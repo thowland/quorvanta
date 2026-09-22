@@ -708,6 +708,97 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
             fail(f"fault-types: {f} has no failing example in the outbound sets")
 
 
+
+# ---------------------------------------------------------------- product identifiers
+
+NDC = re.compile(r"^00000-\d{4}-\d{2}$")
+LOT = re.compile(r"^(Q[A-Z])(\d{2})([A-L])(\d{3})$")
+
+
+def gtin14(ndc11):
+    lab, prod, pkg = ndc11.split("-")
+    body = "003" + lab[1:] + prod + pkg
+    total = sum(int(d) * (3 if i % 2 == 0 else 1) for i, d in enumerate(reversed(body)))
+    return body + str((10 - total % 10) % 10)
+
+
+def check_product(claims):
+    from datetime import date, timedelta
+    doc = load("product/product-identifiers.json")
+    as_of = date.fromisoformat(doc["as_of"])
+    packages = {p["id"]: p for p in doc["packages"]}
+    label = text("label/label.md")
+    sup004 = claims.get("SUP-004", {}).get("text", "")
+    md = text("product/product-identifiers.md")
+    for pid, p in packages.items():
+        if not NDC.match(p["ndc"]):
+            fail(f"{pid}: NDC {p['ndc']} does not use the unassigned 00000 labeler")
+        if p["gtin"] != gtin14(p["ndc"]):
+            fail(f"{pid}: GTIN {p['gtin']} should be {gtin14(p['ndc'])}")
+        for where, body in (("label/label.md", label), ("claim SUP-004", sup004), ("product-identifiers.md", md)):
+            if p["ndc"] not in body:
+                fail(f"{where}: NDC {p['ndc']} missing")
+    lots = {}
+    for lot in doc["lots"]:
+        lid = lot["lot"]
+        if lid in lots:
+            fail(f"lot {lid}: duplicate")
+        lots[lid] = lot
+        m = LOT.match(lid)
+        pkg = packages.get(lot["package"])
+        made = date.fromisoformat(lot["manufactured"])
+        if not m or pkg is None:
+            fail(f"lot {lid}: bad format or unknown package")
+            continue
+        if m.group(1) != pkg["lot_prefix"] or int(m.group(2)) != made.year % 100 or "ABCDEFGHIJKL".index(m.group(3)) + 1 != made.month:
+            fail(f"lot {lid}: prefix, year or month letter does not match package and manufacture date")
+        y, mo = made.year + (made.month + 24) // 12, (made.month + 24) % 12 + 1
+        end = date(y, mo, 1) - timedelta(days=1)
+        if lot["expiry"] != str(end):
+            fail(f"lot {lid}: expiry should be {end}")
+        if lot["status"] != ("expired" if end < as_of else "released"):
+            fail(f"lot {lid}: status does not match expiry as of {as_of}")
+        if made < date.fromisoformat(pkg["introduced"]) - timedelta(days=120):
+            fail(f"lot {lid}: made long before {pkg['id']} was introduced")
+        if lid not in md:
+            fail(f"product-identifiers.md: lot {lid} missing; run scripts/render.py")
+
+    m = re.search(r"register of (\d+) lots", text("README.md"))
+    if not m or int(m.group(1)) != len(lots):
+        fail(f"README.md: lot register count should read {len(lots)}")
+
+    for c in load("test-design/ps-cases.json")["cases"]:
+        by_date = {}
+        for s in c["shipments"]:
+            by_date.setdefault((s["date"], s["package"]), []).append(s)
+        for (day, pid), group in by_date.items():
+            pkg = packages.get(pid)
+            where = f"{c['case_id']} shipment {day}"
+            if pkg is None:
+                fail(f"{where}: unknown package {pid}")
+                continue
+            if sum(s["capsules"] for s in group) != pkg["capsules"]:
+                fail(f"{where}: {sum(s['capsules'] for s in group)} capsules but {pid} holds {pkg['capsules']}")
+            if (pid == "PKG-STARTER") != any(s["dose"] == "titration" for s in group):
+                fail(f"{where}: starter bottle must be exactly the first-fill titration shipment")
+            if date.fromisoformat(day) < date.fromisoformat(pkg["introduced"]):
+                fail(f"{where}: {pid} shipped before it was introduced")
+            for s in group:
+                if s["lot"] is None:
+                    if s["status"] not in ("SHIP_SCHEDULED", "SHIP_AWAITING_PATIENT"):
+                        fail(f"{where}: shipped without a lot")
+                    continue
+                lot = lots.get(s["lot"])
+                if lot is None or lot["package"] != pid:
+                    fail(f"{where}: lot {s['lot']} unknown or for another package")
+                    continue
+                days = sum(x["days"] for x in group)
+                if date.fromisoformat(lot["manufactured"]) > date.fromisoformat(day):
+                    fail(f"{where}: lot {s['lot']} made after it shipped")
+                if date.fromisoformat(lot["expiry"]) < date.fromisoformat(day) + timedelta(days=days):
+                    fail(f"{where}: lot {s['lot']} expires before the supply is used")
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -740,6 +831,7 @@ def main():
     check_markdown_pairs(refs, findings, srds, form_doc)
     check_readme_counts(claims, refs, gaps, srds, dtc_doc, form_doc)
     check_patient_services(claims, refs, load("access/specialty-pharmacy-network.json"))
+    check_product(claims)
     disease = check_disease(refs, findings)
     check_landscape()
     check_scenarios(claims_doc, disease, {g["id"] for g in gaps_doc["gaps"]}, {s["id"] for s in srds_doc["srds"]})

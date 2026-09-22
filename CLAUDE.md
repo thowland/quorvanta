@@ -14,6 +14,7 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - Web and email domains use `.example`.
   - DOIs use the `10.5555` prefix.
   - NCPDP ids use a `99-` prefix.
+  - NDCs use the unassigned labeler `00000`; GTIN-14 check digits must be correct.
   - Every JSON file carries a top-level `_notice` field.
   - Every Markdown document opens with a "Everything here is invented" blockquote.
   - Keep all of these markers in any new file.
@@ -57,6 +58,12 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - Neither piece may mention the product, its ingredients, the predecessor or QuorvantaConnect (`forbidden_terms`).
 - Never join a disease fact to a product claim to imply a benefit (HF-16).
 
+**Product identifiers** (`product/product-identifiers.json`): two packages, the bottle of 120 (`PKG-120`) and the 30-day starter bottle of 92 (`PKG-STARTER`), with NDCs, GTINs, bottle label text and a lot register.
+- Lots are `QV`/`QS` + 2-digit year + month letter + 3-digit sequence, and expire at the end of the 24th month after manufacture.
+- Every case shipment names its package and, once shipped, its lot. The lot must exist, match the package, be made before shipping, and outlast the supply.
+- A first fill is one starter bottle (28 starting-dose capsules plus 64 maintenance capsules); later fills are bottles of 120. QUORVANTA is dispensed only in the original container, so partial fills are not possible.
+- The Markdown is generated: edit the JSON and run `scripts/render.py`.
+
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
 
 **Scenarios** (`test-design/scenarios/`):
@@ -78,7 +85,7 @@ Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-fo
 ```bash
 python3 scripts/validate.py                            # all integrity checks; exits non-zero on failure
 python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real brand/company names
-python3 scripts/render.py                              # regenerate program-terms.md from its JSON
+python3 scripts/render.py                              # regenerate program-terms.md and product-identifiers.md
 ```
 
 Run the validator after any edit. It checks:
@@ -88,6 +95,7 @@ Run the validator after any edit. It checks:
 - gap↔SRD links run both ways, and each JSON/Markdown pair is in sync;
 - the counts in `sources/README.md` still match the data;
 - phones, DOIs and domains use the fiction ranges;
+- product identifiers: NDC and GTIN formats, lot format and expiry, and case shipments against the lot register and packages;
 - disease pieces match their facts and stay unbranded; competitor names stay in landscape/ and test-design/;
 - scenarios: ids resolve, correct answers are verbatim and complete, verification order holds, every fault type has a failing example;
 - patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match.

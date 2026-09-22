@@ -20,6 +20,8 @@ Tell your healthcare provider if you are pregnant, planning to become pregnant, 
 
 ## How to take QUORVANTA
 
+Your first shipment is a starter bottle of 92 capsules, with the starting schedule printed on its label. Later refills come in bottles of 120 capsules. Keep QUORVANTA in the bottle it came in, and don't remove the small desiccant canister.
+
 **Weeks 1 and 2:** one 190 mg capsule, twice a day, for 14 days.
 
 **Week 3 onward:** two 190 mg capsules (380 mg), twice a day.

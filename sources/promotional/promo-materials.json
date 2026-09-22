@@ -49,7 +49,7 @@
         {
           "id": "ISI-05",
           "kind": "body",
-          "text": "**Lymphopenia:** QUORVANTA may decrease lymphocyte counts. In placebo-controlled trials of dimethyl tavorate, mean lymphocyte counts decreased by approximately 25% during the first year and then remained stable; counts <0.5 \u00d7 10\u2079/L occurred in 5% of treated patients and <1% of placebo patients. Obtain a CBC including lymphocyte count before initiation, 3 months after initiation, every 6 months thereafter, and as clinically indicated. Consider interruption in patients with counts <0.5 \u00d7 10\u2079/L persisting for more than 6 months. Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts.",
+          "text": "**Lymphopenia:** QUORVANTA may decrease lymphocyte counts. In placebo-controlled trials of dimethyl tavorate, mean lymphocyte counts decreased by approximately 25% during the first year and then remained stable; counts <0.5 × 10⁹/L occurred in 5% of treated patients and <1% of placebo patients. Obtain a CBC including lymphocyte count before initiation, 3 months after initiation, every 6 months thereafter, and as clinically indicated. Consider interruption in patients with counts <0.5 × 10⁹/L persisting for more than 6 months. Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts.",
           "claims": [
             "SAF-010",
             "SAF-011",
@@ -102,7 +102,7 @@
         {
           "id": "ISI-10",
           "kind": "body",
-          "text": "**Most common adverse reactions** (incidence for dimethyl tavorate \u226510% and \u22652% more than placebo): flushing, abdominal pain, diarrhea, nausea, and headache.",
+          "text": "**Most common adverse reactions** (incidence for dimethyl tavorate ≥10% and ≥2% more than placebo): flushing, abdominal pain, diarrhea, nausea, and headache.",
           "claims": [
             "ADR-001"
           ]
@@ -246,7 +246,7 @@
         {
           "id": "DA-12",
           "kind": "data",
-          "text": "Adverse reactions with dimethyl tavorate 200 mg twice daily vs placebo (\u22652% higher incidence): flushing 34% vs 5%; abdominal pain 16% vs 9%; diarrhea 15% vs 10%; nausea 13% vs 8%; headache 12% vs 9%; vomiting 8% vs 4%; pruritus 7% vs 3%; rash 6% vs 3%; dyspepsia 5% vs 2%; ALT increased 5% vs 3%; photosensitivity reaction 4% vs 1%; lymphopenia 3% vs <1%.",
+          "text": "Adverse reactions with dimethyl tavorate 200 mg twice daily vs placebo (≥2% higher incidence): flushing 34% vs 5%; abdominal pain 16% vs 9%; diarrhea 15% vs 10%; nausea 13% vs 8%; headache 12% vs 9%; vomiting 8% vs 4%; pruritus 7% vs 3%; rash 6% vs 3%; dyspepsia 5% vs 2%; ALT increased 5% vs 3%; photosensitivity reaction 4% vs 1%; lymphopenia 3% vs <1%.",
           "claims": [
             "ADR-009"
           ]
@@ -392,7 +392,7 @@
         {
           "id": "DC-09",
           "kind": "body",
-          "text": "Consider interruption if lymphocyte counts <0.5 \u00d7 10\u2079/L persist for more than 6 months. Consider withholding in herpes zoster or other serious infection until resolved. Withhold and evaluate at the first sign suggestive of PML.",
+          "text": "Consider interruption if lymphocyte counts <0.5 × 10⁹/L persist for more than 6 months. Consider withholding in herpes zoster or other serious infection until resolved. Withhold and evaluate at the first sign suggestive of PML.",
           "claims": [
             "SAF-015",
             "SAF-009",
@@ -420,10 +420,12 @@
         {
           "id": "DC-12",
           "kind": "body",
-          "text": "Supplied: 190 mg delayed-release capsules, bottles of 120. Store at 20\u00b0C to 25\u00b0C (68\u00b0F to 77\u00b0F).",
+          "text": "Supplied: 190 mg delayed-release capsules in bottles of 120 (NDC 00000-0190-01) and 30-day starter bottles of 92 (NDC 00000-0190-02). Dispense in the original container. Store at 20°C to 25°C (68°F to 77°F).",
           "claims": [
             "SUP-001",
             "SUP-002",
+            "SUP-004",
+            "SUP-005",
             "SUP-003"
           ]
         },

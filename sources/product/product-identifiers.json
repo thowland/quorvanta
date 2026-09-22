@@ -1,0 +1,422 @@
+{
+  "_notice": "FICTITIOUS. Product identifiers for a product that does not exist. NDC labeler code 00000 is not an assigned labeler code; GTINs, lot numbers and serial numbers here identify nothing real.",
+  "identifiers_version": "1.0.0",
+  "as_of": "2026-09-22",
+  "product": {
+    "brand": "QUORVANTA",
+    "generic": "soriximel tavorate",
+    "strength": "190 mg",
+    "dosage_form": "delayed-release capsule",
+    "capsule": "Hard capsule, light blue cap and white body, printed 'ST 190' in black ink",
+    "labeler": "Arden Quay Biosciences, Inc.",
+    "shelf_life_months": 24,
+    "storage": "20°C to 25°C (68°F to 77°F); excursions permitted to 15°C to 30°C (59°F to 86°F). Keep in the original container with the desiccant."
+  },
+  "packages": [
+    {
+      "id": "PKG-120",
+      "name": "QUORVANTA 190 mg, bottle of 120 capsules",
+      "ndc": "00000-0190-01",
+      "capsules": 120,
+      "use": "Maintenance: a 30-day supply at 2 capsules twice daily",
+      "lot_prefix": "QV",
+      "introduced": "2024-02-26",
+      "container": "White HDPE bottle with child-resistant cap and a desiccant canister",
+      "label_color": "Light blue band",
+      "gtin": "00300000190016"
+    },
+    {
+      "id": "PKG-STARTER",
+      "name": "QUORVANTA 190 mg, 30-day starter bottle of 92 capsules",
+      "ndc": "00000-0190-02",
+      "capsules": 92,
+      "use": "First fill: 1 capsule twice daily for 14 days (28 capsules), then 2 capsules twice daily for 16 days (64 capsules)",
+      "lot_prefix": "QS",
+      "introduced": "2025-06-02",
+      "container": "White HDPE bottle with child-resistant cap and a desiccant canister; the label carries the two-step starting schedule",
+      "label_color": "Orange band",
+      "gtin": "00300000190023"
+    }
+  ],
+  "formats": {
+    "ndc": "5-4-2 with labeler 00000; product code 0190 for the 190 mg capsule; package code 01 (120) or 02 (starter).",
+    "gtin": "GTIN-14: indicator 0, prefix 03, the 10-digit NDC, and a mod-10 check digit.",
+    "lot": "Prefix (QV for the 120 bottle, QS for the starter bottle), 2-digit year of manufacture, month letter (A = January to L = December), 3-digit sequence. Example: QV26C028.",
+    "expiry": "Printed as EXP YYYY-MM; the product may be used through the last day of that month. Expiry is the end of the 24th month after the month of manufacture.",
+    "serial": "12 alphanumeric characters, unique per bottle, encoded with the GTIN, lot and expiry in the 2D barcode on the bottle label. Serial numbers are not listed here."
+  },
+  "bottle_label_text": {
+    "PKG-120": [
+      "QUORVANTA (soriximel tavorate) delayed-release capsules",
+      "190 mg",
+      "120 capsules",
+      "Rx only",
+      "NDC 00000-0190-01",
+      "Usual dosage: see Prescribing Information",
+      "Swallow capsules whole. Do not crush, chew or open.",
+      "Keep in original container. Do not remove the desiccant. Do not eat the desiccant.",
+      "Store at 20°C to 25°C (68°F to 77°F).",
+      "LOT / EXP",
+      "Manufactured for Arden Quay Biosciences, Inc., Waltham, MA (fictitious)"
+    ],
+    "PKG-STARTER": [
+      "QUORVANTA (soriximel tavorate) delayed-release capsules",
+      "190 mg",
+      "30-day starter bottle: 92 capsules",
+      "Rx only",
+      "NDC 00000-0190-02",
+      "Days 1 to 14: take 1 capsule twice a day",
+      "Day 15 onward: take 2 capsules twice a day",
+      "Swallow capsules whole. Do not crush, chew or open.",
+      "Keep in original container. Do not remove the desiccant. Do not eat the desiccant.",
+      "Store at 20°C to 25°C (68°F to 77°F).",
+      "LOT / EXP",
+      "Manufactured for Arden Quay Biosciences, Inc., Waltham, MA (fictitious)"
+    ]
+  },
+  "lots": [
+    {
+      "lot": "QV23L001",
+      "package": "PKG-120",
+      "manufactured": "2023-12-15",
+      "expiry": "2025-12-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24A002",
+      "package": "PKG-120",
+      "manufactured": "2024-01-15",
+      "expiry": "2026-01-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24B003",
+      "package": "PKG-120",
+      "manufactured": "2024-02-15",
+      "expiry": "2026-02-28",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24C004",
+      "package": "PKG-120",
+      "manufactured": "2024-03-15",
+      "expiry": "2026-03-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24D005",
+      "package": "PKG-120",
+      "manufactured": "2024-04-15",
+      "expiry": "2026-04-30",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24E006",
+      "package": "PKG-120",
+      "manufactured": "2024-05-15",
+      "expiry": "2026-05-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24F007",
+      "package": "PKG-120",
+      "manufactured": "2024-06-15",
+      "expiry": "2026-06-30",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24G008",
+      "package": "PKG-120",
+      "manufactured": "2024-07-15",
+      "expiry": "2026-07-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24H009",
+      "package": "PKG-120",
+      "manufactured": "2024-08-15",
+      "expiry": "2026-08-31",
+      "status": "expired"
+    },
+    {
+      "lot": "QV24I010",
+      "package": "PKG-120",
+      "manufactured": "2024-09-15",
+      "expiry": "2026-09-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV24J011",
+      "package": "PKG-120",
+      "manufactured": "2024-10-15",
+      "expiry": "2026-10-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV24K012",
+      "package": "PKG-120",
+      "manufactured": "2024-11-15",
+      "expiry": "2026-11-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV24L013",
+      "package": "PKG-120",
+      "manufactured": "2024-12-15",
+      "expiry": "2026-12-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25A014",
+      "package": "PKG-120",
+      "manufactured": "2025-01-15",
+      "expiry": "2027-01-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25B015",
+      "package": "PKG-120",
+      "manufactured": "2025-02-15",
+      "expiry": "2027-02-28",
+      "status": "released"
+    },
+    {
+      "lot": "QV25C016",
+      "package": "PKG-120",
+      "manufactured": "2025-03-15",
+      "expiry": "2027-03-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25D017",
+      "package": "PKG-120",
+      "manufactured": "2025-04-15",
+      "expiry": "2027-04-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV25E018",
+      "package": "PKG-120",
+      "manufactured": "2025-05-15",
+      "expiry": "2027-05-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25F019",
+      "package": "PKG-120",
+      "manufactured": "2025-06-15",
+      "expiry": "2027-06-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV25G020",
+      "package": "PKG-120",
+      "manufactured": "2025-07-15",
+      "expiry": "2027-07-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25H021",
+      "package": "PKG-120",
+      "manufactured": "2025-08-15",
+      "expiry": "2027-08-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25I022",
+      "package": "PKG-120",
+      "manufactured": "2025-09-15",
+      "expiry": "2027-09-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV25J023",
+      "package": "PKG-120",
+      "manufactured": "2025-10-15",
+      "expiry": "2027-10-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV25K024",
+      "package": "PKG-120",
+      "manufactured": "2025-11-15",
+      "expiry": "2027-11-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV25L025",
+      "package": "PKG-120",
+      "manufactured": "2025-12-15",
+      "expiry": "2027-12-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV26A026",
+      "package": "PKG-120",
+      "manufactured": "2026-01-15",
+      "expiry": "2028-01-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV26B027",
+      "package": "PKG-120",
+      "manufactured": "2026-02-15",
+      "expiry": "2028-02-29",
+      "status": "released"
+    },
+    {
+      "lot": "QV26C028",
+      "package": "PKG-120",
+      "manufactured": "2026-03-15",
+      "expiry": "2028-03-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV26D029",
+      "package": "PKG-120",
+      "manufactured": "2026-04-15",
+      "expiry": "2028-04-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV26E030",
+      "package": "PKG-120",
+      "manufactured": "2026-05-15",
+      "expiry": "2028-05-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV26F031",
+      "package": "PKG-120",
+      "manufactured": "2026-06-15",
+      "expiry": "2028-06-30",
+      "status": "released"
+    },
+    {
+      "lot": "QV26G032",
+      "package": "PKG-120",
+      "manufactured": "2026-07-15",
+      "expiry": "2028-07-31",
+      "status": "released"
+    },
+    {
+      "lot": "QV26H033",
+      "package": "PKG-120",
+      "manufactured": "2026-08-15",
+      "expiry": "2028-08-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS25E001",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-05-15",
+      "expiry": "2027-05-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS25F002",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-06-15",
+      "expiry": "2027-06-30",
+      "status": "released"
+    },
+    {
+      "lot": "QS25G003",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-07-15",
+      "expiry": "2027-07-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS25H004",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-08-15",
+      "expiry": "2027-08-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS25I005",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-09-15",
+      "expiry": "2027-09-30",
+      "status": "released"
+    },
+    {
+      "lot": "QS25J006",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-10-15",
+      "expiry": "2027-10-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS25K007",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-11-15",
+      "expiry": "2027-11-30",
+      "status": "released"
+    },
+    {
+      "lot": "QS25L008",
+      "package": "PKG-STARTER",
+      "manufactured": "2025-12-15",
+      "expiry": "2027-12-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS26A009",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-01-15",
+      "expiry": "2028-01-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS26B010",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-02-15",
+      "expiry": "2028-02-29",
+      "status": "released"
+    },
+    {
+      "lot": "QS26C011",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-03-15",
+      "expiry": "2028-03-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS26D012",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-04-15",
+      "expiry": "2028-04-30",
+      "status": "released"
+    },
+    {
+      "lot": "QS26E013",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-05-15",
+      "expiry": "2028-05-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS26F014",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-06-15",
+      "expiry": "2028-06-30",
+      "status": "released"
+    },
+    {
+      "lot": "QS26G015",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-07-15",
+      "expiry": "2028-07-31",
+      "status": "released"
+    },
+    {
+      "lot": "QS26H016",
+      "package": "PKG-STARTER",
+      "manufactured": "2026-08-15",
+      "expiry": "2028-08-31",
+      "status": "released"
+    }
+  ]
+}

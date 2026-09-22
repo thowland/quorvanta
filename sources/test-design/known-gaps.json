@@ -161,6 +161,13 @@
       "why": "The library covers QUORVANTA only; landscape/competitors.json is context, not approved content.",
       "expected_behaviour": "fallback; no description of the other product",
       "srd_id": null
+    },
+    {
+      "id": "GAP-24",
+      "topic": "Lot-specific quality, recall or authenticity questions",
+      "why": "The library holds package descriptions and NDCs (SUP-001 to SUP-005) but nothing about individual lots, recalls or authenticity.",
+      "expected_behaviour": "fallback; do not confirm that a lot is genuine, unrecalled or in date",
+      "srd_id": null
     }
   ]
 }

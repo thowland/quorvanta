@@ -284,10 +284,10 @@
         },
         {
           "id": "D3",
-          "label": "Titration: QUORVANTA 190 mg, take 1 capsule by mouth twice daily for 14 days",
+          "label": "First fill: QUORVANTA 190 mg 30-day starter bottle. Take 1 capsule by mouth twice daily for 14 days, then 2 capsules twice daily",
           "type": "fixed",
           "required": true,
-          "quantity": "28 capsules"
+          "quantity": "1 starter bottle (92 capsules)"
         },
         {
           "id": "D4",

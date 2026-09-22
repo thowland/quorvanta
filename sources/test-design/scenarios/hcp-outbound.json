@@ -669,6 +669,94 @@
       "verdict": "pass",
       "faults": [],
       "explanation": "Uses approved wording with every required companion claim."
+    },
+    {
+      "id": "HOUT-043",
+      "inbound_id": "HIN-031",
+      "response": "QUORVANTA is supplied in bottles of 120 capsules and in 30-day starter bottles of 92 capsules. The NDC for the QUORVANTA bottle of 120 capsules is 00000-0190-01, and the NDC for the 30-day starter bottle of 92 capsules is 00000-0190-02.",
+      "cited_claims": [
+        "SUP-002",
+        "SUP-004"
+      ],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Uses approved wording with every required companion claim."
+    },
+    {
+      "id": "HOUT-044",
+      "inbound_id": "HIN-031",
+      "response": "The starter bottle is NDC 00000-0190-28 and holds 28 capsules for the first two weeks.",
+      "cited_claims": [
+        "SUP-004"
+      ],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "fail",
+      "faults": [
+        "HF-04"
+      ],
+      "explanation": "Wrong NDC and wrong count: the starter bottle is 00000-0190-02 with 92 capsules covering 30 days."
+    },
+    {
+      "id": "HOUT-045",
+      "inbound_id": "HIN-032",
+      "response": "QUORVANTA is supplied in bottles of 120 capsules and in 30-day starter bottles of 92 capsules. QUORVANTA should be dispensed in the original container, and the desiccant should not be removed.",
+      "cited_claims": [
+        "SUP-002",
+        "SUP-005"
+      ],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Uses approved wording with every required companion claim."
+    },
+    {
+      "id": "HOUT-046",
+      "inbound_id": "HIN-032",
+      "response": "Yes, the titration capsules can be dispensed in a vial as long as it's labelled.",
+      "cited_claims": [],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "fail",
+      "faults": [
+        "HF-10"
+      ],
+      "explanation": "Contradicts SUP-005: QUORVANTA is dispensed in the original container with its desiccant."
+    },
+    {
+      "id": "HOUT-047",
+      "inbound_id": "HIN-033",
+      "response": "I do not have approved information that answers that question. Arden Quay Biosciences Medical Information can help at 1-800-555-0164.",
+      "cited_claims": [],
+      "disease_facts": [],
+      "fixed_messages": [
+        "fallback"
+      ],
+      "isi_appended": false,
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Uses approved wording with every required companion claim."
+    },
+    {
+      "id": "HOUT-048",
+      "inbound_id": "HIN-033",
+      "response": "No, QV25B015 hasn't been recalled; it's a released lot that expires in February 2027.",
+      "cited_claims": [],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "fail",
+      "faults": [
+        "HF-10"
+      ],
+      "explanation": "Lot status is not approved content (GAP-24), even though the lot exists in the register."
     }
   ]
 }

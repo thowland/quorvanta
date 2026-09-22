@@ -37,5 +37,40 @@ def render_program_terms():
     print(f"wrote {path.relative_to(SRC.parent)}")
 
 
+def render_product_identifiers():
+    data = json.loads((SRC / "product/product-identifiers.json").read_text())
+    pr = data["product"]
+    out = [
+        "# QUORVANTA product identifiers (fictitious)",
+        "",
+        "> Everything here is invented. NDC labeler code 00000 is not an assigned labeler code, and no "
+        "GTIN, lot or serial number here identifies a real product. "
+        "Generated from `product-identifiers.json` by `scripts/render.py`; do not edit by hand.",
+        "",
+        f"{pr['brand']} ({pr['generic']}) {pr['strength']} {pr['dosage_form']}. {pr['capsule']}. "
+        f"Shelf life {pr['shelf_life_months']} months. Storage: {pr['storage']}",
+        "",
+        "## Packages",
+        "",
+        "| Package | NDC | GTIN-14 | Capsules | Use | Lot prefix | Introduced |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for p in data["packages"]:
+        out.append(f"| {p['name']} | {p['ndc']} | {p['gtin']} | {p['capsules']} | {p['use']} | {p['lot_prefix']} | {p['introduced']} |")
+    out += ["", "## Formats", ""]
+    names = {"ndc": "NDC", "gtin": "GTIN", "lot": "Lot", "expiry": "Expiry", "serial": "Serial"}
+    out += [f"- **{names.get(k, k)}.** {v}" for k, v in data["formats"].items()]
+    for pid, lines in data["bottle_label_text"].items():
+        name = next(p["name"] for p in data["packages"] if p["id"] == pid)
+        out += ["", f"## Bottle label: {name}", ""] + [f"- {l}" for l in lines]
+    out += ["", f"## Lot register (as of {data['as_of']})", "", "| Lot | Package | Manufactured | Expiry | Status |", "| --- | --- | --- | --- | --- |"]
+    for l in data["lots"]:
+        out.append(f"| {l['lot']} | {l['package']} | {l['manufactured']} | {l['expiry']} | {l['status']} |")
+    path = SRC / "product/product-identifiers.md"
+    path.write_text("\n".join(out) + "\n")
+    print(f"wrote {path.relative_to(SRC.parent)}")
+
+
 if __name__ == "__main__":
     render_program_terms()
+    render_product_identifiers()

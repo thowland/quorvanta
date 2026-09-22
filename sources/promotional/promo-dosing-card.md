@@ -26,6 +26,6 @@ Renal impairment: no adjustment in mild impairment; not recommended in moderate 
 
 Switching from dimethyl tavorate: start QUORVANTA the day after dimethyl tavorate is discontinued. `[DOS-009]`
 
-Supplied: 190 mg delayed-release capsules, bottles of 120. Store at 20°C to 25°C (68°F to 77°F). `[SUP-001, SUP-002, SUP-003]`
+Supplied: 190 mg delayed-release capsules in bottles of 120 (NDC 00000-0190-01) and 30-day starter bottles of 92 (NDC 00000-0190-02). Dispense in the original container. Store at 20°C to 25°C (68°F to 77°F). `[SUP-001, SUP-002, SUP-004, SUP-005, SUP-003]`
 
 *Please see Important Safety Information on reverse and accompanying full Prescribing Information.*

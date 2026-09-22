@@ -263,6 +263,10 @@
         {
           "id": "PGM-PHARM.6",
           "text": "If the patient's plan changes its required pharmacy, QuorvantaConnect transfers the prescription and tells the patient."
+        },
+        {
+          "id": "PGM-PHARM.7",
+          "text": "A patient starting treatment receives a 30-day starter bottle of 92 capsules, labeled with the starting schedule: 1 capsule twice a day for 14 days, then 2 capsules twice a day. Later fills are bottles of 120 capsules."
         }
       ]
     },

@@ -196,6 +196,12 @@ Clinical studies of DMT and QUORVANTA did not include sufficient numbers of pati
 
 No dosage adjustment is necessary in mild renal impairment. Because of increased exposure to the metabolite hydroxypropyl glutarimide (HPG), QUORVANTA is not recommended in moderate or severe renal impairment (see 12.3).
 
+## 11 DESCRIPTION
+
+QUORVANTA contains soriximel tavorate, a prodrug of monomethyl tavorate. The chemical name of soriximel tavorate is 3-(2,6-dioxopiperidin-1-yl)propyl methyl (2E)-hex-2-enedioate. Its molecular formula is C15H21NO6 and its molecular weight is 311.33.
+
+QUORVANTA is provided as hard, delayed-release capsules for oral administration containing 190 mg of soriximel tavorate as enteric-coated microtablets. Inactive ingredients: microcrystalline cellulose, croscarmellose sodium, colloidal silicon dioxide, magnesium stearate, methacrylic acid copolymer, triethyl citrate and talc. Capsule shell: hypromellose, titanium dioxide and FD&C Blue No. 2.
+
 ## 12 CLINICAL PHARMACOLOGY
 
 ### 12.1 Mechanism of action
@@ -261,7 +267,12 @@ In both studies the three-times-daily dose showed no additional benefit over the
 
 ## 16 HOW SUPPLIED, STORAGE AND HANDLING
 
-QUORVANTA 190 mg delayed-release capsules are supplied in bottles of 120. Store at 20°C to 25°C (68°F to 77°F); excursions permitted to 15°C to 30°C (59°F to 86°F).
+QUORVANTA 190 mg delayed-release capsules are hard capsules with a light blue cap and a white body, printed "ST 190" in black ink. They are supplied as:
+
+- Bottles of 120 capsules: NDC 00000-0190-01
+- 30-day starter bottles of 92 capsules, labeled for the 14-day starting dosage followed by the maintenance dosage: NDC 00000-0190-02
+
+Store at 20°C to 25°C (68°F to 77°F); excursions permitted to 15°C to 30°C (59°F to 86°F). Dispense in the original container. Do not remove the desiccant.
 
 ## 17 PATIENT COUNSELING INFORMATION
 

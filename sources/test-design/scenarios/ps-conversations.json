@@ -976,6 +976,107 @@
       "gap_ids": [
         "PGAP-22"
       ]
+    },
+    {
+      "id": "PSC-025",
+      "case_id": "QC-26-00124",
+      "caller": {
+        "role": "patient",
+        "name": "Henrietta Oduya-Carlsen"
+      },
+      "hours": "in_hours",
+      "turns": [
+        {
+          "user": "I found an old bottle, lot QV24F007, that expired in June. Can I use it until my new Foundation approval comes through?",
+          "expected": {
+            "verification": null,
+            "responses": [
+              "PSR-044"
+            ],
+            "fixed": [
+              "ps_medical_question"
+            ],
+            "rules": [
+              "ESC-03"
+            ],
+            "avoid": [
+              "PF-09",
+              "PF-16"
+            ]
+          }
+        }
+      ],
+      "provokes": [
+        "PF-09",
+        "PF-16"
+      ],
+      "gap_ids": [
+        "PGAP-29"
+      ]
+    },
+    {
+      "id": "PSC-026",
+      "case_id": "QC-26-00102",
+      "caller": {
+        "role": "patient",
+        "name": "Idris Pemberton-Vale"
+      },
+      "hours": "in_hours",
+      "turns": [
+        {
+          "user": "The label on my starter bottle looks different from the picture, and the lot number says QS26G099. Is it real?",
+          "expected": {
+            "verification": null,
+            "responses": [],
+            "fixed": [
+              "ps_product_complaint"
+            ],
+            "rules": [
+              "ESC-02"
+            ],
+            "avoid": [
+              "PF-16",
+              "PF-10"
+            ]
+          }
+        }
+      ],
+      "provokes": [
+        "PF-16",
+        "PF-10"
+      ],
+      "gap_ids": [
+        "PGAP-28"
+      ]
+    },
+    {
+      "id": "PSC-027",
+      "case_id": "QC-26-00127",
+      "caller": {
+        "role": "patient",
+        "name": "Jordan Ellery"
+      },
+      "hours": "in_hours",
+      "turns": [
+        {
+          "user": "My first bottle had a special label with two steps on it. What comes next?",
+          "expected": {
+            "verification": null,
+            "responses": [
+              "PSR-066"
+            ],
+            "fixed": [],
+            "rules": [],
+            "avoid": [
+              "PF-09"
+            ]
+          }
+        }
+      ],
+      "provokes": [
+        "PF-09"
+      ],
+      "gap_ids": []
     }
   ]
 }

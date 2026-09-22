@@ -79,6 +79,7 @@ Version 2.1, effective 2026-01-01. Summarised in the bibliography as REF-022.
 - `PGM-PHARM.4` Each maintenance fill is a 30-day supply of 120 capsules. The pharmacy contacts the patient about 7 days before a refill is due.
 - `PGM-PHARM.5` Questions about a specific shipment, delivery date or replacement are handled by the dispensing pharmacy. QuorvantaConnect can give the patient the pharmacy's phone number and can contact the pharmacy on the patient's behalf.
 - `PGM-PHARM.6` If the patient's plan changes its required pharmacy, QuorvantaConnect transfers the prescription and tells the patient.
+- `PGM-PHARM.7` A patient starting treatment receives a 30-day starter bottle of 92 capsules, labeled with the starting schedule: 1 capsule twice a day for 14 days, then 2 capsules twice a day. Later fills are bottles of 120 capsules.
 
 ## Nurse support and reminders
 

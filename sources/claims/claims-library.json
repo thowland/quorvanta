@@ -1843,7 +1843,25 @@
     {
       "id": "SUP-002",
       "category": "supply",
-      "text": "QUORVANTA is supplied in bottles of 120 capsules.",
+      "text": "QUORVANTA is supplied in bottles of 120 capsules and in 30-day starter bottles of 92 capsules.",
+      "reference": {
+        "label_section": "16",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 2,
+      "status": "approved"
+    },
+    {
+      "id": "SUP-003",
+      "category": "supply",
+      "text": "QUORVANTA should be stored at 20 to 25 degrees C (68 to 77 degrees F); excursions are permitted to 15 to 30 degrees C (59 to 86 degrees F).",
       "reference": {
         "label_section": "16",
         "citations": [
@@ -1859,9 +1877,27 @@
       "status": "approved"
     },
     {
-      "id": "SUP-003",
+      "id": "SUP-004",
       "category": "supply",
-      "text": "QUORVANTA should be stored at 20 to 25 degrees C (68 to 77 degrees F); excursions are permitted to 15 to 30 degrees C (59 to 86 degrees F).",
+      "text": "The NDC for the QUORVANTA bottle of 120 capsules is 00000-0190-01, and the NDC for the 30-day starter bottle of 92 capsules is 00000-0190-02.",
+      "reference": {
+        "label_section": "16",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SUP-005",
+      "category": "supply",
+      "text": "QUORVANTA should be dispensed in the original container, and the desiccant should not be removed.",
       "reference": {
         "label_section": "16",
         "citations": [

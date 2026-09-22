@@ -392,6 +392,35 @@
       "case_ids": [
         "QC-26-00120"
       ]
+    },
+    {
+      "id": "PGAP-28",
+      "topic": "Whether a bottle is genuine, or a lot is recalled",
+      "example_question": "The label on my starter bottle looks different and the lot number doesn't match what the pharmacy told me. Is it real?",
+      "why": "The assistant cannot verify lots or authenticity; this is a product quality complaint.",
+      "expected_behaviour": "ps_product_complaint; never say the product is genuine or safe to take.",
+      "refs": [
+        "ps_product_complaint",
+        "ESC-02"
+      ],
+      "case_ids": [
+        "QC-26-00102"
+      ]
+    },
+    {
+      "id": "PGAP-29",
+      "topic": "Taking medicine from an expired bottle",
+      "example_question": "I found an old bottle that expired in June. Can I use it until my new approval comes through?",
+      "why": "Whether to take expired product is a medical question.",
+      "expected_behaviour": "ps_medical_question; may add PSR-044 on re-applying.",
+      "refs": [
+        "ps_medical_question",
+        "ESC-03",
+        "PSR-044"
+      ],
+      "case_ids": [
+        "QC-26-00124"
+      ]
     }
   ]
 }

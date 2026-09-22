@@ -1,0 +1,88 @@
+{
+  "_notice": "FICTITIOUS. None of these pharmacies, PBMs or health systems exist; NCPDP identifiers use a 99- prefix that is not assigned.",
+  "network_version": "1.0.0",
+  "model": "limited distribution",
+  "summary": "QUORVANTA is available only through the pharmacies listed here. Retail and non-network mail-order pharmacies cannot order it. QuorvantaConnect routes each prescription to the pharmacy the patient's plan requires, or to a network pharmacy of the patient's choosing where the plan allows.",
+  "pharmacies": [
+    {
+      "id": "SP-01",
+      "name": "Marlowe Specialty Pharmacy",
+      "parent": "Independent",
+      "role": "network",
+      "ncpdp": "99-00141 (fictitious)",
+      "phone": "1-800-555-0121",
+      "fax": "1-800-555-0122",
+      "hours": "Mon-Fri 8am-9pm ET, Sat 9am-5pm ET",
+      "states": "All 50 states and DC",
+      "notes": "Primary network pharmacy; receives prescriptions routed by QuorvantaConnect when no payer mandate applies."
+    },
+    {
+      "id": "SP-02",
+      "name": "Northgate Rx Specialty",
+      "parent": "Northgate Health (fictitious integrated PBM)",
+      "role": "network",
+      "ncpdp": "99-00287 (fictitious)",
+      "phone": "1-800-555-0123",
+      "fax": "1-800-555-0124",
+      "hours": "Mon-Fri 7am-10pm ET, Sat 8am-6pm ET",
+      "states": "All 50 states and DC",
+      "notes": "Mandated for members of Northgate Health commercial and Medicare Part D plans."
+    },
+    {
+      "id": "SP-03",
+      "name": "Cairnwell Specialty",
+      "parent": "Cairnwell Benefits (fictitious PBM)",
+      "role": "network",
+      "ncpdp": "99-00332 (fictitious)",
+      "phone": "1-800-555-0125",
+      "fax": "1-800-555-0126",
+      "hours": "Mon-Fri 8am-8pm ET",
+      "states": "All 50 states and DC",
+      "notes": "Mandated for members of Cairnwell-administered plans."
+    },
+    {
+      "id": "SP-04",
+      "name": "Tidewater Specialty Pharmacy",
+      "parent": "Independent",
+      "role": "network",
+      "ncpdp": "99-00418 (fictitious)",
+      "phone": "1-800-555-0127",
+      "fax": "1-800-555-0128",
+      "hours": "Mon-Fri 8am-8pm ET, Sat 9am-1pm ET",
+      "states": "All 50 states and DC",
+      "notes": "Also dispenses bridge supply and patient assistance foundation product on behalf of QuorvantaConnect."
+    },
+    {
+      "id": "SP-05",
+      "name": "Halverson Health System Pharmacy",
+      "parent": "Halverson Health (fictitious IDN)",
+      "role": "limited",
+      "ncpdp": "99-00509 (fictitious)",
+      "phone": "1-800-555-0129",
+      "fax": "1-800-555-0130",
+      "hours": "Mon-Fri 8am-6pm CT",
+      "states": "IL, IN, WI, MI (Halverson Health patients only)",
+      "notes": "Integrated delivery network pharmacy admitted to the network for its own patients; not a national option."
+    }
+  ],
+  "routing_rules": [
+    "If the patient's plan mandates a pharmacy that is in the network (SP-02, SP-03), the prescription is routed there.",
+    "If the plan mandates a pharmacy that is not in the network, QuorvantaConnect works with the plan on a network exception; bridge supply may be dispensed by SP-04 in the meantime.",
+    "If no mandate applies, the patient chooses among SP-01 and SP-04 (and SP-05 for Halverson Health patients). Arden Quay does not express a preference among network pharmacies.",
+    "Prescriptions sent directly to a network pharmacy are accepted and the pharmacy notifies QuorvantaConnect for benefits verification unless the patient declines enrollment.",
+    "Bridge supply and patient assistance foundation product are dispensed only by SP-04."
+  ],
+  "not_available_through": [
+    "Retail chain and independent retail pharmacies",
+    "Non-network mail-order pharmacies",
+    "Hospital outpatient pharmacies other than SP-05 for its own patients",
+    "340B contract pharmacies (covered entities may order through SP-05 arrangements only where licensed)",
+    "Direct sale to physician offices; samples are not provided"
+  ],
+  "hcp_facing_answers": {
+    "which_pharmacy": "Name all national network pharmacies and explain plan mandates; do not recommend one.",
+    "why_limited": "Limited distribution supports the blood-test schedule, patient enrollment in support services and consistent counselling on titration and flushing. (Fictitious rationale; no REMS applies.)",
+    "out_of_state_or_travel": "All national network pharmacies ship to all 50 states and DC.",
+    "my_usual_pharmacy": "If it is not listed, it cannot order QUORVANTA; QuorvantaConnect can transfer the prescription."
+  }
+}

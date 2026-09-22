@@ -1,0 +1,20 @@
+#!/bin/sh
+# Validate the staged snapshot of the pack, not the working tree, so that
+# unstaged edits can neither hide a problem nor cause a false failure.
+# Enable once per clone:  git config core.hooksPath scripts/git-hooks
+# Bypass in an emergency: git commit --no-verify
+
+tmp=$(mktemp -d) || exit 1
+trap 'rm -rf "$tmp"' EXIT
+
+git checkout-index -a --prefix="$tmp/" || exit 1
+
+if [ ! -f "$tmp/scripts/validate.py" ]; then
+    echo "pre-commit: scripts/validate.py is not staged; skipping validation" >&2
+    exit 0
+fi
+
+python3 "$tmp/scripts/validate.py" ${QUORVANTA_DENYLIST:+--denylist "$QUORVANTA_DENYLIST"} || {
+    echo "pre-commit: validation failed; commit aborted" >&2
+    exit 1
+}

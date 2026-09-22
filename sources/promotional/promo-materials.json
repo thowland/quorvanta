@@ -1,0 +1,444 @@
+{
+  "_notice": "FICTITIOUS promotional materials for a product that does not exist. Every statement carries the claim ids that support it, as a promotional review annotation would.",
+  "promo_set_version": "1.0.0",
+  "pieces": [
+    {
+      "id": "PROMO-ISI",
+      "title": "QUORVANTA Important Safety Information",
+      "type": "isi_block",
+      "units": [
+        {
+          "id": "ISI-01",
+          "kind": "body",
+          "text": "**Contraindications:** QUORVANTA is contraindicated in patients with known hypersensitivity to soriximel tavorate, dimethyl tavorate, or any of the excipients. Reactions may include anaphylaxis and angioedema. QUORVANTA is contraindicated in patients taking dimethyl tavorate.",
+          "claims": [
+            "CON-001",
+            "CON-002"
+          ]
+        },
+        {
+          "id": "ISI-02",
+          "kind": "body",
+          "text": "**Anaphylaxis and angioedema:** QUORVANTA can cause anaphylaxis and angioedema after the first dose or at any time during treatment. Signs and symptoms in patients taking dimethyl tavorate have included difficulty breathing, urticaria, and swelling of the throat and tongue. Patients should discontinue QUORVANTA and seek immediate medical care should they experience these signs or symptoms. Do not restart.",
+          "claims": [
+            "SAF-001",
+            "SAF-002"
+          ]
+        },
+        {
+          "id": "ISI-03",
+          "kind": "body",
+          "text": "**Progressive multifocal leukoencephalopathy (PML):** PML has occurred in patients with Brennick syndrome treated with dimethyl tavorate, which has the same active metabolite as QUORVANTA. A fatal case occurred in a patient with prolonged lymphopenia. At the first sign or symptom suggestive of PML, withhold QUORVANTA and perform an appropriate diagnostic evaluation. Typical symptoms progress over days to weeks and include progressive weakness on one side of the body, clumsiness of limbs, disturbance of vision, and changes in thinking, memory, and orientation.",
+          "claims": [
+            "SAF-003",
+            "SAF-004",
+            "SAF-005",
+            "SAF-006"
+          ]
+        },
+        {
+          "id": "ISI-04",
+          "kind": "body",
+          "text": "**Herpes zoster and other serious opportunistic infections:** Serious cases of herpes zoster, and other serious opportunistic viral, fungal, and bacterial infections, have occurred with dimethyl tavorate at any time during treatment, in patients with reduced and with normal lymphocyte counts. Monitor patients for signs and symptoms; consider withholding QUORVANTA until a serious infection has resolved.",
+          "claims": [
+            "SAF-007",
+            "SAF-008",
+            "SAF-009"
+          ]
+        },
+        {
+          "id": "ISI-05",
+          "kind": "body",
+          "text": "**Lymphopenia:** QUORVANTA may decrease lymphocyte counts. In placebo-controlled trials of dimethyl tavorate, mean lymphocyte counts decreased by approximately 25% during the first year and then remained stable; counts <0.5 \u00d7 10\u2079/L occurred in 5% of treated patients and <1% of placebo patients. Obtain a CBC including lymphocyte count before initiation, 3 months after initiation, every 6 months thereafter, and as clinically indicated. Consider interruption in patients with counts <0.5 \u00d7 10\u2079/L persisting for more than 6 months. Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts.",
+          "claims": [
+            "SAF-010",
+            "SAF-011",
+            "MON-001",
+            "MON-003",
+            "SAF-015",
+            "SAF-016"
+          ]
+        },
+        {
+          "id": "ISI-06",
+          "kind": "body",
+          "text": "**Liver injury:** Clinically significant liver injury has been reported with dimethyl tavorate in the postmarketing setting, with onset from a few days to several months after initiation. Obtain serum aminotransferase, alkaline phosphatase, and total bilirubin levels before initiation and during treatment as clinically indicated. Discontinue QUORVANTA if clinically significant liver injury is suspected.",
+          "claims": [
+            "SAF-017",
+            "MON-002",
+            "MON-004",
+            "SAF-018"
+          ]
+        },
+        {
+          "id": "ISI-07",
+          "kind": "body",
+          "text": "**Flushing:** QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo; flushing generally began soon after initiation and usually improved or resolved over time. Taking QUORVANTA with food, or non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing, may reduce the incidence or severity of flushing.",
+          "claims": [
+            "SAF-019",
+            "SAF-020",
+            "ADM-004",
+            "DOS-005"
+          ]
+        },
+        {
+          "id": "ISI-08",
+          "kind": "body",
+          "text": "**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms.",
+          "claims": [
+            "SAF-022",
+            "SAF-024"
+          ]
+        },
+        {
+          "id": "ISI-09",
+          "kind": "body",
+          "text": "**Photosensitivity:** Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients. Advise patients to limit exposure to sunlight and ultraviolet light and to use sun protection.",
+          "claims": [
+            "SAF-025",
+            "SAF-026"
+          ]
+        },
+        {
+          "id": "ISI-10",
+          "kind": "body",
+          "text": "**Most common adverse reactions** (incidence for dimethyl tavorate \u226510% and \u22652% more than placebo): flushing, abdominal pain, diarrhea, nausea, and headache.",
+          "claims": [
+            "ADR-001"
+          ]
+        },
+        {
+          "id": "ISI-11",
+          "kind": "body",
+          "text": "**Pregnancy:** Based on animal data, QUORVANTA may cause fetal harm. There are no adequate data on the developmental risk in pregnant women. A pregnancy exposure registry is available (1-800-555-0177).",
+          "claims": [
+            "POP-001",
+            "POP-004"
+          ]
+        },
+        {
+          "id": "ISI-12",
+          "kind": "body",
+          "text": "**Renal impairment:** QUORVANTA is not recommended in patients with moderate or severe renal impairment.",
+          "claims": [
+            "DOS-007"
+          ]
+        },
+        {
+          "id": "ISI-13",
+          "kind": "footer",
+          "text": "To report SUSPECTED ADVERSE REACTIONS, contact Arden Quay Biosciences Drug Safety at 1-800-555-0142 or FDA at 1-800-FDA-1088.",
+          "claims": [
+            "ADR-008"
+          ]
+        },
+        {
+          "id": "ISI-14",
+          "kind": "indication",
+          "text": "**Indication:** QUORVANTA is indicated for the treatment of relapsing forms of Brennick syndrome, to include first clinical episode, relapsing-remitting disease, and active progressive disease, in adults.",
+          "claims": [
+            "IND-001"
+          ]
+        }
+      ],
+      "isi_required": true,
+      "isi_piece": "PROMO-ISI",
+      "status": "approved",
+      "version": "1.0",
+      "job_code": "AQB-QV-ISI-0926"
+    },
+    {
+      "id": "PROMO-DETAIL-AID",
+      "title": "QUORVANTA HCP detail aid (e-detail), 8 screens",
+      "type": "detail_aid",
+      "units": [
+        {
+          "id": "DA-01",
+          "kind": "headline",
+          "text": "QUORVANTA (soriximel tavorate) delayed-release capsules. For adults with relapsing forms of Brennick syndrome.",
+          "claims": [
+            "IND-001"
+          ]
+        },
+        {
+          "id": "DA-02",
+          "kind": "body",
+          "text": "Relapsing forms of Brennick syndrome include first clinical episode, relapsing-remitting disease, and active progressive disease.",
+          "claims": [
+            "IND-001"
+          ]
+        },
+        {
+          "id": "DA-03",
+          "kind": "headline",
+          "text": "Proven efficacy, established through bioequivalence. The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA. The clinical studies below were conducted with dimethyl tavorate, which has the same active metabolite as QUORVANTA.",
+          "claims": [
+            "EFF-001"
+          ]
+        },
+        {
+          "id": "DA-04",
+          "kind": "body",
+          "text": "Two 2-year, randomized, double-blind, placebo-controlled studies (BRIGHTWATER and CASTLEREAGH) in patients with relapsing-remitting Brennick syndrome who had at least 1 relapse in the prior year or a contrast-enhancing lesion on MRI within 6 weeks of randomization.",
+          "claims": [
+            "EFF-002"
+          ]
+        },
+        {
+          "id": "DA-05",
+          "kind": "data",
+          "text": "BRIGHTWATER, primary endpoint: 25% of patients on dimethyl tavorate 200 mg twice daily relapsed at 2 years vs 43% on placebo, a 46% relative risk reduction (p<0.0001).",
+          "claims": [
+            "EFF-003"
+          ]
+        },
+        {
+          "id": "DA-06",
+          "kind": "data",
+          "text": "BRIGHTWATER: annualized relapse rate 0.18 vs 0.35 with placebo, a 49% relative reduction (p<0.0001).",
+          "claims": [
+            "EFF-004"
+          ]
+        },
+        {
+          "id": "DA-07",
+          "kind": "data",
+          "text": "CASTLEREAGH, primary endpoint: annualized relapse rate 0.21 vs 0.39 with placebo, a 46% relative reduction (p<0.0001).",
+          "claims": [
+            "EFF-008"
+          ]
+        },
+        {
+          "id": "DA-08",
+          "kind": "data",
+          "text": "CASTLEREAGH: 28% relapsed at 2 years vs 40% on placebo, a 33% relative risk reduction (p=0.003).",
+          "claims": [
+            "EFF-009"
+          ]
+        },
+        {
+          "id": "DA-09",
+          "kind": "data",
+          "text": "Disability progression. In BRIGHTWATER, 15% of dimethyl tavorate patients had 12-week confirmed disability progression at 2 years vs 25% on placebo, a 41% relative risk reduction (p=0.003). In CASTLEREAGH, there was no statistically significant effect on disability progression (14% vs 18%, p=0.21).",
+          "claims": [
+            "EFF-005",
+            "EFF-010"
+          ]
+        },
+        {
+          "id": "DA-10",
+          "kind": "data",
+          "text": "MRI outcomes at 2 years. BRIGHTWATER MRI cohort: mean new or newly enlarging T2 lesions 3.1 vs 15.8 with placebo; mean contrast-enhancing lesions 0.2 vs 1.6, an 86% relative odds reduction (p<0.0001 for each). CASTLEREAGH MRI cohort: 4.8 vs 16.2 T2 lesions; 0.4 vs 1.9 contrast-enhancing lesions, a 72% relative odds reduction (p<0.0001 for each).",
+          "claims": [
+            "EFF-006",
+            "EFF-007",
+            "EFF-011"
+          ]
+        },
+        {
+          "id": "DA-11",
+          "kind": "headline",
+          "text": "A known safety profile. Approximately 620 patients with relapsing-remitting Brennick syndrome were treated with QUORVANTA in clinical studies, approximately 410 for more than 1 year; the adverse reaction profile was consistent with the placebo-controlled experience with dimethyl tavorate.",
+          "claims": [
+            "ADR-006"
+          ]
+        },
+        {
+          "id": "DA-12",
+          "kind": "data",
+          "text": "Adverse reactions with dimethyl tavorate 200 mg twice daily vs placebo (\u22652% higher incidence): flushing 34% vs 5%; abdominal pain 16% vs 9%; diarrhea 15% vs 10%; nausea 13% vs 8%; headache 12% vs 9%; vomiting 8% vs 4%; pruritus 7% vs 3%; rash 6% vs 3%; dyspepsia 5% vs 2%; ALT increased 5% vs 3%; photosensitivity reaction 4% vs 1%; lymphopenia 3% vs <1%.",
+          "claims": [
+            "ADR-009"
+          ]
+        },
+        {
+          "id": "DA-13",
+          "kind": "body",
+          "text": "Gastrointestinal events were more frequent early in treatment, primarily in the first 2 months, and usually decreased over time. 5% of dimethyl tavorate patients and 1% of placebo patients discontinued because of gastrointestinal events.",
+          "claims": [
+            "ADR-004"
+          ]
+        },
+        {
+          "id": "DA-14",
+          "kind": "body",
+          "text": "Flushing generally began soon after initiation and usually improved or resolved over time, and was mild or moderate in the majority of patients. Taking QUORVANTA with food may reduce the incidence of flushing.",
+          "claims": [
+            "SAF-020",
+            "ADM-004",
+            "ADM-002"
+          ]
+        },
+        {
+          "id": "DA-15",
+          "kind": "headline",
+          "text": "Simple twice-daily oral dosing. 190 mg twice daily for 14 days, then 380 mg (two 190 mg capsules) twice daily. Capsules are swallowed whole. No CYP-mediated interactions are expected.",
+          "claims": [
+            "DOS-001",
+            "DOS-002",
+            "ADM-001",
+            "INT-001"
+          ]
+        },
+        {
+          "id": "DA-16",
+          "kind": "body",
+          "text": "Monitoring: CBC with lymphocyte count and liver tests before initiation; CBC at 3 months, then every 6 months and as clinically indicated; liver tests as clinically indicated.",
+          "claims": [
+            "MON-001",
+            "MON-002",
+            "MON-003",
+            "MON-004"
+          ]
+        },
+        {
+          "id": "DA-17",
+          "kind": "body",
+          "text": "Transitioning from dimethyl tavorate: QUORVANTA may be started the day after dimethyl tavorate is discontinued. QUORVANTA is contraindicated in patients taking dimethyl tavorate.",
+          "claims": [
+            "DOS-009",
+            "CON-002"
+          ]
+        },
+        {
+          "id": "DA-18",
+          "kind": "footer",
+          "text": "Please see Important Safety Information throughout and accompanying full Prescribing Information.",
+          "claims": []
+        }
+      ],
+      "isi_required": true,
+      "isi_piece": "PROMO-ISI",
+      "status": "approved",
+      "version": "1.0",
+      "job_code": "AQB-QV-DET-0926"
+    },
+    {
+      "id": "PROMO-DOSING-CARD",
+      "title": "QUORVANTA dosing and monitoring card",
+      "type": "dosing_card",
+      "units": [
+        {
+          "id": "DC-01",
+          "kind": "headline",
+          "text": "QUORVANTA dosing and monitoring guide. For adults with relapsing forms of Brennick syndrome.",
+          "claims": [
+            "IND-001"
+          ]
+        },
+        {
+          "id": "DC-02",
+          "kind": "body",
+          "text": "Before starting: CBC including lymphocyte count; serum aminotransferase, alkaline phosphatase and total bilirubin; an estimate of renal function.",
+          "claims": [
+            "MON-001",
+            "MON-002"
+          ]
+        },
+        {
+          "id": "DC-03",
+          "kind": "data",
+          "text": "Days 1 to 14: 190 mg (one capsule) twice daily.",
+          "claims": [
+            "DOS-001"
+          ]
+        },
+        {
+          "id": "DC-04",
+          "kind": "data",
+          "text": "Day 15 onward: 380 mg (two 190 mg capsules) twice daily.",
+          "claims": [
+            "DOS-002"
+          ]
+        },
+        {
+          "id": "DC-05",
+          "kind": "body",
+          "text": "If the maintenance dose is not tolerated: a temporary reduction to 190 mg twice daily may be considered; resume 380 mg twice daily within 6 weeks. Consider discontinuation if the patient cannot tolerate a return to the maintenance dose.",
+          "claims": [
+            "DOS-003",
+            "DOS-004"
+          ]
+        },
+        {
+          "id": "DC-06",
+          "kind": "body",
+          "text": "Administration: swallow capsules whole and intact; do not crush, chew, or sprinkle on food. If taken with food, avoid a high-fat, high-calorie meal (no more than 600 calories and 25 g fat). Avoid co-administration with alcohol.",
+          "claims": [
+            "ADM-001",
+            "ADM-002",
+            "ADM-003"
+          ]
+        },
+        {
+          "id": "DC-07",
+          "kind": "body",
+          "text": "Flushing: taking QUORVANTA with food may reduce its incidence. Non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing may reduce its incidence or severity.",
+          "claims": [
+            "ADM-004",
+            "DOS-005"
+          ]
+        },
+        {
+          "id": "DC-08",
+          "kind": "body",
+          "text": "Ongoing monitoring: CBC with lymphocyte count at 3 months, then every 6 months, and as clinically indicated. Liver tests as clinically indicated. If treatment is interrupted for lymphopenia, continue lymphocyte counts until recovery.",
+          "claims": [
+            "MON-003",
+            "MON-004",
+            "MON-005"
+          ]
+        },
+        {
+          "id": "DC-09",
+          "kind": "body",
+          "text": "Consider interruption if lymphocyte counts <0.5 \u00d7 10\u2079/L persist for more than 6 months. Consider withholding in herpes zoster or other serious infection until resolved. Withhold and evaluate at the first sign suggestive of PML.",
+          "claims": [
+            "SAF-015",
+            "SAF-009",
+            "SAF-005"
+          ]
+        },
+        {
+          "id": "DC-10",
+          "kind": "body",
+          "text": "Renal impairment: no adjustment in mild impairment; not recommended in moderate or severe impairment. Hepatic impairment: no adjustment necessary; no studies were conducted.",
+          "claims": [
+            "DOS-006",
+            "DOS-007",
+            "DOS-008"
+          ]
+        },
+        {
+          "id": "DC-11",
+          "kind": "body",
+          "text": "Switching from dimethyl tavorate: start QUORVANTA the day after dimethyl tavorate is discontinued.",
+          "claims": [
+            "DOS-009"
+          ]
+        },
+        {
+          "id": "DC-12",
+          "kind": "body",
+          "text": "Supplied: 190 mg delayed-release capsules, bottles of 120. Store at 20\u00b0C to 25\u00b0C (68\u00b0F to 77\u00b0F).",
+          "claims": [
+            "SUP-001",
+            "SUP-002",
+            "SUP-003"
+          ]
+        },
+        {
+          "id": "DC-13",
+          "kind": "footer",
+          "text": "Please see Important Safety Information on reverse and accompanying full Prescribing Information.",
+          "claims": []
+        }
+      ],
+      "isi_required": true,
+      "isi_piece": "PROMO-ISI",
+      "status": "approved",
+      "version": "1.0",
+      "job_code": "AQB-QV-DOS-0926"
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "_notice": "FICTITIOUS. Consumer-language claims for a product that does not exist.",
+  "dtc_claims_version": "1.0.0",
+  "usage": "Direct-to-consumer claims are approved separately from HCP claims, in plain language, and each maps to the HCP claims it derives from. The HCP chatbot must not use DTC wording; a response in DTC language ('fewer relapses', '34 out of 100') is unsupported for an HCP audience even where the underlying fact is. A later patient-facing chatbot would use this set.",
+  "isi_required": true,
+  "claims": [
+    {
+      "id": "DTC-001",
+      "audience": "patient",
+      "text": "QUORVANTA is a prescription medicine for adults with relapsing forms of Brennick syndrome.",
+      "derives_from": [
+        "IND-001"
+      ],
+      "topic": "indication",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-002",
+      "audience": "patient",
+      "text": "QUORVANTA is taken by mouth, twice a day.",
+      "derives_from": [
+        "DOS-002"
+      ],
+      "topic": "dosing",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-003",
+      "audience": "patient",
+      "text": "You start with one capsule twice a day for 2 weeks, then two capsules twice a day.",
+      "derives_from": [
+        "DOS-001",
+        "DOS-002"
+      ],
+      "topic": "dosing",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-004",
+      "audience": "patient",
+      "text": "QUORVANTA turns into the same active substance as dimethyl tavorate, a medicine that has been studied in people with relapsing Brennick syndrome for more than 10 years.",
+      "derives_from": [
+        "EFF-001",
+        "ADR-003"
+      ],
+      "topic": "heritage",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-005",
+      "audience": "patient",
+      "text": "In two 2-year studies, people taking dimethyl tavorate had fewer relapses than people taking placebo.",
+      "derives_from": [
+        "EFF-002",
+        "EFF-004",
+        "EFF-008"
+      ],
+      "topic": "efficacy",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-006",
+      "audience": "patient",
+      "text": "In one of those studies, people taking dimethyl tavorate were less likely to have their disability get worse than people taking placebo. In the other study, the difference was not statistically significant.",
+      "derives_from": [
+        "EFF-005",
+        "EFF-010"
+      ],
+      "topic": "efficacy",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-007",
+      "audience": "patient",
+      "text": "People taking dimethyl tavorate in the studies had fewer new areas of damage on MRI than people taking placebo.",
+      "derives_from": [
+        "EFF-006",
+        "EFF-011"
+      ],
+      "topic": "efficacy",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-008",
+      "audience": "patient",
+      "text": "The most common side effects were flushing, stomach pain, diarrhea, nausea and headache.",
+      "derives_from": [
+        "ADR-001"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-009",
+      "audience": "patient",
+      "text": "Flushing and stomach problems were most common in the first months and usually got better over time.",
+      "derives_from": [
+        "SAF-020",
+        "ADR-004"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-010",
+      "audience": "patient",
+      "text": "Taking QUORVANTA with food may help with flushing.",
+      "derives_from": [
+        "ADM-004",
+        "ADM-002"
+      ],
+      "topic": "tolerability",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-011",
+      "audience": "patient",
+      "text": "You can take QUORVANTA with or without food.",
+      "derives_from": [
+        "ADM-002"
+      ],
+      "topic": "tolerability",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-012",
+      "audience": "patient",
+      "text": "QUORVANTA can cause serious side effects, including allergic reactions, a rare brain infection called PML, shingles and other infections, low white blood cell counts, liver problems, serious stomach and bowel problems, and skin reactions to sunlight.",
+      "derives_from": [
+        "SAF-001",
+        "SAF-003",
+        "SAF-007",
+        "SAF-010",
+        "SAF-017",
+        "SAF-022",
+        "SAF-025"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-013",
+      "audience": "patient",
+      "text": "Your healthcare provider will check your blood before you start QUORVANTA, 3 months after you start, and every 6 months after that.",
+      "derives_from": [
+        "MON-001",
+        "MON-003"
+      ],
+      "topic": "monitoring",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-014",
+      "audience": "patient",
+      "text": "QuorvantaConnect can help with insurance questions, the copay program, and questions about taking QUORVANTA.",
+      "derives_from": [
+        "ACC-006",
+        "ACC-007",
+        "ACC-009"
+      ],
+      "topic": "access",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-015",
+      "audience": "patient",
+      "text": "Eligible commercially insured patients may pay as little as $0 a month. Not available to patients in Medicare, Medicaid or other government programs. Terms apply.",
+      "derives_from": [
+        "ACC-007"
+      ],
+      "topic": "access",
+      "version": 1,
+      "status": "approved"
+    }
+  ]
+}

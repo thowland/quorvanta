@@ -1,0 +1,2063 @@
+{
+  "_notice": "FICTITIOUS. QUORVANTA, soriximel tavorate, dimethyl tavorate, Brennick syndrome, Arden Quay Biosciences and every figure here are invented for software testing. Not medical information.",
+  "library_version": "1.2.0",
+  "product": {
+    "brand": "QUORVANTA",
+    "generic": "soriximel tavorate",
+    "form": "delayed-release capsules, 190 mg",
+    "predecessor": {
+      "name": "dimethyl tavorate",
+      "abbrev": "DMT",
+      "relationship": "same active metabolite (monomethyl tavorate, MMT)"
+    },
+    "condition": {
+      "name": "Brennick syndrome",
+      "abbrev": "BrS",
+      "disability_scale": "Brennick Functional Scale (BFS)"
+    },
+    "company": "Arden Quay Biosciences, Inc.",
+    "label": "label/label.md",
+    "label_version": "1.0"
+  },
+  "data_source_values": {
+    "QUORVANTA": "data or instruction specific to QUORVANTA",
+    "DMT": "data generated with dimethyl tavorate; must be attributed to it",
+    "class": "reported across tavoric acid esters"
+  },
+  "rules": {
+    "efficacy_requires_isi": true,
+    "isi_claims": [
+      "IND-001",
+      "CON-001",
+      "CON-002",
+      "SAF-001",
+      "SAF-003",
+      "SAF-007",
+      "SAF-010",
+      "SAF-017",
+      "SAF-019",
+      "SAF-022",
+      "SAF-025",
+      "ADR-001"
+    ],
+    "requires_semantics": "When a claim is used, every claim in its requires list must accompany it in the same response.",
+    "access_claims_note": "Access claims answer availability, prescribing route and support-program questions. They do not answer whether a specific plan covers QUORVANTA, what a given patient will pay, or which pharmacy is best; those route to QuorvantaConnect."
+  },
+  "fixed_messages": {
+    "ae_handoff": "Thank you for letting us know. What you have described may be an adverse event, and we are required to handle these through our Drug Safety team. Please call Arden Quay Biosciences Drug Safety at 1-800-555-0142 so that the details can be recorded properly.",
+    "fallback": "I do not have approved information that answers that question. Arden Quay Biosciences Medical Information can help at 1-800-555-0164.",
+    "access_referral": "For coverage under a specific plan, a patient's expected cost, or help with a prior authorization, QuorvantaConnect can assist at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time."
+  },
+  "claims": [
+    {
+      "id": "IND-001",
+      "category": "indication",
+      "text": "QUORVANTA is indicated for the treatment of relapsing forms of Brennick syndrome, to include first clinical episode, relapsing-remitting disease, and active progressive disease, in adults.",
+      "reference": {
+        "label_section": "1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "population": "adults with relapsing forms of BrS"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-001",
+      "category": "dosing",
+      "text": "The starting dose of QUORVANTA is 190 mg twice a day, orally, for 14 days.",
+      "reference": {
+        "label_section": "2.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "first 14 days"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-002",
+      "category": "dosing",
+      "text": "After 14 days, the dose is increased to the maintenance dose of 380 mg, taken as two 190 mg capsules, twice a day.",
+      "reference": {
+        "label_section": "2.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "DOS-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-003",
+      "category": "dosing",
+      "text": "A temporary reduction to 190 mg twice a day may be considered for patients who do not tolerate the maintenance dose; the maintenance dose should be resumed within 6 weeks.",
+      "reference": {
+        "label_section": "2.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "within 6 weeks"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-004",
+      "category": "dosing",
+      "text": "Discontinuation should be considered for patients unable to tolerate a return to the maintenance dose.",
+      "reference": {
+        "label_section": "2.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-005",
+      "category": "dosing",
+      "text": "Non-enteric coated aspirin, up to 325 mg, taken 30 minutes before dosing may reduce the incidence or severity of flushing.",
+      "reference": {
+        "label_section": "2.2, 5.6",
+        "citations": [
+          "REF-013.1",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "clinical study"
+      },
+      "requires": [
+        "SAF-022"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-006",
+      "category": "dosing",
+      "text": "No dose adjustment is recommended in patients with mild renal impairment.",
+      "reference": {
+        "label_section": "2.5, 8.6",
+        "citations": [
+          "REF-007.1",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "population": "mild renal impairment"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-007",
+      "category": "dosing",
+      "text": "QUORVANTA is not recommended in patients with moderate or severe renal impairment, because of increased exposure to the metabolite HPG.",
+      "reference": {
+        "label_section": "2.5, 8.6",
+        "citations": [
+          "REF-007.2",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "population": "moderate or severe renal impairment"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-008",
+      "category": "dosing",
+      "text": "No dose adjustment is necessary in hepatic impairment. No studies have been conducted in hepatic impairment; MMT exposure would not be expected to be affected.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "no study; expectation",
+        "population": "hepatic impairment"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DOS-009",
+      "category": "dosing",
+      "text": "QUORVANTA may be started the day after dimethyl tavorate is discontinued.",
+      "reference": {
+        "label_section": "7.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "CON-002"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADM-001",
+      "category": "administration",
+      "text": "QUORVANTA capsules should be swallowed whole and intact, and should not be crushed, chewed, or sprinkled on food.",
+      "reference": {
+        "label_section": "2.3",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADM-002",
+      "category": "administration",
+      "text": "If QUORVANTA is taken with food, a high-fat, high-calorie meal or snack should be avoided; the meal or snack should contain no more than 600 calories and no more than 25 g of fat.",
+      "reference": {
+        "label_section": "2.3",
+        "citations": [
+          "REF-005.1",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADM-003",
+      "category": "administration",
+      "text": "Co-administration of QUORVANTA with alcohol should be avoided.",
+      "reference": {
+        "label_section": "2.3",
+        "citations": [
+          "REF-006.4",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADM-004",
+      "category": "administration",
+      "text": "Taking QUORVANTA with food may reduce the incidence of flushing.",
+      "reference": {
+        "label_section": "5.6",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "ADM-002"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "MON-001",
+      "category": "monitoring",
+      "text": "A complete blood count, including lymphocyte count, should be obtained before starting QUORVANTA.",
+      "reference": {
+        "label_section": "2.1, 5.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "before initiation"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "MON-002",
+      "category": "monitoring",
+      "text": "Serum aminotransferase, alkaline phosphatase and total bilirubin levels, and an estimate of renal function, should be obtained before starting QUORVANTA.",
+      "reference": {
+        "label_section": "2.1, 5.5",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "before initiation"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "MON-003",
+      "category": "monitoring",
+      "text": "A complete blood count, including lymphocyte count, should be obtained 3 months after starting QUORVANTA and every 6 months thereafter, and as clinically indicated.",
+      "reference": {
+        "label_section": "2.4, 5.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "3 months, then every 6 months"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "MON-004",
+      "category": "monitoring",
+      "text": "Liver tests should be obtained during treatment as clinically indicated.",
+      "reference": {
+        "label_section": "2.4, 5.5",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "MON-005",
+      "category": "monitoring",
+      "text": "If QUORVANTA is interrupted or discontinued because of lymphopenia, lymphocyte counts should continue to be obtained until recovery.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "CON-001",
+      "category": "contraindication",
+      "text": "QUORVANTA is contraindicated in patients with known hypersensitivity to soriximel tavorate, dimethyl tavorate, or any of the excipients. Reactions may include anaphylaxis and angioedema.",
+      "reference": {
+        "label_section": "4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "CON-002",
+      "category": "contraindication",
+      "text": "QUORVANTA is contraindicated in patients taking dimethyl tavorate, which is also metabolized to monomethyl tavorate.",
+      "reference": {
+        "label_section": "4, 7.1",
+        "citations": [
+          "REF-004.1",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-001",
+      "category": "safety",
+      "text": "QUORVANTA can cause anaphylaxis and angioedema after the first dose or at any time during treatment.",
+      "reference": {
+        "label_section": "5.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-002",
+      "category": "safety",
+      "text": "Patients should discontinue QUORVANTA and seek immediate medical care if they experience signs or symptoms of anaphylaxis or angioedema. QUORVANTA should not be restarted.",
+      "reference": {
+        "label_section": "5.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "SAF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-003",
+      "category": "safety",
+      "text": "Progressive multifocal leukoencephalopathy (PML) has occurred in patients with Brennick syndrome treated with dimethyl tavorate, which has the same active metabolite as QUORVANTA.",
+      "reference": {
+        "label_section": "5.2",
+        "citations": [
+          "REF-009.1",
+          "REF-010.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "clinical trial and postmarketing"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-004",
+      "category": "safety",
+      "text": "A fatal case of PML occurred in a patient who had received dimethyl tavorate for 5 years in a long-term extension study and who had lymphocyte counts predominantly below 0.5 x 10^9/L for 4 years.",
+      "reference": {
+        "label_section": "5.2",
+        "citations": [
+          "REF-009.1",
+          "REF-009.2",
+          "REF-009.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "extension study, single case"
+      },
+      "requires": [
+        "SAF-003"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-005",
+      "category": "safety",
+      "text": "At the first sign or symptom suggestive of PML, QUORVANTA should be withheld and an appropriate diagnostic evaluation performed.",
+      "reference": {
+        "label_section": "5.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "SAF-003"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-006",
+      "category": "safety",
+      "text": "Typical symptoms of PML progress over days to weeks and include progressive weakness on one side of the body, clumsiness of limbs, disturbance of vision, and changes in thinking, memory and orientation.",
+      "reference": {
+        "label_section": "5.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label description"
+      },
+      "requires": [
+        "SAF-003"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-007",
+      "category": "safety",
+      "text": "Serious cases of herpes zoster, including disseminated herpes zoster and herpes zoster involving the eye and the central nervous system, have occurred with dimethyl tavorate at any time during treatment.",
+      "reference": {
+        "label_section": "5.3",
+        "citations": [
+          "REF-010.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "postmarketing"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-008",
+      "category": "safety",
+      "text": "Other serious opportunistic viral, fungal and bacterial infections have occurred with dimethyl tavorate, in patients with reduced and with normal lymphocyte counts.",
+      "reference": {
+        "label_section": "5.3",
+        "citations": [
+          "REF-010.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "postmarketing"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-009",
+      "category": "safety",
+      "text": "Withholding QUORVANTA should be considered in patients with herpes zoster or other serious infection until the infection has resolved.",
+      "reference": {
+        "label_section": "5.3",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-010",
+      "category": "safety",
+      "text": "QUORVANTA may decrease lymphocyte counts. In placebo-controlled trials of dimethyl tavorate, mean lymphocyte counts decreased by approximately 25% during the first year and then remained stable.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-008.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "timepoint": "first year",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-011",
+      "category": "safety",
+      "text": "In placebo-controlled trials of dimethyl tavorate, lymphocyte counts below 0.5 x 10^9/L occurred in 5% of treated patients and fewer than 1% of placebo patients.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-008.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "SAF-010"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-012",
+      "category": "safety",
+      "text": "In controlled trials of dimethyl tavorate, the incidence of infections (54% vs 52%) and serious infections (3% vs 2%) was similar to placebo, and no increase in serious infections was seen in patients with lymphocyte counts below 0.8 x 10^9/L; one patient in an extension study developed PML in the setting of prolonged lymphopenia.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-008.5",
+          "REF-009.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "SAF-004"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-013",
+      "category": "safety",
+      "text": "In controlled and uncontrolled trials of dimethyl tavorate, 3% of patients had prolonged, severe lymphopenia (counts below 0.5 x 10^9/L for at least 6 months); median time to lymphocyte recovery after discontinuation in these patients was 84 weeks.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-008.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "controlled and uncontrolled trials"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-014",
+      "category": "safety",
+      "text": "Among dimethyl tavorate patients without prolonged, severe lymphopenia, median time to lymphocyte recovery after discontinuation was 5 weeks for mild, 9 weeks for moderate and 18 weeks for severe lymphopenia at discontinuation.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-008.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "controlled and uncontrolled trials"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-015",
+      "category": "safety",
+      "text": "Interruption of QUORVANTA should be considered in patients with lymphocyte counts below 0.5 x 10^9/L persisting for more than 6 months. Decisions about restarting should be individualized.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "timepoint": "more than 6 months"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-016",
+      "category": "safety",
+      "text": "Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts.",
+      "reference": {
+        "label_section": "5.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "absence of data"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-017",
+      "category": "safety",
+      "text": "Clinically significant liver injury has been reported with dimethyl tavorate in the postmarketing setting, with onset from a few days to several months after initiation. Abnormalities resolved on discontinuation; none resulted in liver failure, transplant or death.",
+      "reference": {
+        "label_section": "5.5",
+        "citations": [
+          "REF-010.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "postmarketing"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-018",
+      "category": "safety",
+      "text": "QUORVANTA should be discontinued if clinically significant liver injury induced by QUORVANTA is suspected.",
+      "reference": {
+        "label_section": "5.5",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "SAF-017"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-019",
+      "category": "safety",
+      "text": "QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo.",
+      "reference": {
+        "label_section": "5.6",
+        "citations": [
+          "REF-011.3",
+          "REF-002.7"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-020",
+      "category": "safety",
+      "text": "In trials of dimethyl tavorate, flushing generally began soon after initiation, usually improved or resolved over time, and was mild or moderate in the majority of patients.",
+      "reference": {
+        "label_section": "5.6",
+        "citations": [
+          "REF-011.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT"
+      },
+      "requires": [
+        "SAF-019"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-021",
+      "category": "safety",
+      "text": "In trials of dimethyl tavorate, 2% of patients discontinued because of flushing, and fewer than 1% had serious flushing leading to hospitalization.",
+      "reference": {
+        "label_section": "5.6",
+        "citations": [
+          "REF-011.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT"
+      },
+      "requires": [
+        "SAF-019"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-022",
+      "category": "safety",
+      "text": "Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation.",
+      "reference": {
+        "label_section": "5.7",
+        "citations": [
+          "REF-010.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "class",
+        "evidence": "postmarketing",
+        "timepoint": "majority within 6 months"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-023",
+      "category": "safety",
+      "text": "In controlled trials of dimethyl tavorate, the incidence of serious gastrointestinal adverse reactions was 1%, and none were fatal.",
+      "reference": {
+        "label_section": "5.7",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT"
+      },
+      "requires": [
+        "SAF-022"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-024",
+      "category": "safety",
+      "text": "Patients should be monitored and promptly evaluated, and QUORVANTA discontinued, for new or worsening severe gastrointestinal signs and symptoms.",
+      "reference": {
+        "label_section": "5.7",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "SAF-022"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-025",
+      "category": "safety",
+      "text": "Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients in controlled trials. Most were mild and none led to hospitalization.",
+      "reference": {
+        "label_section": "5.8",
+        "citations": [
+          "REF-011.6"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SAF-026",
+      "category": "safety",
+      "text": "Patients should be advised to limit exposure to sunlight and ultraviolet light and to use sun protection during treatment with QUORVANTA.",
+      "reference": {
+        "label_section": "5.8",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [
+        "SAF-025"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-001",
+      "category": "adverse_reactions",
+      "text": "The most common adverse reactions with dimethyl tavorate, which has the same active metabolite as QUORVANTA (incidence at least 10% and at least 2% higher than placebo), were flushing, abdominal pain, diarrhea, nausea and headache.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-011.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-002",
+      "category": "adverse_reactions",
+      "text": "Adverse reaction rates observed in the clinical trials of one drug cannot be directly compared with rates in the clinical trials of another drug and may not reflect the rates observed in practice.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label caveat"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-003",
+      "category": "adverse_reactions",
+      "text": "In clinical studies of dimethyl tavorate, 2,740 patients have been followed for up to 11 years, an exposure of 9,860 person-years; 1,020 patients received at least 5 years of treatment and 310 at least 10 years.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-011.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "controlled and uncontrolled trials"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-004",
+      "category": "adverse_reactions",
+      "text": "In trials of dimethyl tavorate, gastrointestinal events were more frequent early in treatment, primarily in the first 2 months, and usually decreased over time; 5% of treated patients and 1% of placebo patients discontinued because of gastrointestinal events.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-011.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "timepoint": "first 2 months",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-005",
+      "category": "adverse_reactions",
+      "text": "In controlled trials of dimethyl tavorate, transaminase elevations were seen primarily in the first 6 months and most were below 3 times the upper limit of normal; there were no elevations of 3 times the upper limit of normal or more with concomitant bilirubin above 2 times the upper limit of normal.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-011.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "timepoint": "first 6 months"
+      },
+      "requires": [
+        "SAF-017"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-006",
+      "category": "adverse_reactions",
+      "text": "Approximately 620 patients with relapsing-remitting Brennick syndrome were treated with QUORVANTA in clinical studies, approximately 410 of them for more than 1 year; the adverse reaction profile was consistent with the placebo-controlled experience with dimethyl tavorate.",
+      "reference": {
+        "label_section": "6.1",
+        "citations": [
+          "REF-012.1",
+          "REF-012.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "clinical studies (uncontrolled)",
+        "population": "relapsing-remitting BrS"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-007",
+      "category": "adverse_reactions",
+      "text": "Postmarketing reports with dimethyl tavorate include acute pancreatitis; gastrointestinal perforation, ulceration, obstruction and hemorrhage; liver function abnormalities; herpes zoster and other serious opportunistic infections; and alopecia. Frequency and causal relationship cannot be reliably established from voluntary reports.",
+      "reference": {
+        "label_section": "6.2",
+        "citations": [
+          "REF-010.1",
+          "REF-010.4",
+          "REF-010.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "postmarketing"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-008",
+      "category": "adverse_reactions",
+      "text": "Suspected adverse reactions should be reported to Arden Quay Biosciences Drug Safety at 1-800-555-0142.",
+      "reference": {
+        "label_section": "Highlights",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ADR-009",
+      "category": "adverse_reactions",
+      "text": "In Studies A and B, adverse reactions reported with dimethyl tavorate 200 mg twice daily (N=746) versus placebo (N=744) were: flushing 34% vs 5%; abdominal pain 16% vs 9%; diarrhea 15% vs 10%; nausea 13% vs 8%; headache 12% vs 9%; vomiting 8% vs 4%; pruritus 7% vs 3%; rash 6% vs 3%; dyspepsia 5% vs 2%; ALT increased 5% vs 3%; photosensitivity reaction 4% vs 1%; lymphopenia 3% vs less than 1%.",
+      "reference": {
+        "label_section": "6.1 Table 1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-001",
+      "category": "interactions",
+      "text": "The metabolism of soriximel tavorate does not involve CYP enzymes, and no clinically meaningful interactions are expected with CYP inhibitors or inducers.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-018.1",
+          "REF-018.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "in vitro and PK"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-002",
+      "category": "interactions",
+      "text": "Aspirin given approximately 30 minutes before dimethyl tavorate did not alter the pharmacokinetics of MMT.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-013.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "PK study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-003",
+      "category": "interactions",
+      "text": "In a study with dimethyl tavorate, no relevant effect on exposure to a combined oral contraceptive containing levonorgestrel and ethinyl estradiol was observed. No studies have been performed with other oral contraceptives.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-018.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "PK study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-004",
+      "category": "interactions",
+      "text": "Administration of QUORVANTA with 5% and 40% ethanol did not alter total MMT exposure and did not induce dose dumping; mean peak MMT concentration decreased by 7% and 18%, respectively.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-006.1",
+          "REF-006.2",
+          "REF-006.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study"
+      },
+      "requires": [
+        "ADM-003"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-005",
+      "category": "interactions",
+      "text": "In an open-label study, dimethyl tavorate did not attenuate antibody responses to tetanus toxoid-containing and pneumococcal polysaccharide vaccines. The impact on vaccine effectiveness is unknown.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-014.1",
+          "REF-014.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "open-label study, 41 vs 36 subjects"
+      },
+      "requires": [
+        "INT-006"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "INT-006",
+      "category": "interactions",
+      "text": "Live and live-attenuated vaccines have not been assessed with QUORVANTA or dimethyl tavorate.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-014.3",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "absence of data"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-001",
+      "category": "specific_populations",
+      "text": "There are no adequate data on the developmental risk associated with QUORVANTA in pregnant women. Based on animal data, QUORVANTA may cause fetal harm.",
+      "reference": {
+        "label_section": "8.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "animal data; absence of human data",
+        "population": "pregnancy"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-002",
+      "category": "specific_populations",
+      "text": "Data from a dimethyl tavorate pregnancy registry, observational studies and pharmacovigilance have not indicated an increased risk of major birth defects, miscarriage, or other adverse maternal or fetal outcomes; most exposures occurred in the first trimester.",
+      "reference": {
+        "label_section": "8.1",
+        "citations": [
+          "REF-015.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "registry and observational",
+        "population": "pregnancy"
+      },
+      "requires": [
+        "POP-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-003",
+      "category": "specific_populations",
+      "text": "In a prospective dimethyl tavorate pregnancy registry (2012 to 2021), the rate of major birth defects among 298 live births and stillbirths was 3.4% (95% CI 1.6 to 6.1), with no specific pattern. Limitations include exposure misclassification, no adjustment for confounders, and no internal comparator.",
+      "reference": {
+        "label_section": "8.1",
+        "citations": [
+          "REF-015.1",
+          "REF-015.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "registry",
+        "population": "pregnancy"
+      },
+      "requires": [
+        "POP-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-004",
+      "category": "specific_populations",
+      "text": "A pregnancy exposure registry monitors outcomes in women exposed to QUORVANTA during pregnancy. Patients can enroll by calling 1-800-555-0177.",
+      "reference": {
+        "label_section": "8.1",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction",
+        "population": "pregnancy"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-005",
+      "category": "specific_populations",
+      "text": "There are no data on the presence of soriximel tavorate or its metabolites in human milk, on effects on the breastfed infant, or on milk production.",
+      "reference": {
+        "label_section": "8.2",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "absence of data",
+        "population": "lactation"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-006",
+      "category": "specific_populations",
+      "text": "The safety and effectiveness of QUORVANTA in pediatric patients have not been established.",
+      "reference": {
+        "label_section": "8.4",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "absence of data",
+        "population": "pediatric"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-007",
+      "category": "specific_populations",
+      "text": "Clinical studies of dimethyl tavorate and QUORVANTA did not include sufficient numbers of patients aged 65 and over to determine whether they respond differently from younger patients.",
+      "reference": {
+        "label_section": "8.5",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "absence of data",
+        "population": "age 65 and over"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "POP-008",
+      "category": "specific_populations",
+      "text": "In a single-dose study, renal impairment produced no clinically relevant change in MMT exposure, while exposure to the metabolite HPG increased 1.4-, 2.1- and 3.2-fold in mild, moderate and severe impairment.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-007.1",
+          "REF-007.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study, 8 subjects per cohort",
+        "population": "renal impairment"
+      },
+      "requires": [
+        "DOS-007"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-001",
+      "category": "pharmacology",
+      "text": "The mechanism by which soriximel tavorate exerts its therapeutic effect in Brennick syndrome is unknown.",
+      "reference": {
+        "label_section": "12.1",
+        "citations": [
+          "REF-016.2",
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-002",
+      "category": "pharmacology",
+      "text": "MMT, the active metabolite of soriximel tavorate, has been shown to activate the Nrf2 pathway, which is involved in the cellular response to oxidative stress, in vitro and in vivo in animals and humans.",
+      "reference": {
+        "label_section": "12.1",
+        "citations": [
+          "REF-016.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "in vitro and in vivo"
+      },
+      "requires": [
+        "PHA-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-003",
+      "category": "pharmacology",
+      "text": "At twice the maximum recommended dose, QUORVANTA does not prolong the QTc interval to any clinically relevant extent.",
+      "reference": {
+        "label_section": "12.2",
+        "citations": [
+          "REF-017.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "QT study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-004",
+      "category": "pharmacology",
+      "text": "Soriximel tavorate undergoes rapid presystemic hydrolysis by esterases to its active metabolite, MMT, and is not quantifiable in plasma.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-004.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-005",
+      "category": "pharmacology",
+      "text": "Median time to peak MMT concentration is 2 to 2.5 hours. After QUORVANTA 380 mg in patients with Brennick syndrome, mean peak MMT concentration was 1.84 mg/L and mean steady-state AUC with twice-daily dosing was 7.1 mg.hr/L.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-004.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-006",
+      "category": "pharmacology",
+      "text": "A high-fat, high-calorie meal did not affect MMT AUC and reduced peak MMT concentration by approximately 38%; low-fat and medium-fat meals reduced peak concentration by approximately 10% and 22%.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-005.1",
+          "REF-005.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study"
+      },
+      "requires": [
+        "ADM-002"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "PHA-007",
+      "category": "pharmacology",
+      "text": "The terminal half-life of MMT is approximately 1.5 hours, and no accumulation occurs with multiple doses. MMT is eliminated mainly as exhaled carbon dioxide.",
+      "reference": {
+        "label_section": "12.3",
+        "citations": [
+          "REF-004.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "PK study"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-001",
+      "category": "efficacy",
+      "text": "The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of Brennick syndrome and in healthy subjects. The clinical efficacy studies were conducted with dimethyl tavorate.",
+      "reference": {
+        "label_section": "14",
+        "citations": [
+          "REF-004.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "bioavailability bridging"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-002",
+      "category": "efficacy",
+      "text": "Studies A and B were 2-year, randomized, double-blind, placebo-controlled studies of dimethyl tavorate in patients with relapsing-remitting Brennick syndrome who had at least 1 relapse in the preceding year or a contrast-enhancing lesion on MRI within 6 weeks of randomization.",
+      "reference": {
+        "label_section": "14",
+        "citations": [
+          "REF-002.1",
+          "REF-003.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "population": "relapsing-remitting BrS, BFS 0 to 5",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-003",
+      "category": "efficacy",
+      "text": "In Study A, 25% of patients treated with dimethyl tavorate 200 mg twice daily relapsed over 2 years, compared with 43% on placebo, a relative risk reduction of 46% (p<0.0001). This was the primary endpoint.",
+      "reference": {
+        "label_section": "14 Table 2",
+        "citations": [
+          "REF-002.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT, primary endpoint",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-004",
+      "category": "efficacy",
+      "text": "In Study A, the annualized relapse rate was 0.18 with dimethyl tavorate 200 mg twice daily and 0.35 with placebo, a relative reduction of 49% (p<0.0001).",
+      "reference": {
+        "label_section": "14 Table 2",
+        "citations": [
+          "REF-002.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-005",
+      "category": "efficacy",
+      "text": "In Study A, 15% of patients treated with dimethyl tavorate 200 mg twice daily had 12-week confirmed disability progression over 2 years, compared with 25% on placebo, a relative risk reduction of 41% (p=0.003).",
+      "reference": {
+        "label_section": "14 Table 2",
+        "citations": [
+          "REF-002.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001",
+        "EFF-010"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-006",
+      "category": "efficacy",
+      "text": "In the Study A MRI cohort, the mean number of new or newly enlarging T2 lesions over 2 years was 3.1 with dimethyl tavorate and 15.8 with placebo (p<0.0001); 42% and 25% of subjects, respectively, had no new or newly enlarging lesions.",
+      "reference": {
+        "label_section": "14 Table 2",
+        "citations": [
+          "REF-002.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT, MRI subset (160 vs 158)",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-007",
+      "category": "efficacy",
+      "text": "In the Study A MRI cohort, the mean number of contrast-enhancing lesions at 2 years was 0.2 with dimethyl tavorate and 1.6 with placebo, a relative odds reduction of 86% (p<0.0001).",
+      "reference": {
+        "label_section": "14 Table 2",
+        "citations": [
+          "REF-002.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT, MRI subset (160 vs 158)",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-008",
+      "category": "efficacy",
+      "text": "In Study B, the annualized relapse rate was 0.21 with dimethyl tavorate 200 mg twice daily and 0.39 with placebo, a relative reduction of 46% (p<0.0001). This was the primary endpoint.",
+      "reference": {
+        "label_section": "14 Table 3",
+        "citations": [
+          "REF-003.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT, primary endpoint",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-009",
+      "category": "efficacy",
+      "text": "In Study B, 28% of patients treated with dimethyl tavorate 200 mg twice daily relapsed over 2 years, compared with 40% on placebo, a relative risk reduction of 33% (p=0.003).",
+      "reference": {
+        "label_section": "14 Table 3",
+        "citations": [
+          "REF-003.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-010",
+      "category": "efficacy",
+      "text": "In Study B, there was no statistically significant effect of dimethyl tavorate on disability progression: 14% versus 18% with placebo (p=0.21).",
+      "reference": {
+        "label_section": "14 Table 3",
+        "citations": [
+          "REF-003.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT",
+        "population": "relapsing-remitting BrS",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-011",
+      "category": "efficacy",
+      "text": "In the Study B MRI cohort, the mean number of new or newly enlarging T2 lesions over 2 years was 4.8 with dimethyl tavorate and 16.2 with placebo, and the mean number of contrast-enhancing lesions at 2 years was 0.4 versus 1.9, a relative odds reduction of 72% (p<0.0001 for each).",
+      "reference": {
+        "label_section": "14 Table 3",
+        "citations": [
+          "REF-003.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT, MRI subset (150 vs 146)",
+        "timepoint": "2 years",
+        "comparator": "placebo"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-012",
+      "category": "efficacy",
+      "text": "In both studies, dimethyl tavorate 200 mg three times daily showed no additional benefit over 200 mg twice daily.",
+      "reference": {
+        "label_section": "14",
+        "citations": [
+          "REF-002.6"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "DMT",
+        "evidence": "pivotal RCT"
+      },
+      "requires": [
+        "EFF-001"
+      ],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "EFF-013",
+      "category": "efficacy",
+      "text": "QUORVANTA cuts relapses nearly in half.",
+      "reference": {
+        "label_section": "14",
+        "citations": []
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "withdrawn",
+      "note": "Withdrawn at review: attributes dimethyl tavorate trial results to QUORVANTA and omits population, timepoint and comparator. Retained to test handling of withdrawn claims."
+    },
+    {
+      "id": "SUP-001",
+      "category": "supply",
+      "text": "QUORVANTA is supplied as hard, delayed-release capsules containing 190 mg of soriximel tavorate, with a light blue cap and a white body printed 'ST 190' in black ink.",
+      "reference": {
+        "label_section": "3, 16",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SUP-002",
+      "category": "supply",
+      "text": "QUORVANTA is supplied in bottles of 120 capsules.",
+      "reference": {
+        "label_section": "16",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "SUP-003",
+      "category": "supply",
+      "text": "QUORVANTA should be stored at 20 to 25 degrees C (68 to 77 degrees F); excursions are permitted to 15 to 30 degrees C (59 to 86 degrees F).",
+      "reference": {
+        "label_section": "16",
+        "citations": [
+          "REF-001.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "label instruction"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-001",
+      "category": "access",
+      "text": "QUORVANTA is available only through a limited network of specialty pharmacies: Marlowe Specialty Pharmacy, Northgate Rx Specialty, Cairnwell Specialty, Tidewater Specialty Pharmacy, and, for its own patients, Halverson Health System Pharmacy.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-023.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-002",
+      "category": "access",
+      "text": "All national QUORVANTA network pharmacies ship to all 50 states and the District of Columbia.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-023.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-003",
+      "category": "access",
+      "text": "QUORVANTA prescriptions may be submitted using the QUORVANTA enrollment form, by e-prescription to a network pharmacy, or by fax to a network pharmacy.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-023.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-004",
+      "category": "access",
+      "text": "Where a patient's plan requires a specific pharmacy, the prescription is routed to that pharmacy; otherwise the patient may choose among the network pharmacies.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-023.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved",
+      "note": "Arden Quay expresses no preference among network pharmacies; a response naming one as best is unsupported."
+    },
+    {
+      "id": "ACC-005",
+      "category": "access",
+      "text": "Samples of QUORVANTA are not provided.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-023.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-006",
+      "category": "access",
+      "text": "QuorvantaConnect offers benefits verification and prior authorization support, and can be reached at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-022.5"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-007",
+      "category": "access",
+      "text": "Eligible commercially insured patients may pay as little as $0 per month for QUORVANTA through QuorvantaConnect copay assistance, subject to an annual maximum; patients in Medicare, Medicaid or other government programs are not eligible.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-022.1"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved",
+      "note": "The eligibility exclusion must travel with the $0 figure."
+    },
+    {
+      "id": "ACC-008",
+      "category": "access",
+      "text": "Eligible patients experiencing a coverage delay may receive QUORVANTA at no cost for up to 60 days through QuorvantaConnect.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-022.2"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-009",
+      "category": "access",
+      "text": "QuorvantaConnect provides telephone nurse support for questions about taking QUORVANTA; the nurses do not provide medical advice.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-022.3"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ACC-010",
+      "category": "access",
+      "text": "Uninsured and underinsured patients who meet income criteria may be eligible to receive QUORVANTA at no cost through the Arden Quay Patient Assistance Foundation.",
+      "reference": {
+        "label_section": null,
+        "citations": [
+          "REF-022.4"
+        ]
+      },
+      "qualifiers": {
+        "data_source": "QUORVANTA",
+        "evidence": "program terms"
+      },
+      "requires": [],
+      "version": 1,
+      "status": "approved"
+    }
+  ],
+  "references_file": "claims/references.json"
+}

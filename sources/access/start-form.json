@@ -1,0 +1,482 @@
+{
+  "_notice": "FICTITIOUS enrollment form for a product that does not exist. Any data entered into a test system built on this form must be synthetic.",
+  "form_id": "AQB-QV-ENR-2026-02",
+  "title": "QUORVANTA Start Form: prescription and QuorvantaConnect enrollment",
+  "version": "2.1",
+  "submission": {
+    "fax": "1-800-555-0184",
+    "portal": "quorvantaconnect.example",
+    "phone": "1-800-555-0183"
+  },
+  "completion_model": "The patient section (A, B, C, E) may be completed by the patient, a caregiver, or an assisting chatbot on the patient's behalf and signed electronically by the patient. The prescriber section (D, F) must be completed and signed by the prescriber or the prescriber's office. Either party may start; the form is complete when both signatures are present.",
+  "esignature": {
+    "standard": "Electronic signatures are accepted under ESIGN/UETA (fictitious statement). The signer must be shown the full text of any consent before signing, and must affirmatively check the consent box; a signature may not be pre-checked, defaulted, or applied by an assistant.",
+    "assistant_rules": [
+      "An assistant may explain a field, transcribe what the patient says, and read consent text aloud or display it in full.",
+      "An assistant may not select a consent option for the patient, summarize consent text in place of showing it, or sign on the patient's behalf.",
+      "An assistant may not give medical advice while completing the form; questions about whether QUORVANTA is right for the patient go to the prescriber.",
+      "If the patient describes a possible adverse event while completing the form, the assistant directs them to their healthcare provider and to Drug Safety at 1-800-555-0142, and does not record the event in the form.",
+      "If the patient states they are under 18, the assistant stops: the form is for adults and a parent or guardian completes it."
+    ]
+  },
+  "sections": [
+    {
+      "id": "A",
+      "title": "Patient information",
+      "completed_by": "patient",
+      "fields": [
+        {
+          "id": "A1",
+          "label": "Legal first name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "A2",
+          "label": "Legal last name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "A3",
+          "label": "Date of birth",
+          "type": "date",
+          "required": true,
+          "validation": "must be 18 or older"
+        },
+        {
+          "id": "A4",
+          "label": "Sex",
+          "type": "choice",
+          "options": [
+            "Female",
+            "Male",
+            "Prefer not to say"
+          ],
+          "required": true
+        },
+        {
+          "id": "A5",
+          "label": "Street address",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "A6",
+          "label": "City",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "A7",
+          "label": "State",
+          "type": "choice",
+          "options": "US states and DC",
+          "required": true
+        },
+        {
+          "id": "A8",
+          "label": "ZIP",
+          "type": "text",
+          "required": true,
+          "validation": "5 or 9 digits"
+        },
+        {
+          "id": "A9",
+          "label": "Mobile phone",
+          "type": "phone",
+          "required": true
+        },
+        {
+          "id": "A10",
+          "label": "OK to text this number?",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "id": "A11",
+          "label": "Email",
+          "type": "email",
+          "required": false
+        },
+        {
+          "id": "A12",
+          "label": "Preferred language",
+          "type": "choice",
+          "options": [
+            "English",
+            "Spanish",
+            "Other"
+          ],
+          "required": true
+        },
+        {
+          "id": "A13",
+          "label": "Best time to call",
+          "type": "choice",
+          "options": [
+            "Morning",
+            "Afternoon",
+            "Evening"
+          ],
+          "required": false
+        },
+        {
+          "id": "A14",
+          "label": "Caregiver name and phone (if someone helps manage your care)",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Insurance information",
+      "completed_by": "patient",
+      "fields": [
+        {
+          "id": "B1",
+          "label": "Do you have health insurance?",
+          "type": "choice",
+          "options": [
+            "Yes, commercial or employer",
+            "Yes, Medicare",
+            "Yes, Medicaid",
+            "Yes, other government program",
+            "Yes, other",
+            "No"
+          ],
+          "required": true
+        },
+        {
+          "id": "B2",
+          "label": "Primary insurance plan name",
+          "type": "text",
+          "required": false,
+          "show_if": "B1 starts with Yes"
+        },
+        {
+          "id": "B3",
+          "label": "Member ID",
+          "type": "text",
+          "required": false,
+          "show_if": "B1 starts with Yes"
+        },
+        {
+          "id": "B4",
+          "label": "Group number",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "B5",
+          "label": "Pharmacy benefit (Rx BIN / PCN / Group), if shown on your card",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "B6",
+          "label": "Secondary insurance, if any",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "B7",
+          "label": "Upload or attach a photo of the front and back of your insurance card",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "B8",
+          "label": "Are you enrolled in any Medicare, Medicaid, TRICARE, VA or other government-funded program?",
+          "type": "boolean",
+          "required": true,
+          "note": "Determines copay program eligibility (ACC-007)."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "QuorvantaConnect services",
+      "completed_by": "patient",
+      "fields": [
+        {
+          "id": "C1",
+          "label": "Benefits verification and prior authorization support",
+          "type": "boolean",
+          "default": null,
+          "required": true
+        },
+        {
+          "id": "C2",
+          "label": "Copay assistance program (commercially insured patients only; see terms)",
+          "type": "boolean",
+          "default": null,
+          "required": true,
+          "show_if": "B8 is No"
+        },
+        {
+          "id": "C3",
+          "label": "Bridge supply if my coverage is delayed",
+          "type": "boolean",
+          "default": null,
+          "required": true
+        },
+        {
+          "id": "C4",
+          "label": "Nurse support calls",
+          "type": "boolean",
+          "default": null,
+          "required": true
+        },
+        {
+          "id": "C5",
+          "label": "Blood test and refill reminders by text",
+          "type": "boolean",
+          "default": null,
+          "required": true,
+          "show_if": "A10 is Yes"
+        },
+        {
+          "id": "C6",
+          "label": "Patient assistance foundation screening (uninsured or underinsured)",
+          "type": "boolean",
+          "default": null,
+          "required": false
+        },
+        {
+          "id": "C7",
+          "label": "Preferred network specialty pharmacy, if your plan allows a choice",
+          "type": "choice",
+          "options": [
+            "No preference",
+            "Marlowe Specialty Pharmacy",
+            "Tidewater Specialty Pharmacy",
+            "Halverson Health System Pharmacy (Halverson Health patients only)"
+          ],
+          "required": false,
+          "note": "Plan-mandated pharmacies override this choice."
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "title": "Prescription",
+      "completed_by": "prescriber",
+      "fields": [
+        {
+          "id": "D1",
+          "label": "Diagnosis",
+          "type": "choice",
+          "options": [
+            "Relapsing-remitting Brennick syndrome",
+            "First clinical episode of Brennick syndrome",
+            "Active progressive Brennick syndrome"
+          ],
+          "required": true,
+          "note": "Fictitious diagnosis codes: BrS-G35.1 / G35.0 / G35.2."
+        },
+        {
+          "id": "D2",
+          "label": "Date of diagnosis",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "D3",
+          "label": "Titration: QUORVANTA 190 mg, take 1 capsule by mouth twice daily for 14 days",
+          "type": "fixed",
+          "required": true,
+          "quantity": "28 capsules"
+        },
+        {
+          "id": "D4",
+          "label": "Maintenance: QUORVANTA 190 mg, take 2 capsules by mouth twice daily",
+          "type": "fixed",
+          "required": true,
+          "quantity": "120 capsules (30-day supply)",
+          "refills": {
+            "type": "integer",
+            "min": 0,
+            "max": 11,
+            "required": true
+          }
+        },
+        {
+          "id": "D5",
+          "label": "Dispense as written",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "id": "D6",
+          "label": "Baseline CBC with lymphocyte count obtained on",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "D7",
+          "label": "Baseline liver tests obtained on",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "D8",
+          "label": "Renal function assessed (no moderate or severe impairment)",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "id": "D9",
+          "label": "Patient is not currently taking dimethyl tavorate, or last dose date",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "D10",
+          "label": "Known allergies",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "D11",
+          "label": "Prior therapies for Brennick syndrome (for prior authorization)",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "D12",
+          "label": "Clinical notes to support prior authorization (optional attachment)",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "title": "Patient authorizations and signature",
+      "completed_by": "patient",
+      "fields": [
+        {
+          "id": "E1",
+          "label": "HIPAA authorization to share my health information with Arden Quay Biosciences, QuorvantaConnect, its contracted vendors, and the network specialty pharmacy for the purposes of enrollment, benefits verification, financial assistance, and support services",
+          "type": "consent",
+          "required": true,
+          "text_ref": "CONSENT-HIPAA",
+          "default": null
+        },
+        {
+          "id": "E2",
+          "label": "I agree to be contacted by QuorvantaConnect by phone, text and email about my enrollment and QUORVANTA. Message and data rates may apply. I can opt out at any time.",
+          "type": "consent",
+          "required": true,
+          "text_ref": "CONSENT-CONTACT",
+          "default": null
+        },
+        {
+          "id": "E3",
+          "label": "Copay program terms and conditions (required only if C2 is selected)",
+          "type": "consent",
+          "required": false,
+          "text_ref": "CONSENT-COPAY",
+          "show_if": "C2 is Yes",
+          "default": null
+        },
+        {
+          "id": "E4",
+          "label": "I certify that the information I provided is accurate to the best of my knowledge.",
+          "type": "consent",
+          "required": true,
+          "default": null
+        },
+        {
+          "id": "E5",
+          "label": "Patient electronic signature",
+          "type": "esignature",
+          "required": true
+        },
+        {
+          "id": "E6",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "auto": "signature timestamp"
+        },
+        {
+          "id": "E7",
+          "label": "If signed by a legal representative: name and relationship",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "F",
+      "title": "Prescriber attestation and signature",
+      "completed_by": "prescriber",
+      "fields": [
+        {
+          "id": "F1",
+          "label": "Prescriber name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "F2",
+          "label": "NPI",
+          "type": "text",
+          "required": true,
+          "validation": "10 digits (use synthetic values in testing)"
+        },
+        {
+          "id": "F3",
+          "label": "State license number and state",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "F4",
+          "label": "Practice name, address, phone, fax",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "F5",
+          "label": "Office contact for prior authorization",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "F6",
+          "label": "I certify that this prescription is medically necessary, that I have reviewed the Prescribing Information including the baseline test requirements, and that I authorize QuorvantaConnect to act on my behalf for prior authorization and appeals.",
+          "type": "consent",
+          "required": true,
+          "default": null
+        },
+        {
+          "id": "F7",
+          "label": "Prescriber electronic signature",
+          "type": "esignature",
+          "required": true
+        },
+        {
+          "id": "F8",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "auto": "signature timestamp"
+        }
+      ]
+    }
+  ],
+  "consent_texts": {
+    "CONSENT-HIPAA": "By signing, I authorize my healthcare providers, pharmacies and health plans to disclose my protected health information, including my diagnosis, prescription, insurance and contact details, to Arden Quay Biosciences, Inc., QuorvantaConnect, and the vendors and specialty pharmacies working with them, so that they can enroll me in QuorvantaConnect, verify my benefits, assess my eligibility for financial assistance, coordinate my prescription, and provide support services. I understand that information disclosed under this authorization may no longer be protected by federal privacy law once received by Arden Quay Biosciences and its vendors, that I may revoke this authorization at any time by writing to QuorvantaConnect, that revocation will not affect disclosures already made, that my treatment and insurance coverage do not depend on signing, and that this authorization expires 5 years from the date signed unless a shorter period is required by state law. (Fictitious.)",
+    "CONSENT-CONTACT": "I agree that QuorvantaConnect may contact me by phone, text message and email about my enrollment, my prescription, reminders, and QUORVANTA. Automated messages may be used. Message and data rates may apply. I can opt out at any time by replying STOP to a text or calling 1-800-555-0183. (Fictitious.)",
+    "CONSENT-COPAY": "The QuorvantaConnect copay program is for patients with commercial insurance only. Patients enrolled in Medicare, Medicaid, TRICARE, VA, or any other government-funded program are not eligible. Eligible patients may pay as little as $0 per month, subject to an annual maximum benefit. The program is not insurance and may be changed or ended at any time. I will not seek reimbursement for the program benefit from any third party and will notify QuorvantaConnect if my insurance changes. (Fictitious.)"
+  },
+  "post_submission": {
+    "patient_receives": "Copy of the completed form by the contact method chosen; a welcome call within 1 business day",
+    "prescriber_receives": "Confirmation with case number; benefits verification summary within 1 business day",
+    "routing": "Prescription routed per access/specialty-pharmacy-network.json"
+  }
+}

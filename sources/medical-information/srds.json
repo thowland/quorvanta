@@ -119,7 +119,7 @@
       "gap_id": "GAP-10",
       "title": "Tolerability of QUORVANTA compared with dimethyl tavorate",
       "typical_question": "Is QUORVANTA easier on the stomach than dimethyl tavorate?",
-      "response": "QUORVANTA and dimethyl tavorate share the same active metabolite, and the efficacy of QUORVANTA is based on bioequivalence. QUORVANTA was studied in approximately 620 patients in two open-label, uncontrolled studies, and its adverse reaction profile was consistent with the placebo-controlled experience with dimethyl tavorate; no comparison of tolerability was made. An interim, unadjusted analysis of insurance claims data presented as a congress poster (Dvo\u0159\u00e1k-Mensah and Rautenbach, 2025) reported numerically lower discontinuation for gastrointestinal complaints with soriximel tavorate than with dimethyl tavorate at 6 months (11% versus 16%); this analysis is observational, interim and not peer reviewed, and Arden Quay Biosciences makes no claim of improved tolerability.",
+      "response": "QUORVANTA and dimethyl tavorate share the same active metabolite, and the efficacy of QUORVANTA is based on bioequivalence. QUORVANTA was studied in approximately 620 patients in two open-label, uncontrolled studies, and its adverse reaction profile was consistent with the placebo-controlled experience with dimethyl tavorate; no comparison of tolerability was made. An interim, unadjusted analysis of insurance claims data presented as a congress poster (Dvořák-Mensah and Rautenbach, 2025) reported numerically lower discontinuation for gastrointestinal complaints with soriximel tavorate than with dimethyl tavorate at 6 months (11% versus 16%); this analysis is observational, interim and not peer reviewed, and Arden Quay Biosciences makes no claim of improved tolerability.",
       "references": [
         "REF-001",
         "REF-004",
@@ -136,7 +136,7 @@
       "gap_id": "GAP-11",
       "title": "Use of QUORVANTA in non-relapsing progressive Brennick syndrome",
       "typical_question": "Would QUORVANTA help a patient with primary progressive BrS?",
-      "response": "QUORVANTA is indicated for relapsing forms of Brennick syndrome and is not indicated for non-relapsing progressive disease. A single-center, uncontrolled series (Ib\u00e1\u00f1ez-Corry and Dvo\u0159\u00e1k-Mensah, 2024) reported no detectable change in BFS progression over 18 months in 28 patients with non-active progressive BrS treated off-label with a tavorate ester; the authors describe the study as underpowered. Arden Quay Biosciences does not recommend use outside the approved indication.",
+      "response": "QUORVANTA is indicated for relapsing forms of Brennick syndrome and is not indicated for non-relapsing progressive disease. A single-center, uncontrolled series (Ibáñez-Corry and Dvořák-Mensah, 2024) reported no detectable change in BFS progression over 18 months in 28 patients with non-active progressive BrS treated off-label with a tavorate ester; the authors describe the study as underpowered. Arden Quay Biosciences does not recommend use outside the approved indication.",
       "references": [
         "REF-001",
         "REF-021"
@@ -255,11 +255,25 @@
       "gap_id": "GAP-08",
       "title": "Initiating QUORVANTA in patients with low baseline lymphocyte counts",
       "typical_question": "My patient's lymphocyte count is 0.7 before starting. Should I proceed?",
-      "response": "Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts. A complete blood count including lymphocyte count is required before initiation. In the pooled analysis of dimethyl tavorate, mean lymphocyte counts fell by approximately 25% in the first year, and PML in the postmarketing setting occurred predominantly with counts below 0.8 \u00d7 10\u2079/L persisting for more than 6 months. The decision to initiate treatment rests with the treating physician.",
+      "response": "Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts. A complete blood count including lymphocyte count is required before initiation. In the pooled analysis of dimethyl tavorate, mean lymphocyte counts fell by approximately 25% in the first year, and PML in the postmarketing setting occurred predominantly with counts below 0.8 × 10⁹/L persisting for more than 6 months. The decision to initiate treatment rests with the treating physician.",
       "references": [
         "REF-001",
         "REF-008",
         "REF-010"
+      ],
+      "scope": "beyond-label; no data",
+      "status": "approved",
+      "approved": "2026-09",
+      "channel": "Medical Information, unsolicited request only; not for proactive or promotional use"
+    },
+    {
+      "id": "SRD-018",
+      "gap_id": "GAP-22",
+      "title": "Switching to QUORVANTA from other disease-modifying therapies",
+      "typical_question": "My patient is on a daily injectable. How long a washout do they need before starting QUORVANTA?",
+      "response": "The Prescribing Information provides switching guidance only for dimethyl tavorate: QUORVANTA may be initiated the day following discontinuation of dimethyl tavorate, and co-administration is contraindicated. Switching from other disease-modifying therapies has not been studied, and Arden Quay Biosciences has no recommendation on washout periods or sequencing. The Prescribing Information of the previous therapy may describe the duration of its effects on the immune system. A complete blood count including lymphocyte count, liver tests and an estimate of renal function are required before initiating QUORVANTA regardless of prior therapy. The decision on timing rests with the treating physician.",
+      "references": [
+        "REF-001"
       ],
       "scope": "beyond-label; no data",
       "status": "approved",

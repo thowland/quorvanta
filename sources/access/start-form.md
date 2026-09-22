@@ -66,7 +66,7 @@ Electronic signatures are accepted under ESIGN/UETA (fictitious statement). The 
 
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| D1. Diagnosis | choice | Yes | Options: Relapsing-remitting Brennick syndrome, First clinical episode of Brennick syndrome, Active progressive Brennick syndrome; note: Fictitious diagnosis codes: BrS-G35.1 / G35.0 / G35.2. |
+| D1. Diagnosis | choice | Yes | Options: Relapsing-remitting Brennick syndrome, First clinical episode of Brennick syndrome, Active progressive Brennick syndrome; note: Fictitious diagnosis codes (not ICD-10): BRS-RR / BRS-FCE / BRS-AP. |
 | D2. Date of diagnosis | date | No |  |
 | D3. Titration: QUORVANTA 190 mg, take 1 capsule by mouth twice daily for 14 days | fixed | Yes | quantity: 28 capsules |
 | D4. Maintenance: QUORVANTA 190 mg, take 2 capsules by mouth twice daily | fixed | Yes | quantity: 120 capsules (30-day supply); refills 0-11, required |

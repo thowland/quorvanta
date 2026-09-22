@@ -156,3 +156,12 @@ References: REF-001, REF-018
 Neither QUORVANTA nor dimethyl tavorate has been studied in patients with pre-existing low lymphocyte counts. A complete blood count including lymphocyte count is required before initiation. In the pooled analysis of dimethyl tavorate, mean lymphocyte counts fell by approximately 25% in the first year, and PML in the postmarketing setting occurred predominantly with counts below 0.8 × 10⁹/L persisting for more than 6 months. The decision to initiate treatment rests with the treating physician.
 
 References: REF-001, REF-008, REF-010
+
+## SRD-018 Switching to QUORVANTA from other disease-modifying therapies
+**Gap:** GAP-22 · **Scope:** beyond-label; no data · **Approved:** 2026-09
+
+**Typical question:** My patient is on a daily injectable. How long a washout do they need before starting QUORVANTA?
+
+The Prescribing Information provides switching guidance only for dimethyl tavorate: QUORVANTA may be initiated the day following discontinuation of dimethyl tavorate, and co-administration is contraindicated. Switching from other disease-modifying therapies has not been studied, and Arden Quay Biosciences has no recommendation on washout periods or sequencing. The Prescribing Information of the previous therapy may describe the duration of its effects on the immune system. A complete blood count including lymphocyte count, liver tests and an estimate of renal function are required before initiating QUORVANTA regardless of prior therapy. The decision on timing rests with the treating physician.
+
+References: REF-001

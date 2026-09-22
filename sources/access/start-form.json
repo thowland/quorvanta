@@ -274,7 +274,7 @@
             "Active progressive Brennick syndrome"
           ],
           "required": true,
-          "note": "Fictitious diagnosis codes: BrS-G35.1 / G35.0 / G35.2."
+          "note": "Fictitious diagnosis codes (not ICD-10): BRS-RR / BRS-FCE / BRS-AP."
         },
         {
           "id": "D2",

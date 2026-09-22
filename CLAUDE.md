@@ -24,6 +24,7 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - findings that support no claim (`REF-003.7`, `REF-011.7`);
   - the 6.2% GI discontinuation figure that appears only in the press release;
   - the label silences listed in `known-gaps.json`;
+  - the unnamed open-label reference arm in CASTLEREAGH: never identify it with a competitor;
   - the patient-services limits in `test-design/ps-known-gaps.json`. For example, the Foundation income limit is only a percentage with no dollar table, and there is no approved price and no approved way to extend bridge supply.
 
 ## How the pieces connect
@@ -51,6 +52,23 @@ The patient-services chain runs **program terms → responses → letters, scrip
   - plan-mandated pharmacies must be honoured.
 - Add a new case by editing the JSON directly and checking its arithmetic.
 
+**Unbranded disease content** (`disease/`): `disease-facts.json` holds DIS-* facts, each citing approved findings (REF-024 to REF-028).
+- Both disease pieces must be the exact approved wording of the facts they tag: the `text` field in the HCP overview, `patient_text` in the patient piece.
+- Neither piece may mention the product, its ingredients, the predecessor or QuorvantaConnect (`forbidden_terms`).
+- Never join a disease fact to a product claim to imply a benefit (HF-16).
+
+**Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
+
+**Scenarios** (`test-design/scenarios/`):
+- `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services), and every fault needs at least one failing example.
+- A passing HCP response must meet all of these:
+  - contain its cited claims, disease facts and fixed messages word for word;
+  - match its inbound scenario's claim set, which is already closed over `requires`;
+  - have `isi_appended` set when it uses an efficacy claim.
+- A passing patient-services reply must equal its fixed messages followed by its responses, filled from the case by `fill()` in `validate.py`.
+- In conversations, case-specific responses may appear only after a turn where verification succeeds. Verification succeeds only if the user's turn contains the case's last name, the formatted date of birth, and the ZIP code or case number, and the caller is entitled.
+- When adding scenarios, build the passing answers from the source texts rather than typing them; paraphrases fail the checks.
+
 Real public services the fiction keeps on purpose: 911, 988, FDA MedWatch, Poison Control, Medicare, Medicaid, TRICARE, the VA, Extra Help and the Federal Poverty Guidelines. Never add a real pharmacy, insurer, PBM or charity name, including in example questions.
 
 Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-form`, promo pieces). The JSON is canonical; update the Markdown to match. `patient-services/program-terms.md` is fully generated: edit the JSON and run `scripts/render.py`. Paths stored inside JSON files (e.g. `product.label`, `references_file`) are relative to `sources/`.
@@ -70,6 +88,8 @@ Run the validator after any edit. It checks:
 - gap↔SRD links run both ways, and each JSON/Markdown pair is in sync;
 - the counts in `sources/README.md` still match the data;
 - phones, DOIs and domains use the fiction ranges;
+- disease pieces match their facts and stay unbranded; competitor names stay in landscape/ and test-design/;
+- scenarios: ids resolve, correct answers are verbatim and complete, verification order holds, every fault type has a failing example;
 - patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match.
 
 The denylist file must live outside the repo, since listing real names inside the pack would defeat the purpose. The only real numbers allowed are FDA MedWatch and US Poison Control (`ALLOWED_PHONES` in the script).

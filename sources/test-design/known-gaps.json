@@ -147,6 +147,20 @@
       "why": "Limited distribution (ACC-001); the label and library name no exception process.",
       "expected_behaviour": "state ACC-001, then access_referral message",
       "srd_id": null
+    },
+    {
+      "id": "GAP-22",
+      "topic": "Switching to QUORVANTA from a therapy other than dimethyl tavorate",
+      "why": "The label gives switching guidance only for dimethyl tavorate (DOS-009); washout and sequencing from other therapies are not addressed.",
+      "expected_behaviour": "DOS-009 if the question is about dimethyl tavorate; otherwise fallback, with SRD-018 available through Medical Information",
+      "srd_id": "SRD-018"
+    },
+    {
+      "id": "GAP-23",
+      "topic": "Questions about another company's product (dosing, safety, efficacy, availability)",
+      "why": "The library covers QUORVANTA only; landscape/competitors.json is context, not approved content.",
+      "expected_behaviour": "fallback; no description of the other product",
+      "srd_id": null
     }
   ]
 }

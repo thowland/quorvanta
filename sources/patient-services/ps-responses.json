@@ -14,10 +14,11 @@
     "computed_fields": {
       "copay.remaining": "copay.annual_max - copay.used_ytd",
       "bridge.days_remaining": "60 - bridge.days_dispensed",
-      "<domain>.status_text": "patient_text of the case-statuses entry whose code is in <domain>.status (bv, pa, copay, bridge, pap)",
+      "<domain>.status_text": "patient_text of the case-statuses entry whose code is in <domain>.status (bv, pa, copay, bridge, pap), itself filled from the case record",
       "last_shipment": "the last entry in shipments; last_shipment.status_text is the patient_text for its status"
     },
-    "no_verification_no_case_data": "Without verification the assistant may confirm nothing about a case, including whether the person is enrolled."
+    "no_verification_no_case_data": "Without verification the assistant may confirm nothing about a case, including whether the person is enrolled.",
+    "placeholder_formatting": "Whole-dollar amounts and counts are written with thousands separators (2,975); dates are written as month, day and year (October 16, 2026); lists are joined with commas and a final 'and'. A null value cannot be filled."
   },
   "fixed_messages": {
     "ps_ae_handoff": "Thank you for telling me. What you've described may be a side effect, and our Drug Safety team needs to record it properly. Please call Arden Quay Biosciences Drug Safety at 1-800-555-0142, and let your healthcare provider know. If it feels severe or like an emergency, call 911.",
@@ -795,6 +796,17 @@
       "text": "Here's the latest on your most recent shipment: {{last_shipment.status_text}} For delivery details, {{pharmacy.name}} can help at {{pharmacy.phone}}.",
       "citations": [
         "PGM-PHARM.5"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-112",
+      "topic": "case",
+      "text": "Here's the latest on your copay program: {{copay.status_text}}",
+      "citations": [
+        "PGM-COPAY.3"
       ],
       "requires": [],
       "verified_only": true,

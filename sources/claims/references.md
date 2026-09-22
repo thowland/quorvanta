@@ -161,6 +161,45 @@ Type: distribution_notice.
 - `REF-023.4` Where a patient's plan mandates a pharmacy, the prescription is routed to that pharmacy; otherwise the patient chooses among network pharmacies.
 - `REF-023.5` Samples of QUORVANTA are not provided.
 
+**REF-024** Tavistock-Moreau E, Lindqvist-Amara P, Okafor DN, Sørlie-Nakamura T for the IBSC Diagnostic Criteria Panel. Diagnosis and classification of Brennick syndrome: 2021 revision of the IBSC criteria. *Brennick Syndrome Research and Treatment* 2021;38(2):141-158. doi:10.5555/bsrt.2021.38.141  
+Type: journal_article.
+
+- `REF-024.1` Brennick syndrome is a chronic, immune-mediated disorder of the central nervous system characterised by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibres.
+- `REF-024.2` The disease course is classified as first clinical episode, relapsing-remitting, progressive with activity (active progressive), progressive without activity (non-active progressive), or primary progressive.
+- `REF-024.3` A relapse is new or worsening neurological symptoms lasting at least 48 hours, in the absence of fever or infection, at least 30 days after the start of any previous relapse.
+- `REF-024.4` Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region.
+- `REF-024.5` T2 lesions reflect areas of current or past inflammation; contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks.
+
+**REF-025** Halvorsen KE, Pryce-Dunn H, Villaseñor M. The Brennick Functional Scale: development, reliability and validity. *Journal of Relapsing Neuroinflammatory Disease* 2011;19(3):201-214. doi:10.5555/jrnd.2011.19.201  
+Type: journal_article.
+
+- `REF-025.1` The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on examination of six functional domains (motor, sensory, balance, vision, bladder and bowel, cognition) and walking ability.
+- `REF-025.2` BFS 4 corresponds to walking limited to about 500 metres without aid or rest; BFS 6 to needing a walking aid to walk 100 metres.
+- `REF-025.3` A change of at least 1 point sustained for 12 weeks exceeded measurement variability and is proposed as the definition of confirmed disability progression.
+
+**REF-026** Castellan-Ruiz M, Brandt-Okoye L, Wexford H. Prevalence of Brennick syndrome in the United States: a multi-source claims analysis. *Neuroepidemiology Reports* 2023;12(1):33-45. doi:10.5555/ner.2023.12.33  
+Type: journal_article.
+
+- `REF-026.1` An estimated 410,000 adults in the United States were living with Brennick syndrome in 2021.
+- `REF-026.2` Brennick syndrome was diagnosed about 2.5 times as often in women as in men.
+- `REF-026.3` Symptoms most often began between the ages of 20 and 45.
+
+**REF-027** Nordvik-Aalto S, Mbatha-Reid L, Trenholm A. Natural history of Brennick syndrome before disease-modifying therapy: 30 years of the Nordvik registry. *Brennick Syndrome Research and Treatment* 2018;35(4):402-417. doi:10.5555/bsrt.2018.35.402  
+Type: journal_article.
+
+- `REF-027.1` Of 3,120 registry patients, 82% had a relapsing course at onset and 18% a primary progressive course.
+- `REF-027.2` Untreated patients with relapsing-remitting disease had between 0.3 and 0.5 relapses per year on average.
+- `REF-027.3` About half of untreated patients with relapsing-remitting disease had developed a progressive course within 15 years of onset.
+- `REF-027.4` Fatigue was the most frequently reported symptom, by about 70% of patients.
+- `REF-027.5` Having a first-degree relative with Brennick syndrome modestly increased risk; no single inherited cause was identified.
+
+**REF-028** International Brennick Syndrome Consortium Treatment Guideline Group. IBSC guideline on the treatment of relapsing Brennick syndrome, 2024 update. *Brennick Syndrome Research and Treatment* 2024;41(1):1-29. doi:10.5555/bsrt.2024.41.1  
+Type: guideline.
+
+- `REF-028.1` The goals of disease-modifying therapy in relapsing Brennick syndrome are to reduce relapses and new MRI lesions and to slow disability progression.
+- `REF-028.2` Disease-modifying therapies for relapsing Brennick syndrome are available as oral, injectable and infused medicines; the choice depends on disease activity, safety, monitoring and patient preference.
+- `REF-028.3` Short courses of high-dose corticosteroids are commonly used to speed recovery from a relapse; they do not change the long-term course of the disease.
+
 ## References present in the bibliography but not approved for citation
 
 **REF-019** Dvořák-Mensah C, Rautenbach S. Real-world comparison of soriximel tavorate and dimethyl tavorate tolerability: interim results from an insurance claims cohort. *International Brennick Syndrome Consortium (IBSC) Annual Meeting* 2025;Poster P-087.  

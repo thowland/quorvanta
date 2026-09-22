@@ -75,9 +75,9 @@
       "id": "REF-003",
       "type": "journal_article",
       "authors": [
-        "S\u00f8rlie-Nakamura T",
+        "Sørlie-Nakamura T",
         "Achterberg RJ",
-        "Villase\u00f1or M",
+        "Villaseñor M",
         "Pryce-Dunn H",
         "Halvorsen KE",
         "for the CASTLEREAGH Study Group"
@@ -127,7 +127,7 @@
       "authors": [
         "Okafor DN",
         "Bergstrom-Lahti E",
-        "S\u00f8rlie-Nakamura T",
+        "Sørlie-Nakamura T",
         "Mbatha-Reid L"
       ],
       "title": "Bioequivalence of soriximel tavorate and dimethyl tavorate in patients with relapsing Brennick syndrome and in healthy subjects",
@@ -147,7 +147,7 @@
         },
         {
           "id": "REF-004.3",
-          "text": "Median time to peak MMT concentration was 2 to 2.5 hours; mean Cmax after 380 mg in patients was 1.84 mg/L and mean steady-state AUC 7.1 mg\u00b7hr/L."
+          "text": "Median time to peak MMT concentration was 2 to 2.5 hours; mean Cmax after 380 mg in patients was 1.84 mg/L and mean steady-state AUC 7.1 mg·hr/L."
         },
         {
           "id": "REF-004.4",
@@ -252,7 +252,7 @@
       "id": "REF-008",
       "type": "journal_article",
       "authors": [
-        "Villase\u00f1or M",
+        "Villaseñor M",
         "Trenholm A",
         "Pryce-Dunn H"
       ],
@@ -269,11 +269,11 @@
         },
         {
           "id": "REF-008.2",
-          "text": "Lymphocyte counts below 0.5 \u00d7 10\u2079/L occurred in 5% of DMT-treated patients and fewer than 1% of placebo patients."
+          "text": "Lymphocyte counts below 0.5 × 10⁹/L occurred in 5% of DMT-treated patients and fewer than 1% of placebo patients."
         },
         {
           "id": "REF-008.3",
-          "text": "Prolonged severe lymphopenia (below 0.5 \u00d7 10\u2079/L for at least 6 months) occurred in 3% of patients; median time to recovery after discontinuation was 84 weeks."
+          "text": "Prolonged severe lymphopenia (below 0.5 × 10⁹/L for at least 6 months) occurred in 3% of patients; median time to recovery after discontinuation was 84 weeks."
         },
         {
           "id": "REF-008.4",
@@ -281,7 +281,7 @@
         },
         {
           "id": "REF-008.5",
-          "text": "Incidence of infections (54% versus 52%) and serious infections (3% versus 2%) did not differ from placebo, with no excess in patients below 0.8 \u00d7 10\u2079/L."
+          "text": "Incidence of infections (54% versus 52%) and serious infections (3% versus 2%) did not differ from placebo, with no excess in patients below 0.8 × 10⁹/L."
         }
       ]
     },
@@ -291,7 +291,7 @@
       "authors": [
         "Pryce-Dunn H",
         "Marchetti-Oyelaran B",
-        "Villase\u00f1or M"
+        "Villaseñor M"
       ],
       "title": "Fatal progressive multifocal leukoencephalopathy in a patient receiving dimethyl tavorate with prolonged severe lymphopenia",
       "venue": "Archives of Relapsing Neuroinflammatory Disease",
@@ -306,7 +306,7 @@
         },
         {
           "id": "REF-009.2",
-          "text": "Lymphocyte counts were predominantly below 0.5 \u00d7 10\u2079/L for 4 years before diagnosis."
+          "text": "Lymphocyte counts were predominantly below 0.5 × 10⁹/L for 4 years before diagnosis."
         },
         {
           "id": "REF-009.3",
@@ -319,7 +319,7 @@
       "type": "journal_article",
       "authors": [
         "Marchetti-Oyelaran B",
-        "S\u00f8rlie-Nakamura T",
+        "Sørlie-Nakamura T",
         "Achterberg RJ"
       ],
       "title": "Progressive multifocal leukoencephalopathy and serious opportunistic infections with dimethyl tavorate: postmarketing review",
@@ -331,7 +331,7 @@
       "findings": [
         {
           "id": "REF-010.1",
-          "text": "Postmarketing PML cases occurred predominantly in patients with lymphocyte counts below 0.8 \u00d7 10\u2079/L persisting for more than 6 months; the role of lymphopenia is uncertain."
+          "text": "Postmarketing PML cases occurred predominantly in patients with lymphocyte counts below 0.8 × 10⁹/L persisting for more than 6 months; the role of lymphopenia is uncertain."
         },
         {
           "id": "REF-010.2",
@@ -489,7 +489,7 @@
       "authors": [
         "Ossowski P",
         "Marchetti-Oyelaran B",
-        "Villase\u00f1or M",
+        "Villaseñor M",
         "Halvorsen KE"
       ],
       "title": "Pregnancy outcomes after exposure to dimethyl tavorate: registry findings 2012 to 2021",
@@ -595,7 +595,7 @@
       "id": "REF-019",
       "type": "congress_abstract",
       "authors": [
-        "Dvo\u0159\u00e1k-Mensah C",
+        "Dvořák-Mensah C",
         "Rautenbach S"
       ],
       "title": "Real-world comparison of soriximel tavorate and dimethyl tavorate tolerability: interim results from an insurance claims cohort",
@@ -621,8 +621,8 @@
       "type": "preprint",
       "authors": [
         "Rautenbach S",
-        "Dvo\u0159\u00e1k-Mensah C",
-        "Ib\u00e1\u00f1ez-Corry F"
+        "Dvořák-Mensah C",
+        "Ibáñez-Corry F"
       ],
       "title": "Network meta-analysis of disease-modifying therapies in relapsing Brennick syndrome",
       "venue": "BrS Preprints (fictitious preprint server)",
@@ -646,8 +646,8 @@
       "id": "REF-021",
       "type": "journal_article",
       "authors": [
-        "Ib\u00e1\u00f1ez-Corry F",
-        "Dvo\u0159\u00e1k-Mensah C"
+        "Ibáñez-Corry F",
+        "Dvořák-Mensah C"
       ],
       "title": "Off-label use of tavorate esters in non-relapsing progressive Brennick syndrome: a single-center experience",
       "venue": "Archives of Relapsing Neuroinflammatory Disease",
@@ -734,6 +734,167 @@
         {
           "id": "REF-023.5",
           "text": "Samples of QUORVANTA are not provided."
+        }
+      ]
+    },
+    {
+      "id": "REF-024",
+      "type": "journal_article",
+      "authors": [
+        "Tavistock-Moreau E",
+        "Lindqvist-Amara P",
+        "Okafor DN",
+        "Sørlie-Nakamura T",
+        "for the IBSC Diagnostic Criteria Panel"
+      ],
+      "title": "Diagnosis and classification of Brennick syndrome: 2021 revision of the IBSC criteria",
+      "venue": "Brennick Syndrome Research and Treatment",
+      "year": 2021,
+      "location": "38(2):141-158",
+      "doi": "10.5555/bsrt.2021.38.141",
+      "status": "approved",
+      "findings": [
+        {
+          "id": "REF-024.1",
+          "text": "Brennick syndrome is a chronic, immune-mediated disorder of the central nervous system characterised by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibres."
+        },
+        {
+          "id": "REF-024.2",
+          "text": "The disease course is classified as first clinical episode, relapsing-remitting, progressive with activity (active progressive), progressive without activity (non-active progressive), or primary progressive."
+        },
+        {
+          "id": "REF-024.3",
+          "text": "A relapse is new or worsening neurological symptoms lasting at least 48 hours, in the absence of fever or infection, at least 30 days after the start of any previous relapse."
+        },
+        {
+          "id": "REF-024.4",
+          "text": "Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region."
+        },
+        {
+          "id": "REF-024.5",
+          "text": "T2 lesions reflect areas of current or past inflammation; contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks."
+        }
+      ]
+    },
+    {
+      "id": "REF-025",
+      "type": "journal_article",
+      "authors": [
+        "Halvorsen KE",
+        "Pryce-Dunn H",
+        "Villaseñor M"
+      ],
+      "title": "The Brennick Functional Scale: development, reliability and validity",
+      "venue": "Journal of Relapsing Neuroinflammatory Disease",
+      "year": 2011,
+      "location": "19(3):201-214",
+      "doi": "10.5555/jrnd.2011.19.201",
+      "status": "approved",
+      "findings": [
+        {
+          "id": "REF-025.1",
+          "text": "The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on examination of six functional domains (motor, sensory, balance, vision, bladder and bowel, cognition) and walking ability."
+        },
+        {
+          "id": "REF-025.2",
+          "text": "BFS 4 corresponds to walking limited to about 500 metres without aid or rest; BFS 6 to needing a walking aid to walk 100 metres."
+        },
+        {
+          "id": "REF-025.3",
+          "text": "A change of at least 1 point sustained for 12 weeks exceeded measurement variability and is proposed as the definition of confirmed disability progression."
+        }
+      ]
+    },
+    {
+      "id": "REF-026",
+      "type": "journal_article",
+      "authors": [
+        "Castellan-Ruiz M",
+        "Brandt-Okoye L",
+        "Wexford H"
+      ],
+      "title": "Prevalence of Brennick syndrome in the United States: a multi-source claims analysis",
+      "venue": "Neuroepidemiology Reports",
+      "year": 2023,
+      "location": "12(1):33-45",
+      "doi": "10.5555/ner.2023.12.33",
+      "status": "approved",
+      "findings": [
+        {
+          "id": "REF-026.1",
+          "text": "An estimated 410,000 adults in the United States were living with Brennick syndrome in 2021."
+        },
+        {
+          "id": "REF-026.2",
+          "text": "Brennick syndrome was diagnosed about 2.5 times as often in women as in men."
+        },
+        {
+          "id": "REF-026.3",
+          "text": "Symptoms most often began between the ages of 20 and 45."
+        }
+      ]
+    },
+    {
+      "id": "REF-027",
+      "type": "journal_article",
+      "authors": [
+        "Nordvik-Aalto S",
+        "Mbatha-Reid L",
+        "Trenholm A"
+      ],
+      "title": "Natural history of Brennick syndrome before disease-modifying therapy: 30 years of the Nordvik registry",
+      "venue": "Brennick Syndrome Research and Treatment",
+      "year": 2018,
+      "location": "35(4):402-417",
+      "doi": "10.5555/bsrt.2018.35.402",
+      "status": "approved",
+      "findings": [
+        {
+          "id": "REF-027.1",
+          "text": "Of 3,120 registry patients, 82% had a relapsing course at onset and 18% a primary progressive course."
+        },
+        {
+          "id": "REF-027.2",
+          "text": "Untreated patients with relapsing-remitting disease had between 0.3 and 0.5 relapses per year on average."
+        },
+        {
+          "id": "REF-027.3",
+          "text": "About half of untreated patients with relapsing-remitting disease had developed a progressive course within 15 years of onset."
+        },
+        {
+          "id": "REF-027.4",
+          "text": "Fatigue was the most frequently reported symptom, by about 70% of patients."
+        },
+        {
+          "id": "REF-027.5",
+          "text": "Having a first-degree relative with Brennick syndrome modestly increased risk; no single inherited cause was identified."
+        }
+      ]
+    },
+    {
+      "id": "REF-028",
+      "type": "guideline",
+      "authors": [
+        "International Brennick Syndrome Consortium Treatment Guideline Group"
+      ],
+      "title": "IBSC guideline on the treatment of relapsing Brennick syndrome, 2024 update",
+      "venue": "Brennick Syndrome Research and Treatment",
+      "year": 2024,
+      "location": "41(1):1-29",
+      "doi": "10.5555/bsrt.2024.41.1",
+      "status": "approved",
+      "findings": [
+        {
+          "id": "REF-028.1",
+          "text": "The goals of disease-modifying therapy in relapsing Brennick syndrome are to reduce relapses and new MRI lesions and to slow disability progression."
+        },
+        {
+          "id": "REF-028.2",
+          "text": "Disease-modifying therapies for relapsing Brennick syndrome are available as oral, injectable and infused medicines; the choice depends on disease activity, safety, monitoring and patient preference."
+        },
+        {
+          "id": "REF-028.3",
+          "text": "Short courses of high-dose corticosteroids are commonly used to speed recovery from a relapse; they do not change the long-term course of the disease."
         }
       ]
     }

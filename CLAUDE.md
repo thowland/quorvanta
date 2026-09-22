@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot without touching a real product. There is no build step; the only tooling is the validator in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
+This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
 
 ## Non-negotiable invariants
 
 - **Nothing real.** No real drug, brand, company, product or software vendor names anywhere, including in README prose about where the pack came from. The pack was originally modelled on a real label; all traces of that were deliberately removed and must not come back.
 - **Fiction markers:**
-  - Phone numbers use the reserved `1-800-555-01xx` range.
+  - Phone numbers use the reserved `1-800-555-01xx` range; synthetic patients use `(xxx) 555-01xx`.
   - Web and email domains use `.example`.
   - DOIs use the `10.5555` prefix.
   - NCPDP ids use a `99-` prefix.
@@ -23,7 +23,8 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - the three references marked `not_approved_for_promotional_use` (REF-019 to REF-021);
   - findings that support no claim (`REF-003.7`, `REF-011.7`);
   - the 6.2% GI discontinuation figure that appears only in the press release;
-  - the label silences listed in `known-gaps.json`.
+  - the label silences listed in `known-gaps.json`;
+  - the patient-services limits in `test-design/ps-known-gaps.json`. For example, the Foundation income limit is only a percentage with no dollar table, and there is no approved price and no approved way to extend bridge supply.
 
 ## How the pieces connect
 
@@ -35,13 +36,31 @@ The chain of support runs **label → references → claims → materials**:
 - `test-design/known-gaps.json`: each gap names the SRD in `medical-information/srds.json` that answers it (`srd_id`, which may be null). Each SRD points back to its gap via `gap_id`. This file is the answer key. Keep it out of anything that would be fed to a generator or judge model.
 - Access claims (`ACC-*`) cite REF-022 (program terms) and REF-023 (distribution notice), which mirror `access/specialty-pharmacy-network.json` and the commercial-availability press release.
 
-Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-form`, promo pieces). The JSON is canonical; update the Markdown to match. Paths stored inside JSON files (e.g. `product.label`, `references_file`) are relative to `sources/`.
+The patient-services chain runs **program terms → responses → letters, scripts and statuses**:
+
+- `patient-services/program-terms.json` holds numbered provisions (`PGM-COPAY.3`). It is the full text behind REF-022, whose `location` must carry the same version and effective date.
+- `patient-services/ps-responses.json` responses cite provisions or DTC claim ids.
+  - Responses with `{{placeholders}}` are `verified_only` and are filled from a case record.
+  - Computed fields are `copay.remaining`, `bridge.days_remaining`, `<domain>.status_text` (taken from `case-statuses.json`) and `last_shipment`.
+- `bi-letters.md`, `ivr-call-flow.md` and `agent-scripts.md` tag each line with `PSR-*`, `ps_*` fixed messages, `ESC-*`, `CMP-*` or `VER`.
+- `test-design/ps-cases.json` must obey the program rules the validator encodes:
+  - the copay program is for commercial insurance with no government program, capped at $16,000;
+  - bridge supply is capped at 60 days, and `days_dispensed` must equal the sum of bridge shipments;
+  - capsules = days × 2 for the starting dose and days × 4 for the maintenance dose;
+  - bridge and Foundation product ships from SP-04;
+  - plan-mandated pharmacies must be honoured.
+- Add a new case by editing the JSON directly and checking its arithmetic.
+
+Real public services the fiction keeps on purpose: 911, 988, FDA MedWatch, Poison Control, Medicare, Medicaid, TRICARE, the VA, Extra Help and the Federal Poverty Guidelines. Never add a real pharmacy, insurer, PBM or charity name, including in example questions.
+
+Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-form`, promo pieces). The JSON is canonical; update the Markdown to match. `patient-services/program-terms.md` is fully generated: edit the JSON and run `scripts/render.py`. Paths stored inside JSON files (e.g. `product.label`, `references_file`) are relative to `sources/`.
 
 ## Commands
 
 ```bash
 python3 scripts/validate.py                            # all integrity checks; exits non-zero on failure
 python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real brand/company names
+python3 scripts/render.py                              # regenerate program-terms.md from its JSON
 ```
 
 Run the validator after any edit. It checks:
@@ -50,7 +69,8 @@ Run the validator after any edit. It checks:
 - promo and DTC materials use only approved claims, and promo unit text appears verbatim in its Markdown rendering;
 - gap↔SRD links run both ways, and each JSON/Markdown pair is in sync;
 - the counts in `sources/README.md` still match the data;
-- phones, DOIs and domains use the fiction ranges.
+- phones, DOIs and domains use the fiction ranges;
+- patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match.
 
 The denylist file must live outside the repo, since listing real names inside the pack would defeat the purpose. The only real numbers allowed are FDA MedWatch and US Poison Control (`ALLOWED_PHONES` in the script).
 

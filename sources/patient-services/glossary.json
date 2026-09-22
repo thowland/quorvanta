@@ -1,0 +1,25 @@
+{
+  "_notice": "FICTITIOUS program context. The definitions describe general US insurance terms in plain language for a support program that does not exist; they are not insurance or legal advice.",
+  "glossary_version": "1.0.0",
+  "usage": "Approved plain-language definitions a patient-services assistant may give when a patient asks what a term means. A definition explains the term in general; it never says how the patient's own plan applies it (that comes only from the verified case record).",
+  "terms": [
+    { "id": "GLO-01", "term": "Benefits verification", "definition": "A check with your insurance plan to find out how it covers a medicine, including whether approval is needed and what you may pay.", "see_also": ["PSR-010"] },
+    { "id": "GLO-02", "term": "Prior authorization", "definition": "Approval your plan requires before it will cover a particular medicine. Your healthcare provider's office asks for it, usually with help from a support program.", "see_also": ["PSR-012"] },
+    { "id": "GLO-03", "term": "Appeal", "definition": "A formal request asking your plan to reconsider a decision not to cover something. Plans usually have more than one level of appeal.", "see_also": ["PSR-014"] },
+    { "id": "GLO-04", "term": "Formulary", "definition": "Your plan's list of covered drugs. A drug that isn't on the formulary may still be covered if the plan grants an exception.", "see_also": [] },
+    { "id": "GLO-05", "term": "Formulary tier", "definition": "The group a drug is placed in on the formulary. Higher tiers usually cost you more. Specialty medicines are often on the highest tier.", "see_also": [] },
+    { "id": "GLO-06", "term": "Step therapy", "definition": "A plan rule that you try one or more other medicines first before the plan covers another.", "see_also": [] },
+    { "id": "GLO-07", "term": "Deductible", "definition": "The amount you pay for covered care each plan year before your plan starts to pay its share.", "see_also": ["PSR-025"] },
+    { "id": "GLO-08", "term": "Copay", "definition": "A fixed amount you pay for a covered medicine or service, such as a set dollar amount per fill.", "see_also": ["PSR-020"] },
+    { "id": "GLO-09", "term": "Coinsurance", "definition": "Your share of the cost of a covered medicine or service, as a percentage of the price, after you've met your deductible.", "see_also": [] },
+    { "id": "GLO-10", "term": "Out-of-pocket maximum", "definition": "The most you have to pay for covered care in a plan year. After you reach it, your plan pays 100% of covered costs for the rest of that year.", "see_also": ["PSR-025"] },
+    { "id": "GLO-11", "term": "Cost-share", "definition": "The part of the cost you pay yourself, whether as a deductible, copay or coinsurance.", "see_also": ["PSR-103"] },
+    { "id": "GLO-12", "term": "Specialty pharmacy", "definition": "A pharmacy that handles medicines needing special handling, monitoring or paperwork, and usually ships them to your home.", "see_also": ["PSR-060"] },
+    { "id": "GLO-13", "term": "Network exception", "definition": "Permission from your plan to use a pharmacy outside the plan's usual rules, for example when the plan's required pharmacy can't supply a medicine.", "see_also": ["PSR-030"] },
+    { "id": "GLO-14", "term": "Accumulator or maximizer program", "definition": "A plan rule about how copay assistance counts. With some of these rules, money paid by a copay program doesn't count toward your deductible or out-of-pocket maximum.", "see_also": ["PSR-025"] },
+    { "id": "GLO-15", "term": "Explanation of benefits (EOB)", "definition": "A statement from your plan showing what it paid and what you owe. It isn't a bill.", "see_also": [] },
+    { "id": "GLO-16", "term": "Medicare Part D", "definition": "The part of Medicare that covers prescription drugs, offered through private plans approved by Medicare.", "see_also": ["PSR-051"] },
+    { "id": "GLO-17", "term": "Extra Help", "definition": "A federal program that helps people with limited income and resources pay for Medicare drug coverage.", "see_also": ["PSR-052"] },
+    { "id": "GLO-18", "term": "Federal Poverty Guidelines", "definition": "Income levels set each year by the federal government, by household size, and used to decide eligibility for many assistance programs.", "see_also": ["PSR-041"] }
+  ]
+}

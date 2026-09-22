@@ -206,6 +206,236 @@ def check_fiction_markers(denylist):
                 fail(f"{rel}: denylisted name '{name}'")
 
 
+# ---------------------------------------------------------------- patient services
+
+TAG = re.compile(r"`\[([^\]`]+)\]`")
+PLACEHOLDER = re.compile(r"\{\{\s*([a-z_.]+)\s*\}\}")
+DOMAINS = {"bv", "pa", "copay", "bridge", "pap", "shipment"}
+GOVERNMENT_TYPES = {"medicare", "medicaid", "tricare", "va", "other_government"}
+BRIDGE_DAYS = 60
+COPAY_MAX = 16000
+
+
+def resolve(obj, path):
+    for part in path.split("."):
+        if not isinstance(obj, dict) or part not in obj:
+            return False, None
+        obj = obj[part]
+    return True, obj
+
+
+def check_patient_services(claims, refs, network):
+    terms = load("patient-services/program-terms.json")
+    lib = load("patient-services/ps-responses.json")
+    statuses_doc = load("patient-services/case-statuses.json")
+    glossary = load("patient-services/glossary.json")
+    rules = load("patient-services/conversation-rules.json")
+    gaps = load("test-design/ps-known-gaps.json")
+    cases_doc = load("test-design/ps-cases.json")
+    dtc = {c["id"]: c for c in load("patient/dtc-claims.json")["claims"]}
+
+    provisions = {}
+    for s in terms["sections"]:
+        for pr in s["provisions"]:
+            if pr["id"] in provisions:
+                fail(f"program-terms: duplicate provision {pr['id']}")
+            provisions[pr["id"]] = pr["text"]
+    md = text("patient-services/program-terms.md")
+    for pid, ptext in provisions.items():
+        if f"`{pid}` {ptext}" not in md:
+            fail(f"patient-services/program-terms.md: {pid} missing or out of date; run scripts/render.py")
+    ref = refs.get(terms["summarised_by"])
+    if ref is None:
+        fail(f"program-terms: summarised_by {terms['summarised_by']} does not exist")
+    elif f"v{terms['terms_version']}" not in ref["location"] or terms["effective"] not in ref["location"]:
+        fail(f"{ref['id']}: location '{ref['location']}' does not match program terms v{terms['terms_version']}, {terms['effective']}")
+
+    def check_cites(owner, cites):
+        for cid in cites:
+            if cid in provisions:
+                continue
+            if cid in dtc:
+                if dtc[cid]["status"] != "approved":
+                    fail(f"{owner}: cites {dtc[cid]['status']} {cid}")
+                continue
+            fail(f"{owner}: citation {cid} does not exist")
+
+    responses = {r["id"]: r for r in lib["responses"]}
+    fixed = set(lib["fixed_messages"])
+    for rid, r in responses.items():
+        check_cites(rid, r["citations"])
+        if not r["citations"]:
+            fail(f"{rid}: no citations")
+        for req in r["requires"]:
+            if req not in responses:
+                fail(f"{rid}: requires unknown response {req}")
+        has_ph = bool(PLACEHOLDER.search(r["text"]))
+        if has_ph != r["verified_only"]:
+            fail(f"{rid}: verified_only is {r['verified_only']} but text {'has' if has_ph else 'has no'} placeholders")
+
+    statuses = {}
+    for s in statuses_doc["statuses"]:
+        if s["code"] in statuses:
+            fail(f"case-statuses: duplicate code {s['code']}")
+        if s["domain"] not in DOMAINS:
+            fail(f"case-statuses: {s['code']} has unknown domain {s['domain']}")
+        statuses[s["code"]] = s
+        check_cites(s["code"], s["citations"])
+
+    for g in glossary["terms"]:
+        for rid in g["see_also"]:
+            if rid not in responses:
+                fail(f"glossary {g['id']}: see_also {rid} does not exist")
+
+    rule_ids = {"VER"} | {e["id"] for e in rules["escalations"]} | {c["id"] for c in rules["compliance"]}
+    for e in rules["escalations"]:
+        if e["fixed_message"] not in fixed:
+            fail(f"conversation-rules {e['id']}: unknown fixed message {e['fixed_message']}")
+    for c in rules["callers"]:
+        if c.get("fixed_message") and c["fixed_message"] not in fixed:
+            fail(f"conversation-rules caller {c['role']}: unknown fixed message {c['fixed_message']}")
+        check_cites(f"conversation-rules caller {c['role']}", c.get("citations", []))
+    for c in rules["compliance"]:
+        check_cites(c["id"], c.get("citations", []))
+    check_cites("conversation-rules VER", rules["identity_verification"]["citations"])
+
+    known = set(responses) | fixed | rule_ids
+    for rel in ["patient-services/bi-letters.md", "patient-services/ivr-call-flow.md", "patient-services/agent-scripts.md"]:
+        for tag in TAG.findall(text(rel)):
+            for token in (t.strip() for t in tag.split(",")):
+                if token not in known:
+                    fail(f"{rel}: tag {token} does not exist")
+
+    cases = {c["case_id"]: c for c in cases_doc["cases"]}
+    for g in gaps["gaps"]:
+        for r in g["refs"]:
+            if r not in known:
+                fail(f"{g['id']}: ref {r} does not exist")
+        for cid in g["case_ids"]:
+            if cid not in cases:
+                fail(f"{g['id']}: case {cid} does not exist")
+
+    computed = set(lib["rules"]["computed_fields"]) - {"<domain>.status_text", "last_shipment"}
+    computed |= {f"{d}.status_text" for d in DOMAINS} | {"last_shipment.status_text"}
+    sources = [r["text"] for r in responses.values()] + [s["patient_text"] for s in statuses.values()]
+    sources += [text(f"patient-services/{f}") for f in ("bi-letters.md", "agent-scripts.md")]
+    for src in sources:
+        for ph in PLACEHOLDER.findall(src):
+            if ph not in computed and not any(resolve(c, ph)[0] for c in cases.values()):
+                fail(f"placeholder {{{{{ph}}}}} does not resolve in any case record")
+
+    readme = text("README.md")
+    expected = [
+        (r"(\d+) numbered provisions in (\d+) sections", (len(provisions), len(terms["sections"]))),
+        (r"(\d+) approved patient-services responses \((\d+) of them case-specific",
+         (len(responses), sum(r["verified_only"] for r in responses.values()))),
+        (r"(\d+) fixed messages\b", (len(fixed),)),
+        (r"(\d+) case status codes", (len(statuses),)),
+        (r"(\d+) plain-language insurance terms", (len(glossary["terms"]),)),
+        (r"(\d+) escalations and (\d+) compliance rules", (len(rules["escalations"]), len(rules["compliance"]))),
+        (r"(\d+) synthetic QuorvantaConnect case records", (len(cases),)),
+        (r"(\d+) patient-services situations", (len(gaps["gaps"]),)),
+    ]
+    for pattern, want in expected:
+        m = re.search(pattern, readme)
+        if not m:
+            fail(f"README.md: count sentence not found: /{pattern}/")
+        elif tuple(int(g) for g in m.groups()) != want:
+            fail(f"README.md: '{m.group(0)}' should read {want}")
+
+    check_cases(cases_doc, statuses, network)
+
+
+def check_cases(cases_doc, statuses, network):
+    as_of = cases_doc["as_of"]
+    by_domain = {}
+    for code, s in statuses.items():
+        by_domain.setdefault(s["domain"], set()).add(code)
+    pharmacies = {p["id"]: p for p in network["pharmacies"]}
+    from datetime import date, timedelta
+
+    for c in cases_doc["cases"]:
+        cid = c["case_id"]
+        ins = c["insurance"]
+        gov = ins["government_program"] or ins["type"] in GOVERNMENT_TYPES
+        commercial = ins["type"] == "commercial" and not gov
+
+        for dom in ("bv", "pa", "copay", "bridge", "pap"):
+            if c[dom]["status"] not in by_domain[dom]:
+                fail(f"{cid}: {dom}.status {c[dom]['status']} is not a {dom} code")
+        for s in c["shipments"]:
+            if s["status"] not in by_domain["shipment"]:
+                fail(f"{cid}: shipment status {s['status']} is not a shipment code")
+            per_day = 2 if s["dose"] == "titration" else 4
+            if s["capsules"] != s["days"] * per_day:
+                fail(f"{cid}: shipment {s['date']} has {s['capsules']} capsules for {s['days']} {s['dose']} days")
+
+        if c["shipments"] and c["shipments"][-1]["source"] in ("bridge", "pap") and c["pharmacy"] and c["pharmacy"]["id"] != "SP-04":
+            fail(f"{cid}: latest shipment is {c['shipments'][-1]['source']} product, which only SP-04 dispenses")
+
+        dob = date.fromisoformat(c["patient"]["dob"])
+        ref = date.fromisoformat(as_of)
+        age = ref.year - dob.year - ((ref.month, ref.day) < (dob.month, dob.day))
+        if age < 18:
+            fail(f"{cid}: patient is under 18")
+        if not re.fullmatch(r"\(\d{3}\) 555-01\d\d", c["patient"]["phone"]):
+            fail(f"{cid}: patient phone {c['patient']['phone']} is outside 555-01xx")
+
+        cp = c["copay"]
+        if cp["annual_max"] != COPAY_MAX:
+            fail(f"{cid}: copay.annual_max is not {COPAY_MAX}")
+        if not 0 <= cp["used_ytd"] <= COPAY_MAX:
+            fail(f"{cid}: copay.used_ytd out of range")
+        if cp["status"] in ("COPAY_ACTIVE", "COPAY_MAX_REACHED") and not commercial:
+            fail(f"{cid}: {cp['status']} but patient is not commercially insured without government coverage")
+        if cp["status"] == "COPAY_INELIGIBLE_GOVERNMENT" and not gov:
+            fail(f"{cid}: COPAY_INELIGIBLE_GOVERNMENT but no government program")
+        if cp["status"] == "COPAY_MAX_REACHED" and cp["used_ytd"] != COPAY_MAX:
+            fail(f"{cid}: COPAY_MAX_REACHED but used_ytd is {cp['used_ytd']}")
+
+        br = c["bridge"]
+        bridge_days = sum(s["days"] for s in c["shipments"] if s["source"] == "bridge"
+                          and date.fromisoformat(s["date"]) > ref - timedelta(days=365))
+        if br["days_dispensed"] != bridge_days:
+            fail(f"{cid}: bridge.days_dispensed {br['days_dispensed']} but bridge shipments total {bridge_days}")
+        if br["days_dispensed"] > BRIDGE_DAYS:
+            fail(f"{cid}: bridge exceeds {BRIDGE_DAYS} days")
+        if br["status"] == "BRIDGE_EXHAUSTED" and br["days_dispensed"] != BRIDGE_DAYS:
+            fail(f"{cid}: BRIDGE_EXHAUSTED but {br['days_dispensed']} days dispensed")
+        if br["status"] in ("BRIDGE_ACTIVE", "BRIDGE_EXHAUSTED", "BRIDGE_ENDED_FINAL_DENIAL", "BRIDGE_ENDED_COVERAGE_APPROVED") and not commercial:
+            fail(f"{cid}: {br['status']} but patient is not eligible for bridge supply")
+        if br["status"] == "BRIDGE_ACTIVE" and c["pa"]["status"] not in ("PA_SUBMITTED", "APPEAL_SUBMITTED", "NETWORK_EXCEPTION_PENDING", "PA_DENIED"):
+            fail(f"{cid}: BRIDGE_ACTIVE without a pending PA, appeal or network exception")
+
+        pp = c["pap"]
+        if pp["status"] == "PAP_INCOMPLETE" and not pp["missing_documents"]:
+            fail(f"{cid}: PAP_INCOMPLETE with no missing_documents")
+        if pp["status"] in ("PAP_APPROVED", "PAP_EXPIRED"):
+            decided = date.fromisoformat(pp["decided_on"])
+            if date.fromisoformat(pp["approved_through"]) > decided + timedelta(days=366):
+                fail(f"{cid}: Foundation approval longer than 12 months")
+        if pp["status"] == "PAP_MEDICAID_PENDING":
+            if date.fromisoformat(pp["approved_through"]) > date.fromisoformat(pp["decided_on"]) + timedelta(days=90):
+                fail(f"{cid}: Medicaid-pending supply longer than 90 days")
+
+        ph = c["pharmacy"]
+        if ph:
+            p = pharmacies.get(ph["id"])
+            if p is None:
+                fail(f"{cid}: pharmacy {ph['id']} is not in the network")
+            elif (p["name"], p["phone"]) != (ph["name"], ph["phone"]):
+                fail(f"{cid}: pharmacy name or phone does not match {ph['id']}")
+        req = ins["required_pharmacy"]
+        if req not in (None, "non-network") and req not in pharmacies:
+            fail(f"{cid}: required_pharmacy {req} is not a network pharmacy")
+        if req in pharmacies and ph and ph["id"] not in (req, "SP-04"):
+            fail(f"{cid}: plan requires {req} but pharmacy is {ph['id']}")
+
+        for contact in c["authorized_contacts"]:
+            if contact.get("scope") not in ("status", "full"):
+                fail(f"{cid}: authorised contact {contact.get('name')} has no valid scope")
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -237,6 +467,7 @@ def main():
     gaps, srds = check_gaps_and_srds(gaps_doc, srds_doc, refs)
     check_markdown_pairs(refs, findings, srds, form_doc)
     check_readme_counts(claims, refs, gaps, srds, dtc_doc, form_doc)
+    check_patient_services(claims, refs, load("access/specialty-pharmacy-network.json"))
     check_fiction_markers(read_denylist(args.denylist))
     report()
 

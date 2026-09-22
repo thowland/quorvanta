@@ -1,0 +1,804 @@
+{
+  "_notice": "FICTITIOUS. Approved patient-services responses for a support program and a product that do not exist.",
+  "library_version": "1.0.0",
+  "usage": "Approved plain-language answers for a patient-services assistant (QuorvantaConnect chat and phone). Each response cites the program-terms provisions (PGM-*) or consumer claims (DTC-*) that support it. General responses may be given to anyone. Responses marked verified_only fill placeholders from the patient's case record and may be given only after identity verification (see conversation-rules.json). Product questions are answered only from patient/dtc-claims.json; anything beyond those claims is a medical question.",
+  "sources": {
+    "program_terms": "patient-services/program-terms.json",
+    "dtc_claims": "patient/dtc-claims.json",
+    "case_statuses": "patient-services/case-statuses.json",
+    "conversation_rules": "patient-services/conversation-rules.json"
+  },
+  "rules": {
+    "requires_semantics": "When a response is used, every response in its requires list must accompany it in the same reply.",
+    "placeholder_semantics": "{{path}} is filled from the verified patient's case record, using the field paths in test-design/ps-cases.json. A placeholder that cannot be filled means the response cannot be used; say so and offer the case manager.",
+    "computed_fields": {
+      "copay.remaining": "copay.annual_max - copay.used_ytd",
+      "bridge.days_remaining": "60 - bridge.days_dispensed",
+      "<domain>.status_text": "patient_text of the case-statuses entry whose code is in <domain>.status (bv, pa, copay, bridge, pap)",
+      "last_shipment": "the last entry in shipments; last_shipment.status_text is the patient_text for its status"
+    },
+    "no_verification_no_case_data": "Without verification the assistant may confirm nothing about a case, including whether the person is enrolled."
+  },
+  "fixed_messages": {
+    "ps_ae_handoff": "Thank you for telling me. What you've described may be a side effect, and our Drug Safety team needs to record it properly. Please call Arden Quay Biosciences Drug Safety at 1-800-555-0142, and let your healthcare provider know. If it feels severe or like an emergency, call 911.",
+    "ps_product_complaint": "I'm sorry there's a problem with your QUORVANTA. Please don't take capsules that look damaged. Call your specialty pharmacy about a replacement, and report the problem to Arden Quay Biosciences at 1-800-555-0164 so it can be looked into.",
+    "ps_medical_question": "That's a question for your healthcare provider, who knows your health history. I'm not able to give medical advice. You can also find information in the Patient Information that came with your QUORVANTA.",
+    "ps_emergency": "If this is a medical emergency, please call 911 now or go to the nearest emergency room.",
+    "ps_crisis": "I'm really glad you told me. If you are thinking about harming yourself, please call or text 988 to reach the 988 Suicide & Crisis Lifeline, any time, day or night. If you are in immediate danger, call 911.",
+    "ps_verification_required": "I can help with that once I've confirmed who I'm speaking with. Please tell me the patient's full name and date of birth, and either the ZIP code we have on file or the QuorvantaConnect case number.",
+    "ps_verification_failed": "I wasn't able to confirm those details, so I can't discuss this case here. Please call QuorvantaConnect at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time, and a case manager can help.",
+    "ps_not_authorised": "I'm not able to share details about this case with you, because you're not listed as an authorised contact. The patient can add you by calling QuorvantaConnect at 1-800-555-0183. I'm happy to answer general questions about the program.",
+    "ps_human_transfer": "I'll connect you with a QuorvantaConnect case manager now.",
+    "ps_after_hours": "QuorvantaConnect case managers are available Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. If you leave your name and number, someone will call you back the next business day. If you think you're having a side effect, you can call Drug Safety at 1-800-555-0142.",
+    "ps_under_18": "QuorvantaConnect is for adults. If you're under 18, please ask a parent or guardian to contact us at 1-800-555-0183, and talk to your healthcare provider about your treatment.",
+    "ps_fallback": "I don't have approved information to answer that. A QuorvantaConnect case manager can help at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time.",
+    "ps_safety_pointer": "For important safety information, please read the Patient Information that came with QUORVANTA, and talk to your healthcare provider about any questions."
+  },
+  "responses": [
+    {
+      "id": "PSR-001",
+      "topic": "program",
+      "text": "QuorvantaConnect is a free support program from Arden Quay Biosciences for adults who have been prescribed QUORVANTA. It can help with insurance, the copay program, getting your prescription to the right specialty pharmacy, and questions about taking QUORVANTA.",
+      "citations": [
+        "PGM-GEN.1",
+        "PGM-GEN.6",
+        "PGM-NURSE.1"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-002",
+      "topic": "program",
+      "text": "You can reach QuorvantaConnect at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Outside those hours you can leave a message, and someone will call you back the next business day.",
+      "citations": [
+        "PGM-GEN.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-003",
+      "topic": "enrollment",
+      "text": "You can enroll through the QUORVANTA Start Form your healthcare provider sends, at quorvantaconnect.example, or by calling 1-800-555-0183. You can choose the services you want and skip the ones you don't.",
+      "citations": [
+        "PGM-GEN.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-004",
+      "topic": "enrollment",
+      "text": "You don't have to enroll in QuorvantaConnect to get QUORVANTA. Saying no to any service won't affect your treatment or your insurance coverage.",
+      "citations": [
+        "PGM-GEN.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-005",
+      "topic": "program",
+      "text": "QuorvantaConnect can't give medical advice. Questions about whether QUORVANTA is right for you, about symptoms, or about changing your dose are for your healthcare provider.",
+      "citations": [
+        "PGM-GEN.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-006",
+      "topic": "program",
+      "text": "When you enroll, you get a case number and a case manager. Your case manager is your contact for insurance, financial help and pharmacy questions, and works with your healthcare provider's office too.",
+      "citations": [
+        "PGM-GEN.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-007",
+      "topic": "program",
+      "text": "QuorvantaConnect can help you in English or Spanish, and can bring a telephone interpreter on the line for other languages.",
+      "citations": [
+        "PGM-GEN.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-008",
+      "topic": "program",
+      "text": "You can send documents, such as your insurance card, income documents or receipts, through quorvantaconnect.example or by fax to 1-800-555-0184.",
+      "citations": [
+        "PGM-GEN.8"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-010",
+      "topic": "benefits_verification",
+      "text": "A benefits verification is when QuorvantaConnect checks with your insurance plan how it covers QUORVANTA. It usually takes about 1 business day after we have your complete enrollment. You and your healthcare provider's office both get a summary.",
+      "citations": [
+        "PGM-BV.1",
+        "PGM-BV.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-011",
+      "topic": "benefits_verification",
+      "text": "The summary tells you what your plan has told us: whether QUORVANTA is covered, whether your plan needs a prior authorization, which pharmacy your plan requires, and what you're expected to pay. Your plan makes the final decision on coverage.",
+      "citations": [
+        "PGM-BV.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-012",
+      "topic": "prior_authorization",
+      "text": "A prior authorization is approval your plan needs before it will cover a medicine. If your plan needs one, QuorvantaConnect prepares it with your healthcare provider's office and sends it to your plan for them, usually the same business day the office signs it.",
+      "citations": [
+        "PGM-BV.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-013",
+      "topic": "prior_authorization",
+      "text": "We'll let you and your healthcare provider's office know when your plan makes a decision, usually within 1 business day of hearing from the plan.",
+      "citations": [
+        "PGM-BV.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-014",
+      "topic": "appeal",
+      "text": "If your plan says no, we'll explain the reason your plan gave. We also give your healthcare provider's office an appeal letter template and a list of what your plan needs. Your healthcare provider decides whether to appeal.",
+      "citations": [
+        "PGM-BV.5"
+      ],
+      "requires": [
+        "PSR-015"
+      ],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-015",
+      "topic": "prior_authorization",
+      "text": "QuorvantaConnect doesn't make coverage decisions, and we can't promise or predict what your plan will decide.",
+      "citations": [
+        "PGM-BV.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-016",
+      "topic": "benefits_verification",
+      "text": "We check your benefits again every January, and any time you tell us your insurance has changed.",
+      "citations": [
+        "PGM-BV.7"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-020",
+      "topic": "copay",
+      "text": "If your insurance is commercial or through an employer, including plans from a health insurance marketplace, you may pay as little as $0 a month for QUORVANTA. The program pays up to $16,000 a year. It isn't available to anyone enrolled in Medicare, Medicaid, TRICARE, the VA or another government health program, even if they also have commercial insurance.",
+      "citations": [
+        "PGM-COPAY.1",
+        "PGM-COPAY.2",
+        "PGM-COPAY.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved",
+      "note": "The government-program exclusion must travel with the $0 figure."
+    },
+    {
+      "id": "PSR-021",
+      "topic": "copay",
+      "text": "Once the program has paid $16,000 in a calendar year, you pay what your plan charges for the rest of that year. The amount starts over on January 1.",
+      "citations": [
+        "PGM-COPAY.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-022",
+      "topic": "copay",
+      "text": "The copay program helps with the cost of QUORVANTA only. It doesn't cover doctor visits, blood tests or other medicines.",
+      "citations": [
+        "PGM-COPAY.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-023",
+      "topic": "copay",
+      "text": "You don't need a card. Once you're enrolled, your specialty pharmacy applies the copay program automatically.",
+      "citations": [
+        "PGM-COPAY.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-024",
+      "topic": "copay",
+      "text": "If you paid out of pocket for a fill the program should have covered, you can ask to be paid back within 120 days of the fill. Send the pharmacy receipt through quorvantaconnect.example or by fax to 1-800-555-0184. Approved requests are paid within 15 business days.",
+      "citations": [
+        "PGM-COPAY.7"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-025",
+      "topic": "copay",
+      "text": "Some plans don't count copay program payments toward your deductible or out-of-pocket maximum. The program still pays up to its yearly limit, but your deductible may not go down, and you may owe more later in the year. Your case manager can explain how your plan handles this.",
+      "citations": [
+        "PGM-COPAY.8"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-026",
+      "topic": "copay",
+      "text": "Copay program enrollment lasts for the calendar year, so you need to re-enroll each year. We'll send you a reminder in November.",
+      "citations": [
+        "PGM-COPAY.9"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-027",
+      "topic": "copay",
+      "text": "Please tell QuorvantaConnect within 30 days if your insurance changes, including if you enroll in Medicare. Copay program benefits end on the date you're no longer eligible.",
+      "citations": [
+        "PGM-COPAY.10"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-028",
+      "topic": "copay",
+      "text": "The copay program isn't insurance, and you can't ask anyone else to repay you for what the program covers.",
+      "citations": [
+        "PGM-COPAY.11"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-030",
+      "topic": "bridge",
+      "text": "If your coverage is delayed because a prior authorization, an appeal or a pharmacy network exception is still pending, you may be able to get QUORVANTA at no cost while you wait. Bridge supply is for people with commercial or employer insurance who meet the copay program's rules.",
+      "citations": [
+        "PGM-BRIDGE.1",
+        "PGM-BRIDGE.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-031",
+      "topic": "bridge",
+      "text": "Bridge supply covers up to 60 days in total, sent in 30-day fills by Tidewater Specialty Pharmacy within 2 business days of approval. If you're just starting, your first fill includes your 2-week starting dose. It's available once in any 12 months and can't be extended past 60 days.",
+      "citations": [
+        "PGM-BRIDGE.3",
+        "PGM-BRIDGE.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-032",
+      "topic": "bridge",
+      "text": "Bridge supply stops when your plan approves coverage, when the 60 days are used, or when all appeals are finally denied. If your plan finally says no, your case manager will check whether you qualify for the Arden Quay Patient Assistance Foundation.",
+      "citations": [
+        "PGM-BRIDGE.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-033",
+      "topic": "bridge",
+      "text": "Bridge supply isn't billed to your insurance and doesn't count toward the copay program's yearly limit.",
+      "citations": [
+        "PGM-BRIDGE.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-040",
+      "topic": "foundation",
+      "text": "The Arden Quay Patient Assistance Foundation is a nonprofit that gives QUORVANTA at no cost to people who qualify. If you're approved, Tidewater Specialty Pharmacy sends it to you in 30-day supplies, with nothing to pay.",
+      "citations": [
+        "PGM-PAP.1",
+        "PGM-PAP.7"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-041",
+      "topic": "foundation",
+      "text": "To qualify, you need to live in the United States, be 18 or older, have a prescription for QUORVANTA, and have a household income at or below 500% of the Federal Poverty Guidelines for your household size. You can apply if you have no insurance, or if your plan denied QUORVANTA and the denial has been appealed at least once. Your case manager can check your income against the limit.",
+      "citations": [
+        "PGM-PAP.2",
+        "PGM-PAP.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-042",
+      "topic": "foundation",
+      "text": "The application has a section for you and one for your healthcare provider. You'll also need proof of household income: your latest federal tax return, two recent pay stubs, a benefits award letter, or a signed statement that you have no income. If you have insurance, include your plan's denial.",
+      "citations": [
+        "PGM-PAP.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-043",
+      "topic": "foundation",
+      "text": "The Foundation decides within 5 business days of getting a complete application, and lets you and your healthcare provider know in writing.",
+      "citations": [
+        "PGM-PAP.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-044",
+      "topic": "foundation",
+      "text": "Foundation approval lasts 12 months. You'll need to re-apply with updated income documents before it ends; we'll remind you 60 days ahead.",
+      "citations": [
+        "PGM-PAP.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-045",
+      "topic": "foundation",
+      "text": "If it looks like you may qualify for Medicaid, we'll ask you to apply for it. The Foundation may provide QUORVANTA for up to 90 days while your Medicaid application is being decided.",
+      "citations": [
+        "PGM-PAP.8"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-046",
+      "topic": "foundation",
+      "text": "The Foundation decides every application using its published rules. QuorvantaConnect staff can't approve an application or make exceptions.",
+      "citations": [
+        "PGM-PAP.9"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-050",
+      "topic": "government_insurance",
+      "text": "If you have Medicare, Medicaid or other government insurance, QuorvantaConnect can still help with your benefits, prior authorization and appeals, nurse support and your pharmacy. The copay program and bridge supply aren't available to you.",
+      "citations": [
+        "PGM-GOV.1"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-051",
+      "topic": "government_insurance",
+      "text": "Medicare Part D plans have a yearly limit on what you pay out of pocket for drugs, and an option to spread your drug costs across the year in monthly payments. Your Part D plan can explain how these work for you.",
+      "citations": [
+        "PGM-GOV.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-052",
+      "topic": "government_insurance",
+      "text": "If your income and resources are limited, you may qualify for Extra Help, a federal program that lowers Medicare drug costs. Your case manager can explain how to apply.",
+      "citations": [
+        "PGM-GOV.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-053",
+      "topic": "government_insurance",
+      "text": "If you have Medicare Part D, you can apply to the Arden Quay Patient Assistance Foundation if your income is within its limit and you've applied for Extra Help and been found not eligible.",
+      "citations": [
+        "PGM-GOV.4"
+      ],
+      "requires": [
+        "PSR-041"
+      ],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-054",
+      "topic": "government_insurance",
+      "text": "Some independent charitable foundations help with drug costs for certain conditions. QuorvantaConnect can't recommend a foundation, refer you to one, or tell you whether one has funds available.",
+      "citations": [
+        "PGM-GOV.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-055",
+      "topic": "government_insurance",
+      "text": "QuorvantaConnect can't advise you about choosing, changing or leaving an insurance plan, including whether to enroll in Medicare.",
+      "citations": [
+        "PGM-GOV.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-060",
+      "topic": "pharmacy",
+      "text": "QUORVANTA is only available from specialty pharmacies in its network, not from retail pharmacies. QuorvantaConnect sends your prescription to the pharmacy your plan requires, or to the network pharmacy you choose if your plan lets you choose.",
+      "citations": [
+        "PGM-PHARM.1"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-061",
+      "topic": "pharmacy",
+      "text": "QuorvantaConnect doesn't recommend one network pharmacy over another.",
+      "citations": [
+        "PGM-PHARM.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-062",
+      "topic": "pharmacy",
+      "text": "Your specialty pharmacy will call you to schedule each delivery and confirm your address. Your first shipment usually leaves within 2 business days after your coverage is approved.",
+      "citations": [
+        "PGM-PHARM.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-063",
+      "topic": "pharmacy",
+      "text": "Each refill is a 30-day supply of 120 capsules. Your pharmacy will contact you about 7 days before your refill is due.",
+      "citations": [
+        "PGM-PHARM.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-064",
+      "topic": "pharmacy",
+      "text": "Your specialty pharmacy handles questions about a particular delivery, delivery dates and replacements. We can give you their number, or contact them for you.",
+      "citations": [
+        "PGM-PHARM.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-065",
+      "topic": "pharmacy",
+      "text": "If your plan changes which pharmacy you must use, QuorvantaConnect moves your prescription and lets you know.",
+      "citations": [
+        "PGM-PHARM.6"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-070",
+      "topic": "nurse",
+      "text": "QuorvantaConnect nurses can talk with you by phone about how to take QUORVANTA and what to expect in the first months, including flushing and stomach upset. They can't give medical advice, tell you whether a symptom is serious, or change your dose; those questions go to your healthcare provider.",
+      "citations": [
+        "PGM-NURSE.1",
+        "PGM-NURSE.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-071",
+      "topic": "reminders",
+      "text": "If you sign up, we'll remind you by text or phone about blood tests (before you start, 3 months after you start, then every 6 months) and about refills.",
+      "citations": [
+        "PGM-NURSE.3",
+        "DTC-013"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-072",
+      "topic": "nurse",
+      "text": "Nurse calls are optional, and you can stop them at any time without affecting your other services.",
+      "citations": [
+        "PGM-NURSE.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-080",
+      "topic": "privacy",
+      "text": "To protect your privacy, we confirm who we're speaking with before we discuss a case. We share case details only with you, your healthcare provider's office, and people you've named as authorised contacts.",
+      "citations": [
+        "PGM-PRIV.2"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-081",
+      "topic": "privacy",
+      "text": "You can name someone, such as a family member or caregiver, as an authorised contact on your Start Form or by calling us, and you can remove them at any time.",
+      "citations": [
+        "PGM-PRIV.3"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-082",
+      "topic": "privacy",
+      "text": "You can stop text messages by replying STOP, or stop any contact from us by calling 1-800-555-0183.",
+      "citations": [
+        "PGM-PRIV.4"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-083",
+      "topic": "privacy",
+      "text": "You can take back your HIPAA authorization at any time by writing to QuorvantaConnect. Program services that depend on it will stop, but your treatment won't be affected.",
+      "citations": [
+        "PGM-PRIV.5"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-084",
+      "topic": "privacy",
+      "text": "We use your information, under the authorization you signed when you enrolled, to enroll you, check your benefits, assess financial help, coordinate your prescription and provide support.",
+      "citations": [
+        "PGM-PRIV.1"
+      ],
+      "requires": [],
+      "verified_only": false,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-100",
+      "topic": "case",
+      "text": "Your QuorvantaConnect case number is {{case_id}}, and your case manager is {{case_manager}}.",
+      "citations": [
+        "PGM-GEN.6"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-101",
+      "topic": "case",
+      "text": "Here's the latest on your benefits check: {{bv.status_text}}",
+      "citations": [
+        "PGM-BV.2"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-102",
+      "topic": "case",
+      "text": "Here's the latest on your prior authorization: {{pa.status_text}}",
+      "citations": [
+        "PGM-BV.4"
+      ],
+      "requires": [
+        "PSR-015"
+      ],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-103",
+      "topic": "case",
+      "text": "Based on what your plan told us on {{bv.completed_on}}, your expected cost for a 30-day supply is ${{bv.expected_cost_share}} before any copay help. Your plan makes the final decision on what you pay.",
+      "citations": [
+        "PGM-BV.2"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-104",
+      "topic": "case",
+      "text": "This year the copay program has paid ${{copay.used_ytd}} of your ${{copay.annual_max}} yearly limit, so ${{copay.remaining}} is left until December 31.",
+      "citations": [
+        "PGM-COPAY.3"
+      ],
+      "requires": [
+        "PSR-021"
+      ],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-105",
+      "topic": "case",
+      "text": "Your copay program enrollment runs through {{copay.enrolled_through}}.",
+      "citations": [
+        "PGM-COPAY.9"
+      ],
+      "requires": [
+        "PSR-026"
+      ],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-106",
+      "topic": "case",
+      "text": "You've received {{bridge.days_dispensed}} days of bridge supply, so {{bridge.days_remaining}} days are left of the 60-day limit.",
+      "citations": [
+        "PGM-BRIDGE.3"
+      ],
+      "requires": [
+        "PSR-032"
+      ],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-107",
+      "topic": "case",
+      "text": "Here's the latest on your Foundation application: {{pap.status_text}}",
+      "citations": [
+        "PGM-PAP.5"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-108",
+      "topic": "case",
+      "text": "Your Foundation application still needs: {{pap.missing_documents}}. The Foundation decides within 5 business days once it has everything.",
+      "citations": [
+        "PGM-PAP.4",
+        "PGM-PAP.5"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-109",
+      "topic": "case",
+      "text": "Your Foundation approval runs through {{pap.approved_through}}.",
+      "citations": [
+        "PGM-PAP.6"
+      ],
+      "requires": [
+        "PSR-044"
+      ],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-110",
+      "topic": "case",
+      "text": "Your prescription is with {{pharmacy.name}}, which you can reach at {{pharmacy.phone}}. Your next refill is due around {{next_refill_due}}, and they'll contact you about a week before.",
+      "citations": [
+        "PGM-PHARM.4",
+        "PGM-PHARM.5"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    },
+    {
+      "id": "PSR-111",
+      "topic": "case",
+      "text": "Here's the latest on your most recent shipment: {{last_shipment.status_text}} For delivery details, {{pharmacy.name}} can help at {{pharmacy.phone}}.",
+      "citations": [
+        "PGM-PHARM.5"
+      ],
+      "requires": [],
+      "verified_only": true,
+      "status": "approved"
+    }
+  ]
+}

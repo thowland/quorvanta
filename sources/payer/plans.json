@@ -1,0 +1,618 @@
+{
+  "_notice": "FICTITIOUS. Plans, pharmacy benefit processors and formulary positions for a product that does not exist. Every plan, processor, BIN, PCN and formulary is invented; BINs use the 000 prefix. Medicaid, Medicare and TRICARE are real public programs kept by the fiction, but every coverage detail here is invented.",
+  "plans_version": "1.0.0",
+  "as_of": "2026-09-22",
+  "usage": "Formulary position of QUORVANTA on each plan named in test-design/ps-cases.json. prior_authorization is none, new_starts (only for patients starting QUORVANTA, whose first fill is a starter bottle) or all. A case whose plan requires prior authorization and whose pa.status is PA_NOT_REQUIRED has a current authorization on file in payer/transactions.json. required_pharmacy matches the case's insurance.required_pharmacy. Reject codes are the pack's own; they correspond to, but do not reproduce, the codes in the industry telecommunication standard. There is no price for QUORVANTA in this pack, so claims carry patient amounts only. payer/formulary-fhir.json is generated from this file by scripts/render.py.",
+  "processors": [
+    {
+      "id": "PRC-01",
+      "name": "Brightfield Rx Services",
+      "bin": "000410",
+      "pcns": [
+        "BFRX"
+      ]
+    },
+    {
+      "id": "PRC-02",
+      "name": "Northgate Health pharmacy benefits",
+      "bin": "000520",
+      "pcns": [
+        "NGHCOM",
+        "NGHPD"
+      ]
+    },
+    {
+      "id": "PRC-03",
+      "name": "Cairnwell Benefits",
+      "bin": "000630",
+      "pcns": [
+        "CWBRX"
+      ]
+    },
+    {
+      "id": "PRC-04",
+      "name": "Harborline Health Plans pharmacy benefits",
+      "bin": "000740",
+      "pcns": [
+        "HBMKT"
+      ]
+    },
+    {
+      "id": "PRC-05",
+      "name": "Keystone Crest Health pharmacy benefits",
+      "bin": "000850",
+      "pcns": [
+        "KCMAPD"
+      ]
+    },
+    {
+      "id": "PRC-06",
+      "name": "Halverson Health Plan Services",
+      "bin": "000960",
+      "pcns": [
+        "HHEMP"
+      ]
+    },
+    {
+      "id": "PRC-07",
+      "name": "Summitline Benefits",
+      "bin": "000170",
+      "pcns": [
+        "SLRX"
+      ]
+    },
+    {
+      "id": "PRC-08",
+      "name": "Lakeshore Community Care pharmacy benefits",
+      "bin": "000280",
+      "pcns": [
+        "LCCMCD"
+      ]
+    },
+    {
+      "id": "PRC-09",
+      "name": "Tallgrass Community Health pharmacy benefits",
+      "bin": "000301",
+      "pcns": [
+        "TCHMCD"
+      ]
+    },
+    {
+      "id": "PRC-10",
+      "name": "TRICARE pharmacy benefit (processing details invented for this pack)",
+      "bin": "000390",
+      "pcns": [
+        "TRIRX"
+      ]
+    }
+  ],
+  "pa_criteria": [
+    {
+      "id": "PAC-01",
+      "criteria": [
+        "Diagnosis of a relapsing form of Brennick syndrome in an adult",
+        "Prescribed by, or in consultation with, a neurologist",
+        "Complete blood count, including lymphocyte count, within 6 months before starting",
+        "Not taking dimethyl tavorate"
+      ],
+      "approval_months": 12
+    },
+    {
+      "id": "PAC-02",
+      "criteria": [
+        "Diagnosis of a relapsing form of Brennick syndrome in an adult",
+        "Prescribed by, or in consultation with, a neurologist",
+        "Complete blood count, including lymphocyte count, within 6 months before starting",
+        "Not taking dimethyl tavorate",
+        "For a new start: documented trial of at least one formulary therapy for relapsing Brennick syndrome (step therapy)"
+      ],
+      "approval_months": 12
+    }
+  ],
+  "reject_codes": [
+    {
+      "code": "RJ-01",
+      "meaning": "Prior authorization required",
+      "standard_equivalent": "the telecommunication-standard reject for prior authorization required"
+    },
+    {
+      "code": "RJ-02",
+      "meaning": "Product not covered by the plan",
+      "standard_equivalent": "the reject for a product or service not covered"
+    },
+    {
+      "code": "RJ-03",
+      "meaning": "Quantity exceeds the plan limit",
+      "standard_equivalent": "the reject for plan limits exceeded"
+    },
+    {
+      "code": "RJ-04",
+      "meaning": "Coverage not active on the date of service",
+      "standard_equivalent": "the reject for patient not covered or coverage terminated"
+    },
+    {
+      "code": "RJ-05",
+      "meaning": "Pharmacy not in the plan's network for this product",
+      "standard_equivalent": "the reject for a non-network or non-preferred pharmacy"
+    },
+    {
+      "code": "RJ-06",
+      "meaning": "Refill too soon",
+      "standard_equivalent": "the reject for refill too soon"
+    },
+    {
+      "code": "RJ-07",
+      "meaning": "Drug utilisation alert: therapeutic duplication with dimethyl tavorate",
+      "standard_equivalent": "a DUR reject for therapeutic duplication"
+    }
+  ],
+  "formularies": [
+    {
+      "id": "FRM-BF-COM",
+      "name": "Brightfield Employer Health commercial formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-BF-EPO",
+      "name": "Brightfield Employer Health EPO closed formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "not_covered",
+        "tier": null,
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": null
+      }
+    },
+    {
+      "id": "FRM-NG-COM",
+      "name": "Northgate Health commercial formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "new_starts",
+        "pa_criteria": "PAC-01",
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-NG-PD",
+      "name": "Northgate Medicare Part D formulary",
+      "program": "medicare",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "all",
+        "pa_criteria": "PAC-01",
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-CW",
+      "name": "Cairnwell Choice formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "all",
+        "pa_criteria": "PAC-02",
+        "step_therapy": true,
+        "step_therapy_new_starts_only": true,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-HB-MKT",
+      "name": "Harborline Marketplace formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "new_starts",
+        "pa_criteria": "PAC-01",
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-KC-MA",
+      "name": "Keystone Crest Medicare Advantage formulary",
+      "program": "medicare",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-HH",
+      "name": "Halverson Health Employee Plan formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-SL",
+      "name": "Summitline Employer Plan formulary",
+      "program": "commercial",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "specialty",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-LCC",
+      "name": "Lakeshore Community Care Medicaid preferred drug list",
+      "program": "medicaid",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "preferred-brand",
+        "prior_authorization": "all",
+        "pa_criteria": "PAC-01",
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-TCH",
+      "name": "Tallgrass Community Health Medicaid preferred drug list",
+      "program": "medicaid",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "preferred-brand",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "FRM-TRI",
+      "name": "TRICARE uniform formulary (entry invented for this pack)",
+      "program": "tricare",
+      "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+      },
+      "quorvanta": {
+        "status": "covered",
+        "tier": "non-preferred-brand",
+        "prior_authorization": "none",
+        "pa_criteria": null,
+        "step_therapy": false,
+        "step_therapy_new_starts_only": false,
+        "quantity_limits": {
+          "PKG-120": {
+            "quantity": 120,
+            "days": 30
+          },
+          "PKG-STARTER": {
+            "quantity": 92,
+            "days": 30
+          }
+        }
+      }
+    }
+  ],
+  "plans": [
+    {
+      "id": "PLN-01",
+      "name": "Brightfield Employer Health PPO",
+      "type": "commercial",
+      "processor_id": "PRC-01",
+      "pcn": "BFRX",
+      "formulary_id": "FRM-BF-COM",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-02",
+      "name": "Brightfield Employer Health HDHP",
+      "type": "commercial",
+      "processor_id": "PRC-01",
+      "pcn": "BFRX",
+      "formulary_id": "FRM-BF-COM",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-03",
+      "name": "Brightfield Employer Health EPO",
+      "type": "commercial",
+      "processor_id": "PRC-01",
+      "pcn": "BFRX",
+      "formulary_id": "FRM-BF-EPO",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-04",
+      "name": "Northgate Health PPO",
+      "type": "commercial",
+      "processor_id": "PRC-02",
+      "pcn": "NGHCOM",
+      "formulary_id": "FRM-NG-COM",
+      "required_pharmacy": "SP-02",
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-05",
+      "name": "Northgate Medicare Part D",
+      "type": "medicare",
+      "processor_id": "PRC-02",
+      "pcn": "NGHPD",
+      "formulary_id": "FRM-NG-PD",
+      "required_pharmacy": "SP-02",
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-06",
+      "name": "Cairnwell Choice HMO",
+      "type": "commercial",
+      "processor_id": "PRC-03",
+      "pcn": "CWBRX",
+      "formulary_id": "FRM-CW",
+      "required_pharmacy": "SP-03",
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-07",
+      "name": "Harborline Marketplace Bronze",
+      "type": "commercial",
+      "processor_id": "PRC-04",
+      "pcn": "HBMKT",
+      "formulary_id": "FRM-HB-MKT",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-08",
+      "name": "Harborline Marketplace Silver",
+      "type": "commercial",
+      "processor_id": "PRC-04",
+      "pcn": "HBMKT",
+      "formulary_id": "FRM-HB-MKT",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-09",
+      "name": "Harborline Marketplace Gold",
+      "type": "commercial",
+      "processor_id": "PRC-04",
+      "pcn": "HBMKT",
+      "formulary_id": "FRM-HB-MKT",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-10",
+      "name": "Keystone Crest Medicare Advantage",
+      "type": "medicare",
+      "processor_id": "PRC-05",
+      "pcn": "KCMAPD",
+      "formulary_id": "FRM-KC-MA",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-11",
+      "name": "Halverson Health Employee Plan",
+      "type": "commercial",
+      "processor_id": "PRC-06",
+      "pcn": "HHEMP",
+      "formulary_id": "FRM-HH",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-12",
+      "name": "Summitline Employer Plan",
+      "type": "commercial",
+      "processor_id": "PRC-07",
+      "pcn": "SLRX",
+      "formulary_id": "FRM-SL",
+      "required_pharmacy": "non-network",
+      "required_pharmacy_name": "Summitline Specialty (not in the QUORVANTA network)"
+    },
+    {
+      "id": "PLN-13",
+      "name": "Lakeshore Community Care (Medicaid)",
+      "type": "medicaid",
+      "processor_id": "PRC-08",
+      "pcn": "LCCMCD",
+      "formulary_id": "FRM-LCC",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-14",
+      "name": "Tallgrass Community Health (Medicaid)",
+      "type": "medicaid",
+      "processor_id": "PRC-09",
+      "pcn": "TCHMCD",
+      "formulary_id": "FRM-TCH",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    },
+    {
+      "id": "PLN-15",
+      "name": "TRICARE",
+      "type": "tricare",
+      "processor_id": "PRC-10",
+      "pcn": "TRIRX",
+      "formulary_id": "FRM-TRI",
+      "required_pharmacy": null,
+      "required_pharmacy_name": null
+    }
+  ]
+}

@@ -1,0 +1,1022 @@
+{
+  "_notice": "FICTITIOUS. Field force, accounts and prescribers for a company and product that do not exist. Every person, practice, address and phone number is invented; phone numbers use the reserved 555-01xx range. NPI-shaped identifiers begin with 9, which the national registry never assigns, and carry a correct check digit so format validators can be exercised.",
+  "field_force_version": "1.0.0",
+  "as_of": "2026-09-22",
+  "usage": "Territories, staff, accounts (HCOs) and prescribers (HCPs) for CRM and field-force testing. Each ps-cases.json case names its prescriber in prescriber_id; case_ids here lists the same links from the prescriber's side. A no_see prescriber must not be called. approved_email calls go only to prescribers with consent.approved_email true. Samples of QUORVANTA are not provided (ACC-005), so no call records a sample.",
+  "field_rules": [
+    {
+      "id": "FR-01",
+      "rule": "Promote only with approved materials and approved claims. When an efficacy claim is discussed, PROMO-ISI is presented in the same call. Claims are closed over their requires lists."
+    },
+    {
+      "id": "FR-02",
+      "rule": "Unsolicited questions outside the approved claims (off-label use, comparisons, missed doses, anything in the Medical Information standard responses) are not answered by the representative; they are submitted to Medical Information the same day."
+    },
+    {
+      "id": "FR-03",
+      "rule": "A possible adverse event heard during any interaction is forwarded to Drug Safety within 1 business day, using the business calendar in safety/safety-reference.json. The representative gives the HCP the Drug Safety number and asks no further questions."
+    },
+    {
+      "id": "FR-04",
+      "rule": "Call notes contain no patient name, date of birth, case number or other patient-identifying details."
+    },
+    {
+      "id": "FR-05",
+      "rule": "Representatives do not recommend one network pharmacy over another and do not discuss a specific patient's coverage; they give the QuorvantaConnect number."
+    },
+    {
+      "id": "FR-06",
+      "rule": "Samples of QUORVANTA are not provided; no call offers or records samples."
+    },
+    {
+      "id": "FR-07",
+      "rule": "Approved emails are sent only from an approved template, unaltered, and only to prescribers who have consented."
+    },
+    {
+      "id": "FR-08",
+      "rule": "Representatives call only on prescribers in their own territory and never on a no-see prescriber."
+    }
+  ],
+  "territories": [
+    {
+      "id": "TER-01",
+      "name": "New England and New York",
+      "states": [
+        "MA",
+        "RI",
+        "NY",
+        "CT",
+        "NJ"
+      ],
+      "rep_id": "REP-01",
+      "manager_id": "RM-EAST"
+    },
+    {
+      "id": "TER-02",
+      "name": "Mid-Atlantic",
+      "states": [
+        "PA",
+        "MD",
+        "VA",
+        "NC",
+        "DE",
+        "DC"
+      ],
+      "rep_id": "REP-02",
+      "manager_id": "RM-EAST"
+    },
+    {
+      "id": "TER-03",
+      "name": "Southeast",
+      "states": [
+        "GA",
+        "FL",
+        "TN",
+        "LA",
+        "AL",
+        "SC",
+        "MS"
+      ],
+      "rep_id": "REP-03",
+      "manager_id": "RM-EAST"
+    },
+    {
+      "id": "TER-04",
+      "name": "Great Lakes",
+      "states": [
+        "IL",
+        "MI",
+        "OH",
+        "WI",
+        "MN",
+        "IN"
+      ],
+      "rep_id": "REP-04",
+      "manager_id": "RM-WEST"
+    },
+    {
+      "id": "TER-05",
+      "name": "Central and Mountain",
+      "states": [
+        "MO",
+        "TX",
+        "CO",
+        "UT",
+        "NM",
+        "AZ",
+        "KS",
+        "OK"
+      ],
+      "rep_id": "REP-05",
+      "manager_id": "RM-WEST"
+    },
+    {
+      "id": "TER-06",
+      "name": "Pacific",
+      "states": [
+        "CA",
+        "OR",
+        "WA",
+        "NV"
+      ],
+      "rep_id": "REP-06",
+      "manager_id": "RM-WEST"
+    }
+  ],
+  "staff": [
+    {
+      "id": "REP-01",
+      "role": "therapeutic_specialist",
+      "name": "Juniper Vasquez-Albright",
+      "territory_id": "TER-01"
+    },
+    {
+      "id": "REP-02",
+      "role": "therapeutic_specialist",
+      "name": "Desmond Okonkwo-Farrant",
+      "territory_id": "TER-02"
+    },
+    {
+      "id": "REP-03",
+      "role": "therapeutic_specialist",
+      "name": "Farida Whitby-Nakagawa",
+      "territory_id": "TER-03"
+    },
+    {
+      "id": "REP-04",
+      "role": "therapeutic_specialist",
+      "name": "Magnus Oyewole-Lund",
+      "territory_id": "TER-04"
+    },
+    {
+      "id": "REP-05",
+      "role": "therapeutic_specialist",
+      "name": "Soledad Kittredge-Amari",
+      "territory_id": "TER-05"
+    },
+    {
+      "id": "REP-06",
+      "role": "therapeutic_specialist",
+      "name": "Harlan Nakashima-Brook",
+      "territory_id": "TER-06"
+    },
+    {
+      "id": "RM-EAST",
+      "role": "regional_manager",
+      "name": "Winifred Salcedo-Grant",
+      "territory_id": null
+    },
+    {
+      "id": "RM-WEST",
+      "role": "regional_manager",
+      "name": "Ambrose Tiernan-Oke",
+      "territory_id": null
+    },
+    {
+      "id": "MSL-EAST",
+      "role": "medical_science_liaison",
+      "name": "Ophelia Rasmussen-Adu, PharmD",
+      "territory_id": null,
+      "covers": [
+        "TER-01",
+        "TER-02",
+        "TER-03"
+      ]
+    },
+    {
+      "id": "MSL-WEST",
+      "role": "medical_science_liaison",
+      "name": "Kwame Lindahl-Serrano, PhD",
+      "territory_id": null,
+      "covers": [
+        "TER-04",
+        "TER-05",
+        "TER-06"
+      ]
+    }
+  ],
+  "hcos": [
+    {
+      "id": "HCO-01",
+      "name": "Fenwick Hollow Neurology Associates",
+      "type": "private_practice",
+      "city": "Cambridge",
+      "state": "MA",
+      "zip": "02139",
+      "phone": "(617) 555-0150"
+    },
+    {
+      "id": "HCO-02",
+      "name": "Keelhaven Neurology Center",
+      "type": "private_practice",
+      "city": "Philadelphia",
+      "state": "PA",
+      "zip": "19104",
+      "phone": "(215) 555-0151"
+    },
+    {
+      "id": "HCO-03",
+      "name": "Halverson Health Neuroscience Clinic",
+      "type": "idn",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60611",
+      "phone": "(312) 555-0152"
+    },
+    {
+      "id": "HCO-04",
+      "name": "Mesquite Ridge Neurology",
+      "type": "private_practice",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zip": "85004",
+      "phone": "(602) 555-0153"
+    },
+    {
+      "id": "HCO-05",
+      "name": "Wickham Bridge Community Clinic",
+      "type": "community_health_center",
+      "city": "Portland",
+      "state": "OR",
+      "zip": "97205",
+      "phone": "(503) 555-0154"
+    },
+    {
+      "id": "HCO-06",
+      "name": "Marrowdale Neurology",
+      "type": "private_practice",
+      "city": "Detroit",
+      "state": "MI",
+      "zip": "48201",
+      "phone": "(313) 555-0155"
+    },
+    {
+      "id": "HCO-07",
+      "name": "Larkspur Peak Neurology",
+      "type": "private_practice",
+      "city": "Denver",
+      "state": "CO",
+      "zip": "80202",
+      "phone": "(303) 555-0156"
+    },
+    {
+      "id": "HCO-08",
+      "name": "Quillfield Medical Group",
+      "type": "multispecialty_group",
+      "city": "Columbus",
+      "state": "OH",
+      "zip": "43215",
+      "phone": "(614) 555-0157"
+    },
+    {
+      "id": "HCO-09",
+      "name": "Brindlewood Neurology",
+      "type": "private_practice",
+      "city": "Atlanta",
+      "state": "GA",
+      "zip": "30303",
+      "phone": "(404) 555-0158"
+    },
+    {
+      "id": "HCO-10",
+      "name": "Cedarmoss Neurology",
+      "type": "private_practice",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98104",
+      "phone": "(206) 555-0159"
+    },
+    {
+      "id": "HCO-11",
+      "name": "Bellwood Hollow Clinic",
+      "type": "multispecialty_group",
+      "city": "Nashville",
+      "state": "TN",
+      "zip": "37203",
+      "phone": "(615) 555-0160"
+    },
+    {
+      "id": "HCO-12",
+      "name": "Tamarack Ferry Neurology",
+      "type": "private_practice",
+      "city": "Minneapolis",
+      "state": "MN",
+      "zip": "55401",
+      "phone": "(612) 555-0161"
+    },
+    {
+      "id": "HCO-13",
+      "name": "Coquina Shore Neurology",
+      "type": "private_practice",
+      "city": "Tampa",
+      "state": "FL",
+      "zip": "33602",
+      "phone": "(813) 555-0162"
+    },
+    {
+      "id": "HCO-14",
+      "name": "Pecanvale Neurology",
+      "type": "private_practice",
+      "city": "Houston",
+      "state": "TX",
+      "zip": "77002",
+      "phone": "(713) 555-0163"
+    },
+    {
+      "id": "HCO-15",
+      "name": "Riverlet Neurology",
+      "type": "private_practice",
+      "city": "St. Louis",
+      "state": "MO",
+      "zip": "63101",
+      "phone": "(314) 555-0164"
+    },
+    {
+      "id": "HCO-16",
+      "name": "Tarrow Neck Neurology",
+      "type": "private_practice",
+      "city": "Raleigh",
+      "state": "NC",
+      "zip": "27601",
+      "phone": "(919) 555-0165"
+    },
+    {
+      "id": "HCO-17",
+      "name": "Arroyo Linden Neurology",
+      "type": "academic_medical_center",
+      "city": "San Diego",
+      "state": "CA",
+      "zip": "92101",
+      "phone": "(619) 555-0166"
+    },
+    {
+      "id": "HCO-18",
+      "name": "Wyeholm Neurology",
+      "type": "private_practice",
+      "city": "Baltimore",
+      "state": "MD",
+      "zip": "21201",
+      "phone": "(410) 555-0167"
+    },
+    {
+      "id": "HCO-19",
+      "name": "Saltgrass Neurology",
+      "type": "private_practice",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "zip": "84101",
+      "phone": "(801) 555-0168"
+    },
+    {
+      "id": "HCO-20",
+      "name": "Juniper Mesa Clinic",
+      "type": "community_health_center",
+      "city": "Albuquerque",
+      "state": "NM",
+      "zip": "87102",
+      "phone": "(505) 555-0169"
+    },
+    {
+      "id": "HCO-21",
+      "name": "Gullhaven Neurology",
+      "type": "private_practice",
+      "city": "Providence",
+      "state": "RI",
+      "zip": "02903",
+      "phone": "(401) 555-0170"
+    },
+    {
+      "id": "HCO-22",
+      "name": "Cypress Landing Neurology",
+      "type": "private_practice",
+      "city": "New Orleans",
+      "state": "LA",
+      "zip": "70112",
+      "phone": "(504) 555-0171"
+    },
+    {
+      "id": "HCO-23",
+      "name": "Ashbrook Lane Neurology",
+      "type": "private_practice",
+      "city": "Madison",
+      "state": "WI",
+      "zip": "53703",
+      "phone": "(608) 555-0172"
+    },
+    {
+      "id": "HCO-24",
+      "name": "Eastmere Neurological Institute",
+      "type": "academic_medical_center",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10016",
+      "phone": "(212) 555-0173"
+    },
+    {
+      "id": "HCO-25",
+      "name": "Norwood Chase Neurology",
+      "type": "private_practice",
+      "city": "Richmond",
+      "state": "VA",
+      "zip": "23219",
+      "phone": "(804) 555-0174"
+    }
+  ],
+  "hcps": [
+    {
+      "id": "HCP-001",
+      "npi": "9000010378",
+      "first_name": "Ingrid",
+      "last_name": "Solvang-Price",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-01",
+      "state": "MA",
+      "phone": "(617) 555-0150",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00101"
+      ]
+    },
+    {
+      "id": "HCP-002",
+      "npi": "9000010741",
+      "first_name": "Tobias",
+      "last_name": "Wren-Hallam",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-02",
+      "state": "PA",
+      "phone": "(215) 555-0151",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00102",
+        "QC-26-00121"
+      ]
+    },
+    {
+      "id": "HCP-003",
+      "npi": "9000011111",
+      "first_name": "Marguerite",
+      "last_name": "Penhallow-Idowu",
+      "credential": "DO",
+      "specialty": "Neurology",
+      "hco_id": "HCO-03",
+      "state": "IL",
+      "phone": "(312) 555-0152",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00103",
+        "QC-26-00117"
+      ]
+    },
+    {
+      "id": "HCP-004",
+      "npi": "9000011483",
+      "first_name": "Casimir",
+      "last_name": "Delacroix-Ng",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-04",
+      "state": "AZ",
+      "phone": "(602) 555-0153",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00104"
+      ]
+    },
+    {
+      "id": "HCP-005",
+      "npi": "9000011855",
+      "first_name": "Annelise",
+      "last_name": "Fairweather-Okoro",
+      "credential": "NP",
+      "specialty": "Neurology",
+      "hco_id": "HCO-05",
+      "state": "OR",
+      "phone": "(503) 555-0154",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00105"
+      ]
+    },
+    {
+      "id": "HCP-006",
+      "npi": "9000012226",
+      "first_name": "Rashid",
+      "last_name": "Vanterpool",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-06",
+      "state": "MI",
+      "phone": "(313) 555-0155",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00106"
+      ]
+    },
+    {
+      "id": "HCP-007",
+      "npi": "9000012598",
+      "first_name": "Beatrix",
+      "last_name": "Omondi-Hale",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-07",
+      "state": "CO",
+      "phone": "(303) 555-0156",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00107"
+      ]
+    },
+    {
+      "id": "HCP-008",
+      "npi": "9000012960",
+      "first_name": "Lucian",
+      "last_name": "Pettigrew-Nnadi",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-08",
+      "state": "OH",
+      "phone": "(614) 555-0157",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00108"
+      ]
+    },
+    {
+      "id": "HCP-009",
+      "npi": "9000013331",
+      "first_name": "Sunniva",
+      "last_name": "Ashdown-Mensah",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-09",
+      "state": "GA",
+      "phone": "(404) 555-0158",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00109"
+      ]
+    },
+    {
+      "id": "HCP-010",
+      "npi": "9000013703",
+      "first_name": "Emeric",
+      "last_name": "Tanaka-Holt",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-10",
+      "state": "WA",
+      "phone": "(206) 555-0159",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00110"
+      ]
+    },
+    {
+      "id": "HCP-011",
+      "npi": "9000014073",
+      "first_name": "Odalys",
+      "last_name": "Fenwick-Mbatha",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-11",
+      "state": "TN",
+      "phone": "(615) 555-0160",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00111"
+      ]
+    },
+    {
+      "id": "HCP-012",
+      "npi": "9000014446",
+      "first_name": "Gunnar",
+      "last_name": "Esterhuizen",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-12",
+      "state": "MN",
+      "phone": "(612) 555-0161",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00112"
+      ]
+    },
+    {
+      "id": "HCP-013",
+      "npi": "9000014818",
+      "first_name": "Perpetua",
+      "last_name": "Valdes-Quinn",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-13",
+      "state": "FL",
+      "phone": "(813) 555-0162",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00113"
+      ]
+    },
+    {
+      "id": "HCP-014",
+      "npi": "9000015187",
+      "first_name": "Ignatius",
+      "last_name": "Moreau-Achike",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-14",
+      "state": "TX",
+      "phone": "(713) 555-0163",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00114"
+      ]
+    },
+    {
+      "id": "HCP-015",
+      "npi": "9000015559",
+      "first_name": "Wilhelmina",
+      "last_name": "Strand-Oduya",
+      "credential": "NP",
+      "specialty": "Neurology",
+      "hco_id": "HCO-15",
+      "state": "MO",
+      "phone": "(314) 555-0164",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00115"
+      ]
+    },
+    {
+      "id": "HCP-016",
+      "npi": "9000015922",
+      "first_name": "Leander",
+      "last_name": "Iyer-Galloway",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-16",
+      "state": "NC",
+      "phone": "(919) 555-0165",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00116"
+      ]
+    },
+    {
+      "id": "HCP-017",
+      "npi": "9000016292",
+      "first_name": "Esperanza",
+      "last_name": "Castellar-Voss",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-17",
+      "state": "CA",
+      "phone": "(619) 555-0166",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00118",
+        "QC-26-00128"
+      ]
+    },
+    {
+      "id": "HCP-018",
+      "npi": "9000016664",
+      "first_name": "Florian",
+      "last_name": "Achebe-Rowe",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-18",
+      "state": "MD",
+      "phone": "(410) 555-0167",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00119"
+      ]
+    },
+    {
+      "id": "HCP-019",
+      "npi": "9000017035",
+      "first_name": "Henrietta",
+      "last_name": "Vos-Abiola",
+      "credential": "PA-C",
+      "specialty": "Neurology",
+      "hco_id": "HCO-19",
+      "state": "UT",
+      "phone": "(801) 555-0168",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00120"
+      ]
+    },
+    {
+      "id": "HCP-020",
+      "npi": "9000017407",
+      "first_name": "Leopold",
+      "last_name": "Ybarra-Finch",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-20",
+      "state": "NM",
+      "phone": "(505) 555-0169",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00122"
+      ]
+    },
+    {
+      "id": "HCP-021",
+      "npi": "9000017779",
+      "first_name": "Clementine",
+      "last_name": "Asante-Holm",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-21",
+      "state": "RI",
+      "phone": "(401) 555-0170",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00123"
+      ]
+    },
+    {
+      "id": "HCP-022",
+      "npi": "9000018140",
+      "first_name": "Thaddeus",
+      "last_name": "Boudreaux-Lim",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-22",
+      "state": "LA",
+      "phone": "(504) 555-0171",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00124"
+      ]
+    },
+    {
+      "id": "HCP-023",
+      "npi": "9000018512",
+      "first_name": "Ottilie",
+      "last_name": "Marchetti-Sow",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-23",
+      "state": "WI",
+      "phone": "(608) 555-0172",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00125"
+      ]
+    },
+    {
+      "id": "HCP-024",
+      "npi": "9000018884",
+      "first_name": "Anselm",
+      "last_name": "Whitcombe-Diallo",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-24",
+      "state": "NY",
+      "phone": "(212) 555-0173",
+      "segment": "A",
+      "call_plan_per_quarter": 6,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00126"
+      ]
+    },
+    {
+      "id": "HCP-025",
+      "npi": "9000019254",
+      "first_name": "Marisa",
+      "last_name": "Kowalczyk-Obeng",
+      "credential": "NP",
+      "specialty": "Neurology",
+      "hco_id": "HCO-24",
+      "state": "NY",
+      "phone": "(212) 555-0173",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00127"
+      ]
+    },
+    {
+      "id": "HCP-026",
+      "npi": "9000019627",
+      "first_name": "Barnaby",
+      "last_name": "Quist-Adjei",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-25",
+      "state": "VA",
+      "phone": "(804) 555-0174",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": [
+        "QC-26-00129"
+      ]
+    },
+    {
+      "id": "HCP-027",
+      "npi": "9000019999",
+      "first_name": "Rosamund",
+      "last_name": "Iwu-Hartley",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-03",
+      "state": "IL",
+      "phone": "(312) 555-0152",
+      "segment": "B",
+      "call_plan_per_quarter": 0,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": true,
+      "case_ids": []
+    },
+    {
+      "id": "HCP-028",
+      "npi": "9000020369",
+      "first_name": "Silvan",
+      "last_name": "Okereke-Frost",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-17",
+      "state": "CA",
+      "phone": "(619) 555-0166",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": []
+    },
+    {
+      "id": "HCP-029",
+      "npi": "9000020732",
+      "first_name": "Delphine",
+      "last_name": "Arkwright-Nwosu",
+      "credential": "MD",
+      "specialty": "Pediatric neurology",
+      "hco_id": "HCO-24",
+      "state": "NY",
+      "phone": "(212) 555-0173",
+      "segment": "C",
+      "call_plan_per_quarter": 2,
+      "consent": {
+        "approved_email": false
+      },
+      "no_see": false,
+      "case_ids": []
+    },
+    {
+      "id": "HCP-030",
+      "npi": "9000021102",
+      "first_name": "Tiberius",
+      "last_name": "Halloran-Baptiste",
+      "credential": "MD",
+      "specialty": "Neurology",
+      "hco_id": "HCO-14",
+      "state": "TX",
+      "phone": "(713) 555-0163",
+      "segment": "B",
+      "call_plan_per_quarter": 4,
+      "consent": {
+        "approved_email": true
+      },
+      "no_see": false,
+      "case_ids": []
+    }
+  ]
+}

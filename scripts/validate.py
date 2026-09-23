@@ -26,6 +26,8 @@ ALLOWED_PHONES = {
     "1-800-222-1222",  # US Poison Control
 }
 FICTION_PHONE = re.compile(r"^1-800-555-01\d\d$")
+# Standards bodies whose canonical URLs FHIR resources must carry.
+ALLOWED_HOSTS = {"hl7.org", "terminology.hl7.org"}
 
 errors = []
 
@@ -195,10 +197,13 @@ def check_fiction_markers(denylist):
         for phone in re.findall(r"1-800-[A-Z0-9]{3}-[A-Z0-9]{4}", body):
             if phone not in ALLOWED_PHONES and not FICTION_PHONE.match(phone):
                 fail(f"{rel}: phone {phone} is outside 1-800-555-01xx")
+        for phone in re.findall(r"\(\d{3}\) \d{3}-\d{4}", body):
+            if not re.fullmatch(r"\(\d{3}\) 555-01\d\d", phone):
+                fail(f"{rel}: phone {phone} is outside 555-01xx")
         for doi in re.findall(r"\b10\.\d{4,}/", body):
             if doi != "10.5555/":
                 fail(f"{rel}: DOI prefix {doi} is not 10.5555")
-        for host in sorted(set(re.findall(r"\b(?:[a-z0-9-]+\.)+(?:com|org|net|gov|io|co|us)\b", body, re.I))):
+        for host in sorted(set(re.findall(r"\b(?:[a-z0-9-]+\.)+(?:com|org|net|gov|io|co|us)\b", body, re.I)) - ALLOWED_HOSTS):
             fail(f"{rel}: real-looking domain {host}; use .example")
         lowered = body.lower()
         for name in denylist:
@@ -688,8 +693,8 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
     pout = load(base + "ps-outbound.json")["replies"]
     count = lambda xs, v: sum(x["verdict"] == v for x in xs)
     expected = [
-        (r"(\d+) fault types \((\d+) for the HCP bot, (\d+) for",
-         (len(faults), sum(f.startswith("HF") for f in faults), sum(f.startswith("PF") for f in faults))),
+        (r"(\d+) fault types \((\d+) for the HCP bot, (\d+) for the patient-services assistant, (\d+) for adverse event intake and (\d+) for field records\)",
+         (len(faults),) + tuple(sum(f.startswith(p) for f in faults) for p in ("HF", "PF", "SF", "CF"))),
         (r"(\d+) labelled HCP questions", (len(inbound),)),
         (r"(\d+) labelled HCP bot responses \((\d+) pass, (\d+) fail\)", (len(hout), count(hout, "pass"), count(hout, "fail"))),
         (r"(\d+) multi-turn patient-services conversations", (len(convs),)),
@@ -703,9 +708,7 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
         elif tuple(int(g) for g in m.groups()) != want:
             fail(f"README.md: '{m.group(0)}' should read {want}")
 
-    for f in faults:
-        if f not in fault_coverage:
-            fail(f"fault-types: {f} has no failing example in the outbound sets")
+    return faults, fault_coverage
 
 
 
@@ -799,6 +802,507 @@ def check_product(claims):
                     fail(f"{where}: lot {s['lot']} expires before the supply is used")
 
 
+# ---------------------------------------------------------------- safety, field force, payer
+
+def business_days(holidays):
+    from datetime import date, timedelta
+    hol = {date.fromisoformat(d) for d in holidays}
+
+    def add(day, n):
+        d = date.fromisoformat(day)
+        while n:
+            d += timedelta(days=1)
+            if d.weekday() < 5 and d not in hol:
+                n -= 1
+        return str(d)
+
+    def is_bd(day):
+        d = date.fromisoformat(day)
+        return d.weekday() < 5 and d not in hol
+    return add, is_bd
+
+
+def npi_ok(npi):
+    if not re.fullmatch(r"9\d{9}", npi):
+        return False
+    total = 0
+    for i, d in enumerate(reversed([int(x) for x in "80840" + npi])):
+        if i % 2 == 1:
+            d = d * 2 - 9 if d > 4 else d * 2
+        total += d
+    return total % 10 == 0
+
+
+def check_safety(lots):
+    from datetime import date, timedelta
+    ref = load("safety/safety-reference.json")
+    terms = {t["id"]: t for t in ref["terms"]}
+    sits = {s["id"] for s in ref["special_situations"]}
+    criteria = {c["id"] for c in ref["seriousness_criteria"]}
+    minimum = {c["id"] for c in ref["minimum_criteria"]}
+    headings = set(re.findall(r"^### (\d+\.\d+)", text("label/label.md"), re.M))
+    for tid, t in terms.items():
+        if t["listed"] != bool(t["label_sections"]):
+            fail(f"{tid}: listed is {t['listed']} but label_sections is {t['label_sections']}")
+        for s in t["label_sections"]:
+            if s not in headings:
+                fail(f"{tid}: label section {s} does not exist")
+    add_bd, _ = business_days(ref["business_calendar"]["holidays"])
+
+    base = "test-design/scenarios/"
+    convs = {c["id"] for c in load(base + "ps-conversations.json")["conversations"]}
+    inbound = {s["id"] for s in load(base + "hcp-inbound.json")["scenarios"]}
+    calls = {c["id"]: c for c in load("crm/call-log.json")["calls"]}
+    cases = {c["case_id"] for c in load("test-design/ps-cases.json")["cases"]}
+    hcps = {h["id"] for h in load("crm/field-force.json")["hcps"]}
+    channels = {"drug_safety", "medical_information", "field", "hcp_chatbot", "quorvantaconnect_assistant",
+                "quorvantaconnect_nurse", "patient_community_page"}
+
+    def derive(r):
+        """The expected assessment, recomputed from the report's own facts."""
+        e = r["expected"]
+        valid = not e["missing_criteria"]
+        events = e["events"]
+        serious = any(ev["serious_criteria"] for ev in events)
+        listed = all(ev["listed"] for ev in events)
+        ctype = ("not_valid" if not valid else "adverse_event" if events
+                 else "special_situation" if e["special_situations"] else "product_complaint")
+        day0 = None
+        if ctype in ("adverse_event", "special_situation"):
+            complete = [x["on"] for x in r["receipts"] if x["criteria_complete"]]
+            day0 = min(complete) if complete else None
+        if ctype == "adverse_event" and any(ev["serious_criteria"] and not ev["listed"] for ev in events):
+            rep, due = "expedited_15_day", str(date.fromisoformat(day0) + timedelta(days=15))
+        elif ctype in ("adverse_event", "special_situation"):
+            rep, due = "periodic", None
+        else:
+            rep, due = "not_reportable", None
+        first = min(x["on"] for x in r["receipts"])
+        ds = [x["on"] for x in r["receipts"] if x["by"] == "drug_safety"]
+        late = bool(r["receipts"][0]["by"] != "drug_safety" and ds and ds[0] > add_bd(first, 1))
+        return {"case_type": ctype, "valid": valid, "serious": serious, "listed": listed if events else None,
+                "reportability": rep, "day_0": day0, "due": due, "internal_forward_late": late}
+
+    reports = {}
+    for r in load(base + "ae-intake.json")["reports"]:
+        rid, e = r["id"], r["expected"]
+        reports[rid] = r
+        if r["case_id"] and r["case_id"] not in cases:
+            fail(f"{rid}: unknown case {r['case_id']}")
+        if r["hcp_id"] and r["hcp_id"] not in hcps:
+            fail(f"{rid}: unknown prescriber {r['hcp_id']}")
+        dates = [x["on"] for x in r["receipts"]]
+        if dates != sorted(dates):
+            fail(f"{rid}: receipts are not in date order")
+        for x in r["receipts"]:
+            if x["by"] not in channels:
+                fail(f"{rid}: unknown receiving channel {x['by']}")
+            ref_id = x["ref"]
+            if ref_id and not (ref_id in convs or ref_id in inbound or ref_id in calls):
+                fail(f"{rid}: receipt ref {ref_id} does not exist")
+            if x["by"] == "field":
+                call = calls.get(ref_id)
+                fwd = [f["forwarded_on"] for f in call["adverse_event_forwards"] if f["report_id"] == rid] if call else []
+                ds = [y["on"] for y in r["receipts"] if y["by"] == "drug_safety"]
+                if not call or call["date"] != x["on"] or fwd != ds[:1]:
+                    fail(f"{rid}: field receipt does not match {ref_id} in crm/call-log.json")
+        for m in e["missing_criteria"]:
+            if m not in minimum:
+                fail(f"{rid}: unknown minimum criterion {m}")
+        for ev in e["events"]:
+            t = terms.get(ev["term"])
+            if t is None:
+                fail(f"{rid}: unknown term {ev['term']}")
+                continue
+            if ev["listed"] != (t["listed"] and (not ev["fatal"] or t["fatal_outcome_listed"])):
+                fail(f"{rid}: event {ev['term']} listed flag does not follow safety-reference.json")
+            for c in ev["serious_criteria"]:
+                if c not in criteria:
+                    fail(f"{rid}: unknown seriousness criterion {c}")
+        for s in e["special_situations"]:
+            if s not in sits:
+                fail(f"{rid}: unknown special situation {s}")
+        pc = e["product_complaint"]
+        if pc and pc["lot"] is not None and pc["lot_status"] != ("in_register" if pc["lot"] in lots else "not_in_register"):
+            fail(f"{rid}: lot_status for {pc['lot']} does not match the lot register")
+        for k, v in derive(r).items():
+            if e[k] != v:
+                fail(f"{rid}: expected.{k} is {e[k]!r}; the rules give {v!r}")
+
+    coverage = set()
+    items = load(base + "ae-assessments.json")["assessments"]
+    for a in items:
+        r = reports.get(a["report_id"])
+        if r is None:
+            fail(f"{a['id']}: unknown report {a['report_id']}")
+            continue
+        same = a["assessment"] == r["expected"]
+        if a["verdict"] == "pass" and (not same or a["faults"]):
+            fail(f"{a['id']}: passing assessment differs from {r['id']} expected, or lists faults")
+        if a["verdict"] == "fail":
+            if same or not a["faults"]:
+                fail(f"{a['id']}: failing assessment equals the expected one or names no fault")
+            coverage |= set(a["faults"])
+    readme = text("README.md")
+    expected = [
+        (r"(\d+) event terms \((\d+) in the label", (len(terms), sum(t["listed"] for t in terms.values()))),
+        (r"(\d+) special situations", (len(sits),)),
+        (r"(\d+) adverse event reports", (len(reports),)),
+        (r"(\d+) labelled intake assessments \((\d+) pass, (\d+) fail\)",
+         (len(items), sum(a["verdict"] == "pass" for a in items), sum(a["verdict"] == "fail" for a in items))),
+    ]
+    readme_counts(readme, expected)
+    return reports, coverage
+
+
+def readme_counts(readme, expected):
+    for pattern, want in expected:
+        m = re.search(pattern, readme)
+        if not m:
+            fail(f"README.md: count sentence not found: /{pattern}/")
+        elif tuple(int(g) for g in m.groups()) != want:
+            fail(f"README.md: '{m.group(0)}' should read {want}")
+
+
+def check_field_force(claims_doc, srd_ids, reports):
+    ff = load("crm/field-force.json")
+    ref = load("safety/safety-reference.json")
+    add_bd, is_bd = business_days(ref["business_calendar"]["holidays"])
+    claims = {c["id"]: c for c in claims_doc["claims"]}
+    efficacy = {cid for cid, c in claims.items() if c["category"] == "efficacy"}
+    pieces = {p["id"] for p in load("promotional/promo-materials.json")["pieces"]}
+    cases = {c["case_id"]: c for c in load("test-design/ps-cases.json")["cases"]}
+    hcos = {h["id"]: h for h in ff["hcos"]}
+    hcps = {h["id"]: h for h in ff["hcps"]}
+    staff = {s["id"]: s for s in ff["staff"]}
+    territory_of = {}
+    for t in ff["territories"]:
+        if t["rep_id"] not in staff or t["manager_id"] not in staff:
+            fail(f"{t['id']}: unknown rep or manager")
+        for st in t["states"]:
+            if st in territory_of:
+                fail(f"{t['id']}: state {st} is also in {territory_of[st]['id']}")
+            territory_of[st] = t
+    for h in ff["hcos"]:
+        if not re.fullmatch(r"\(\d{3}\) 555-01\d\d", h["phone"]):
+            fail(f"{h['id']}: phone {h['phone']} is outside 555-01xx")
+    npis = set()
+    for hid, h in hcps.items():
+        if not npi_ok(h["npi"]):
+            fail(f"{hid}: NPI {h['npi']} is not 9-prefixed with a valid check digit")
+        if h["npi"] in npis:
+            fail(f"{hid}: duplicate NPI")
+        npis.add(h["npi"])
+        o = hcos.get(h["hco_id"])
+        if o is None or (o["state"], o["phone"]) != (h["state"], h["phone"]):
+            fail(f"{hid}: HCO missing, or state or phone differs from it")
+        if h["state"] not in territory_of:
+            fail(f"{hid}: state {h['state']} is in no territory")
+        for cid in h["case_ids"]:
+            if cid not in cases or cases[cid].get("prescriber_id") != hid:
+                fail(f"{hid}: case {cid} does not name this prescriber")
+    for cid, c in cases.items():
+        p = hcps.get(c.get("prescriber_id"))
+        if p is None or cid not in p["case_ids"]:
+            fail(f"{cid}: prescriber_id {c.get('prescriber_id')} missing or not linked back")
+
+    isi = claims_doc["rules"]["isi_claims"]
+    templates = {}
+    for t in load("crm/approved-emails.json")["templates"]:
+        templates[t["id"]] = t
+        for cid in t["claims"] + isi:
+            if cid not in claims or claims[cid]["status"] != "approved":
+                fail(f"{t['id']}: claim {cid} missing or not approved")
+            elif claims[cid]["text"] not in t["body"]:
+                fail(f"{t['id']}: text of {cid} not verbatim in the body")
+        for p in t["pieces"]:
+            if p not in pieces:
+                fail(f"{t['id']}: unknown piece {p}")
+
+    patient_marks = []
+    for c in cases.values():
+        patient_marks += [c["patient"]["last_name"], c["case_id"], format_value(c["patient"]["dob"])]
+
+    def private(body):
+        return [m for m in patient_marks if m in body]
+
+    log = load("crm/call-log.json")
+    for call in log["calls"]:
+        cid, h = call["id"], hcps.get(call["hcp_id"])
+        if h is None:
+            fail(f"{cid}: unknown prescriber {call['hcp_id']}")
+            continue
+        if not is_bd(call["date"]) or call["date"] > log["as_of"]:
+            fail(f"{cid}: {call['date']} is not a business day on or before {log['as_of']}")
+        found = set()
+        ter = territory_of.get(h["state"])
+        if h["no_see"] or not ter or ter["rep_id"] != call["rep_id"]:
+            found.add("CF-08")
+        if call["channel"] == "approved_email":
+            if call["template_id"] not in templates:
+                fail(f"{cid}: unknown email template {call['template_id']}")
+            if not h["consent"]["approved_email"]:
+                found.add("CF-08")
+        for p in call["pieces"]:
+            if p not in pieces:
+                fail(f"{cid}: unknown piece {p}")
+        for x in call["claims"]:
+            if x not in claims or claims[x]["status"] != "approved":
+                fail(f"{cid}: claim {x} missing or not approved")
+        if set(call["claims"]) != closure(call["claims"], claims):
+            fail(f"{cid}: claims are not closed over requires")
+        if set(call["claims"]) & efficacy and "PROMO-ISI" not in call["pieces"]:
+            fail(f"{cid}: efficacy claims without PROMO-ISI")
+        for mi in call["medical_information_requests"]:
+            if mi["srd_id"] not in srd_ids:
+                fail(f"{cid}: unknown SRD {mi['srd_id']}")
+            if mi["submitted_on"] != call["date"]:
+                found.add("CF-02")
+        for f in call["adverse_event_forwards"]:
+            if f["report_id"] not in reports:
+                fail(f"{cid}: unknown adverse event report {f['report_id']}")
+            if f["forwarded_on"] > add_bd(call["date"], 1):
+                found.add("CF-03")
+        if private(call["notes"]):
+            found.add("CF-05")
+        if found != set(call["deviations"]):
+            fail(f"{cid}: deviations {sorted(call['deviations'])} but the record shows {sorted(found)}")
+
+    coverage = set()
+    notes = load("test-design/scenarios/crm-notes.json")["items"]
+    for n in notes:
+        nid, h = n["id"], hcps.get(n["hcp_id"])
+        if h is None:
+            fail(f"{nid}: unknown prescriber {n['hcp_id']}")
+            continue
+        if n["verdict"] == "fail":
+            if not n["faults"]:
+                fail(f"{nid}: failing item names no fault")
+            coverage |= set(n["faults"])
+            continue
+        if n["faults"]:
+            fail(f"{nid}: passing item lists faults")
+        if h["no_see"]:
+            fail(f"{nid}: passing item for a no-see prescriber")
+        if n["kind"] == "approved_email":
+            t = templates.get(n["template_id"])
+            if t is None or n["text"] != t["body"] or not h["consent"]["approved_email"]:
+                fail(f"{nid}: passing email is not its template, unaltered, to a consenting prescriber")
+        elif private(n["text"]):
+            fail(f"{nid}: passing call note contains patient details {private(n['text'])}")
+    readme_counts(text("README.md"), [
+        (r"(\d+) prescribers at (\d+) accounts", (len(hcps), len(hcos))),
+        (r"(\d+) field calls", (len(log["calls"]),)),
+        (r"(\d+) approved email templates", (len(templates),)),
+        (r"(\d+) labelled call notes and emails \((\d+) pass, (\d+) fail\)",
+         (len(notes), sum(n["verdict"] == "pass" for n in notes), sum(n["verdict"] == "fail" for n in notes))),
+    ])
+    return coverage
+
+
+PA_EVENTS = ("pa_request", "pa_decision", "appeal_request", "appeal_decision", "network_exception_request")
+BV_RESULT = {"BV_COMPLETE_COVERED": "covered", "BV_COMPLETE_PA_REQUIRED": "pa_required",
+             "BV_COMPLETE_NOT_COVERED": "not_covered", "BV_COMPLETE_OUT_OF_NETWORK": "out_of_network"}
+
+
+def check_payer():
+    doc = load("payer/plans.json")
+    procs = {p["id"]: p for p in doc["processors"]}
+    forms = {f["id"]: f for f in doc["formularies"]}
+    plans = {p["id"]: p for p in doc["plans"]}
+    rejects = {r["code"] for r in doc["reject_codes"]}
+    criteria = {c["id"] for c in doc["pa_criteria"]}
+    network = {p["id"] for p in load("access/specialty-pharmacy-network.json")["pharmacies"]}
+    packages = {p["ndc"]: p for p in load("product/product-identifiers.json")["packages"]}
+    cases = {c["case_id"]: c for c in load("test-design/ps-cases.json")["cases"]}
+    for p in procs.values():
+        if not re.fullmatch(r"000\d{3}", p["bin"]):
+            fail(f"{p['id']}: BIN {p['bin']} is not in the 000 fiction range")
+    for f in forms.values():
+        q = f["quorvanta"]
+        if q["pa_criteria"] and q["pa_criteria"] not in criteria:
+            fail(f"{f['id']}: unknown PA criteria {q['pa_criteria']}")
+        if (q["prior_authorization"] != "none") != bool(q["pa_criteria"]):
+            fail(f"{f['id']}: prior_authorization and pa_criteria disagree")
+    by_name = {}
+    for p in plans.values():
+        by_name[p["name"]] = p
+        if p["processor_id"] not in procs or p["pcn"] not in procs[p["processor_id"]]["pcns"]:
+            fail(f"{p['id']}: unknown processor or PCN")
+        if p["formulary_id"] not in forms:
+            fail(f"{p['id']}: unknown formulary")
+        if p["required_pharmacy"] not in (None, "non-network") and p["required_pharmacy"] not in network:
+            fail(f"{p['id']}: required pharmacy {p['required_pharmacy']} is not in the network")
+
+    tx_doc = load("payer/transactions.json")
+    covs = {c["id"]: c for c in tx_doc["coverages"]}
+    members = set()
+    for c in covs.values():
+        p = plans.get(c["plan_id"])
+        if c["case_id"] not in cases or p is None:
+            fail(f"{c['id']}: unknown case or plan")
+            continue
+        if (c["bin"], c["pcn"]) != (procs[p["processor_id"]]["bin"], p["pcn"]):
+            fail(f"{c['id']}: BIN or PCN differs from {p['id']}")
+        if c["member_id"] in members:
+            fail(f"{c['id']}: duplicate member id")
+        members.add(c["member_id"])
+
+    txs = tx_doc["transactions"]
+    ids = [t["id"] for t in txs]
+    if len(set(ids)) != len(ids):
+        fail("payer/transactions.json: duplicate transaction ids")
+    year = tx_doc["as_of"][:4]
+    for cid, case in cases.items():
+        mine = [t for t in txs if t["case_id"] == cid]
+        current = [c for c in covs.values() if c["case_id"] == cid and c["order"] == "primary" and c["end"] is None]
+        plan_name = case["insurance"]["plan_name"]
+        if plan_name is None:
+            if current or mine:
+                fail(f"{cid}: no plan in the case but coverage or transactions exist")
+            continue
+        if len(current) != 1 or plans[current[0]["plan_id"]]["name"] != plan_name:
+            fail(f"{cid}: current primary coverage does not match plan {plan_name}")
+            continue
+        cur = current[0]
+        plan = plans[cur["plan_id"]]
+        form = forms[plan["formulary_id"]]["quorvanta"]
+        if plan["required_pharmacy"] != case["insurance"]["required_pharmacy"]:
+            fail(f"{cid}: required pharmacy differs from {plan['id']}")
+        cur_tx = [t for t in mine if t["coverage_id"] == cur["id"]]
+        for t in mine:
+            c = covs.get(t["coverage_id"])
+            if c is None or c["case_id"] != cid:
+                fail(f"{t['id']}: coverage {t['coverage_id']} is not this case's")
+                continue
+            active = c["start"] <= t["date"] and (c["end"] is None or t["date"] <= c["end"])
+            if t["type"] == "claim":
+                pkg = packages.get(t["ndc"])
+                if pkg is None or t["quantity"] != pkg["capsules"]:
+                    fail(f"{t['id']}: NDC or quantity does not match a package")
+                if t["pharmacy_id"] not in network:
+                    fail(f"{t['id']}: pharmacy {t['pharmacy_id']} is not in the network")
+                for code in t["reject_codes"]:
+                    if code not in rejects:
+                        fail(f"{t['id']}: unknown reject code {code}")
+                if t["result"] == "paid":
+                    req = plans[c["plan_id"]]["required_pharmacy"]
+                    if not active or t["reject_codes"] or t["patient_pay"] != (c["patient_cost_share"] if c["order"] == "primary" else 0):
+                        fail(f"{t['id']}: paid claim outside coverage, with rejects, or with the wrong patient pay")
+                    if req in network and t["pharmacy_id"] != req:
+                        fail(f"{t['id']}: plan requires {req}")
+                elif t["patient_pay"] is not None or not t["reject_codes"] or ("RJ-04" in t["reject_codes"]) == active:
+                    fail(f"{t['id']}: rejected claim has patient pay, no reject code, or a coverage reject that does not match the dates")
+            elif not active:
+                fail(f"{t['id']}: {t['type']} outside the coverage period")
+
+        shipped = sorted({(s["date"], s["package"]) for s in case["shipments"]
+                          if s["source"] == "plan" and s["status"] in ("SHIP_SHIPPED", "SHIP_DELIVERED")})
+        by_ndc = {p["id"]: p["ndc"] for p in packages.values()}
+        paid = sorted((t["date"], t["ndc"]) for t in mine if t["type"] == "claim" and t["result"] == "paid"
+                      and covs[t["coverage_id"]]["order"] == "primary")
+        if paid != [(d, by_ndc[p]) for d, p in shipped]:
+            fail(f"{cid}: paid primary claims do not match plan shipments")
+        free = {s["date"] for s in case["shipments"] if s["source"] in ("bridge", "pap")}
+        if free & {d for d, _ in paid}:
+            fail(f"{cid}: a bridge or Foundation shipment was billed to the plan")
+
+        spent, total = {}, 0
+        for t in (t for t in mine if t["type"] == "copay_claim"):
+            yr = t["date"][:4]
+            c = covs[t["coverage_id"]]
+            due = min(c["patient_cost_share"], 16000 - spent.get(yr, 0))
+            if t["program_paid"] != due or t["patient_pay"] != c["patient_cost_share"] - due:
+                fail(f"{t['id']}: copay program paid {t['program_paid']}, rules give {due}")
+            if plans[c["plan_id"]]["type"] != "commercial" or case["insurance"]["government_program"] and c["end"] is None:
+                fail(f"{t['id']}: copay claim for non-commercial or government-covered patient")
+            spent[yr] = spent.get(yr, 0) + t["program_paid"]
+        if spent.get(year, 0) != case["copay"]["used_ytd"]:
+            fail(f"{cid}: copay claims in {year} total {spent.get(year, 0)}, case says {case['copay']['used_ytd']}")
+
+        checks = [t for t in cur_tx if t["type"] == "benefit_check"]
+        bvs = case["bv"]
+        if bvs["status"] == "BV_NEEDS_INFO":
+            if checks:
+                fail(f"{cid}: BV_NEEDS_INFO but a benefit check exists")
+            continue
+        if not checks or checks[-1]["date"] != bvs["completed_on"]:
+            fail(f"{cid}: last benefit check does not match bv.completed_on")
+            continue
+        bc = checks[-1]
+        if (bc["result"] != BV_RESULT[bvs["status"]] or bc["patient_cost_share"] != bvs["expected_cost_share"]
+                or bvs["expected_cost_share"] != cur["patient_cost_share"]):
+            fail(f"{cid}: benefit check result or cost share differs from the case")
+        if (bc["result"] == "not_covered") != (form["status"] == "not_covered"):
+            fail(f"{cid}: benefit check and formulary disagree on coverage")
+        if bc["result"] == "out_of_network" and plan["required_pharmacy"] != "non-network":
+            fail(f"{cid}: out_of_network without a non-network mandate")
+        before = [s for s in case["shipments"] if s["date"] < bc["date"]]
+        after = [s for s in case["shipments"] if s["date"] >= bc["date"]]
+        new_start = not before and bool(after) and after[0]["package"] == "PKG-STARTER"
+        needs_pa = form["prior_authorization"] == "all" or form["prior_authorization"] == "new_starts" and new_start
+        on_file = any(t["type"] == "pa_decision" and t["outcome"] == "approved" and t["date"] <= bc["date"]
+                      and t["valid_through"] >= bc["date"] for t in cur_tx)
+        if bc["result"] in ("covered", "pa_required") and (bc["result"] == "pa_required") != (needs_pa and not on_file):
+            fail(f"{cid}: benefit check says {bc['result']} but the formulary and authorizations say otherwise")
+        if bool(bc["authorization_on_file"]) != (needs_pa and on_file):
+            fail(f"{cid}: authorization_on_file does not match the transactions")
+
+        pa = case["pa"]
+        ev = [t for t in cur_tx if t["type"] in PA_EVENTS and t["date"] >= bc["date"]]
+        reqs = [t for t in ev if t["type"] in ("pa_request", "network_exception_request")]
+        decisions = [t for t in ev if t["type"] in ("pa_decision", "appeal_decision")]
+        appeals = [t for t in ev if t["type"] == "appeal_request"]
+        denial = [t for t in ev if t["type"] == "pa_decision" and t["outcome"] == "denied"]
+        for t in ev:
+            if t["type"] == "pa_request":
+                if t["criteria_id"] != form["pa_criteria"]:
+                    fail(f"{t['id']}: criteria {t['criteria_id']} are not the formulary's")
+                if t["new_start"] != new_start:
+                    fail(f"{t['id']}: new_start does not match the case's shipments")
+        want = {
+            "submitted_on": reqs[0]["date"] if reqs else None,
+            "decided_on": decisions[-1]["date"] if decisions else None,
+            "appeal_submitted_on": appeals[-1]["date"] if appeals else None,
+            "denial_reason": denial[-1]["reason"] if denial else None,
+        }
+        for k, v in want.items():
+            if pa[k] != v:
+                fail(f"{cid}: pa.{k} is {pa[k]} but transactions give {v}")
+        last = decisions[-1] if decisions else None
+        status = ("PA_NOT_REQUIRED" if not reqs and bc["result"] != "not_covered" else
+                  "PA_AWAITING_OFFICE" if not reqs else
+                  "NETWORK_EXCEPTION_PENDING" if reqs[0]["type"] == "network_exception_request" else
+                  "PA_SUBMITTED" if not decisions and not appeals else
+                  "APPEAL_SUBMITTED" if appeals and (not last or last["type"] == "pa_decision") else
+                  "PA_APPROVED" if last["type"] == "pa_decision" and last["outcome"] == "approved" else
+                  "PA_DENIED" if last["type"] == "pa_decision" else
+                  "APPEAL_APPROVED" if last["outcome"] == "approved" else "APPEAL_DENIED_FINAL")
+        if pa["status"] != status:
+            fail(f"{cid}: pa.status is {pa['status']} but transactions give {status}")
+
+    fhir = load("payer/formulary-fhir.json")["bundle"]
+    res = {(e["resource"]["resourceType"], e["resource"]["id"]): e["resource"] for e in fhir["entry"]}
+    for f in forms.values():
+        item = res.get(("Basic", f"{f['id']}-quorvanta"))
+        if ("InsurancePlan", f["id"]) not in res or (item is None) != (f["quorvanta"]["status"] != "covered"):
+            fail(f"payer/formulary-fhir.json: {f['id']} out of date; run scripts/render.py")
+            continue
+        if item:
+            got = {e["url"].rsplit("usdf-", 1)[1]: e for e in item["extension"]}
+            q = f["quorvanta"]
+            if (got["DrugTierID-extension"]["valueCodeableConcept"]["coding"][0]["code"] != q["tier"]
+                    or got["PriorAuthorization-extension"]["valueBoolean"] != (q["prior_authorization"] != "none")
+                    or got["StepTherapyLimit-extension"]["valueBoolean"] != q["step_therapy"]):
+                fail(f"payer/formulary-fhir.json: {f['id']} out of date; run scripts/render.py")
+    if len(res) != len(fhir["entry"]) or len([r for r in res if r[0] == "InsurancePlan"]) != len(forms):
+        fail("payer/formulary-fhir.json: entries do not match plans.json; run scripts/render.py")
+    readme_counts(text("README.md"), [
+        (r"(\d+) plans on (\d+) formularies", (len(plans), len(forms))),
+        (r"(\d+) coverage records and (\d+) payer transactions", (len(covs), len(txs))),
+    ])
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -834,7 +1338,20 @@ def main():
     check_product(claims)
     disease = check_disease(refs, findings)
     check_landscape()
-    check_scenarios(claims_doc, disease, {g["id"] for g in gaps_doc["gaps"]}, {s["id"] for s in srds_doc["srds"]})
+    faults, coverage = check_scenarios(claims_doc, disease, {g["id"] for g in gaps_doc["gaps"]}, {s["id"] for s in srds_doc["srds"]})
+    lots = {l["lot"] for l in load("product/product-identifiers.json")["lots"]}
+    reports, ae_coverage = check_safety(lots)
+    crm_coverage = check_field_force(claims_doc, set(srds), reports)
+    check_payer()
+    for owner, ids in [(r["id"], r["provokes"]) for r in reports.values()]:
+        for f in ids:
+            if f not in faults:
+                fail(f"{owner}: unknown fault {f}")
+    for f in sorted((ae_coverage | crm_coverage) - set(faults)):
+        fail(f"labelled sets: unknown fault {f}")
+    for f in faults:
+        if f not in coverage | ae_coverage | crm_coverage:
+            fail(f"fault-types: {f} has no failing example in the labelled sets")
     check_fiction_markers(read_denylist(args.denylist))
     report()
 

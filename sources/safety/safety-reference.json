@@ -1,0 +1,622 @@
+{
+  "_notice": "FICTITIOUS. Drug Safety conventions for a product that does not exist. The event terms are a small pack-defined list taken from the fictitious label; they are not MedDRA and carry no MedDRA codes. The seriousness criteria and the four minimum criteria follow the publicly described ICH conventions; the timelines are a simplified model for testing, not regulatory advice.",
+  "reference_version": "1.0.0",
+  "reference_safety_information": {
+    "document": "label/label.md",
+    "version": "1.0",
+    "sections": [
+      "4",
+      "5",
+      "6"
+    ],
+    "rule": "An event is listed (expected) only if its term is marked listed here. A listed term is unlisted when the reported outcome is more severe than the label describes: a fatal outcome is listed only for terms with fatal_outcome_listed true."
+  },
+  "usage": "Coding and assessment conventions for adverse event intake. Each reported event is coded to one term id (AET-*) from its verbatim description, using lay_terms as a guide; an event with no matching term is not coded by guessing but raised for review. Terms AET-001 to AET-025 are in the label; AET-101 onwards are not.",
+  "minimum_criteria": [
+    {
+      "id": "patient",
+      "definition": "An identifiable patient: any of initials, age or age group, sex, or a case number. A name alone counts; 'a friend of mine' or 'people online' does not."
+    },
+    {
+      "id": "reporter",
+      "definition": "An identifiable reporter who could be contacted for follow-up: name with a phone number, email or case record, or a known HCP or employee."
+    },
+    {
+      "id": "product",
+      "definition": "QUORVANTA or soriximel tavorate named as the suspect product."
+    },
+    {
+      "id": "event",
+      "definition": "At least one adverse event, or a special situation that is reportable without an event."
+    }
+  ],
+  "seriousness_criteria": [
+    {
+      "id": "death",
+      "definition": "The patient died."
+    },
+    {
+      "id": "life_threatening",
+      "definition": "The patient was at risk of death at the time of the event, as judged by the reporter."
+    },
+    {
+      "id": "hospitalisation",
+      "definition": "Admission to hospital, or prolongation of an existing stay. An emergency department visit without admission does not meet this criterion on its own."
+    },
+    {
+      "id": "disability",
+      "definition": "Persistent or significant disability or incapacity."
+    },
+    {
+      "id": "congenital_anomaly",
+      "definition": "A congenital anomaly or birth defect."
+    },
+    {
+      "id": "medically_important",
+      "definition": "An event that may jeopardise the patient or need intervention to prevent one of the outcomes above. In this pack, any gastrointestinal bleeding, anaphylaxis, angioedema, PML, serious infection and liver injury with jaundice are medically important."
+    }
+  ],
+  "terms": [
+    {
+      "id": "AET-001",
+      "term": "Flushing",
+      "listed": true,
+      "label_sections": [
+        "5.6",
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "flushing",
+        "hot flushes",
+        "face goes red",
+        "warmth",
+        "burning feeling in the skin"
+      ]
+    },
+    {
+      "id": "AET-002",
+      "term": "Abdominal pain",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "stomach pain",
+        "stomach ache",
+        "belly pain",
+        "cramps"
+      ]
+    },
+    {
+      "id": "AET-003",
+      "term": "Diarrhea",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "diarrhea",
+        "loose stools",
+        "runs"
+      ]
+    },
+    {
+      "id": "AET-004",
+      "term": "Nausea",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "nausea",
+        "feeling sick",
+        "queasy"
+      ]
+    },
+    {
+      "id": "AET-005",
+      "term": "Headache",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "headache",
+        "head pain"
+      ]
+    },
+    {
+      "id": "AET-006",
+      "term": "Vomiting",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "vomiting",
+        "throwing up",
+        "being sick"
+      ]
+    },
+    {
+      "id": "AET-007",
+      "term": "Pruritus",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "itching",
+        "itchy skin"
+      ]
+    },
+    {
+      "id": "AET-008",
+      "term": "Rash",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "rash",
+        "spots",
+        "red patches"
+      ]
+    },
+    {
+      "id": "AET-009",
+      "term": "Dyspepsia",
+      "listed": true,
+      "label_sections": [
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "indigestion",
+        "heartburn",
+        "upset stomach"
+      ]
+    },
+    {
+      "id": "AET-010",
+      "term": "Alanine aminotransferase increased",
+      "listed": true,
+      "label_sections": [
+        "5.5",
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "raised liver enzymes",
+        "liver test was high",
+        "ALT up"
+      ]
+    },
+    {
+      "id": "AET-011",
+      "term": "Photosensitivity reaction",
+      "listed": true,
+      "label_sections": [
+        "5.8",
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "burns easily in the sun",
+        "bad sunburn",
+        "sun rash"
+      ]
+    },
+    {
+      "id": "AET-012",
+      "term": "Lymphopenia",
+      "listed": true,
+      "label_sections": [
+        "5.4",
+        "6.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "low lymphocytes",
+        "low white count",
+        "lymphocyte count dropped"
+      ]
+    },
+    {
+      "id": "AET-013",
+      "term": "Anaphylaxis",
+      "listed": true,
+      "label_sections": [
+        "5.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "severe allergic reaction",
+        "anaphylactic reaction",
+        "collapsed after the dose"
+      ]
+    },
+    {
+      "id": "AET-014",
+      "term": "Angioedema",
+      "listed": true,
+      "label_sections": [
+        "5.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "throat swelling",
+        "swollen tongue",
+        "swollen lips"
+      ]
+    },
+    {
+      "id": "AET-015",
+      "term": "Progressive multifocal leukoencephalopathy",
+      "listed": true,
+      "label_sections": [
+        "5.2"
+      ],
+      "fatal_outcome_listed": true,
+      "lay_terms": [
+        "PML",
+        "brain infection"
+      ]
+    },
+    {
+      "id": "AET-016",
+      "term": "Herpes zoster",
+      "listed": true,
+      "label_sections": [
+        "5.3",
+        "6.2"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "shingles",
+        "shingles in the eye",
+        "zoster"
+      ]
+    },
+    {
+      "id": "AET-017",
+      "term": "Serious opportunistic infection",
+      "listed": true,
+      "label_sections": [
+        "5.3",
+        "6.2"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "serious infection",
+        "fungal infection needing hospital care"
+      ]
+    },
+    {
+      "id": "AET-018",
+      "term": "Liver injury",
+      "listed": true,
+      "label_sections": [
+        "5.5",
+        "6.2"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "liver damage",
+        "jaundice",
+        "yellow eyes"
+      ],
+      "notes": "Section 5.5 states that no case resulted in liver failure, transplant or death. Liver failure is coded AET-101, which is unlisted."
+    },
+    {
+      "id": "AET-019",
+      "term": "Gastrointestinal haemorrhage",
+      "listed": true,
+      "label_sections": [
+        "5.7",
+        "6.2"
+      ],
+      "fatal_outcome_listed": true,
+      "lay_terms": [
+        "black stools",
+        "tarry stools",
+        "vomiting blood",
+        "blood in stool"
+      ]
+    },
+    {
+      "id": "AET-020",
+      "term": "Gastrointestinal perforation",
+      "listed": true,
+      "label_sections": [
+        "5.7",
+        "6.2"
+      ],
+      "fatal_outcome_listed": true,
+      "lay_terms": [
+        "perforated bowel",
+        "hole in the stomach"
+      ]
+    },
+    {
+      "id": "AET-021",
+      "term": "Gastrointestinal ulceration",
+      "listed": true,
+      "label_sections": [
+        "5.7",
+        "6.2"
+      ],
+      "fatal_outcome_listed": true,
+      "lay_terms": [
+        "stomach ulcer",
+        "ulcer"
+      ]
+    },
+    {
+      "id": "AET-022",
+      "term": "Gastrointestinal obstruction",
+      "listed": true,
+      "label_sections": [
+        "5.7",
+        "6.2"
+      ],
+      "fatal_outcome_listed": true,
+      "lay_terms": [
+        "blocked bowel",
+        "bowel obstruction"
+      ]
+    },
+    {
+      "id": "AET-023",
+      "term": "Acute pancreatitis",
+      "listed": true,
+      "label_sections": [
+        "6.2"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "pancreatitis"
+      ]
+    },
+    {
+      "id": "AET-024",
+      "term": "Alopecia",
+      "listed": true,
+      "label_sections": [
+        "6.2"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "hair loss",
+        "hair falling out",
+        "thinning hair"
+      ]
+    },
+    {
+      "id": "AET-025",
+      "term": "Urticaria",
+      "listed": true,
+      "label_sections": [
+        "5.1"
+      ],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "hives",
+        "welts"
+      ]
+    },
+    {
+      "id": "AET-101",
+      "term": "Hepatic failure",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "liver failure",
+        "liver stopped working",
+        "needs a liver transplant"
+      ],
+      "notes": "Not in the label; section 5.5 says liver injury cases did not progress to liver failure."
+    },
+    {
+      "id": "AET-102",
+      "term": "Acute kidney injury",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "kidney failure",
+        "kidneys shut down",
+        "kidney injury"
+      ],
+      "notes": "Section 8.6 concerns use in pre-existing renal impairment; it does not list kidney injury as an adverse reaction."
+    },
+    {
+      "id": "AET-103",
+      "term": "Tinnitus",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "ringing in the ears"
+      ]
+    },
+    {
+      "id": "AET-104",
+      "term": "Insomnia",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "can't sleep",
+        "trouble sleeping"
+      ]
+    },
+    {
+      "id": "AET-105",
+      "term": "Death, cause unknown",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "passed away",
+        "died"
+      ]
+    },
+    {
+      "id": "AET-106",
+      "term": "Brennick syndrome relapse",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "relapse",
+        "flare",
+        "new attack"
+      ],
+      "notes": "Used with SIT-06 when a relapse is reported as a lack of effect."
+    },
+    {
+      "id": "AET-107",
+      "term": "Seizure",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "seizure",
+        "fit",
+        "convulsion"
+      ],
+      "notes": "Not in the label. Section 5.2 lists the symptoms of PML, and seizure is not one of them; do not code a seizure to AET-015."
+    },
+    {
+      "id": "AET-108",
+      "term": "Hair colour changes",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "hair turning grey",
+        "hair going white",
+        "hair changed colour"
+      ],
+      "notes": "Not in the label. Alopecia (AET-024) is hair loss, not a change in colour."
+    },
+    {
+      "id": "AET-109",
+      "term": "Fall",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "fell",
+        "tripped and fell",
+        "slipped"
+      ]
+    },
+    {
+      "id": "AET-110",
+      "term": "Wrist fracture",
+      "listed": false,
+      "label_sections": [],
+      "fatal_outcome_listed": false,
+      "lay_terms": [
+        "broke my wrist",
+        "fractured wrist"
+      ]
+    }
+  ],
+  "special_situations": [
+    {
+      "id": "SIT-01",
+      "name": "Exposure during pregnancy",
+      "reportable_without_event": true,
+      "action": "Record the case and give the pregnancy exposure registry number, 1-800-555-0177 (label 8.1). Follow up for the outcome of the pregnancy."
+    },
+    {
+      "id": "SIT-02",
+      "name": "Exposure during breastfeeding",
+      "reportable_without_event": true,
+      "action": "Record the case; the label has no data on lactation (8.2)."
+    },
+    {
+      "id": "SIT-03",
+      "name": "Medication error",
+      "reportable_without_event": true,
+      "action": "Record how the product was taken or dispensed contrary to the label (for example, capsules opened or crushed, contrary to 2.3; wrong titration schedule, contrary to 2.2)."
+    },
+    {
+      "id": "SIT-04",
+      "name": "Overdose",
+      "reportable_without_event": true,
+      "action": "Record the amount and timing. The label has no overdose section; say nothing about management."
+    },
+    {
+      "id": "SIT-05",
+      "name": "Use outside the approved indication or population",
+      "reportable_without_event": true,
+      "action": "Record the use as reported (for example, a patient under 18, contrary to 8.4). Do not comment on whether the use is appropriate."
+    },
+    {
+      "id": "SIT-06",
+      "name": "Lack of effect",
+      "reportable_without_event": true,
+      "action": "Record the reported lack of effect in the approved indication, with the relapse or progression described."
+    },
+    {
+      "id": "SIT-07",
+      "name": "Co-administration with dimethyl tavorate",
+      "reportable_without_event": true,
+      "action": "Record as use contrary to a contraindication (4, 7.1)."
+    },
+    {
+      "id": "SIT-08",
+      "name": "Product complaint with an adverse event",
+      "reportable_without_event": false,
+      "action": "Record the case and send the complaint, with the lot number and expiry, to Product Quality through 1-800-555-0164."
+    }
+  ],
+  "product_complaints": {
+    "route": "Product Quality, through Medical Information at 1-800-555-0164",
+    "lot_check": "A lot number given by the reporter is checked against product/product-identifiers.json. A lot that is not in the register, or that belongs to the other package, is recorded as not_in_register and escalated as a suspected counterfeit or labelling error. Intake staff do not say whether a lot is genuine, recalled or safe to take.",
+    "without_event": "A complaint with no adverse event and no special situation is not a safety case. It goes to Product Quality only."
+  },
+  "timelines": {
+    "day_0": "The first date on which anyone working for Arden Quay Biosciences received the information, including field staff, Medical Information, QuorvantaConnect and its contractors. It is not the date Drug Safety received it. For a report that was invalid when first received, day 0 is the date the last missing criterion arrived.",
+    "internal_forwarding": "Anyone other than Drug Safety who receives a possible adverse event forwards it to Drug Safety within 1 business day of receipt. A later forward is recorded as a deviation; it does not move day 0.",
+    "expedited": "A valid case with at least one event that is itself both serious and unlisted is reported as a 15-day expedited report, due 15 calendar days after day 0. A serious listed event and a non-serious unlisted event in the same case do not qualify.",
+    "periodic": "Any other valid adverse event case, and any special-situation case without an event, is reported in the periodic safety report. It has no individual due date in this model.",
+    "not_reportable": "Invalid reports and complaints with no event or special situation are not reported to the regulator. Invalid reports are followed up where a reporter can be contacted."
+  },
+  "business_calendar": {
+    "business_days": "Monday to Friday, excluding the holidays listed here.",
+    "holidays": [
+      "2026-01-01",
+      "2026-01-19",
+      "2026-02-16",
+      "2026-05-25",
+      "2026-06-19",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-10-12",
+      "2026-11-11",
+      "2026-11-26",
+      "2026-12-25"
+    ]
+  },
+  "intake_rules": [
+    "Record the reporter's words as the verbatim for each event; code each to one term.",
+    "Record every event mentioned, including one mentioned in passing or one the reporter doubts is related. A report is not dropped because the reporter or the prescriber thinks the drug did not cause the event.",
+    "Do not record anything the reporter did not say: no inferred age, sex, dates, lot numbers, diagnosis codes or causality.",
+    "Do not tell the reporter whether the drug caused the event, whether the event is serious, or what to do about it. Direct them to their healthcare provider, or to 911 in an emergency.",
+    "Ask follow-up questions only for missing minimum criteria, seriousness, outcome, and the lot number when a product complaint is involved."
+  ]
+}

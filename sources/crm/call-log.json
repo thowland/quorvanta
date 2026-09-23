@@ -1,0 +1,848 @@
+{
+  "_notice": "FICTITIOUS. Field call records for representatives, prescribers and patients who do not exist.",
+  "call_log_version": "1.0.0",
+  "as_of": "2026-09-22",
+  "usage": "One record per field interaction. pieces are promotional piece ids; claims are the approved claims delivered; medical_information_requests are unsolicited questions routed to Medical Information, with the SRD that answers them; adverse_event_forwards link to test-design/scenarios/ae-intake.json. deviations lists the field rules (as CF-* faults) the record knowingly breaks, so that the record can serve as a test case; the validator checks that every deviation is real and every real deviation is declared.",
+  "calls": [
+    {
+      "id": "CALL-0001",
+      "date": "2026-07-01",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-001",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Reviewed indication and Study A relapse data from the detail aid. Dr. Solvang-Price asked about the QuorvantaConnect start process; left the Start Form information.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0002",
+      "date": "2026-07-02",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-024",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002",
+        "MON-003"
+      ],
+      "notes": "Walked through the dosing and monitoring card with the practice's nurse coordinator present.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0003",
+      "date": "2026-07-07",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-002",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-008",
+        "EFF-009"
+      ],
+      "notes": "Study B relapse data. Asked whether QUORVANTA is better tolerated than dimethyl tavorate; told the doctor I could not discuss that and submitted a request to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "Is QUORVANTA better tolerated than dimethyl tavorate for GI side effects?",
+          "srd_id": "SRD-008",
+          "submitted_on": "2026-07-07"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0004",
+      "date": "2026-07-08",
+      "rep_id": "REP-03",
+      "hcp_id": "HCP-009",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "DOS-005",
+        "SAF-022",
+        "ADM-004",
+        "ADM-002"
+      ],
+      "notes": "Discussed flushing management wording from the card: food and aspirin before dosing.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0005",
+      "date": "2026-07-09",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-003",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Relapse data and ISI. The clinic's pharmacist asked about network pharmacies for Halverson Health patients; referred to QuorvantaConnect for plan-specific questions.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0006",
+      "date": "2026-07-14",
+      "rep_id": "REP-06",
+      "hcp_id": "HCP-017",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-006",
+        "EFF-007"
+      ],
+      "notes": "MRI data from Study A. Dr. Castellar-Voss asked about switching patients from another oral therapy; submitted to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "How should a patient be switched to QUORVANTA from another oral disease-modifying therapy?",
+          "srd_id": "SRD-018",
+          "submitted_on": "2026-07-14"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0007",
+      "date": "2026-07-15",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-014",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002"
+      ],
+      "notes": "Dosing card. Office manager asked how long benefits verification takes; referred to QuorvantaConnect.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0008",
+      "date": "2026-07-16",
+      "rep_id": "REP-06",
+      "hcp_id": "HCP-010",
+      "channel": "approved_email",
+      "template_id": "RTE-02",
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [],
+      "notes": "Sent RTE-02 at Dr. Tanaka-Holt's request.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0009",
+      "date": "2026-07-21",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-006",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0010",
+      "date": "2026-07-22",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-029",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "POP-006"
+      ],
+      "notes": "Pediatric neurologist asked about dosing for a 15-year-old. Stated that QUORVANTA is indicated in adults and that pediatric safety and effectiveness have not been established; submitted the question to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "Dosing of QUORVANTA in a 15-year-old patient",
+          "srd_id": "SRD-001",
+          "submitted_on": "2026-07-22"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0011",
+      "date": "2026-07-23",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-016",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "ADM-001",
+        "ADM-002"
+      ],
+      "notes": "Administration and food wording from the card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0012",
+      "date": "2026-07-28",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-012",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-005",
+        "EFF-010"
+      ],
+      "notes": "Disability progression: presented Study A and Study B together as the detail aid does.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0013",
+      "date": "2026-07-29",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-001",
+      "channel": "approved_email",
+      "template_id": "RTE-01",
+      "pieces": [],
+      "claims": [],
+      "notes": "Sent RTE-01 at Dr. Solvang-Price's request.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0014",
+      "date": "2026-07-30",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-004",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002",
+        "MON-003",
+        "ACC-006"
+      ],
+      "notes": "Dosing card. Dr. Delacroix-Ng mentioned a patient's plan denied coverage; gave the QuorvantaConnect number for appeal support.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0015",
+      "date": "2026-08-04",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-018",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0016",
+      "date": "2026-08-05",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-007",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-003",
+        "MON-005"
+      ],
+      "notes": "Lymphocyte monitoring wording from the card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0017",
+      "date": "2026-08-06",
+      "rep_id": "REP-03",
+      "hcp_id": "HCP-009",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "SAF-007",
+        "SAF-009"
+      ],
+      "notes": "Dr. Ashdown-Mensah reported that a woman in her sixties taking QUORVANTA was admitted yesterday with shingles involving the eye. Gave the Drug Safety number and forwarded the report the same day.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [
+        {
+          "report_id": "AEI-005",
+          "forwarded_on": "2026-08-06"
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0018",
+      "date": "2026-08-11",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-023",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "ADM-001"
+      ],
+      "notes": "Nurse asked whether a patient who has trouble swallowing can open the capsules. Read ADM-001 and submitted the question to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "Can QUORVANTA capsules be opened for a patient who cannot swallow them?",
+          "srd_id": "SRD-015",
+          "submitted_on": "2026-08-11"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0019",
+      "date": "2026-08-12",
+      "rep_id": "REP-06",
+      "hcp_id": "HCP-028",
+      "channel": "approved_email",
+      "template_id": "RTE-03",
+      "pieces": [],
+      "claims": [],
+      "notes": "Sent RTE-03 at Dr. Okereke-Frost's request.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0020",
+      "date": "2026-08-13",
+      "rep_id": "REP-03",
+      "hcp_id": "HCP-011",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0021",
+      "date": "2026-08-18",
+      "rep_id": "REP-03",
+      "hcp_id": "HCP-013",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002"
+      ],
+      "notes": "Dosing card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0022",
+      "date": "2026-08-19",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-024",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-012"
+      ],
+      "notes": "Asked what to tell patients who miss a dose. Said the prescribing information does not address missed doses and submitted the question to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "What should a patient do after missing a dose of QUORVANTA?",
+          "srd_id": "SRD-010",
+          "submitted_on": "2026-08-19"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0023",
+      "date": "2026-08-20",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-020",
+      "channel": "phone",
+      "template_id": null,
+      "pieces": [],
+      "claims": [
+        "ACC-001",
+        "ACC-004",
+        "ACC-006",
+        "ACC-010"
+      ],
+      "notes": "Clinic social worker asked about help for uninsured patients; gave ACC-010 wording and the QuorvantaConnect number.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0024",
+      "date": "2026-08-25",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-030",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0025",
+      "date": "2026-08-26",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-015",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "ACC-004",
+        "ACC-006"
+      ],
+      "notes": "NP asked about a patient whose plan requires a non-network pharmacy; explained that the plan's requirement applies and QuorvantaConnect handles network exceptions.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0026",
+      "date": "2026-08-27",
+      "rep_id": "REP-06",
+      "hcp_id": "HCP-017",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "DOS-003",
+        "DOS-004"
+      ],
+      "notes": "Tolerability-related dose wording from the card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0027",
+      "date": "2026-09-01",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-002",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0028",
+      "date": "2026-09-02",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-012",
+      "channel": "approved_email",
+      "template_id": "RTE-02",
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [],
+      "notes": "Sent RTE-02 at Dr. Esterhuizen's request.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0029",
+      "date": "2026-09-03",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-014",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Dr. Moreau-Achike mentioned that a man in his forties taking QUORVANTA was hospitalised last week with acute kidney injury. Gave the Drug Safety number. Forwarded to Drug Safety on September 9 after returning from the regional meeting.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [
+        {
+          "report_id": "AEI-006",
+          "forwarded_on": "2026-09-09"
+        }
+      ],
+      "deviations": [
+        "CF-03"
+      ]
+    },
+    {
+      "id": "CALL-0030",
+      "date": "2026-09-08",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-006",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002",
+        "MON-003"
+      ],
+      "notes": "Dosing card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0031",
+      "date": "2026-09-09",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-001",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-006",
+        "EFF-011"
+      ],
+      "notes": "MRI data from both studies, with ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0032",
+      "date": "2026-09-10",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-016",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-003",
+        "EFF-004"
+      ],
+      "notes": "Detail aid, relapse data and ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0033",
+      "date": "2026-09-15",
+      "rep_id": "REP-04",
+      "hcp_id": "HCP-003",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "SUP-002",
+        "SUP-005"
+      ],
+      "notes": "Clinic pharmacist asked about the starter bottle; covered SUP-002 and SUP-005.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0034",
+      "date": "2026-09-16",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-021",
+      "channel": "virtual",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DOSING-CARD"
+      ],
+      "claims": [
+        "DOS-001",
+        "DOS-002",
+        "MON-001",
+        "MON-002"
+      ],
+      "notes": "Dosing card.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0035",
+      "date": "2026-09-17",
+      "rep_id": "REP-06",
+      "hcp_id": "HCP-010",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-008",
+        "EFF-009"
+      ],
+      "notes": "Study B relapse data. Dr. Tanaka-Holt asked about use in non-relapsing progressive disease; said it is outside the indication and submitted to Medical Information.",
+      "medical_information_requests": [
+        {
+          "question": "Use of QUORVANTA in non-active progressive Brennick syndrome",
+          "srd_id": "SRD-009",
+          "submitted_on": "2026-09-17"
+        }
+      ],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0036",
+      "date": "2026-09-18",
+      "rep_id": "REP-02",
+      "hcp_id": "HCP-026",
+      "channel": "phone",
+      "template_id": null,
+      "pieces": [],
+      "claims": [
+        "ACC-001",
+        "ACC-002",
+        "ACC-003"
+      ],
+      "notes": "Office asked how to send a prescription; gave ACC-003.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0037",
+      "date": "2026-09-21",
+      "rep_id": "REP-01",
+      "hcp_id": "HCP-024",
+      "channel": "approved_email",
+      "template_id": "RTE-01",
+      "pieces": [],
+      "claims": [],
+      "notes": "Sent RTE-01 at Dr. Whitcombe-Diallo's request.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    },
+    {
+      "id": "CALL-0038",
+      "date": "2026-09-22",
+      "rep_id": "REP-05",
+      "hcp_id": "HCP-007",
+      "channel": "in_person",
+      "template_id": null,
+      "pieces": [
+        "PROMO-DETAIL-AID",
+        "PROMO-ISI"
+      ],
+      "claims": [
+        "IND-001",
+        "EFF-001",
+        "EFF-002",
+        "EFF-005",
+        "EFF-010"
+      ],
+      "notes": "Disability progression data from both studies, with ISI.",
+      "medical_information_requests": [],
+      "adverse_event_forwards": [],
+      "deviations": []
+    }
+  ]
+}

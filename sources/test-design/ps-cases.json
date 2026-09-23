@@ -8,12 +8,14 @@
     "authorized_contacts[].scope": "'status' (case status, pharmacy, shipments, copay and Foundation status) or 'full' (everything the patient may hear).",
     "shipments": "One entry per dose step per shipment. A first fill is one 30-day starter bottle (PKG-STARTER, 92 capsules) recorded as a 14-day titration entry and a 16-day maintenance entry; later fills are bottles of 120 (PKG-120). capsules = days x 2 for titration and days x 4 for maintenance. source is plan, bridge or pap. lot is from product/product-identifiers.json, or null until the shipment leaves the pharmacy.",
     "bridge.days_dispensed": "Sum of days in shipments with source bridge in the last 12 months.",
-    "next_refill_due": "Date of the last shipped or delivered shipment plus the days it supplied."
+    "next_refill_due": "Date of the last shipped or delivered shipment plus the days it supplied.",
+    "prescriber_id": "The prescribing HCP in crm/field-force.json. Not disclosed to callers; used to route letters and prior authorization work to the office."
   },
   "cases": [
     {
       "case_id": "QC-26-00101",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-001",
       "patient": {
         "first_name": "Marisol",
         "last_name": "Quintero-Haas",
@@ -153,6 +155,7 @@
     {
       "case_id": "QC-26-00102",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-002",
       "patient": {
         "first_name": "Idris",
         "last_name": "Pemberton-Vale",
@@ -242,6 +245,7 @@
     {
       "case_id": "QC-26-00103",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-003",
       "patient": {
         "first_name": "Colette",
         "last_name": "Arbuthnot-Diaz",
@@ -341,6 +345,7 @@
     {
       "case_id": "QC-26-00104",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-004",
       "patient": {
         "first_name": "Anselm",
         "last_name": "Okwuosa-Reyes",
@@ -366,7 +371,7 @@
       "pa": {
         "status": "APPEAL_DENIED_FINAL",
         "submitted_on": "2026-04-02",
-        "decided_on": "2026-04-28",
+        "decided_on": "2026-05-21",
         "denial_reason": "Not medically necessary per plan criteria",
         "appeal_submitted_on": "2026-05-10"
       },
@@ -429,6 +434,7 @@
     {
       "case_id": "QC-26-00105",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-005",
       "patient": {
         "first_name": "Beatrix",
         "last_name": "Nakagawa-Flores",
@@ -558,6 +564,7 @@
     {
       "case_id": "QC-26-00106",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-006",
       "patient": {
         "first_name": "Gunnar",
         "last_name": "Fairweather-Ito",
@@ -707,6 +714,7 @@
     {
       "case_id": "QC-26-00107",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-007",
       "patient": {
         "first_name": "Philippa",
         "last_name": "Mbeki-Castellan",
@@ -866,6 +874,7 @@
     {
       "case_id": "QC-26-00108",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-008",
       "patient": {
         "first_name": "Ezekiel",
         "last_name": "Thorsby-Amadi",
@@ -984,6 +993,7 @@
     {
       "case_id": "QC-26-00109",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-009",
       "patient": {
         "first_name": "Oona",
         "last_name": "Castellanos-Pike",
@@ -1142,6 +1152,7 @@
     {
       "case_id": "QC-26-00110",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-010",
       "patient": {
         "first_name": "Lucan",
         "last_name": "Iverson-Adeyemi",
@@ -1290,6 +1301,7 @@
     {
       "case_id": "QC-26-00111",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-011",
       "patient": {
         "first_name": "Delphine",
         "last_name": "Harrowgate-Osei",
@@ -1384,6 +1396,7 @@
     {
       "case_id": "QC-26-00112",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-012",
       "patient": {
         "first_name": "Wilhelmina",
         "last_name": "Szabo-Ncube",
@@ -1492,6 +1505,7 @@
     {
       "case_id": "QC-26-00113",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-013",
       "patient": {
         "first_name": "Horatio",
         "last_name": "Vasquez-Lindgren",
@@ -1635,6 +1649,7 @@
     {
       "case_id": "QC-26-00114",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-014",
       "patient": {
         "first_name": "Graciela",
         "last_name": "Montalbán-Ruiz",
@@ -1762,6 +1777,7 @@
     {
       "case_id": "QC-26-00115",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-015",
       "patient": {
         "first_name": "Thaddeus",
         "last_name": "Oyelowo-Brandt",
@@ -1851,6 +1867,7 @@
     {
       "case_id": "QC-26-00116",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-016",
       "patient": {
         "first_name": "Ines",
         "last_name": "Blackwood-Achterberg",
@@ -1940,6 +1957,7 @@
     {
       "case_id": "QC-26-00117",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-003",
       "patient": {
         "first_name": "Cormac",
         "last_name": "Adeyemi-Holt",
@@ -2058,6 +2076,7 @@
     {
       "case_id": "QC-26-00118",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-017",
       "patient": {
         "first_name": "Saoirse",
         "last_name": "Bellweather-Kim",
@@ -2166,6 +2185,7 @@
     {
       "case_id": "QC-26-00119",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-018",
       "patient": {
         "first_name": "Rupert",
         "last_name": "Ekwueme-Soto",
@@ -2264,6 +2284,7 @@
     {
       "case_id": "QC-26-00120",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-019",
       "patient": {
         "first_name": "Tamsin",
         "last_name": "Ogunleye-Park",
@@ -2327,6 +2348,7 @@
     {
       "case_id": "QC-26-00121",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-002",
       "patient": {
         "first_name": "Augustin",
         "last_name": "Farrow-Nakamura",
@@ -2390,6 +2412,7 @@
     {
       "case_id": "QC-26-00122",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-020",
       "patient": {
         "first_name": "Marguerite",
         "last_name": "Sandoval-Achebe",
@@ -2478,6 +2501,7 @@
     {
       "case_id": "QC-26-00123",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-021",
       "patient": {
         "first_name": "Leopold",
         "last_name": "Varga-Mensah",
@@ -2541,6 +2565,7 @@
     {
       "case_id": "QC-26-00124",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-022",
       "patient": {
         "first_name": "Henrietta",
         "last_name": "Oduya-Carlsen",
@@ -2729,6 +2754,7 @@
     {
       "case_id": "QC-26-00125",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-023",
       "patient": {
         "first_name": "Barnaby",
         "last_name": "Kowalczyk-Eze",
@@ -2907,6 +2933,7 @@
     {
       "case_id": "QC-26-00126",
       "case_manager": "Tomas Lindqvist-Oyelaran",
+      "prescriber_id": "HCP-024",
       "patient": {
         "first_name": "Jordan",
         "last_name": "Ellery",
@@ -3035,6 +3062,7 @@
     {
       "case_id": "QC-26-00127",
       "case_manager": "Priyanka Deveraux",
+      "prescriber_id": "HCP-025",
       "patient": {
         "first_name": "Jordan",
         "last_name": "Ellery",
@@ -3123,6 +3151,7 @@
     {
       "case_id": "QC-26-00128",
       "case_manager": "Wendell Okafor-Brandt",
+      "prescriber_id": "HCP-017",
       "patient": {
         "first_name": "Ottoline",
         "last_name": "Radebe-Sorensen",
@@ -3271,6 +3300,7 @@
     {
       "case_id": "QC-26-00129",
       "case_manager": "Rosalind Achebe-Marr",
+      "prescriber_id": "HCP-026",
       "patient": {
         "first_name": "Cassius",
         "last_name": "Whitlock-Obi",

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
+This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. It also serves as a test bed for adverse event intake, payer and benefits processing, and CRM and field-force compliance. The pack is being prepared for public release on GitHub under CC BY-SA 4.0 (content) and GPL-3.0 (scripts). There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
 
 ## Non-negotiable invariants
 
@@ -15,6 +15,10 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - DOIs use the `10.5555` prefix.
   - NCPDP ids use a `99-` prefix.
   - NDCs use the unassigned labeler `00000`; GTIN-14 check digits must be correct.
+  - Prescriber NPIs are 10 digits beginning with `9`, with a correct check digit (Luhn over the `80840` prefix).
+  - Pharmacy BINs begin with `000`.
+  - Every local phone number, `(xxx) nnn-nnnn`, is `555-01xx`.
+  - Event coding uses the pack's own `AET-*` terms. Never add MedDRA codes or NCPDP code values; both are licensed.
   - Every JSON file carries a top-level `_notice` field.
   - Every Markdown document opens with a "Everything here is invented" blockquote.
   - Keep all of these markers in any new file.
@@ -26,7 +30,10 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - the 6.2% GI discontinuation figure that appears only in the press release;
   - the label silences listed in `known-gaps.json`;
   - the unnamed open-label reference arm in CASTLEREAGH: never identify it with a competitor;
-  - the patient-services limits in `test-design/ps-known-gaps.json`. For example, the Foundation income limit is only a percentage with no dollar table, and there is no approved price and no approved way to extend bridge supply.
+  - the patient-services limits in `test-design/ps-known-gaps.json`. For example, the Foundation income limit is only a percentage with no dollar table, and there is no approved price and no approved way to extend bridge supply;
+  - `CALL-0029`'s late adverse event forward (declared as `CF-03`), and the other intake traps in `ae-intake.json`: hepatic failure is unlisted because label 5.5 says no case progressed to it, and lot `QS26G099` is not in the register;
+  - no price anywhere in `payer/`: claims carry patient amounts only;
+  - the FHIR formulary's pack-local drug code (FHIR requires RxNorm, which an invented drug cannot have).
 
 ## How the pieces connect
 
@@ -64,10 +71,28 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - A first fill is one starter bottle (28 starting-dose capsules plus 64 maintenance capsules); later fills are bottles of 120. QUORVANTA is dispensed only in the original container, so partial fills are not possible.
 - The Markdown is generated: edit the JSON and run `scripts/render.py`.
 
+**Adverse event intake** (`safety/`, `test-design/scenarios/ae-intake.json`, `ae-assessments.json`):
+- `safety-reference.json` defines the event terms (listed only with label sections), seriousness criteria, special situations, day 0, the 15-day rule and the business calendar.
+- Each report's `expected` assessment must follow from its own receipts and events. The validator recomputes case type, seriousness, listedness, reportability, day 0, due date and late forwarding.
+- Field receipts must match the call log: the same call date, and a forward date equal to Drug Safety's receipt.
+
+**Payer** (`payer/`): `plans.json` holds processors, formularies and plans; `transactions.json` holds coverages and transactions per case. The transactions must reproduce each case:
+- one paid primary claim per plan shipment that has left the pharmacy, and none for bridge or Foundation shipments;
+- copay claims follow the $16,000 cap and sum to `copay.used_ytd`;
+- the last benefit check date equals `bv.completed_on`;
+- the case's `pa` fields and status follow from the requests, decisions and appeals;
+- prior authorization needs follow the formulary: `none`, `new_starts` (a starter bottle first, with no earlier shipment) or `all`, unless an approval is on file.
+- `formulary-fhir.json` is generated: edit `plans.json` and run `scripts/render.py`.
+
+**Field force** (`crm/`):
+- Prescribers link to cases both ways (`hcps[].case_ids` and each case's `prescriber_id`).
+- Every call must obey the field rules FR-01 to FR-08 or declare the breach in `deviations` as a CF-* fault; the validator recomputes the deviations.
+- A passing approved email equals its template body, which is approved claim text plus the ISI claims.
+
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
 
 **Scenarios** (`test-design/scenarios/`):
-- `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services), and every fault needs at least one failing example.
+- `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services, SF-* for adverse event intake, CF-* for field records), and every fault needs at least one failing example in a labelled set.
 - A passing HCP response must meet all of these:
   - contain its cited claims, disease facts and fixed messages word for word;
   - match its inbound scenario's claim set, which is already closed over `requires`;
@@ -85,7 +110,7 @@ Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-fo
 ```bash
 python3 scripts/validate.py                            # all integrity checks; exits non-zero on failure
 python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real brand/company names
-python3 scripts/render.py                              # regenerate program-terms.md and product-identifiers.md
+python3 scripts/render.py                              # regenerate program-terms.md, product-identifiers.md and payer/formulary-fhir.json
 ```
 
 Run the validator after any edit. It checks:
@@ -98,9 +123,12 @@ Run the validator after any edit. It checks:
 - product identifiers: NDC and GTIN formats, lot format and expiry, and case shipments against the lot register and packages;
 - disease pieces match their facts and stay unbranded; competitor names stay in landscape/ and test-design/;
 - scenarios: ids resolve, correct answers are verbatim and complete, verification order holds, every fault type has a failing example;
-- patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match.
+- patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match;
+- safety: event terms against label sections, and every intake report's expected assessment recomputed from its receipts and events;
+- field force: NPIs, territories, prescriber-case links, template bodies, and each call's field rules against its declared deviations;
+- payer: BIN range, plans and coverages, claims against shipments, copay arithmetic, benefit-check and PA history against the cases, and the FHIR bundle against `plans.json`.
 
-The denylist file must live outside the repo, since listing real names inside the pack would defeat the purpose. The only real numbers allowed are FDA MedWatch and US Poison Control (`ALLOWED_PHONES` in the script).
+The denylist file must live outside the repo, since listing real names inside the pack would defeat the purpose. The only real numbers allowed are FDA MedWatch and US Poison Control (`ALLOWED_PHONES` in the script). The only real domains allowed are the HL7 canonical hosts FHIR requires (`ALLOWED_HOSTS`).
 
 A pre-commit hook (`scripts/git-hooks/pre-commit`) runs the validator against the staged snapshot and blocks the commit on failure. It picks up a denylist from `$QUORVANTA_DENYLIST` when set. Each fresh clone must enable it once with `git config core.hooksPath scripts/git-hooks`. The main branch is `master`.
 

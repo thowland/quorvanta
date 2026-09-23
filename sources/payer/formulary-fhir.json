@@ -1,0 +1,1616 @@
+{
+  "_notice": "FICTITIOUS. FHIR formulary resources for plans and a drug that do not exist. Generated from payer/plans.json by scripts/render.py; do not edit by hand.",
+  "generated_from": "payer/plans.json",
+  "conformance": "Shaped after the HL7 US Drug Formulary implementation guide STU2 (Formulary, FormularyItem, FormularyDrug) and not validated against it. The drug is coded with a pack-local code system and its NDCs because an invented drug has no RxNorm code, which the FormularyDrug profile requires. A formulary that excludes QUORVANTA has no FormularyItem. Unwrap the bundle field before loading it into a FHIR server.",
+  "bundle": {
+    "resourceType": "Bundle",
+    "id": "quorvanta-formularies",
+    "type": "collection",
+    "timestamp": "2026-09-22T00:00:00Z",
+    "entry": [
+      {
+        "fullUrl": "urn:ardenquay:MedicationKnowledge/quorvanta-190-dr",
+        "resource": {
+          "resourceType": "MedicationKnowledge",
+          "id": "quorvanta-190-dr",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/drug",
+                "code": "QV-190-DR",
+                "display": "QUORVANTA (soriximel tavorate) 190 mg delayed-release capsule"
+              },
+              {
+                "system": "http://hl7.org/fhir/sid/ndc",
+                "code": "00000-0190-01",
+                "display": "QUORVANTA 190 mg, bottle of 120 capsules"
+              },
+              {
+                "system": "http://hl7.org/fhir/sid/ndc",
+                "code": "00000-0190-02",
+                "display": "QUORVANTA 190 mg, 30-day starter bottle of 92 capsules"
+              }
+            ]
+          },
+          "status": "active",
+          "doseForm": {
+            "text": "delayed-release capsule"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-BF-COM",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-BF-COM",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-BF-COM"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Brightfield Employer Health commercial formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-BF-COM-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-BF-COM-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-BF-COM"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-BF-EPO",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-BF-EPO",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-BF-EPO"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Brightfield Employer Health EPO closed formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-NG-COM",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-NG-COM",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-NG-COM"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Northgate Health commercial formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-NG-COM-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-NG-COM-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-NG-COM"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Prior authorization criteria PAC-01 in payer/plans.json. Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-NG-PD",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-NG-PD",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-NG-PD"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Northgate Medicare Part D formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-NG-PD-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-NG-PD-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-NG-PD"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Prior authorization criteria PAC-01 in payer/plans.json. Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-CW",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-CW",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-CW"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Cairnwell Choice formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-CW-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-CW-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-CW"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Prior authorization criteria PAC-02 in payer/plans.json. Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-HB-MKT",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-HB-MKT",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-HB-MKT"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Harborline Marketplace formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-HB-MKT-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-HB-MKT-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-HB-MKT"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Prior authorization criteria PAC-01 in payer/plans.json. Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-KC-MA",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-KC-MA",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-KC-MA"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Keystone Crest Medicare Advantage formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-KC-MA-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-KC-MA-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-KC-MA"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-HH",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-HH",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-HH"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Halverson Health Employee Plan formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-HH-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-HH-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-HH"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-SL",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-SL",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-SL"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Summitline Employer Plan formulary",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-SL-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-SL-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-SL"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "specialty"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-LCC",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-LCC",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-LCC"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Lakeshore Community Care Medicaid preferred drug list",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-LCC-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-LCC-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-LCC"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "preferred-brand"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Prior authorization criteria PAC-01 in payer/plans.json. Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-TCH",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-TCH",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-TCH"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "Tallgrass Community Health Medicaid preferred drug list",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-TCH-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-TCH-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-TCH"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "preferred-brand"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:InsurancePlan/FRM-TRI",
+        "resource": {
+          "resourceType": "InsurancePlan",
+          "id": "FRM-TRI",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "identifier": [
+            {
+              "system": "https://ardenquay.example/fhir/formulary-id",
+              "value": "FRM-TRI"
+            }
+          ],
+          "status": "active",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "DRUGPOL"
+                }
+              ]
+            }
+          ],
+          "name": "TRICARE uniform formulary (entry invented for this pack)",
+          "period": {
+            "start": "2026-01-01",
+            "end": "2026-12-31"
+          }
+        }
+      },
+      {
+        "fullUrl": "urn:ardenquay:Basic/FRM-TRI-quorvanta",
+        "resource": {
+          "resourceType": "Basic",
+          "id": "FRM-TRI-quorvanta",
+          "meta": {
+            "lastUpdated": "2026-09-22T00:00:00Z",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem"
+            ],
+            "tag": [
+              {
+                "system": "https://ardenquay.example/fhir/CodeSystem/pack-tags",
+                "code": "fictitious",
+                "display": "Invented test data; no real plan, formulary or drug"
+              }
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension",
+              "valueReference": {
+                "reference": "InsurancePlan/FRM-TRI"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension",
+              "valueCode": "active"
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension",
+              "valuePeriod": {
+                "start": "2026-01-01",
+                "end": "2026-12-31"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS-TEMPORARY-TRIAL-USE",
+                    "code": "1-month-in-mail"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS-TEMPORARY-TRIAL-USE",
+                    "code": "non-preferred-brand"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension",
+              "valueBoolean": false
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AdditionalCoverageInformation-extension",
+              "valueMarkdown": "Quantity limit: 120 capsules per 30 days (PKG-120); 92 capsules per 30 days (PKG-STARTER). Dispensed only by QUORVANTA network specialty pharmacies."
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS",
+                "code": "formulary-item"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "MedicationKnowledge/quorvanta-190-dr"
+          }
+        }
+      }
+    ]
+  }
+}

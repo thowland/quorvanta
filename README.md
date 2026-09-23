@@ -89,7 +89,7 @@ The product has a visual identity for use in demonstrations, interface mock-ups 
 The pack is plain JSON, Markdown and XML under `sources/`, with Python tooling under `scripts/`. It needs Python 3; only the population generator needs a third-party library.
 
 ```bash
-git clone <this repository> && cd <repository>
+git clone https://github.com/thowland/quorvanta.git && cd quorvanta
 git config core.hooksPath scripts/git-hooks      # run the validator before every commit
 python3 scripts/validate.py                      # check every cross-reference, figure and fiction marker
 ```

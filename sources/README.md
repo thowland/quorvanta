@@ -322,7 +322,7 @@ A matching or cleansing tool can be scored against the flags.
 
 ## Licence
 
-The content under `sources/` is licensed under the Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0). The tooling under `scripts/` is licensed under the GNU General Public License v3.0 (GPL-3.0). See `LICENSE` and `LICENSES/` at the repository root. The SPL rendering uses LOINC codes, which are copyright the Regenstrief Institute, Inc. and the LOINC Committee and are used under the LOINC licence. The licences cover the pack as fiction and give no right to use its invented names as trademarks.
+The content under `sources/`, and the identity package under `assets/`, is licensed under the Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0). The tooling under `scripts/` is licensed under the GNU General Public License v3.0 (GPL-3.0). See `LICENSE` and `LICENSES/` at the repository root. The SPL rendering uses LOINC codes, which are copyright the Regenstrief Institute, Inc. and the LOINC Committee and are used under the LOINC licence. The licences cover the pack as fiction and give no right to use its invented names as trademarks.
 
 ## Caveats
 

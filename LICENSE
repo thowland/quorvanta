@@ -2,8 +2,10 @@ This repository is released under two licences.
 
 Content: everything under sources/ (the fictitious label, claims, references,
 promotional, medical, access, patient, patient-services, payer, CRM, safety,
-product, press, landscape and test-design material) is licensed under the
-Creative Commons Attribution-ShareAlike 4.0 International licence.
+product, press, landscape, population and test-design material) and everything
+under assets/ (the Quorvanta identity package: logos, identity board, brand
+guide and generation prompts) is licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International licence.
 Full text: LICENSES/CC-BY-SA-4.0.txt
 
 Tooling: everything under scripts/ is licensed under the GNU General Public

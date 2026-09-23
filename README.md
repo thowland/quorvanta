@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/quorvanta-identity-package/logo-lockup-reverse.png">
+    <img src="assets/quorvanta-identity-package/logo-lockup.png" width="480" alt="Quorvanta logo: an open circular Q in deep teal with an apricot diagonal tail, beside the Quorvanta wordmark and the generic name soriximel tavorate">
+  </picture>
+</p>
+
 # QUORVANTA: a synthetic therapy for testing pharma commercial systems
 
 > Everything here is invented. There is no QUORVANTA, no soriximel tavorate, no Brennick syndrome and no Arden Quay Biosciences, and none of the studies, figures, people, plans, pharmacies or patients exist. The pack contains no medical information and must not be used for any clinical purpose.
@@ -67,6 +74,16 @@ The pack was first built to test a guardrailed HCP chatbot and a patient-service
 - **Commercial data and supply-chain teams.** Load prescriber, payer, dispense, inventory and serialization data that joins up across files, with planted data-quality problems tagged for scoring.
 - **Vendor evaluations and demonstrations.** Show a system working end to end without an NDA (non-disclosure agreement) around the data.
 
+## Visual identity
+
+The product has a visual identity for use in demonstrations, interface mock-ups and training material. A plausible brand keeps reviewers' attention on the behaviour being shown, where placeholder styling tends to draw comments that have nothing to do with the system under test. The mark is an open circular Q in deep teal crossed by an apricot diagonal, set beside the wordmark with the generic name beneath it, on an ivory ground.
+
+<p align="center">
+  <img src="assets/quorvanta-identity-package/identity-board.png" width="860" alt="Quorvanta identity board: the logo lockup, the standalone Q symbol, a reversed logo on deep teal, the five-colour palette, and mock-ups of a carton, a brand card reading 'A little more possibility.' and a poster, over the footer 'An imaginary therapy for an imaginary condition.'">
+</p>
+
+`assets/quorvanta-identity-package/` holds the logo in a light version and a reverse version for dark backgrounds, the identity board, the brand guide and the prompts used to generate the images. The images are generated raster concept art, so small lettering and mock-up copy can vary between them. Where they disagree, the brand guide's spelling, colour values and copy are authoritative; the board, for example, labels ink as #243633, where the guide gives #243638. The logo should be redrawn as vector artwork before any print use. The guide's copy rules match the pack's own: the brand line is "A little more possibility.", and no identity material may carry clinical statistics or therapeutic promises, which can come only from the approved claims.
+
 ## Getting started
 
 The pack is plain JSON, Markdown and XML under `sources/`, with Python tooling under `scripts/`. It needs Python 3; only the population generator needs a third-party library.
@@ -131,4 +148,4 @@ New population entity types are single modules under `scripts/population/entitie
 
 ## Licence
 
-The content under `sources/` is licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0), and the tooling under `scripts/` under the GNU General Public License v3.0. See `LICENSE` and `LICENSES/`. LOINC codes used in the pack are covered by the notice in `LICENSE`.
+The content under `sources/` and the identity package under `assets/` are licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0), and the tooling under `scripts/` under the GNU General Public License v3.0. See `LICENSE` and `LICENSES/`. LOINC codes used in the pack are covered by the notice in `LICENSE`.

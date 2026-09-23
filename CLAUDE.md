@@ -15,7 +15,8 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - DOIs use the `10.5555` prefix.
   - NCPDP ids use a `99-` prefix.
   - NDCs use the unassigned labeler `00000`; GTIN-14 check digits must be correct.
-  - Prescriber NPIs are 10 digits beginning with `9`, with a correct check digit (Luhn over the `80840` prefix).
+  - Prescriber NPIs are 10 digits beginning with `9`, with a correct check digit (Luhn over the `80840` prefix). The core cast uses `90`, the generated population `91`.
+  - Lab CLIA numbers are `99D` plus seven digits.
   - Pharmacy BINs begin with `000`.
   - Every local phone number, `(xxx) nnn-nnnn`, is `555-01xx`.
   - GS1: the manufacturer's company prefix is `0300000`, the one inside the GTINs. Every other trading partner uses `0200001` to `0200011`, in the restricted-circulation range; GLN and SSCC check digits must be correct.
@@ -103,6 +104,8 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - One module per entity type lives in `scripts/population/entities/`. The fiction-safe name, phone, email and NPI helpers are in `scripts/population/core.py`; use them in new entities rather than raw Faker calls, because Faker's defaults produce real-looking phones, domains and names.
 - The validator is driven by each file's header (`id_prefix`, `references`, `must_match`, `quality_flags`), so a new entity type needs no validator change. Keep `scripts/validate.py` standard-library only.
 - Population records never carry scenarios or answer keys, and never reuse a core cast name or NPI.
+- `patterns` (clinical or business situations) and `quality_flags` (data problems) are separate. The validator re-derives the lab-results patterns and eGFR from the values, so change the generator, not the output.
+- Deferred ideas and release tasks live in `BACKLOG.md`.
 
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
 

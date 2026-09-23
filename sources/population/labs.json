@@ -1,0 +1,1715 @@
+{
+  "_notice": "FICTITIOUS. Generated clinical laboratories that do not exist. CLIA-shaped certificate numbers begin with 99D, a state code that is never issued. Phones use 555-01xx; domains use .example.",
+  "population_version": "1.0.0",
+  "entity": "labs",
+  "generated": {
+    "generator": "scripts/generate_population.py",
+    "faker_version": "40.39.0",
+    "seed": 20260922,
+    "count": 60,
+    "as_of": "2026-09-22"
+  },
+  "usage": "Laboratories that run the monitoring blood tests in the label (complete blood count with lymphocyte count, liver tests and renal function). National labs serve every state; a regional lab serves its census division; hospital and physician-office labs belong to a generated office (office_id) and serve that state. results_delivery says how results reach the ordering office.",
+  "id_prefix": "PLAB",
+  "references": {
+    "office_id": "offices",
+    "quality_flags[].of": "labs"
+  },
+  "must_match": {
+    "state": [
+      "office_id",
+      "state"
+    ]
+  },
+  "quality_flags": {
+    "duplicate": "A second record for the same lab (same CLIA number, name variant); 'of' is the original.",
+    "certificate_lapsed": "The CLIA certificate lapsed on certificate_lapsed_on, yet results after that date exist."
+  },
+  "records": [
+    {
+      "id": "PLAB-00001",
+      "name": "Marrammere Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00007",
+      "clia": "99D1433361",
+      "city": "East Danamouth",
+      "state": "MD",
+      "zip": "20914",
+      "phone": "(410) 555-0126",
+      "email_domain": "marrammere-health-laboratory.example",
+      "states_served": [
+        "MD"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00002",
+      "name": "Sloemoor Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D7273458",
+      "city": "Acevedomouth",
+      "state": "IL",
+      "zip": "62521",
+      "phone": "(312) 555-0169",
+      "email_domain": "sloemoor-clinical-laboratories.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 11,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": "2026-06-07",
+      "quality_flags": [
+        {
+          "type": "certificate_lapsed"
+        }
+      ]
+    },
+    {
+      "id": "PLAB-00003",
+      "name": "Bitternford Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00006",
+      "clia": "99D8717919",
+      "city": "Laurenshire",
+      "state": "AZ",
+      "zip": "85480",
+      "phone": "(520) 555-0196",
+      "email_domain": "bitternford-health-laboratory.example",
+      "states_served": [
+        "AZ"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00004",
+      "name": "Burdockmere Neuroscience Institute Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00057",
+      "clia": "99D1708830",
+      "city": "New Michaelview",
+      "state": "NV",
+      "zip": "89194",
+      "phone": "(702) 555-0150",
+      "email_domain": "burdockmere-neuroscience-institute-laboratory.example",
+      "states_served": [
+        "NV"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00005",
+      "name": "Nettlevale Neurology Center Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00128",
+      "clia": "99D7790289",
+      "city": "New Jose",
+      "state": "FL",
+      "zip": "33678",
+      "phone": "(813) 555-0194",
+      "email_domain": "nettlevale-neurology-center-laboratory.example",
+      "states_served": [
+        "FL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00006",
+      "name": "Heronshaw Health Partners Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00076",
+      "clia": "99D4314918",
+      "city": "Perryfurt",
+      "state": "NJ",
+      "zip": "08454",
+      "phone": "(609) 555-0121",
+      "email_domain": "heronshaw-health-partners-office-laboratory.example",
+      "states_served": [
+        "NJ"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00007",
+      "name": "Sorrelhaven Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00001",
+      "clia": "99D6037947",
+      "city": "Fitzgeraldton",
+      "state": "WA",
+      "zip": "98393",
+      "phone": "(509) 555-0108",
+      "email_domain": "sorrelhaven-health-laboratory.example",
+      "states_served": [
+        "WA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00008",
+      "name": "Otterdale Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00004",
+      "clia": "99D0405582",
+      "city": "South Toddburgh",
+      "state": "UT",
+      "zip": "84198",
+      "phone": "(801) 555-0122",
+      "email_domain": "otterdale-health-laboratory.example",
+      "states_served": [
+        "UT"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00009",
+      "name": "Yarrowhollow Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00002",
+      "clia": "99D4055071",
+      "city": "Gatesmouth",
+      "state": "FL",
+      "zip": "33527",
+      "phone": "(305) 555-0137",
+      "email_domain": "yarrowhollow-health-laboratory.example",
+      "states_served": [
+        "FL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00010",
+      "name": "Bitterncombe Diagnostics",
+      "type": "national_reference_lab",
+      "office_id": null,
+      "clia": "99D9860745",
+      "city": "Karenberg",
+      "state": "GA",
+      "zip": "30209",
+      "phone": "(912) 555-0163",
+      "email_domain": "bitterncombe-diagnostics.example",
+      "states_served": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ],
+      "patient_service_centers": 690,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00011",
+      "name": "Thistleworth Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D4052735",
+      "city": "Johnsonmouth",
+      "state": "CA",
+      "zip": "93144",
+      "phone": "(916) 555-0153",
+      "email_domain": "thistleworth-clinical-laboratories.example",
+      "states_served": [
+        "AK",
+        "CA",
+        "HI",
+        "OR",
+        "WA"
+      ],
+      "patient_service_centers": 44,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00012",
+      "name": "Rowanhurst Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D4091697",
+      "city": "East Juan",
+      "state": "TX",
+      "zip": "76405",
+      "phone": "(214) 555-0107",
+      "email_domain": "rowanhurst-clinical-laboratories.example",
+      "states_served": [
+        "AR",
+        "LA",
+        "OK",
+        "TX"
+      ],
+      "patient_service_centers": 51,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00013",
+      "name": "Quillridge Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D1804793",
+      "city": "North Daniel",
+      "state": "OH",
+      "zip": "43387",
+      "phone": "(614) 555-0139",
+      "email_domain": "quillridge-regional-laboratory.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 17,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00014",
+      "name": "Plovervale Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00005",
+      "clia": "99D8655405",
+      "city": "Lake Brianborough",
+      "state": "IA",
+      "zip": "50879",
+      "phone": "(515) 555-0172",
+      "email_domain": "plovervale-health-laboratory.example",
+      "states_served": [
+        "IA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00015",
+      "name": "Sorrelgate Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D1627996",
+      "city": "Nicoleton",
+      "state": "MI",
+      "zip": "48637",
+      "phone": "(313) 555-0108",
+      "email_domain": "sorrelgate-clinical-laboratories.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 35,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00016",
+      "name": "Thistledale Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D0838900",
+      "city": "Lopezberg",
+      "state": "PA",
+      "zip": "16073",
+      "phone": "(215) 555-0197",
+      "email_domain": "thistledale-clinical-laboratories.example",
+      "states_served": [
+        "NJ",
+        "NY",
+        "PA"
+      ],
+      "patient_service_centers": 17,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00017",
+      "name": "Junipermere Neuroscience Institute Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00113",
+      "clia": "99D5262637",
+      "city": "Lake Timothyberg",
+      "state": "IL",
+      "zip": "61277",
+      "phone": "(312) 555-0126",
+      "email_domain": "junipermere-neuroscience-institute-laboratory.example",
+      "states_served": [
+        "IL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00018",
+      "name": "Larchmoor Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00110",
+      "clia": "99D6219360",
+      "city": "Manuelhaven",
+      "state": "WA",
+      "zip": "98263",
+      "phone": "(509) 555-0120",
+      "email_domain": "larchmoor-medical-group-office-laboratory.example",
+      "states_served": [
+        "WA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00019",
+      "name": "Cinderford Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D8559472",
+      "city": "East Christine",
+      "state": "TX",
+      "zip": "76317",
+      "phone": "(713) 555-0172",
+      "email_domain": "cinderford-regional-laboratory.example",
+      "states_served": [
+        "AR",
+        "LA",
+        "OK",
+        "TX"
+      ],
+      "patient_service_centers": 42,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00020",
+      "name": "Junipervale Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D9332730",
+      "city": "Lake Stephanieborough",
+      "state": "FL",
+      "zip": "34451",
+      "phone": "(305) 555-0182",
+      "email_domain": "junipervale-clinical-laboratories.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 37,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00021",
+      "name": "Kestrelhurst Laboratories",
+      "type": "national_reference_lab",
+      "office_id": null,
+      "clia": "99D4824001",
+      "city": "Johnburgh",
+      "state": "VA",
+      "zip": "23443",
+      "phone": "(703) 555-0133",
+      "email_domain": "kestrelhurst-laboratories.example",
+      "states_served": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ],
+      "patient_service_centers": 1324,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00022",
+      "name": "Yarrowdale Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00070",
+      "clia": "99D1033906",
+      "city": "Port Dale",
+      "state": "IN",
+      "zip": "46519",
+      "phone": "(317) 555-0165",
+      "email_domain": "yarrowdale-medical-group-office-laboratory.example",
+      "states_served": [
+        "IN"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00023",
+      "name": "Tansyford Neurology Center Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00039",
+      "clia": "99D2646201",
+      "city": "Thomasside",
+      "state": "AL",
+      "zip": "36830",
+      "phone": "(205) 555-0104",
+      "email_domain": "tansyford-neurology-center-laboratory.example",
+      "states_served": [
+        "AL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00024",
+      "name": "Campionhollow Physicians Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00049",
+      "clia": "99D5376746",
+      "city": "Vernonview",
+      "state": "AL",
+      "zip": "36746",
+      "phone": "(205) 555-0126",
+      "email_domain": "campionhollow-physicians-office-laboratory.example",
+      "states_served": [
+        "AL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00025",
+      "name": "Cinderfell Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D4680817",
+      "city": "West Michael",
+      "state": "GA",
+      "zip": "30809",
+      "phone": "(404) 555-0152",
+      "email_domain": "cinderfell-clinical-laboratories.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 20,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00026",
+      "name": "Quillwick Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D5330700",
+      "city": "Scottfurt",
+      "state": "CA",
+      "zip": "95755",
+      "phone": "(619) 555-0177",
+      "email_domain": "quillwick-regional-laboratory.example",
+      "states_served": [
+        "AK",
+        "CA",
+        "HI",
+        "OR",
+        "WA"
+      ],
+      "patient_service_centers": 15,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00027",
+      "name": "Bitternshaw Physicians Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00051",
+      "clia": "99D8729878",
+      "city": "Saramouth",
+      "state": "CO",
+      "zip": "80064",
+      "phone": "(303) 555-0125",
+      "email_domain": "bitternshaw-physicians-office-laboratory.example",
+      "states_served": [
+        "CO"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00028",
+      "name": "Bramblebrook Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00145",
+      "clia": "99D9589695",
+      "city": "Roberttown",
+      "state": "GA",
+      "zip": "30166",
+      "phone": "(404) 555-0194",
+      "email_domain": "bramblebrook-medical-group-office-laboratory.example",
+      "states_served": [
+        "GA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00029",
+      "name": "Quillbrook Health Partners Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00023",
+      "clia": "99D4549706",
+      "city": "Petersonport",
+      "state": "CO",
+      "zip": "80337",
+      "phone": "(303) 555-0138",
+      "email_domain": "quillbrook-health-partners-office-laboratory.example",
+      "states_served": [
+        "CO"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00030",
+      "name": "Lindenhithe Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00010",
+      "clia": "99D3170248",
+      "city": "Jonesside",
+      "state": "PA",
+      "zip": "16390",
+      "phone": "(215) 555-0114",
+      "email_domain": "lindenhithe-health-laboratory.example",
+      "states_served": [
+        "PA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00031",
+      "name": "Yarrowford Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00003",
+      "clia": "99D5959890",
+      "city": "New Emilyside",
+      "state": "VA",
+      "zip": "24586",
+      "phone": "(804) 555-0118",
+      "email_domain": "yarrowford-health-laboratory.example",
+      "states_served": [
+        "VA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00032",
+      "name": "Sablevale Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D9182884",
+      "city": "Johnmouth",
+      "state": "IN",
+      "zip": "47073",
+      "phone": "(317) 555-0144",
+      "email_domain": "sablevale-clinical-laboratories.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 38,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00033",
+      "name": "Nettleshaw Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D6667689",
+      "city": "Port Robinchester",
+      "state": "AZ",
+      "zip": "85237",
+      "phone": "(520) 555-0192",
+      "email_domain": "nettleshaw-regional-laboratory.example",
+      "states_served": [
+        "AZ",
+        "CO",
+        "ID",
+        "MT",
+        "NM",
+        "NV",
+        "UT",
+        "WY"
+      ],
+      "patient_service_centers": 12,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00034",
+      "name": "Juniperstead Neuroscience Institute Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00091",
+      "clia": "99D3332636",
+      "city": "Davisport",
+      "state": "MD",
+      "zip": "21612",
+      "phone": "(410) 555-0180",
+      "email_domain": "juniperstead-neuroscience-institute-laboratory.example",
+      "states_served": [
+        "MD"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00035",
+      "name": "Lindenshaw Diagnostics",
+      "type": "national_reference_lab",
+      "office_id": null,
+      "clia": "99D0538603",
+      "city": "Port Taylor",
+      "state": "SC",
+      "zip": "29079",
+      "phone": "(803) 555-0133",
+      "email_domain": "lindenshaw-diagnostics.example",
+      "states_served": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ],
+      "patient_service_centers": 1369,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00036",
+      "name": "Bitternhurst Neuroscience Institute Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00029",
+      "clia": "99D9660693",
+      "city": "Port Erin",
+      "state": "MD",
+      "zip": "21399",
+      "phone": "(410) 555-0161",
+      "email_domain": "bitternhurst-neuroscience-institute-laboratory.example",
+      "states_served": [
+        "MD"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00037",
+      "name": "Quillshaw Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00008",
+      "clia": "99D1777738",
+      "city": "Munozburgh",
+      "state": "FL",
+      "zip": "32807",
+      "phone": "(305) 555-0159",
+      "email_domain": "quillshaw-health-laboratory.example",
+      "states_served": [
+        "FL"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00038",
+      "name": "Burdockcrest Physicians Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00016",
+      "clia": "99D8778764",
+      "city": "New Margaretborough",
+      "state": "OK",
+      "zip": "73031",
+      "phone": "(405) 555-0105",
+      "email_domain": "burdockcrest-physicians-office-laboratory.example",
+      "states_served": [
+        "OK"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00039",
+      "name": "Lindenhaven Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D5942198",
+      "city": "North Brian",
+      "state": "GA",
+      "zip": "30002",
+      "phone": "(912) 555-0190",
+      "email_domain": "lindenhaven-regional-laboratory.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 21,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00040",
+      "name": "Tansyhithe Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00012",
+      "clia": "99D4777404",
+      "city": "Port Faith",
+      "state": "GA",
+      "zip": "31351",
+      "phone": "(912) 555-0184",
+      "email_domain": "tansyhithe-health-laboratory.example",
+      "states_served": [
+        "GA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00041",
+      "name": "Rowanstead Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D4983236",
+      "city": "North David",
+      "state": "MI",
+      "zip": "48795",
+      "phone": "(313) 555-0182",
+      "email_domain": "rowanstead-regional-laboratory.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 56,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00042",
+      "name": "Sablecrest Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00115",
+      "clia": "99D0808040",
+      "city": "Lake Carolmouth",
+      "state": "UT",
+      "zip": "84531",
+      "phone": "(801) 555-0178",
+      "email_domain": "sablecrest-medical-group-office-laboratory.example",
+      "states_served": [
+        "UT"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00043",
+      "name": "Ottervale Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00109",
+      "clia": "99D0483587",
+      "city": "Maddenbury",
+      "state": "WA",
+      "zip": "98228",
+      "phone": "(509) 555-0189",
+      "email_domain": "ottervale-medical-group-office-laboratory.example",
+      "states_served": [
+        "WA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00044",
+      "name": "Thistlehollow Neurology Center Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00019",
+      "clia": "99D4643499",
+      "city": "South Johnnyview",
+      "state": "OH",
+      "zip": "43357",
+      "phone": "(614) 555-0151",
+      "email_domain": "thistlehollow-neurology-center-laboratory.example",
+      "states_served": [
+        "OH"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00045",
+      "name": "Quillhurst Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00009",
+      "clia": "99D7394569",
+      "city": "East Michaelfurt",
+      "state": "TX",
+      "zip": "77655",
+      "phone": "(713) 555-0171",
+      "email_domain": "quillhurst-health-laboratory.example",
+      "states_served": [
+        "TX"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00046",
+      "name": "Wrenmere Clinical Laboratories",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D1197093",
+      "city": "South Jason",
+      "state": "IN",
+      "zip": "47193",
+      "phone": "(317) 555-0113",
+      "email_domain": "wrenmere-clinical-laboratories.example",
+      "states_served": [
+        "IL",
+        "IN",
+        "MI",
+        "OH",
+        "WI"
+      ],
+      "patient_service_centers": 8,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00047",
+      "name": "Ploverworth Pathology Services",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D1559039",
+      "city": "Andrewburgh",
+      "state": "VA",
+      "zip": "23294",
+      "phone": "(703) 555-0150",
+      "email_domain": "ploverworth-pathology-services.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 25,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00048",
+      "name": "Alderdale Health Laboratory",
+      "type": "hospital_lab",
+      "office_id": "POFC-00011",
+      "clia": "99D8734374",
+      "city": "East Kelly",
+      "state": "ID",
+      "zip": "83579",
+      "phone": "(208) 555-0104",
+      "email_domain": "alderdale-health-laboratory.example",
+      "states_served": [
+        "ID"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00049",
+      "name": "Bramblehithe Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00116",
+      "clia": "99D4241956",
+      "city": "East Ericshire",
+      "state": "VA",
+      "zip": "24517",
+      "phone": "(804) 555-0193",
+      "email_domain": "bramblehithe-medical-group-office-laboratory.example",
+      "states_served": [
+        "VA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00050",
+      "name": "Thistlehaven Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00102",
+      "clia": "99D9051494",
+      "city": "Lake Charlesview",
+      "state": "MI",
+      "zip": "48127",
+      "phone": "(616) 555-0143",
+      "email_domain": "thistlehaven-medical-group-office-laboratory.example",
+      "states_served": [
+        "MI"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00051",
+      "name": "Wrenmoor Diagnostics",
+      "type": "national_reference_lab",
+      "office_id": null,
+      "clia": "99D8293381",
+      "city": "Gamblefurt",
+      "state": "MO",
+      "zip": "64605",
+      "phone": "(314) 555-0174",
+      "email_domain": "wrenmoor-diagnostics.example",
+      "states_served": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ],
+      "patient_service_centers": 831,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00052",
+      "name": "Burdockmoor Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D8146045",
+      "city": "Ericaside",
+      "state": "TX",
+      "zip": "76856",
+      "phone": "(214) 555-0143",
+      "email_domain": "burdockmoor-regional-laboratory.example",
+      "states_served": [
+        "AR",
+        "LA",
+        "OK",
+        "TX"
+      ],
+      "patient_service_centers": 37,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00053",
+      "name": "Sloeworth Health Partners Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00143",
+      "clia": "99D4326010",
+      "city": "Gonzalezland",
+      "state": "MI",
+      "zip": "49084",
+      "phone": "(616) 555-0127",
+      "email_domain": "sloeworth-health-partners-office-laboratory.example",
+      "states_served": [
+        "MI"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00054",
+      "name": "Bitterngate Pathology Services",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D2465052",
+      "city": "Rogersview",
+      "state": "FL",
+      "zip": "34167",
+      "phone": "(305) 555-0148",
+      "email_domain": "bitterngate-pathology-services.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 26,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00055",
+      "name": "Sedgestead Pathology Services",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D7802964",
+      "city": "Stevenschester",
+      "state": "GA",
+      "zip": "31573",
+      "phone": "(404) 555-0102",
+      "email_domain": "sedgestead-pathology-services.example",
+      "states_served": [
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "MD",
+        "NC",
+        "SC",
+        "VA",
+        "WV"
+      ],
+      "patient_service_centers": 57,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00056",
+      "name": "Whinvale Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D6583790",
+      "city": "West Jamie",
+      "state": "ND",
+      "zip": "58532",
+      "phone": "(701) 555-0153",
+      "email_domain": "whinvale-regional-laboratory.example",
+      "states_served": [
+        "IA",
+        "KS",
+        "MN",
+        "MO",
+        "ND",
+        "NE",
+        "SD"
+      ],
+      "patient_service_centers": 54,
+      "results_delivery": [
+        "fax"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00057",
+      "name": "Bitterndale Medical Group Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00062",
+      "clia": "99D2966978",
+      "city": "South Gabrielle",
+      "state": "KY",
+      "zip": "40790",
+      "phone": "(502) 555-0142",
+      "email_domain": "bitterndale-medical-group-office-laboratory.example",
+      "states_served": [
+        "KY"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00058",
+      "name": "Fennelcombe Physicians Office Laboratory",
+      "type": "physician_office_lab",
+      "office_id": "POFC-00079",
+      "clia": "99D3952446",
+      "city": "Ramirezchester",
+      "state": "CA",
+      "zip": "95565",
+      "phone": "(916) 555-0123",
+      "email_domain": "fennelcombe-physicians-office-laboratory.example",
+      "states_served": [
+        "CA"
+      ],
+      "patient_service_centers": 1,
+      "results_delivery": [
+        "fax",
+        "hl7_v2_feed"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00059",
+      "name": "Rowanworth Regional Laboratory",
+      "type": "regional_lab",
+      "office_id": null,
+      "clia": "99D9375510",
+      "city": "Thomasmouth",
+      "state": "WA",
+      "zip": "98302",
+      "phone": "(509) 555-0119",
+      "email_domain": "rowanworth-regional-laboratory.example",
+      "states_served": [
+        "AK",
+        "CA",
+        "HI",
+        "OR",
+        "WA"
+      ],
+      "patient_service_centers": 27,
+      "results_delivery": [
+        "fax",
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "PLAB-00060",
+      "name": "Bitterncombe Diagnostic Services",
+      "type": "national_reference_lab",
+      "office_id": null,
+      "clia": "99D9860745",
+      "city": "Karenberg",
+      "state": "GA",
+      "zip": "30209",
+      "phone": "(912) 555-0163",
+      "email_domain": "bitterncombe-diagnostics.example",
+      "states_served": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ],
+      "patient_service_centers": 690,
+      "results_delivery": [
+        "portal"
+      ],
+      "certificate_lapsed_on": null,
+      "quality_flags": [
+        {
+          "type": "duplicate",
+          "of": "PLAB-00010"
+        }
+      ]
+    }
+  ]
+}

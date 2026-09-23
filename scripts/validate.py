@@ -1588,6 +1588,14 @@ def check_population():
             flag_types = {f["type"] for f in r.get("quality_flags", [])}
             for t in flag_types - set(doc["quality_flags"]):
                 fail(f"{where} {rid}: quality flag {t} is not in the file's legend")
+            for t in {x["type"] for x in r.get("patterns", [])} - set(doc.get("patterns", {})):
+                fail(f"{where} {rid}: pattern {t} is not in the file's legend")
+            if "clia" in r:
+                dup = any(f["type"] == "duplicate" for f in r["quality_flags"])
+                if not re.fullmatch(r"99D\d{7}", r["clia"]) or (not dup and r["clia"] in npi_owner):
+                    fail(f"{where} {rid}: CLIA number {r['clia']} is outside the 99D fiction range or reused")
+                if not dup:
+                    npi_owner[r["clia"]] = rid
             if f"{r.get('first_name')} {r.get('last_name')}" in core_names:
                 fail(f"{where} {rid}: repeats a core cast member's name")
             for email in field_values(r, "email"):
@@ -1614,6 +1622,95 @@ def check_population():
                 for plan in (ins["plan_name"], ins.get("secondary_plan_name")):
                     if plan and plan not in plan_names and plan != "VA health care" and not re.fullmatch(r"[A-Z]{2} Medicaid \(fee-for-service\)", plan):
                         fail(f"{where} {rid}: plan {plan} is not in payer/plans.json")
+    if {"lab-results", "patients", "labs"} <= set(docs):
+        check_lab_results(docs)
+
+
+def ckd_epi_2021(creat, age, sex):
+    k, a = (0.7, -0.241) if sex == "female" else (0.9, -0.302)
+    v = 142 * min(creat / k, 1) ** a * max(creat / k, 1) ** -1.200 * 0.9938 ** age
+    return round(v * (1.012 if sex == "female" else 1))
+
+
+def check_lab_results(docs):
+    """Monitoring results: codes, flags, eGFR, dates against therapy, and patterns recomputed from values."""
+    from datetime import date
+    doc = docs["lab-results"]
+    tests = doc["tests"]
+    patients = {p["id"]: p for p in docs["patients"]["records"]}
+    labs = {l["id"]: l for l in docs["labs"]["records"]}
+    as_of = doc["generated"]["as_of"]
+    severe_since = {}
+    for r in sorted(doc["records"], key=lambda r: (r["patient_id"], r["collected_on"], r["id"])):
+        rid, p = r["id"], patients.get(r["patient_id"])
+        where = f"population/lab-results.json {rid}"
+        if p is None:
+            continue
+        flags = {f["type"] for f in r["quality_flags"]}
+        th = p["therapy"]
+        if not th["started_on"]:
+            fail(f"{where}: patient never started treatment")
+            continue
+        if not r["collected_on"] <= r["reported_on"] <= as_of:
+            fail(f"{where}: collected, reported and as_of dates out of order")
+        if r["ordering_hcp_id"] != p["prescriber_id"]:
+            fail(f"{where}: ordering HCP is not the patient's prescriber")
+        if (r["reason"] == "baseline") != (r["collected_on"] < th["started_on"]):
+            fail(f"{where}: only baseline tests come before treatment starts")
+        if th["discontinued_on"] and r["collected_on"] > th["discontinued_on"] and r["reason"] != "post_discontinuation_follow_up":
+            fail(f"{where}: routine test after treatment stopped")
+        lab = labs.get(r["lab_id"])
+        lapsed = bool(lab and lab["certificate_lapsed_on"] and r["collected_on"] > lab["certificate_lapsed_on"])
+        if lapsed != ("lab_certificate_lapsed" in flags):
+            fail(f"{where}: lab_certificate_lapsed flag does not match the lab's certificate date")
+        if lab and p["state"] not in lab["states_served"]:
+            fail(f"{where}: lab {lab['id']} does not serve {p['state']}")
+        if r["status"] == "cancelled":
+            if r["results"] or "cancelled_specimen" not in flags:
+                fail(f"{where}: a cancelled specimen has results or no flag")
+            continue
+        values = {}
+        for x in r["results"]:
+            t = tests.get(x["test"])
+            if t is None or x["loinc"] != t["loinc"]:
+                fail(f"{where}: unknown test or wrong LOINC for {x['test']}")
+                continue
+            if x["unit"] != t["unit"]:
+                if not (x["test"] == "LYMPH" and "unit_mismatch" in flags):
+                    fail(f"{where}: {x['test']} unit {x['unit']} is not {t['unit']}")
+                continue
+            want = "L" if t["low"] is not None and x["value"] < t["low"] else "H" if t["high"] is not None and x["value"] > t["high"] else "N"
+            if x["flag"] != want:
+                fail(f"{where}: {x['test']} flag {x['flag']} should be {want}")
+            values[x["test"]] = x["value"]
+        if "CREAT" in values and "EGFR" in values:
+            born, day = date.fromisoformat(p["dob"]), date.fromisoformat(r["collected_on"])
+            age = day.year - born.year - ((day.month, day.day) < (born.month, born.day))
+            if values["EGFR"] != ckd_epi_2021(values["CREAT"], age, p["sex"]):
+                fail(f"{where}: eGFR {values['EGFR']} does not follow from creatinine by CKD-EPI 2021")
+        if "duplicate" in flags:
+            continue
+        pats = {x["type"] for x in r["patterns"]}
+        pid = r["patient_id"]
+        if "LYMPH" in values:
+            if values["LYMPH"] < 0.5:
+                severe_since.setdefault(pid, r["collected_on"])
+            else:
+                severe_since.pop(pid, None)
+        since = severe_since.get(pid)
+        prolonged = bool(since) and "LYMPH" in values and (date.fromisoformat(r["collected_on"]) - date.fromisoformat(since)).days >= 182
+        derived = {
+            "prolonged_severe_lymphopenia": prolonged,
+            "low_baseline_lymphocytes": r["reason"] == "baseline" and values.get("LYMPH", 9) < 1.0,
+            "moderate_renal_impairment_at_baseline": r["reason"] == "baseline" and 30 <= values.get("EGFR", 99) < 60,
+            "severe_renal_impairment_at_baseline": r["reason"] == "baseline" and values.get("EGFR", 99) < 30,
+            "hepatic_signal": values.get("ALT", 0) > 200 and values.get("TBIL", 0) > 2.4,
+            "alt_above_3x_uln": values.get("ALT", 0) > 120 and not (values.get("TBIL", 0) > 2.4 and values.get("ALT", 0) > 200),
+            "follow_up_after_discontinuation": r["reason"] == "post_discontinuation_follow_up",
+        }
+        for k, v in derived.items():
+            if (k in pats) != v:
+                fail(f"{where}: pattern {k} is {'missing' if v else 'not supported by the values'}")
 
 
 def read_denylist(path):

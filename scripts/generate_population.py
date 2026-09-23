@@ -8,6 +8,7 @@ Needs Faker (scripts/requirements.txt), unlike the rest of the tooling:
     .venv/bin/python scripts/generate_population.py --entity hcps        # one entity; its inputs must exist
     .venv/bin/python scripts/generate_population.py --entity patients --with-deps
     .venv/bin/python scripts/generate_population.py --count hcps=1000 --count patients=800
+    .venv/bin/python scripts/generate_population.py --entity lab-results --count lab-results=200   # patients monitored
     .venv/bin/python scripts/generate_population.py --list
 
 Output goes to sources/population/<entity>.json. The same seed and Faker
@@ -76,7 +77,7 @@ def main():
     if args.list:
         for name, e in sorted(core.REGISTRY.items()):
             req = ", ".join(e.requires) or "nothing"
-            print(f"{name:16} default {e.default_count:>5}  ids {e.id_prefix}-NNNNN  requires {req}")
+            print(f"{name:16} default {e.default_count:>5} {e.count_means:<20} ids {e.id_prefix}-NNNNN  requires {req}")
         return
 
     counts = {}

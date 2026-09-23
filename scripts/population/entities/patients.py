@@ -8,6 +8,7 @@ from population.core import AS_OF, SRC, Entity, People, register
 INSURANCE = {"commercial": 55, "medicare": 25, "medicaid": 12, "tricare": 2, "va": 1, "none": 5}
 LANGUAGES = {"English": 85, "Spanish": 12, "Vietnamese": 1, "Polish": 1, "Portuguese": 1}
 RELATIONSHIPS = ["spouse", "partner", "adult child", "parent", "sibling", "friend"]
+DISCONTINUATION = ["gastrointestinal events", "flushing", "lymphopenia", "patient decision", "insurance", "other"]
 # Plans in payer/plans.json that only make sense in some states: the Medicaid managed-care plans
 # are state programs and the Halverson plan covers that health system's own employees.
 PLAN_STATES = {"Lakeshore Community Care (Medicaid)": {"NY"}, "Tallgrass Community Health (Medicaid)": {"OH"},
@@ -27,7 +28,8 @@ class Patients(Entity):
              "prescriber but no shipments, claims or case statuses; only the 29 hand-built cases in "
              "test-design/ps-cases.json have those. Plan names come from payer/plans.json, limited by state where a "
              "plan is regional; a Medicaid patient in a state with no pack plan gets '<state> Medicaid (fee-for-service)', "
-             "which names the public program only. Patients are adults unless flagged minor.")
+             "which names the public program only. Patients are adults unless flagged minor. therapy records when an "
+             "enrolled patient started QUORVANTA and, for some, when and why they stopped; lab-results follow it.")
     flags = {
         "same_name": "Shares first and last name with 'of', with a different date of birth and ZIP code.",
         "same_name_and_dob": "Shares name and date of birth with 'of'; only the ZIP code tells them apart.",
@@ -101,6 +103,17 @@ class Patients(Entity):
             rf, rl, _ = people.person()
             rep = {"name": f"{rf} {rl}", "relationship": "adult child", "document": "power of attorney"}
         enrolled = rng.random() < 0.85
+        enrolled_on = AS_OF - timedelta(days=rng.randrange(1, 900)) if enrolled else None
+        therapy = {"status": "not_started", "started_on": None, "discontinued_on": None, "discontinued_reason": None}
+        if enrolled:
+            start = enrolled_on + timedelta(days=rng.randrange(7, 22))
+            if start <= AS_OF:
+                therapy.update(status="on_therapy", started_on=str(start))
+                days = (AS_OF - start).days
+                if days > 120 and rng.random() < 0.10:
+                    stop = start + timedelta(days=rng.randrange(60, days))
+                    reason = rng.choices(DISCONTINUATION, weights=[25, 20, 30, 15, 10, 10])[0]
+                    therapy.update(status="discontinued", discontinued_on=str(stop), discontinued_reason=reason)
         return {
             "id": self.make_id(i), "first_name": first, "last_name": last, "sex": sex, "dob": dob(18, 80),
             "city": people.city(), "state": state, "zip": people.zip(state), "previous_zip": None,
@@ -109,6 +122,7 @@ class Patients(Entity):
             "insurance": {"type": kind, "plan_name": plan, "secondary_plan_name": secondary,
                           "government_program": kind in ("medicare", "medicaid", "tricare", "va") or secondary is not None},
             "program": {"status": "enrolled" if enrolled else rng.choice(["pending", "declined"]),
-                        "enrolled_on": str(AS_OF - timedelta(days=rng.randrange(1, 900))) if enrolled else None},
+                        "enrolled_on": str(enrolled_on) if enrolled else None},
+            "therapy": therapy,
             "authorized_contacts": contacts, "legal_representative": rep, "quality_flags": [],
         }

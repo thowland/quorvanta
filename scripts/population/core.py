@@ -55,6 +55,9 @@ class Entity:
     notice = ""
     usage = ""
     flags = {}          # quality flag type -> meaning, written to the file as a legend
+    patterns = {}       # optional: domain pattern type -> meaning (clinical or business, not data errors)
+    header = {}         # optional: extra header content, such as a code catalog
+    count_means = "records"   # what --count sets, if not the number of records
 
     @property
     def path(self):
@@ -70,6 +73,15 @@ class Entity:
 # ---- geography -----------------------------------------------------------------
 # Rough population weights and one or more real area codes per state. Phone numbers
 # are always (area code) 555-01xx, the range reserved for fiction.
+# US census divisions, for labs and other services with a regional footprint.
+DIVISIONS = {
+    "New England": ["CT", "ME", "MA", "NH", "RI", "VT"], "Mid-Atlantic": ["NJ", "NY", "PA"],
+    "East North Central": ["IL", "IN", "MI", "OH", "WI"], "West North Central": ["IA", "KS", "MN", "MO", "NE", "ND", "SD"],
+    "South Atlantic": ["DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV"], "East South Central": ["AL", "KY", "MS", "TN"],
+    "West South Central": ["AR", "LA", "OK", "TX"], "Mountain": ["AZ", "CO", "ID", "MT", "NV", "NM", "UT", "WY"],
+    "Pacific": ["AK", "CA", "HI", "OR", "WA"],
+}
+
 STATES = {
     "AL": (5.1, ["205"]), "AK": (0.7, ["907"]), "AZ": (7.4, ["602", "520"]), "AR": (3.0, ["501"]),
     "CA": (39.0, ["213", "415", "619", "916"]), "CO": (5.9, ["303"]), "CT": (3.6, ["203"]), "DE": (1.0, ["302"]),
@@ -231,6 +243,8 @@ def write(entity, records, ctx, faker_version):
         "references": entity.references,
         "must_match": entity.must_match,
         "quality_flags": entity.flags,
+        **({"patterns": entity.patterns} if entity.patterns else {}),
+        **entity.header,
         "records": records,
     }
     entity.path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n")

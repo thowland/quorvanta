@@ -3,7 +3,7 @@
 
 Run from anywhere:  python3 scripts/extract_names.py
 
-Writes names-to-check.csv at the repository root: one row per name, with a
+Writes scripts/names-to-check.csv: one row per name, with a
 priority, what kind of check it needs, and where it is used. People, cities,
 real public programs and standards bodies are left out. The status and notes
 columns are for whoever does the checking; re-running keeps them for names
@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
-OUT = ROOT / "names-to-check.csv"
+OUT = ROOT / "scripts" / "names-to-check.csv"
 
 CHECKS = {
     "brand": "Trademark registers (USPTO and major markets), FDA drug name databases, web search",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact-phrase web search for each name in names-to-check.csv.
+"""Exact-phrase web search for each name in scripts/names-to-check.csv.
 
 Run from anywhere:
     python3 scripts/namecheck.py                  # search every name without a status
@@ -17,7 +17,7 @@ and writes column J (status) and column K (notes):
 
 The notes column gets the date, time and timezone of the lookup. The evidence
 for each search (query, reported hit count, top links) is appended to
-namecheck-log.jsonl, so an 'in use' can be checked by hand.
+scripts/namecheck-log.jsonl, so an 'in use' can be checked by hand.
 
 Backends (--backend), each needing its own credentials in the environment:
     google   Google Custom Search JSON API: GOOGLE_API_KEY and GOOGLE_CSE_ID (a
@@ -122,8 +122,10 @@ def save(path, rows):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--file", default=str(ROOT / "names-to-check.csv"), help="CSV to update (default names-to-check.csv)")
-    parser.add_argument("--log", default=str(ROOT / "namecheck-log.jsonl"), help="evidence log (default namecheck-log.jsonl)")
+    parser.add_argument("--file", default=str(ROOT / "scripts" / "names-to-check.csv"),
+                        help="CSV to update (default scripts/names-to-check.csv)")
+    parser.add_argument("--log", default=str(ROOT / "scripts" / "namecheck-log.jsonl"),
+                        help="evidence log (default scripts/namecheck-log.jsonl)")
     parser.add_argument("--backend", choices=sorted(BACKENDS), default="google")
     parser.add_argument("--limit", type=int, help="search at most this many names in this run")
     parser.add_argument("--recheck", action="store_true", help="search names that already have a status")

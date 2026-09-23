@@ -1527,6 +1527,95 @@ def check_spl():
             fail(f"{rel}: 10-digit NDC for {ndc} missing or malformed")
 
 
+def field_values(record, path):
+    """Values at a dotted path; a segment ending in [] iterates a list."""
+    values = [record]
+    for part in path.split("."):
+        nxt = []
+        for v in values:
+            if not isinstance(v, dict):
+                continue
+            key = part[:-2] if part.endswith("[]") else part
+            got = v.get(key)
+            if part.endswith("[]"):
+                nxt.extend(got or [])
+            elif got is not None:
+                nxt.append(got)
+        values = nxt
+    return values
+
+
+def check_population():
+    """Generated entities in sources/population/: generic checks driven by each file's own header."""
+    from datetime import date
+    folder = SRC / "population"
+    if not folder.exists():
+        return
+    ff = load("crm/field-force.json")
+    core_npis = {h["npi"] for h in ff["hcps"]}
+    core_names = {f"{h['first_name']} {h['last_name']}" for h in ff["hcps"]} | {s["name"] for s in ff["staff"]}
+    core_names |= {f"{c['patient']['first_name']} {c['patient']['last_name']}" for c in load("test-design/ps-cases.json")["cases"]}
+    plan_names = {p["name"] for p in load("payer/plans.json")["plans"]}
+    docs = {}
+    for path in sorted(folder.glob("*.json")):
+        doc = json.loads(path.read_text())
+        docs[doc["entity"]] = doc
+    ids = {n: {r["id"] for r in d["records"]} for n, d in docs.items()}
+    npi_owner = {}
+    for name, doc in docs.items():
+        where = f"population/{name}.json"
+        gen = doc["generated"]
+        if gen["count"] != len(doc["records"]) or len(ids[name]) != len(doc["records"]):
+            fail(f"{where}: count or ids inconsistent")
+        as_of = date.fromisoformat(gen["as_of"])
+        by_id = {r["id"]: r for r in doc["records"]}
+        for r in doc["records"]:
+            rid = r["id"]
+            if not re.fullmatch(rf"{doc['id_prefix']}-\d{{5}}", rid):
+                fail(f"{where}: id {rid} does not match {doc['id_prefix']}-NNNNN")
+            for path, target in doc["references"].items():
+                for v in field_values(r, path):
+                    if target not in ids:
+                        fail(f"{where}: references {target}, which has not been generated")
+                    elif v not in ids[target]:
+                        fail(f"{where} {rid}: {path} {v} does not exist in {target}")
+            for fld, (ref_path, other) in doc.get("must_match", {}).items():
+                target = next(t for p, t in doc["references"].items() if p == ref_path)
+                pool = {x["id"]: x for x in docs.get(target, {}).get("records", [])}
+                for v in field_values(r, ref_path):
+                    if v in pool and pool[v].get(other) != r.get(fld):
+                        fail(f"{where} {rid}: {fld} differs from {ref_path} {v}'s {other}; regenerate {name}")
+            flag_types = {f["type"] for f in r.get("quality_flags", [])}
+            for t in flag_types - set(doc["quality_flags"]):
+                fail(f"{where} {rid}: quality flag {t} is not in the file's legend")
+            if f"{r.get('first_name')} {r.get('last_name')}" in core_names:
+                fail(f"{where} {rid}: repeats a core cast member's name")
+            for email in field_values(r, "email"):
+                if not email.endswith(".example"):
+                    fail(f"{where} {rid}: email {email} is not in .example")
+            if "npi" in r:
+                if not npi_ok(r["npi"]) or not r["npi"].startswith("91") or r["npi"] in core_npis:
+                    fail(f"{where} {rid}: NPI {r['npi']} is not a 91-prefixed pack NPI, or collides with the core cast")
+                dup = next((f["of"] for f in r["quality_flags"] if f["type"] == "duplicate"), None)
+                if dup:
+                    if by_id.get(dup, {}).get("npi") != r["npi"]:
+                        fail(f"{where} {rid}: a duplicate must share its original's NPI")
+                elif r["npi"] in npi_owner:
+                    fail(f"{where} {rid}: NPI {r['npi']} also belongs to {npi_owner[r['npi']]}")
+                else:
+                    npi_owner[r["npi"]] = rid
+            if "dob" in r:
+                born = date.fromisoformat(r["dob"])
+                age = as_of.year - born.year - ((as_of.month, as_of.day) < (born.month, born.day))
+                if (age < 18) != ("minor" in flag_types):
+                    fail(f"{where} {rid}: age {age} does not match its minor flag")
+            ins = r.get("insurance")
+            if ins:
+                for plan in (ins["plan_name"], ins.get("secondary_plan_name")):
+                    if plan and plan not in plan_names and plan != "VA health care" and not re.fullmatch(r"[A-Z]{2} Medicaid \(fee-for-service\)", plan):
+                        fail(f"{where} {rid}: plan {plan} is not in payer/plans.json")
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -1569,6 +1658,7 @@ def main():
     check_payer()
     check_channel()
     check_spl()
+    check_population()
     for owner, ids in [(r["id"], r["provokes"]) for r in reports.values()]:
         for f in ids:
             if f not in faults:

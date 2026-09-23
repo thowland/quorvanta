@@ -1,0 +1,5064 @@
+{
+  "_notice": "FICTITIOUS. Generated office staff who do not exist. Phones are the office's 555-01xx number with an extension; emails use .example.",
+  "population_version": "1.0.0",
+  "entity": "office-staff",
+  "generated": {
+    "generator": "scripts/generate_population.py",
+    "faker_version": "40.39.0",
+    "seed": 20260922,
+    "count": 250,
+    "as_of": "2026-09-22"
+  },
+  "usage": "The people who deal with QuorvantaConnect for a practice: they send Start Forms, prepare prior authorizations and receive benefits letters. They are not prescribers and cannot sign the Start Form's prescriber section. Every open office gets an office manager before any office gets a second staff member.",
+  "id_prefix": "POFS",
+  "references": {
+    "office_ids[]": "offices",
+    "quality_flags[].of": "office-staff"
+  },
+  "must_match": {},
+  "quality_flags": {
+    "duplicate": "A second record for the same person, with a name variant; 'of' is the original.",
+    "departed": "Has left the practice (status departed, departed_on set) but is still listed as a contact.",
+    "multi_office": "Works for more than one office, for example through a shared billing service. Not an error."
+  },
+  "records": [
+    {
+      "id": "POFS-00001",
+      "first_name": "Virginia",
+      "last_name": "Määttä-Woods",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00013"
+      ],
+      "phone": "(206) 555-0129 x245",
+      "email": "virginia.maatta-woods@sorrelhaven-health-neurology-mendozabury.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00002",
+      "first_name": "Mike",
+      "last_name": "Karppinen-Hançer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00014"
+      ],
+      "phone": "(316) 555-0126 x358",
+      "email": "mike.karppinen-hancer@cinderford-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00003",
+      "first_name": "Jennifer",
+      "last_name": "Anttila-Fredriksson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00015"
+      ],
+      "phone": "(713) 555-0197 x298",
+      "email": "jennifer.anttila-fredriksson@sorrelgate-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00004",
+      "first_name": "Dylan",
+      "last_name": "Tielemans-Şensoy",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00016"
+      ],
+      "phone": "(405) 555-0180 x215",
+      "email": "dylan.tielemans-sensoy@burdockcrest-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00005",
+      "first_name": "Mary",
+      "last_name": "Wałek-Falk",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00017"
+      ],
+      "phone": "(515) 555-0137 x265",
+      "email": "mary.waek-falk@plovervale-health-neurology-danielborough.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00006",
+      "first_name": "Jessica",
+      "last_name": "Jönsson-Hörle",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00018"
+      ],
+      "phone": "(312) 555-0185 x319",
+      "email": "jessica.jonsson-horle@sedgehollow-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00007",
+      "first_name": "Ronald",
+      "last_name": "Eloranta-Farias",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00019"
+      ],
+      "phone": "(216) 555-0112 x307",
+      "email": "ronald.eloranta-farias@thistlehollow-neurology-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00008",
+      "first_name": "Daniel",
+      "last_name": "Vainio-Mendonça",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00020"
+      ],
+      "phone": "(214) 555-0147 x343",
+      "email": "daniel.vainio-mendonca@junipergate-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00009",
+      "first_name": "Kristen",
+      "last_name": "Löwer-Travis",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00021"
+      ],
+      "phone": "(312) 555-0193 x348",
+      "email": "kristen.lower-travis@aldervale-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00010",
+      "first_name": "Anthony",
+      "last_name": "Baldwin-Åberg",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00022"
+      ],
+      "phone": "(702) 555-0140 x206",
+      "email": "anthony.baldwin-aberg@lindenmere-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00011",
+      "first_name": "Ariel",
+      "last_name": "Cherubini-Włodyka",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00023"
+      ],
+      "phone": "(303) 555-0137 x301",
+      "email": "ariel.cherubini-wodyka@quillbrook-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00012",
+      "first_name": "Jessica",
+      "last_name": "Owokoniran-Nyokayebululu",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00024"
+      ],
+      "phone": "(602) 555-0167 x339",
+      "email": "jessica.owokoniran-nyokayebululu@bitternford-health-neurology-greenbury.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00013",
+      "first_name": "Grant",
+      "last_name": "Comeriato-Ullmann",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00025"
+      ],
+      "phone": "(312) 555-0181 x279",
+      "email": "grant.comeriato-ullmann@heronfell-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00014",
+      "first_name": "Sue",
+      "last_name": "Åberg-Alonzo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00026"
+      ],
+      "phone": "(215) 555-0113 x378",
+      "email": "sue.aberg-alonzo@lindenhithe-health-neurology-jillmouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00015",
+      "first_name": "Diana",
+      "last_name": "Penttilä-Pires",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00027"
+      ],
+      "phone": "(407) 555-0172 x308",
+      "email": "diana.penttila-pires@nettlehollow-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00016",
+      "first_name": "Megan",
+      "last_name": "Johansson-Samson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00028"
+      ],
+      "phone": "(214) 555-0157 x340",
+      "email": "megan.johansson-samson@rowanbrook-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00017",
+      "first_name": "Charles",
+      "last_name": "Gaudin-Jenkins",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00029"
+      ],
+      "phone": "(410) 555-0155 x215",
+      "email": "charles.gaudin-jenkins@bitternhurst-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00018",
+      "first_name": "Thomas",
+      "last_name": "Ahokas-Oestrovsky",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00030"
+      ],
+      "phone": "(619) 555-0151 x366",
+      "email": "thomas.ahokas-oestrovsky@gorseworth-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00019",
+      "first_name": "Elaine",
+      "last_name": "Cutuli-Paris",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00031"
+      ],
+      "phone": "(410) 555-0158 x393",
+      "email": "elaine.cutuli-paris@tansywick-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00020",
+      "first_name": "William",
+      "last_name": "Akçay-Löwer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00032"
+      ],
+      "phone": "(515) 555-0181 x344",
+      "email": "william.akcay-lower@plovervale-health-neurology-bishopton.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00021",
+      "first_name": "Heather",
+      "last_name": "Loep-Bertilsson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00033"
+      ],
+      "phone": "(713) 555-0189 x389",
+      "email": "heather.loep-bertilsson@campionford-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00022",
+      "first_name": "Lisa",
+      "last_name": "Koya-Antonello",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00034"
+      ],
+      "phone": "(616) 555-0135 x323",
+      "email": "lisa.koya-antonello@sorreldale-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00023",
+      "first_name": "Sonya",
+      "last_name": "Şafak-Nyawose",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00035"
+      ],
+      "phone": "(614) 555-0104 x395",
+      "email": "sonya.safak-nyawose@gorsecrest-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00024",
+      "first_name": "Matthew",
+      "last_name": "Shekoni-Lankle",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00036"
+      ],
+      "phone": "(312) 555-0180 x369",
+      "email": "matthew.shekoni-lankle@whinmoor-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00025",
+      "first_name": "Linda",
+      "last_name": "Gutiérrez-Etzler",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00037"
+      ],
+      "phone": "(225) 555-0168 x262",
+      "email": "linda.gutierrez-etzler@sorrelshaw-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00026",
+      "first_name": "Lydia",
+      "last_name": "Thompson-Gonzales",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00039"
+      ],
+      "phone": "(205) 555-0149 x304",
+      "email": "lydia.thompson-gonzales@tansyford-neurology-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00027",
+      "first_name": "Beverly",
+      "last_name": "Kitzmann-Carter",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00040"
+      ],
+      "phone": "(512) 555-0102 x337",
+      "email": "beverly.kitzmann-carter@quillhurst-health-neurology-new-danielle.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00028",
+      "first_name": "Rebecca",
+      "last_name": "Johansson-Gabela",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00041"
+      ],
+      "phone": "(509) 555-0117 x278",
+      "email": "rebecca.johansson-gabela@sorrelhaven-health-neurology-wrightville.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00029",
+      "first_name": "Bethany",
+      "last_name": "Gramsci-Garobbio",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00042"
+      ],
+      "phone": "(515) 555-0125 x349",
+      "email": "bethany.gramsci-garobbio@plovervale-health-neurology-new-christopherfort.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00030",
+      "first_name": "Hailey",
+      "last_name": "Gustavsson-Oparinde",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00043"
+      ],
+      "phone": "(916) 555-0103 x252",
+      "email": "hailey.gustavsson-oparinde@quillstead-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00031",
+      "first_name": "Crystal",
+      "last_name": "Oyeyemi-Caboto",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00044"
+      ],
+      "phone": "(215) 555-0114 x281",
+      "email": "crystal.oyeyemi-caboto@lindenhithe-health-neurology-edwardton.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00032",
+      "first_name": "Michelle",
+      "last_name": "Roberts-Diallo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00045"
+      ],
+      "phone": "(215) 555-0188 x287",
+      "email": "michelle.roberts-diallo@lindenhithe-health-neurology-kevinchester.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00033",
+      "first_name": "Sarah",
+      "last_name": "George-Gallardo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00046"
+      ],
+      "phone": "(214) 555-0114 x356",
+      "email": "sarah.george-gallardo@whinshaw-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00034",
+      "first_name": "Kimberly",
+      "last_name": "Cafua-Ehlert",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00048"
+      ],
+      "phone": "(619) 555-0158 x341",
+      "email": "kimberly.cafua-ehlert@wrencrest-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00035",
+      "first_name": "Brian",
+      "last_name": "Contreras-Sauer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00049"
+      ],
+      "phone": "(205) 555-0151 x210",
+      "email": "brian.contreras-sauer@campionhollow-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00036",
+      "first_name": "Cole",
+      "last_name": "Wipstrik-Häggström",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00050"
+      ],
+      "phone": "(216) 555-0118 x225",
+      "email": "cole.wipstrik-haggstrom@aldershaw-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00037",
+      "first_name": "Cheryl",
+      "last_name": "Adebisi-Sezer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00051"
+      ],
+      "phone": "(303) 555-0180 x303",
+      "email": "cheryl.adebisi-sezer@bitternshaw-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00038",
+      "first_name": "Leslie",
+      "last_name": "Kusch-Yıldırım",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00053"
+      ],
+      "phone": "(608) 555-0142 x271",
+      "email": "leslie.kusch-yldrm@juniperdale-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00039",
+      "first_name": "Randy",
+      "last_name": "Kobelt-Riikonen",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00054"
+      ],
+      "phone": "(702) 555-0117 x299",
+      "email": "randy.kobelt-riikonen@fennelshaw-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00040",
+      "first_name": "Heather",
+      "last_name": "Casarin-Morel",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00055"
+      ],
+      "phone": "(616) 555-0143 x297",
+      "email": "heather.casarin-morel@larchhollow-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00041",
+      "first_name": "Hunter",
+      "last_name": "Neuteboom-Ramos",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00056"
+      ],
+      "phone": "(216) 555-0164 x230",
+      "email": "hunter.neuteboom-ramos@wrenhurst-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00042",
+      "first_name": "Robin",
+      "last_name": "Sundberg-Hänel",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00057"
+      ],
+      "phone": "(702) 555-0178 x356",
+      "email": "robin.sundberg-hanel@burdockmere-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00043",
+      "first_name": "Lisa",
+      "last_name": "Morrison-Castañeda",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00058"
+      ],
+      "phone": "(713) 555-0163 x318",
+      "email": "lisa.morrison-castaneda@campionworth-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00044",
+      "first_name": "Kimberly",
+      "last_name": "Potier-Battisti",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00059"
+      ],
+      "phone": "(919) 555-0199 x282",
+      "email": "kimberly.potier-battisti@rowanworth-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00045",
+      "first_name": "Justin",
+      "last_name": "Andrade-Seven",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00060"
+      ],
+      "phone": "(305) 555-0131 x378",
+      "email": "justin.andrade-seven@yarrowhollow-health-neurology-manningview.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00046",
+      "first_name": "Dustin",
+      "last_name": "Ramón-Carey",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00061"
+      ],
+      "phone": "(602) 555-0122 x377",
+      "email": "dustin.ramon-carey@bitternford-health-neurology-nicholasshire.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00047",
+      "first_name": "Scott",
+      "last_name": "Kaletka-Kari",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00062"
+      ],
+      "phone": "(502) 555-0108 x334",
+      "email": "scott.kaletka-kari@bitterndale-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00048",
+      "first_name": "Mary",
+      "last_name": "Omidina-Charpentier",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00063"
+      ],
+      "phone": "(412) 555-0162 x331",
+      "email": "mary.omidina-charpentier@lindenhithe-health-neurology-elizabethtown.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00049",
+      "first_name": "Mark",
+      "last_name": "Canova-Finke",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00064"
+      ],
+      "phone": "(503) 555-0140 x265",
+      "email": "mark.canova-finke@bramblefell-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00050",
+      "first_name": "Tyler",
+      "last_name": "Huttunen-Cassiano",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00065"
+      ],
+      "phone": "(520) 555-0130 x271",
+      "email": "tyler.huttunen-cassiano@bitternford-health-neurology-parkport.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00051",
+      "first_name": "Joan",
+      "last_name": "Striebitz-Rodrígez",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00066"
+      ],
+      "phone": "(412) 555-0188 x381",
+      "email": "joan.striebitz-rodrigez@fennelwick-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00052",
+      "first_name": "Raymond",
+      "last_name": "Manço-Chiappetta",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00067"
+      ],
+      "phone": "(206) 555-0128 x354",
+      "email": "raymond.manco-chiappetta@sorrelhaven-health-neurology-barbarafort.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00053",
+      "first_name": "Scott",
+      "last_name": "Manzanares-Rienzo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00068"
+      ],
+      "phone": "(804) 555-0171 x373",
+      "email": "scott.manzanares-rienzo@yarrowford-health-neurology-south-joshuahaven.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00054",
+      "first_name": "Joseph",
+      "last_name": "Comencini-Peres",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00069"
+      ],
+      "phone": "(205) 555-0193 x264",
+      "email": "joseph.comencini-peres@alderstead-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00055",
+      "first_name": "Hannah",
+      "last_name": "Speer-Tessier",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00070"
+      ],
+      "phone": "(317) 555-0119 x216",
+      "email": "hannah.speer-tessier@yarrowdale-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00056",
+      "first_name": "Sarah",
+      "last_name": "Taylor-Ficino",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00071"
+      ],
+      "phone": "(816) 555-0177 x337",
+      "email": "sarah.taylor-ficino@fennelhithe-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00057",
+      "first_name": "Mason",
+      "last_name": "Curiel-Bennett",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00072"
+      ],
+      "phone": "(509) 555-0178 x269",
+      "email": "mason.curiel-bennett@sorrelhaven-health-neurology-brendaport.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00058",
+      "first_name": "Stephanie",
+      "last_name": "Oloyede-Nkomoye",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00073"
+      ],
+      "phone": "(312) 555-0185 x283",
+      "email": "stephanie.oloyede-nkomoye@junipervale-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00059",
+      "first_name": "Phillip",
+      "last_name": "Dyjas-Cadefau",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00074"
+      ],
+      "phone": "(515) 555-0107 x294",
+      "email": "phillip.dyjas-cadefau@plovervale-health-neurology-port-kurt.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00060",
+      "first_name": "Bethany",
+      "last_name": "Roger-Bellemans",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00075"
+      ],
+      "phone": "(206) 555-0183 x389",
+      "email": "bethany.roger-bellemans@larchcrest-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00061",
+      "first_name": "John",
+      "last_name": "Comeriato-Geerts",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00076"
+      ],
+      "phone": "(609) 555-0121 x273",
+      "email": "john.comeriato-geerts@heronshaw-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00062",
+      "first_name": "Samantha",
+      "last_name": "Gentili-Casagrande",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00077"
+      ],
+      "phone": "(617) 555-0193 x361",
+      "email": "samantha.gentili-casagrande@nettleshaw-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00063",
+      "first_name": "Brandon",
+      "last_name": "Vieira-Nkomoye",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00078"
+      ],
+      "phone": "(413) 555-0113 x277",
+      "email": "brandon.vieira-nkomoye@quillford-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00064",
+      "first_name": "John",
+      "last_name": "Makhulukhulu-Hermann",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00079"
+      ],
+      "phone": "(916) 555-0114 x265",
+      "email": "john.makhulukhulu-hermann@fennelcombe-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00065",
+      "first_name": "Alisha",
+      "last_name": "Sauvage-Evrard",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00080"
+      ],
+      "phone": "(515) 555-0137 x366",
+      "email": "alisha.sauvage-evrard@plovervale-health-neurology-harringtontown.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00066",
+      "first_name": "Christina",
+      "last_name": "Salako-Conraoi",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00081"
+      ],
+      "phone": "(208) 555-0109 x204",
+      "email": "christina.salako-conraoi@alderdale-health-neurology-north-laurie.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00067",
+      "first_name": "Kimberly",
+      "last_name": "Seven-Tamez",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00082"
+      ],
+      "phone": "(312) 555-0192 x370",
+      "email": "kimberly.seven-tamez@ploverhithe-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00068",
+      "first_name": "Krystal",
+      "last_name": "Dias-Harris",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00083"
+      ],
+      "phone": "(703) 555-0147 x376",
+      "email": "krystal.dias-harris@tansyshaw-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00069",
+      "first_name": "David",
+      "last_name": "Mlalane-Henry",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00085"
+      ],
+      "phone": "(213) 555-0137 x332",
+      "email": "david.mlalane-henry@marramdale-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00070",
+      "first_name": "Jennifer",
+      "last_name": "Bilir-Rios",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00086"
+      ],
+      "phone": "(703) 555-0127 x395",
+      "email": "jennifer.bilir-rios@yarrowford-health-neurology-josemouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00071",
+      "first_name": "John",
+      "last_name": "Chauveau-Baresi",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00087"
+      ],
+      "phone": "(203) 555-0148 x292",
+      "email": "john.chauveau-baresi@marrambrook-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00072",
+      "first_name": "Jenna",
+      "last_name": "Ayandokun-Arnold",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00088"
+      ],
+      "phone": "(314) 555-0168 x358",
+      "email": "jenna.ayandokun-arnold@larchcombe-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00073",
+      "first_name": "Luis",
+      "last_name": "Ajewole-Margraf",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00089"
+      ],
+      "phone": "(813) 555-0140 x361",
+      "email": "luis.ajewole-margraf@bramblehaven-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00074",
+      "first_name": "Andrew",
+      "last_name": "Pitala-Śliz",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00090"
+      ],
+      "phone": "(412) 555-0197 x220",
+      "email": "andrew.pitala-sliz@tansyhaven-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00075",
+      "first_name": "Kelly",
+      "last_name": "Gnatz-Demirel",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00091"
+      ],
+      "phone": "(410) 555-0157 x214",
+      "email": "kelly.gnatz-demirel@juniperstead-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00076",
+      "first_name": "Meghan",
+      "last_name": "Bertho-Abatantuono",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00092"
+      ],
+      "phone": "(305) 555-0124 x256",
+      "email": "meghan.bertho-abatantuono@fennelcrest-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00077",
+      "first_name": "Donna",
+      "last_name": "Mennea-Kreusel",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00093"
+      ],
+      "phone": "(305) 555-0119 x264",
+      "email": "donna.mennea-kreusel@yarrowhollow-health-neurology-east-troyland.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00078",
+      "first_name": "Anthony",
+      "last_name": "Williams-Lahti",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00094"
+      ],
+      "phone": "(503) 555-0152 x201",
+      "email": "anthony.williams-lahti@kestrelridge-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00079",
+      "first_name": "Tammy",
+      "last_name": "Garrone-Bloch",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00095"
+      ],
+      "phone": "(608) 555-0106 x318",
+      "email": "tammy.garrone-bloch@sablehollow-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00080",
+      "first_name": "Lisa",
+      "last_name": "Rudolph-Villa",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00096"
+      ],
+      "phone": "(919) 555-0183 x241",
+      "email": "lisa.rudolph-villa@sorrelstead-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00081",
+      "first_name": "Kathryn",
+      "last_name": "Mahlalela-Lebreton",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00097"
+      ],
+      "phone": "(601) 555-0142 x260",
+      "email": "kathryn.mahlalela-lebreton@ploverdale-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00082",
+      "first_name": "David",
+      "last_name": "Olubode-Hayrioğlu",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00098"
+      ],
+      "phone": "(713) 555-0163 x247",
+      "email": "david.olubode-hayrioglu@wrenfell-family-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00083",
+      "first_name": "Cathy",
+      "last_name": "Geisel-Johansson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00099"
+      ],
+      "phone": "(213) 555-0126 x211",
+      "email": "cathy.geisel-johansson@wrenshaw-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00084",
+      "first_name": "Amanda",
+      "last_name": "Salo-Kronenberg",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00100"
+      ],
+      "phone": "(801) 555-0115 x220",
+      "email": "amanda.salo-kronenberg@otterdale-health-neurology-sarahland.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00085",
+      "first_name": "Elizabeth",
+      "last_name": "Maleszka-Wikström",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00101"
+      ],
+      "phone": "(515) 555-0198 x295",
+      "email": "elizabeth.maleszka-wikstrom@plovervale-health-neurology-south-samuel.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00086",
+      "first_name": "Thomas",
+      "last_name": "Loera-Corbo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00102"
+      ],
+      "phone": "(616) 555-0139 x246",
+      "email": "thomas.loera-corbo@thistlehaven-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00087",
+      "first_name": "Gary",
+      "last_name": "Jessel-Juszczuk",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00103"
+      ],
+      "phone": "(214) 555-0149 x238",
+      "email": "gary.jessel-juszczuk@sableford-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00088",
+      "first_name": "Anne",
+      "last_name": "Masikane-Martineau",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00104"
+      ],
+      "phone": "(404) 555-0110 x351",
+      "email": "anne.masikane-martineau@cinderfell-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00089",
+      "first_name": "Ronald",
+      "last_name": "Becker-Costela",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00105"
+      ],
+      "phone": "(602) 555-0101 x358",
+      "email": "ronald.becker-costela@campionhurst-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00090",
+      "first_name": "Amanda",
+      "last_name": "Lindqvist-Girón",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00106"
+      ],
+      "phone": "(305) 555-0116 x349",
+      "email": "amanda.lindqvist-giron@plovergate-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00091",
+      "first_name": "Lauren",
+      "last_name": "Dubois-Bikwayo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00107"
+      ],
+      "phone": "(512) 555-0109 x288",
+      "email": "lauren.dubois-bikwayo@quillhurst-health-neurology-north-jasonstad.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00092",
+      "first_name": "Erica",
+      "last_name": "Valentín-Gordon",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00108"
+      ],
+      "phone": "(407) 555-0135 x233",
+      "email": "erica.valentin-gordon@wrenhithe-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00093",
+      "first_name": "Jasmine",
+      "last_name": "Dupré-Kriens",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00109"
+      ],
+      "phone": "(206) 555-0183 x310",
+      "email": "jasmine.dupre-kriens@ottervale-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00094",
+      "first_name": "Donald",
+      "last_name": "Soduba-Baggio",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00110"
+      ],
+      "phone": "(206) 555-0178 x217",
+      "email": "donald.soduba-baggio@larchmoor-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00095",
+      "first_name": "Matthew",
+      "last_name": "Garcia-Osik",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00112"
+      ],
+      "phone": "(225) 555-0164 x283",
+      "email": "matthew.garcia-osik@juniperbrook-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00096",
+      "first_name": "Jake",
+      "last_name": "Ayoola-Mdladla",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00113"
+      ],
+      "phone": "(312) 555-0171 x370",
+      "email": "jake.ayoola-mdladla@junipermere-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00097",
+      "first_name": "Christine",
+      "last_name": "Nkomoye-Olaiya",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00114"
+      ],
+      "phone": "(404) 555-0167 x286",
+      "email": "christine.nkomoye-olaiya@tansyhithe-health-neurology-west-ana.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00098",
+      "first_name": "Stephanie",
+      "last_name": "Khuyameni-Akçay",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00115"
+      ],
+      "phone": "(801) 555-0199 x317",
+      "email": "stephanie.khuyameni-akcay@sablecrest-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00099",
+      "first_name": "James",
+      "last_name": "Ayandokun-Wulf",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00116"
+      ],
+      "phone": "(804) 555-0142 x362",
+      "email": "james.ayandokun-wulf@bramblehithe-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00100",
+      "first_name": "Michael",
+      "last_name": "Sikhunyana-Kim",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00117"
+      ],
+      "phone": "(505) 555-0111 x346",
+      "email": "michael.sikhunyana-kim@rowanford-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00101",
+      "first_name": "David",
+      "last_name": "Sipilä-Ruuskanen",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00118"
+      ],
+      "phone": "(804) 555-0180 x347",
+      "email": "david.sipila-ruuskanen@sorrelridge-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00102",
+      "first_name": "Kenneth",
+      "last_name": "Palacios-Verbeek",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00119"
+      ],
+      "phone": "(404) 555-0178 x380",
+      "email": "kenneth.palacios-verbeek@burdockhurst-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00103",
+      "first_name": "Isaac",
+      "last_name": "Andrade-Pontecorvo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00120"
+      ],
+      "phone": "(602) 555-0151 x261",
+      "email": "isaac.andrade-pontecorvo@bitternford-health-neurology-new-zachary.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00104",
+      "first_name": "Jean",
+      "last_name": "Kostolzin-Thompson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00121"
+      ],
+      "phone": "(313) 555-0195 x233",
+      "email": "jean.kostolzin-thompson@quillwick-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00105",
+      "first_name": "Ronald",
+      "last_name": "Recer-Gregorczuk",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00122"
+      ],
+      "phone": "(801) 555-0104 x237",
+      "email": "ronald.recer-gregorczuk@otterdale-health-neurology-lake-markmouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00106",
+      "first_name": "Dorothy",
+      "last_name": "Scaramucci-Losekann",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00123"
+      ],
+      "phone": "(305) 555-0100 x354",
+      "email": "dorothy.scaramucci-losekann@tansycombe-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00107",
+      "first_name": "Frederick",
+      "last_name": "Puente-Maphindela",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00124"
+      ],
+      "phone": "(704) 555-0115 x292",
+      "email": "frederick.puente-maphindela@lindencrest-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00108",
+      "first_name": "Kenneth",
+      "last_name": "Zemanek-Woods",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00125"
+      ],
+      "phone": "(314) 555-0159 x276",
+      "email": "kenneth.zemanek-woods@quillhithe-family-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00109",
+      "first_name": "Barbara",
+      "last_name": "Interminei-Goncalves",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00126"
+      ],
+      "phone": "(305) 555-0111 x351",
+      "email": "barbara.interminei-goncalves@quillshaw-health-neurology-gutierrezchester.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00110",
+      "first_name": "Tiffany",
+      "last_name": "Mende-Mlangeni",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00127"
+      ],
+      "phone": "(512) 555-0195 x382",
+      "email": "tiffany.mende-mlangeni@wrenmoor-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00111",
+      "first_name": "Brandon",
+      "last_name": "Johansson-Walker",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00128"
+      ],
+      "phone": "(305) 555-0176 x239",
+      "email": "brandon.johansson-walker@nettlevale-neurology-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00112",
+      "first_name": "Patty",
+      "last_name": "Stey-Lage",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00129"
+      ],
+      "phone": "(512) 555-0153 x201",
+      "email": "patty.stey-lage@sloewick-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00113",
+      "first_name": "Elizabeth",
+      "last_name": "Herrera-Alonzo",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00130"
+      ],
+      "phone": "(518) 555-0165 x206",
+      "email": "elizabeth.herrera-alonzo@heronmere-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00114",
+      "first_name": "Terry",
+      "last_name": "Leskinen-Ertaş",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00131"
+      ],
+      "phone": "(808) 555-0181 x256",
+      "email": "terry.leskinen-ertas@sorrelworth-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00115",
+      "first_name": "April",
+      "last_name": "Vasconcelos-Lindholm",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00132"
+      ],
+      "phone": "(520) 555-0181 x281",
+      "email": "april.vasconcelos-lindholm@bitternford-health-neurology-lake-margaretview.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00116",
+      "first_name": "Samantha",
+      "last_name": "Concepción-Alanko",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00133"
+      ],
+      "phone": "(317) 555-0181 x369",
+      "email": "samantha.concepcion-alanko@rowanhollow-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00117",
+      "first_name": "Carla",
+      "last_name": "Ojua-Şener",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00134"
+      ],
+      "phone": "(509) 555-0176 x362",
+      "email": "carla.ojua-sener@sorrelhaven-health-neurology-stoutfort.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00118",
+      "first_name": "Erik",
+      "last_name": "Cooper-Dickinson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00135"
+      ],
+      "phone": "(503) 555-0102 x248",
+      "email": "erik.cooper-dickinson@thistlecrest-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00119",
+      "first_name": "Mark",
+      "last_name": "Nyberg-Sager",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00136"
+      ],
+      "phone": "(216) 555-0177 x343",
+      "email": "mark.nyberg-sager@burdockhollow-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00120",
+      "first_name": "Alexander",
+      "last_name": "Drub-Fernandez",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00137"
+      ],
+      "phone": "(602) 555-0110 x338",
+      "email": "alexander.drub-fernandez@bitternford-health-neurology-valerieton.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00121",
+      "first_name": "Philip",
+      "last_name": "Callegaro-Holmström",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00138"
+      ],
+      "phone": "(703) 555-0113 x283",
+      "email": "philip.callegaro-holmstrom@otterwick-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00122",
+      "first_name": "Chelsey",
+      "last_name": "Chiliza-Adebisi",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00139"
+      ],
+      "phone": "(601) 555-0107 x306",
+      "email": "chelsey.chiliza-adebisi@cinderhaven-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00123",
+      "first_name": "Joseph",
+      "last_name": "Strong-Campos",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00140"
+      ],
+      "phone": "(520) 555-0107 x307",
+      "email": "joseph.strong-campos@bitternford-health-neurology-west-sarah.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00124",
+      "first_name": "Martha",
+      "last_name": "Jones-Eraslan",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00141"
+      ],
+      "phone": "(616) 555-0131 x297",
+      "email": "martha.jones-eraslan@gorsemere-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00125",
+      "first_name": "Shannon",
+      "last_name": "Magnani-Cymer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00142"
+      ],
+      "phone": "(502) 555-0175 x304",
+      "email": "shannon.magnani-cymer@campionridge-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00126",
+      "first_name": "Jordan",
+      "last_name": "Kambs-Johansson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00143"
+      ],
+      "phone": "(313) 555-0183 x263",
+      "email": "jordan.kambs-johansson@sloeworth-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00127",
+      "first_name": "Ashley",
+      "last_name": "Johansson-Campbell",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00144"
+      ],
+      "phone": "(512) 555-0188 x213",
+      "email": "ashley.johansson-campbell@teaselhaven-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00128",
+      "first_name": "Sarah",
+      "last_name": "Nunez-Hjelm",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00145"
+      ],
+      "phone": "(912) 555-0187 x328",
+      "email": "sarah.nunez-hjelm@bramblebrook-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00129",
+      "first_name": "Caitlin",
+      "last_name": "Doesburg-Thomas",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00146"
+      ],
+      "phone": "(509) 555-0155 x363",
+      "email": "caitlin.doesburg-thomas@sorrelhaven-health-neurology-brownville.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00130",
+      "first_name": "Ashley",
+      "last_name": "Wielgat-Schweitzer",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00147"
+      ],
+      "phone": "(912) 555-0109 x344",
+      "email": "ashley.wielgat-schweitzer@sablehaven-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00131",
+      "first_name": "Katie",
+      "last_name": "Bradshaw-Plath",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00149"
+      ],
+      "phone": "(305) 555-0194 x373",
+      "email": "katie.bradshaw-plath@yarrowhollow-health-neurology-west-antonio.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00132",
+      "first_name": "Christopher",
+      "last_name": "Baudry-Bakare",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00150"
+      ],
+      "phone": "(213) 555-0160 x246",
+      "email": "christopher.baudry-bakare@cindermere-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00133",
+      "first_name": "Amanda",
+      "last_name": "Kronenberg",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00100"
+      ],
+      "phone": "(801) 555-0115 x220",
+      "email": "amanda.salo-kronenberg@otterdale-health-neurology-sarahland.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": [
+        {
+          "type": "duplicate",
+          "of": "POFS-00084"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00134",
+      "first_name": "Tina",
+      "last_name": "Seguin-Gruijl",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00014"
+      ],
+      "phone": "(316) 555-0126 x207",
+      "email": "tina.seguin-gruijl@cinderford-neurology-associates.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00135",
+      "first_name": "Patrick",
+      "last_name": "Cwalile-Şama",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00128"
+      ],
+      "phone": "(305) 555-0176 x217",
+      "email": "patrick.cwalile-sama@nettlevale-neurology-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-05-15",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00136",
+      "first_name": "Sergio",
+      "last_name": "Legrand-Hietanen",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00023"
+      ],
+      "phone": "(303) 555-0137 x394",
+      "email": "sergio.legrand-hietanen@quillbrook-health-partners.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00137",
+      "first_name": "Kenneth",
+      "last_name": "Verbeek",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00119"
+      ],
+      "phone": "(404) 555-0178 x380",
+      "email": "kenneth.palacios-verbeek@burdockhurst-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": [
+        {
+          "type": "duplicate",
+          "of": "POFS-00102"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00138",
+      "first_name": "Gordon",
+      "last_name": "Melgar-Stoffelsz",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00061"
+      ],
+      "phone": "(602) 555-0122 x340",
+      "email": "gordon.melgar-stoffelsz@bitternford-health-neurology-nicholasshire.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00139",
+      "first_name": "Allison",
+      "last_name": "Heikkilä-Koski",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00065"
+      ],
+      "phone": "(520) 555-0130 x304",
+      "email": "allison.heikkila-koski@bitternford-health-neurology-parkport.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00140",
+      "first_name": "Lisa",
+      "last_name": "Karhu-Dlamdaka",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00028"
+      ],
+      "phone": "(214) 555-0157 x306",
+      "email": "lisa.karhu-dlamdaka@rowanbrook-neurology-associates.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00141",
+      "first_name": "Jason",
+      "last_name": "Hollander-Johansson",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00062"
+      ],
+      "phone": "(502) 555-0108 x283",
+      "email": "jason.hollander-johansson@bitterndale-medical-group.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00142",
+      "first_name": "Jennifer",
+      "last_name": "Fernandez-Manço",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00131"
+      ],
+      "phone": "(808) 555-0181 x366",
+      "email": "jennifer.fernandez-manco@sorrelworth-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00143",
+      "first_name": "William",
+      "last_name": "Carter-Hultgren",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00086"
+      ],
+      "phone": "(703) 555-0127 x357",
+      "email": "william.carter-hultgren@yarrowford-health-neurology-josemouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00144",
+      "first_name": "Brandon",
+      "last_name": "Tafoya-Kettunen",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00132"
+      ],
+      "phone": "(520) 555-0181 x339",
+      "email": "brandon.tafoya-kettunen@bitternford-health-neurology-lake-margaretview.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00145",
+      "first_name": "Destiny",
+      "last_name": "Porto-Persson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00037"
+      ],
+      "phone": "(225) 555-0168 x283",
+      "email": "destiny.porto-persson@sorrelshaw-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00146",
+      "first_name": "Brandy",
+      "last_name": "Lewis-Väisänen",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00079"
+      ],
+      "phone": "(916) 555-0114 x341",
+      "email": "brandy.lewis-vaisanen@fennelcombe-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "departed",
+      "departed_on": "2026-01-28",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00147",
+      "first_name": "Danielle",
+      "last_name": "Ciarka-Guilbert",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00141"
+      ],
+      "phone": "(616) 555-0131 x251",
+      "email": "danielle.ciarka-guilbert@gorsemere-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00148",
+      "first_name": "Alicia",
+      "last_name": "Almagià-Çetin",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00057"
+      ],
+      "phone": "(702) 555-0178 x333",
+      "email": "alicia.almagia-cetin@burdockmere-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00149",
+      "first_name": "Misty",
+      "last_name": "Kocoł-Khuba",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00075"
+      ],
+      "phone": "(206) 555-0183 x261",
+      "email": "misty.koco-khuba@larchcrest-physicians.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00150",
+      "first_name": "Dana",
+      "last_name": "Falabi-Hatfield",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00077"
+      ],
+      "phone": "(617) 555-0193 x262",
+      "email": "dana.falabi-hatfield@nettleshaw-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00151",
+      "first_name": "William",
+      "last_name": "Montalvo-Şama",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00149"
+      ],
+      "phone": "(305) 555-0194 x300",
+      "email": "william.montalvo-sama@yarrowhollow-health-neurology-west-antonio.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00152",
+      "first_name": "Edward",
+      "last_name": "Zimmer-Teixeira",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00150"
+      ],
+      "phone": "(213) 555-0160 x344",
+      "email": "edward.zimmer-teixeira@cindermere-health-partners.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00153",
+      "first_name": "Mary",
+      "last_name": "Nondaba-Dorawa",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00146"
+      ],
+      "phone": "(509) 555-0155 x335",
+      "email": "mary.nondaba-dorawa@sorrelhaven-health-neurology-brownville.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00154",
+      "first_name": "Robin",
+      "last_name": "Ovadia-Siqueira",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00097"
+      ],
+      "phone": "(601) 555-0142 x303",
+      "email": "robin.ovadia-siqueira@ploverdale-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00155",
+      "first_name": "Ian",
+      "last_name": "Häkkinen-Oyeniyi",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00030"
+      ],
+      "phone": "(619) 555-0151 x295",
+      "email": "ian.hakkinen-oyeniyi@gorseworth-community-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00156",
+      "first_name": "Donald",
+      "last_name": "Zimmer-Domínguez",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00096"
+      ],
+      "phone": "(919) 555-0183 x311",
+      "email": "donald.zimmer-dominguez@sorrelstead-neurology.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00157",
+      "first_name": "Carlos",
+      "last_name": "Madlala-Hedström",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00040"
+      ],
+      "phone": "(512) 555-0102 x243",
+      "email": "carlos.madlala-hedstrom@quillhurst-health-neurology-new-danielle.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00158",
+      "first_name": "Anna",
+      "last_name": "Olesiejuk-Mendes",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00103"
+      ],
+      "phone": "(214) 555-0149 x224",
+      "email": "anna.olesiejuk-mendes@sableford-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00159",
+      "first_name": "Jennifer",
+      "last_name": "Bave-Gomez",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00102"
+      ],
+      "phone": "(616) 555-0139 x321",
+      "email": "jennifer.bave-gomez@thistlehaven-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00160",
+      "first_name": "Danny",
+      "last_name": "Ahmed-Stac",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00022"
+      ],
+      "phone": "(702) 555-0140 x208",
+      "email": "danny.ahmed-stac@lindenmere-neurology.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00161",
+      "first_name": "Ryan",
+      "last_name": "Nene-Holmberg",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00076"
+      ],
+      "phone": "(609) 555-0121 x368",
+      "email": "ryan.nene-holmberg@heronshaw-health-partners.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00162",
+      "first_name": "Jerry",
+      "last_name": "Ceschi-Wela",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00026"
+      ],
+      "phone": "(215) 555-0113 x314",
+      "email": "jerry.ceschi-wela@lindenhithe-health-neurology-jillmouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00163",
+      "first_name": "Todd",
+      "last_name": "Mallet-Nkala",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00058"
+      ],
+      "phone": "(713) 555-0163 x286",
+      "email": "todd.mallet-nkala@campionworth-community-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00164",
+      "first_name": "Renee",
+      "last_name": "Peruzzi-Baca",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00033"
+      ],
+      "phone": "(713) 555-0189 x243",
+      "email": "renee.peruzzi-baca@campionford-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "departed",
+      "departed_on": "2026-08-20",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00165",
+      "first_name": "Kevin",
+      "last_name": "Meyer-Ciúinín",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00016"
+      ],
+      "phone": "(405) 555-0180 x351",
+      "email": "kevin.meyer-ciuinin@burdockcrest-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00166",
+      "first_name": "Kenneth",
+      "last_name": "Erdoğan-İnönü",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00092"
+      ],
+      "phone": "(305) 555-0124 x258",
+      "email": "kenneth.erdogan-inonu@fennelcrest-neurology.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00167",
+      "first_name": "Donald",
+      "last_name": "Viviani-Wagner",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00048"
+      ],
+      "phone": "(619) 555-0158 x396",
+      "email": "donald.viviani-wagner@wrencrest-community-health-center.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00168",
+      "first_name": "Christina",
+      "last_name": "Gómez-Mohammed",
+      "role": "billing_specialist",
+      "office_ids": [
+        "POFC-00029"
+      ],
+      "phone": "(410) 555-0155 x261",
+      "email": "christina.gomez-mohammed@bitternhurst-neuroscience-institute.example",
+      "duties": [
+        "benefits_verification",
+        "copay_questions"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00169",
+      "first_name": "Julie",
+      "last_name": "Adelakun-Jacobs",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00130"
+      ],
+      "phone": "(518) 555-0165 x278",
+      "email": "julie.adelakun-jacobs@heronmere-neurology-clinic.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00170",
+      "first_name": "Daniel",
+      "last_name": "Kumpulainen-Söderström",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00048"
+      ],
+      "phone": "(619) 555-0158 x282",
+      "email": "daniel.kumpulainen-soderstrom@wrencrest-community-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00171",
+      "first_name": "Ryan",
+      "last_name": "Tréinfhear-Aronsson",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00032"
+      ],
+      "phone": "(515) 555-0181 x212",
+      "email": "ryan.treinfhear-aronsson@plovervale-health-neurology-bishopton.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00172",
+      "first_name": "Zachary",
+      "last_name": "Johansson-Elberts",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00136"
+      ],
+      "phone": "(216) 555-0177 x311",
+      "email": "zachary.johansson-elberts@burdockhollow-neurology-associates.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00173",
+      "first_name": "Jeffrey",
+      "last_name": "Schweitzer-Gaito",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00068"
+      ],
+      "phone": "(804) 555-0171 x377",
+      "email": "jeffrey.schweitzer-gaito@yarrowford-health-neurology-south-joshuahaven.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00174",
+      "first_name": "Karen",
+      "last_name": "Njinji-Tessier",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00092"
+      ],
+      "phone": "(305) 555-0124 x359",
+      "email": "karen.njinji-tessier@fennelcrest-neurology.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00175",
+      "first_name": "Jade",
+      "last_name": "Chiesa-Jones",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00042"
+      ],
+      "phone": "(515) 555-0125 x369",
+      "email": "jade.chiesa-jones@plovervale-health-neurology-new-christopherfort.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00176",
+      "first_name": "Michael",
+      "last_name": "Mphahlwa-Ndima",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00125"
+      ],
+      "phone": "(314) 555-0159 x379",
+      "email": "michael.mphahlwa-ndima@quillhithe-family-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00177",
+      "first_name": "Alexis",
+      "last_name": "Powell-Andersson",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00037"
+      ],
+      "phone": "(225) 555-0168 x342",
+      "email": "alexis.powell-andersson@sorrelshaw-medical-group.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00178",
+      "first_name": "Rebecca",
+      "last_name": "Rörricht-Bellocchio",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00061"
+      ],
+      "phone": "(602) 555-0122 x272",
+      "email": "rebecca.rorricht-bellocchio@bitternford-health-neurology-nicholasshire.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00179",
+      "first_name": "Jo",
+      "last_name": "Sibeko-Omojola",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00147"
+      ],
+      "phone": "(912) 555-0109 x324",
+      "email": "jo.sibeko-omojola@sablehaven-health-partners.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00180",
+      "first_name": "Donna",
+      "last_name": "Olsson-Svensson",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00121"
+      ],
+      "phone": "(313) 555-0195 x324",
+      "email": "donna.olsson-svensson@quillwick-neurology.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00181",
+      "first_name": "Robert",
+      "last_name": "Moore-Robinson",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00072"
+      ],
+      "phone": "(509) 555-0178 x216",
+      "email": "robert.moore-robinson@sorrelhaven-health-neurology-brendaport.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00182",
+      "first_name": "Morgan",
+      "last_name": "Cortez-Faloye",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00034"
+      ],
+      "phone": "(616) 555-0135 x351",
+      "email": "morgan.cortez-faloye@sorreldale-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00183",
+      "first_name": "Madison",
+      "last_name": "Bellocchio-Campos",
+      "role": "billing_specialist",
+      "office_ids": [
+        "POFC-00015",
+        "POFC-00097"
+      ],
+      "phone": "(713) 555-0197 x277",
+      "email": "madison.bellocchio-campos@sorrelgate-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "copay_questions"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": [
+        {
+          "type": "multi_office"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00184",
+      "first_name": "Denise",
+      "last_name": "Coates-Udinesi",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00028"
+      ],
+      "phone": "(214) 555-0157 x398",
+      "email": "denise.coates-udinesi@rowanbrook-neurology-associates.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-07-10",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00185",
+      "first_name": "Carol",
+      "last_name": "Ware-Bonilla",
+      "role": "billing_specialist",
+      "office_ids": [
+        "POFC-00131"
+      ],
+      "phone": "(808) 555-0181 x292",
+      "email": "carol.ware-bonilla@sorrelworth-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "copay_questions"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00186",
+      "first_name": "Cynthia",
+      "last_name": "Akdeniz-Watkins",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00089"
+      ],
+      "phone": "(813) 555-0140 x278",
+      "email": "cynthia.akdeniz-watkins@bramblehaven-neurology.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-05-05",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00187",
+      "first_name": "Lauren",
+      "last_name": "Kiviniemi-Rios",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00030"
+      ],
+      "phone": "(619) 555-0151 x298",
+      "email": "lauren.kiviniemi-rios@gorseworth-community-health-center.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00188",
+      "first_name": "Breanna",
+      "last_name": "Sobiło-Osborne",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00131"
+      ],
+      "phone": "(808) 555-0181 x271",
+      "email": "breanna.sobio-osborne@sorrelworth-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00189",
+      "first_name": "Sandra",
+      "last_name": "Harper-Jasso",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00067"
+      ],
+      "phone": "(206) 555-0128 x276",
+      "email": "sandra.harper-jasso@sorrelhaven-health-neurology-barbarafort.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00190",
+      "first_name": "Gregory",
+      "last_name": "Green-Bonnet",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00137"
+      ],
+      "phone": "(602) 555-0110 x328",
+      "email": "gregory.green-bonnet@bitternford-health-neurology-valerieton.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00191",
+      "first_name": "Robert",
+      "last_name": "Gülen-Odetola",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00056"
+      ],
+      "phone": "(216) 555-0164 x377",
+      "email": "robert.gulen-odetola@wrenhurst-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00192",
+      "first_name": "Rachel",
+      "last_name": "Mansız-Ogulana",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00079"
+      ],
+      "phone": "(916) 555-0114 x378",
+      "email": "rachel.mansz-ogulana@fennelcombe-physicians.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00193",
+      "first_name": "Andrea",
+      "last_name": "Molin-Eriksson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00142"
+      ],
+      "phone": "(502) 555-0175 x309",
+      "email": "andrea.molin-eriksson@campionridge-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00194",
+      "first_name": "David",
+      "last_name": "Bartłomiejczyk-Sutton",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00037"
+      ],
+      "phone": "(225) 555-0168 x310",
+      "email": "david.bartomiejczyk-sutton@sorrelshaw-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00195",
+      "first_name": "Nicole",
+      "last_name": "Calgari-Guyot",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00036"
+      ],
+      "phone": "(312) 555-0180 x379",
+      "email": "nicole.calgari-guyot@whinmoor-neurology-associates.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00196",
+      "first_name": "Tracey",
+      "last_name": "Mccoy-Borges",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00043"
+      ],
+      "phone": "(916) 555-0103 x389",
+      "email": "tracey.mccoy-borges@quillstead-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00197",
+      "first_name": "Tammy",
+      "last_name": "Nygren-Anderson",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00014"
+      ],
+      "phone": "(316) 555-0126 x328",
+      "email": "tammy.nygren-anderson@cinderford-neurology-associates.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00198",
+      "first_name": "Shane",
+      "last_name": "Korutürk-Lloyd",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00071"
+      ],
+      "phone": "(816) 555-0177 x319",
+      "email": "shane.koruturk-lloyd@fennelhithe-neurological-care.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00199",
+      "first_name": "Katrina",
+      "last_name": "Olivo-Mapholoba",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00091"
+      ],
+      "phone": "(410) 555-0157 x358",
+      "email": "katrina.olivo-mapholoba@juniperstead-neuroscience-institute.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00200",
+      "first_name": "Teresa",
+      "last_name": "Zijlemans-Anderson",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00094"
+      ],
+      "phone": "(503) 555-0152 x251",
+      "email": "teresa.zijlemans-anderson@kestrelridge-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00201",
+      "first_name": "Kristina",
+      "last_name": "Hämäläinen-Fogel",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00147"
+      ],
+      "phone": "(912) 555-0109 x238",
+      "email": "kristina.hamalainen-fogel@sablehaven-health-partners.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00202",
+      "first_name": "Kayla",
+      "last_name": "Kolen-Bamidele",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00105"
+      ],
+      "phone": "(602) 555-0101 x237",
+      "email": "kayla.kolen-bamidele@campionhurst-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00203",
+      "first_name": "Diane",
+      "last_name": "Skrobot-Faloye",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00049"
+      ],
+      "phone": "(205) 555-0151 x219",
+      "email": "diane.skrobot-faloye@campionhollow-physicians.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00204",
+      "first_name": "William",
+      "last_name": "Gomes-Lange",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00020"
+      ],
+      "phone": "(214) 555-0147 x323",
+      "email": "william.gomes-lange@junipergate-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00205",
+      "first_name": "Emma",
+      "last_name": "Camargo-Cooper",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00150"
+      ],
+      "phone": "(213) 555-0160 x368",
+      "email": "emma.camargo-cooper@cindermere-health-partners.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00206",
+      "first_name": "Sue",
+      "last_name": "Gonsior-Bohnbach",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00086"
+      ],
+      "phone": "(703) 555-0127 x232",
+      "email": "sue.gonsior-bohnbach@yarrowford-health-neurology-josemouth.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00207",
+      "first_name": "Rebecca",
+      "last_name": "Mandrysz-Gabbana",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00125"
+      ],
+      "phone": "(314) 555-0159 x261",
+      "email": "rebecca.mandrysz-gabbana@quillhithe-family-health-center.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00208",
+      "first_name": "Cindy",
+      "last_name": "Bilgin-Gibson",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00048"
+      ],
+      "phone": "(619) 555-0158 x395",
+      "email": "cindy.bilgin-gibson@wrencrest-community-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00209",
+      "first_name": "John",
+      "last_name": "Turchetta-Tarhan",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00046"
+      ],
+      "phone": "(214) 555-0114 x251",
+      "email": "john.turchetta-tarhan@whinshaw-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00210",
+      "first_name": "Karen",
+      "last_name": "Rautiainen-Siering",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00029"
+      ],
+      "phone": "(410) 555-0155 x259",
+      "email": "karen.rautiainen-siering@bitternhurst-neuroscience-institute.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00211",
+      "first_name": "Michelle",
+      "last_name": "Andersson-Kozica",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00022"
+      ],
+      "phone": "(702) 555-0140 x306",
+      "email": "michelle.andersson-kozica@lindenmere-neurology.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00212",
+      "first_name": "Sharon",
+      "last_name": "Bilgin-Valdez",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00101"
+      ],
+      "phone": "(515) 555-0198 x223",
+      "email": "sharon.bilgin-valdez@plovervale-health-neurology-south-samuel.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00213",
+      "first_name": "Renee",
+      "last_name": "Perez-Altera",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00035"
+      ],
+      "phone": "(614) 555-0104 x347",
+      "email": "renee.perez-altera@gorsecrest-health-partners.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-02-27",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00214",
+      "first_name": "Daniel",
+      "last_name": "Kallio-Lemonnier",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00050"
+      ],
+      "phone": "(216) 555-0118 x370",
+      "email": "daniel.kallio-lemonnier@aldershaw-neurological-care.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00215",
+      "first_name": "Manuel",
+      "last_name": "Schmitt-Oshin",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00124"
+      ],
+      "phone": "(704) 555-0115 x266",
+      "email": "manuel.schmitt-oshin@lindencrest-neurology-associates.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00216",
+      "first_name": "Jared",
+      "last_name": "Nyberg-Rees",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00150"
+      ],
+      "phone": "(213) 555-0160 x233",
+      "email": "jared.nyberg-rees@cindermere-health-partners.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "departed",
+      "departed_on": "2026-08-07",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00217",
+      "first_name": "Jill",
+      "last_name": "Arslan-Onjengenyamazane",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00097"
+      ],
+      "phone": "(601) 555-0142 x362",
+      "email": "jill.arslan-onjengenyamazane@ploverdale-neurology-clinic.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00218",
+      "first_name": "Joshua",
+      "last_name": "Dziuban-Mckinney",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00034"
+      ],
+      "phone": "(616) 555-0135 x337",
+      "email": "joshua.dziuban-mckinney@sorreldale-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-03-15",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00219",
+      "first_name": "Cynthia",
+      "last_name": "Rosales-Nzimase",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00046"
+      ],
+      "phone": "(214) 555-0114 x207",
+      "email": "cynthia.rosales-nzimase@whinshaw-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00220",
+      "first_name": "Tyler",
+      "last_name": "Mjoli-Ball",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00150"
+      ],
+      "phone": "(213) 555-0160 x248",
+      "email": "tyler.mjoli-ball@cindermere-health-partners.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00221",
+      "first_name": "Ashley",
+      "last_name": "Taylor-Legendre",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00116"
+      ],
+      "phone": "(804) 555-0142 x358",
+      "email": "ashley.taylor-legendre@bramblehithe-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00222",
+      "first_name": "Hunter",
+      "last_name": "Ramos",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00056"
+      ],
+      "phone": "(216) 555-0164 x230",
+      "email": "hunter.neuteboom-ramos@wrenhurst-neurology.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": [
+        {
+          "type": "duplicate",
+          "of": "POFS-00041"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00223",
+      "first_name": "Anthony",
+      "last_name": "Güçlü-Adegoke",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00050"
+      ],
+      "phone": "(216) 555-0118 x241",
+      "email": "anthony.guclu-adegoke@aldershaw-neurological-care.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00224",
+      "first_name": "Micheal",
+      "last_name": "Gülen-Andersson",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00101"
+      ],
+      "phone": "(515) 555-0198 x248",
+      "email": "micheal.gulen-andersson@plovervale-health-neurology-south-samuel.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-06-20",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00225",
+      "first_name": "Jason",
+      "last_name": "Jones-Geerling",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00083"
+      ],
+      "phone": "(703) 555-0147 x331",
+      "email": "jason.jones-geerling@tansyshaw-neurology-associates.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00226",
+      "first_name": "Albert",
+      "last_name": "Medina-Faleti",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00044"
+      ],
+      "phone": "(215) 555-0114 x251",
+      "email": "albert.medina-faleti@lindenhithe-health-neurology-edwardton.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00227",
+      "first_name": "Tyler",
+      "last_name": "Stoll-Obiała",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00133"
+      ],
+      "phone": "(317) 555-0181 x398",
+      "email": "tyler.stoll-obiaa@rowanhollow-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00228",
+      "first_name": "Troy",
+      "last_name": "Karpeta-Johansson",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00055"
+      ],
+      "phone": "(616) 555-0143 x257",
+      "email": "troy.karpeta-johansson@larchhollow-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "departed",
+      "departed_on": "2026-06-24",
+      "quality_flags": [
+        {
+          "type": "departed"
+        }
+      ]
+    },
+    {
+      "id": "POFS-00229",
+      "first_name": "Jeffery",
+      "last_name": "Chotzen-Wilson",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00108"
+      ],
+      "phone": "(407) 555-0135 x293",
+      "email": "jeffery.chotzen-wilson@wrenhithe-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00230",
+      "first_name": "Charles",
+      "last_name": "Andersson-Sanches",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00096"
+      ],
+      "phone": "(919) 555-0183 x242",
+      "email": "charles.andersson-sanches@sorrelstead-neurology.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00231",
+      "first_name": "Mary",
+      "last_name": "Hannula-Mkholo",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00097"
+      ],
+      "phone": "(601) 555-0142 x228",
+      "email": "mary.hannula-mkholo@ploverdale-neurology-clinic.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00232",
+      "first_name": "Thomas",
+      "last_name": "Väyrynen-Bernini",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00049"
+      ],
+      "phone": "(205) 555-0151 x272",
+      "email": "thomas.vayrynen-bernini@campionhollow-physicians.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00233",
+      "first_name": "Jacob",
+      "last_name": "Mora-Treviño",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00016"
+      ],
+      "phone": "(405) 555-0180 x348",
+      "email": "jacob.mora-trevino@burdockcrest-physicians.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00234",
+      "first_name": "Emily",
+      "last_name": "Roberts-Andersson",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00024"
+      ],
+      "phone": "(602) 555-0167 x341",
+      "email": "emily.roberts-andersson@bitternford-health-neurology-greenbury.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00235",
+      "first_name": "Jacob",
+      "last_name": "Köhler-Panzera",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00050"
+      ],
+      "phone": "(216) 555-0118 x221",
+      "email": "jacob.kohler-panzera@aldershaw-neurological-care.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00236",
+      "first_name": "Mike",
+      "last_name": "Barillaro-Zänker",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00069"
+      ],
+      "phone": "(205) 555-0193 x226",
+      "email": "mike.barillaro-zanker@alderstead-neurology-clinic.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00237",
+      "first_name": "Paul",
+      "last_name": "Mrotek-Bradshaw",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00057"
+      ],
+      "phone": "(702) 555-0178 x260",
+      "email": "paul.mrotek-bradshaw@burdockmere-neuroscience-institute.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00238",
+      "first_name": "Natalie",
+      "last_name": "Bauer-Stenberg",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00055"
+      ],
+      "phone": "(616) 555-0143 x396",
+      "email": "natalie.bauer-stenberg@larchhollow-neurological-care.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00239",
+      "first_name": "Frederick",
+      "last_name": "Heinonen-Moraes",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00013"
+      ],
+      "phone": "(206) 555-0129 x316",
+      "email": "frederick.heinonen-moraes@sorrelhaven-health-neurology-mendozabury.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00240",
+      "first_name": "Sabrina",
+      "last_name": "Gute-Ogunyeye",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00067"
+      ],
+      "phone": "(206) 555-0128 x208",
+      "email": "sabrina.gute-ogunyeye@sorrelhaven-health-neurology-barbarafort.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00241",
+      "first_name": "Dennis",
+      "last_name": "Archuleta-Ogunbiyi",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00098"
+      ],
+      "phone": "(713) 555-0163 x362",
+      "email": "dennis.archuleta-ogunbiyi@wrenfell-family-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00242",
+      "first_name": "Edward",
+      "last_name": "John-Warmuz",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00098"
+      ],
+      "phone": "(713) 555-0163 x313",
+      "email": "edward.john-warmuz@wrenfell-family-health-center.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00243",
+      "first_name": "Andrea",
+      "last_name": "Stoll-Mosemann",
+      "role": "billing_specialist",
+      "office_ids": [
+        "POFC-00115"
+      ],
+      "phone": "(801) 555-0199 x297",
+      "email": "andrea.stoll-mosemann@sablecrest-medical-group.example",
+      "duties": [
+        "benefits_verification",
+        "copay_questions"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00244",
+      "first_name": "Samantha",
+      "last_name": "Oladipupo-Quiroz",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00121"
+      ],
+      "phone": "(313) 555-0195 x348",
+      "email": "samantha.oladipupo-quiroz@quillwick-neurology.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00245",
+      "first_name": "Michael",
+      "last_name": "Cibin-Mazzacurati",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00088"
+      ],
+      "phone": "(314) 555-0168 x293",
+      "email": "michael.cibin-mazzacurati@larchcombe-neurology-clinic.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00246",
+      "first_name": "Jillian",
+      "last_name": "Jaiyeola-Lukhele",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00131"
+      ],
+      "phone": "(808) 555-0181 x293",
+      "email": "jillian.jaiyeola-lukhele@sorrelworth-neurology-associates.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00247",
+      "first_name": "Gina",
+      "last_name": "Westerlund-Miechowicz",
+      "role": "prior_authorization_coordinator",
+      "office_ids": [
+        "POFC-00033"
+      ],
+      "phone": "(713) 555-0189 x369",
+      "email": "gina.westerlund-miechowicz@campionford-neurological-care.example",
+      "duties": [
+        "prior_authorization",
+        "appeals",
+        "benefits_verification"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00248",
+      "first_name": "Kimberly",
+      "last_name": "Lopez-Mejía",
+      "role": "office_manager",
+      "office_ids": [
+        "POFC-00026"
+      ],
+      "phone": "(215) 555-0113 x324",
+      "email": "kimberly.lopez-mejia@lindenhithe-health-neurology-jillmouth.example",
+      "duties": [
+        "benefits_verification",
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00249",
+      "first_name": "Bryan",
+      "last_name": "Werner-Collazo",
+      "role": "nurse",
+      "office_ids": [
+        "POFC-00085"
+      ],
+      "phone": "(213) 555-0137 x346",
+      "email": "bryan.werner-collazo@marramdale-neurology.example",
+      "duties": [
+        "start_forms",
+        "refills",
+        "patient_education"
+      ],
+      "quorvantaconnect_portal": true,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    },
+    {
+      "id": "POFS-00250",
+      "first_name": "William",
+      "last_name": "Gallagher-Demirel",
+      "role": "medical_assistant",
+      "office_ids": [
+        "POFC-00032"
+      ],
+      "phone": "(515) 555-0181 x304",
+      "email": "william.gallagher-demirel@plovervale-health-neurology-bishopton.example",
+      "duties": [
+        "start_forms",
+        "refills"
+      ],
+      "quorvantaconnect_portal": false,
+      "status": "active",
+      "departed_on": null,
+      "quality_flags": []
+    }
+  ]
+}

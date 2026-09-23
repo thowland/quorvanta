@@ -14,3 +14,9 @@ tavorate, Brennick syndrome, Arden Quay Biosciences, QuorvantaConnect and every
 person, plan, pharmacy and organisation named in the pack do not exist. The
 licences grant no right to use any of those names as a trademark, and the pack
 contains no medical information.
+
+sources/label/label-spl.xml contains LOINC codes. This material contains
+content from LOINC (http://loinc.org). LOINC is copyright Regenstrief
+Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC)
+Committee and is available at no cost under the license at
+http://loinc.org/license.

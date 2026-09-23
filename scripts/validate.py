@@ -26,8 +26,8 @@ ALLOWED_PHONES = {
     "1-800-222-1222",  # US Poison Control
 }
 FICTION_PHONE = re.compile(r"^1-800-555-01\d\d$")
-# Standards bodies whose canonical URLs FHIR resources must carry.
-ALLOWED_HOSTS = {"hl7.org", "terminology.hl7.org"}
+# Standards bodies whose canonical URLs FHIR resources and EPCIS documents must carry.
+ALLOWED_HOSTS = {"hl7.org", "terminology.hl7.org", "ref.gs1.org"}
 
 errors = []
 
@@ -57,7 +57,7 @@ def check_json_files():
 
 
 def check_markdown_notices():
-    for path in sorted(SRC.rglob("*.md")):
+    for path in sorted([*SRC.rglob("*.md"), *SRC.rglob("*.xml")]):
         head = "\n".join(path.read_text().splitlines()[:6]).lower()
         if "invented" not in head and "fictitious" not in head:
             fail(f"{path.relative_to(SRC)}: no fiction notice in the first lines")
@@ -190,7 +190,7 @@ def check_readme_counts(claims, refs, gaps, srds, dtc_doc, form_doc):
 
 def check_fiction_markers(denylist):
     for path in sorted(SRC.rglob("*")):
-        if path.suffix not in {".md", ".json"}:
+        if path.suffix not in {".md", ".json", ".xml"}:
             continue
         rel = path.relative_to(SRC)
         body = path.read_text()
@@ -1303,6 +1303,230 @@ def check_payer():
     ])
 
 
+def gs1_check(body):
+    total = sum(int(d) * (3 if i % 2 == 0 else 1) for i, d in enumerate(reversed(body)))
+    return str((10 - total % 10) % 10)
+
+
+def check_channel():
+    from datetime import date, timedelta
+    product = load("product/product-identifiers.json")
+    by_gtin = {p["gtin"]: p for p in product["packages"]}
+    packages = {p["id"]: p for p in product["packages"]}
+    lots = {l["lot"]: l for l in product["lots"]}
+    network = {p["id"]: p for p in load("access/specialty-pharmacy-network.json")["pharmacies"]}
+    tp = load("channel/trading-partners.json")
+    loc_owner, sp_by_loc = {}, {}
+    for p in tp["parties"]:
+        ok_prefix = p["prefix"] == "0300000" if p["id"] == "TP-AQB" else re.fullmatch(r"02000(0[1-9]|1[01])", p["prefix"])
+        if not ok_prefix:
+            fail(f"{p['id']}: prefix {p['prefix']} is outside the fiction ranges")
+        for g in [p["gln"]] + [l["gln"] for l in p["locations"]]:
+            if not re.fullmatch(r"\d{13}", g) or gs1_check(g[:-1]) != g[-1] or not g.startswith(p["prefix"]):
+                fail(f"{p['id']}: GLN {g} is malformed or has a wrong check digit")
+        for l in p["locations"]:
+            loc_owner[l["sgln"]] = p["id"]
+            if p["role"] == "dispenser":
+                sp_by_loc[l["sgln"]] = p["pharmacy_id"]
+        if p["role"] == "dispenser":
+            n = network.get(p["pharmacy_id"])
+            if n is None or n["ncpdp"].split()[0] != p["ncpdp"]:
+                fail(f"{p['id']}: not a network pharmacy, or NCPDP differs")
+
+    def package_of(epc):
+        m = re.fullmatch(r"urn:epc:id:sgtin:(\d{7})\.(\d{6})\.([A-Z0-9]{12})", epc)
+        if not m:
+            return None
+        body = m.group(2)[0] + m.group(1) + m.group(2)[1:]
+        return by_gtin.get(body + gs1_check(body))
+
+    events = load("channel/epcis-events.json")["document"]["epcisBody"]["eventList"]
+    state = {}                      # epc -> dict(lot, package, at, out, out_day)
+    dispensed = {}                  # (serial, day, pharmacy)
+    times = [e["eventTime"][:16] for e in events]
+    if times != sorted(times):
+        fail("channel/epcis-events.json: events are not in time order")
+    for n, e in enumerate(events):
+        day = e["eventTime"][:10]
+        where = e.get("bizLocation", e.get("readPoint", {})).get("id")
+        if where not in loc_owner:
+            fail(f"EPCIS event {n}: unknown location {where}")
+        epcs = e.get("epcList", []) + e.get("childEPCs", [])
+        for epc in epcs:
+            if epc.startswith("urn:epc:id:sscc:"):
+                m = re.fullmatch(r"urn:epc:id:sscc:(\d{7})\.(\d{10})", epc)
+                if not m:
+                    fail(f"EPCIS event {n}: malformed SSCC {epc}")
+                continue
+            pkg = package_of(epc)
+            if pkg is None:
+                fail(f"EPCIS event {n}: {epc} is not a serial of a pack GTIN")
+                continue
+            s = state.get(epc)
+            if e["bizStep"] == "commissioning":
+                lot = lots.get(e["ilmd"]["cbvmda:lotNumber"])
+                if s or lot is None or lot["package"] != pkg["id"] or lot["expiry"] != e["ilmd"]["cbvmda:itemExpirationDate"] or day < lot["manufactured"]:
+                    fail(f"EPCIS event {n}: {epc} commissioned twice, or lot, package, expiry or date is wrong")
+                    continue
+                state[epc] = {"lot": lot, "at": where, "out": None}
+                continue
+            if s is None:
+                fail(f"EPCIS event {n}: {epc} has events before commissioning")
+                continue
+            if s["out"]:
+                fail(f"EPCIS event {n}: {epc} has events after it was {s['out']}")
+            if e["type"] == "AggregationEvent" and e["action"] == "DELETE":
+                s["at"] = where
+            if e["bizStep"] == "dispensing":
+                if where not in sp_by_loc or s["at"] != where:
+                    fail(f"EPCIS event {n}: {epc} dispensed where it is not held")
+                if date.fromisoformat(s["lot"]["expiry"]) < date.fromisoformat(day) + timedelta(days=30):
+                    fail(f"EPCIS event {n}: {epc} dispensed from lot {s['lot']['lot']}, which expires before the supply is used")
+                s["out"], s["out_day"] = "dispensed", day
+                dispensed[epc.rsplit(".", 1)[1]] = (day, sp_by_loc.get(where), s["lot"]["lot"], pkg["ndc"])
+            if e["disposition"] == "expired" and day <= s["lot"]["expiry"]:
+                fail(f"EPCIS event {n}: {epc} marked expired before {s['lot']['expiry']}")
+            if e["bizStep"] == "destroying":
+                s["out"], s["out_day"] = "destroyed", day
+
+    feed = load("channel/dispense-867.json")
+    records = feed["records"]
+    seen = set()
+    for r in records:
+        d = dispensed.get(r["serial"])
+        if r["serial"] in seen or d != (r["dispense_date"], r["pharmacy_id"], r["lot"], r["ndc"]):
+            fail(f"{r['record_id']}: no matching EPCIS dispensing event, or serial reused")
+        seen.add(r["serial"])
+    if len(seen) != len(dispensed):
+        fail("channel/dispense-867.json: EPCIS dispensing events without an 867 record")
+    npis = {h["npi"] for h in load("crm/field-force.json")["hcps"]}
+    cases = {c["case_id"]: c for c in load("test-design/ps-cases.json")["cases"]}
+    tx = load("payer/transactions.json")
+    covs = {c["id"]: c for c in tx["coverages"]}
+    claim_sp = {(t["case_id"], t["date"]): t["pharmacy_id"] for t in tx["transactions"]
+                if t["type"] == "claim" and t["result"] == "paid" and covs[t["coverage_id"]]["order"] == "primary"}
+    start, end = feed["period"]["start"], feed["period"]["end"]
+    want, held = set(), set()
+    for cid, c in cases.items():
+        for s in c["shipments"]:
+            if not start <= s["date"] <= end or s["lot"] is None:
+                continue
+            sp = "SP-04" if s["source"] in ("bridge", "pap") else claim_sp.get((cid, s["date"]))
+            if s["status"] in ("SHIP_SHIPPED", "SHIP_DELIVERED"):
+                want.add((cid, s["date"], packages[s["package"]]["ndc"], s["lot"], sp))
+            else:
+                held.add((cid, s["date"], s["lot"]))
+    got = set()
+    for r in records:
+        if r["prescriber_npi"] not in npis:
+            fail(f"{r['record_id']}: prescriber NPI {r['prescriber_npi']} is not in crm/field-force.json")
+        if r["hub_case_id"]:
+            got.add((r["hub_case_id"], r["dispense_date"], r["ndc"], r["lot"], r["pharmacy_id"]))
+            c = cases[r["hub_case_id"]]
+            npi = next((h["npi"] for h in load("crm/field-force.json")["hcps"] if h["id"] == c["prescriber_id"]), None)
+            if r["prescriber_npi"] != npi or r["ship_to_state"] != c["patient"]["state"]:
+                fail(f"{r['record_id']}: prescriber or state differs from {r['hub_case_id']}")
+    if got != want:
+        fail(f"channel/dispense-867.json: case dispenses differ from case shipments: missing {sorted(want - got)[:3]}, extra {sorted(got - want)[:3]}")
+    for a in feed["held_allocations"]:
+        epc = next((k for k in state if k.endswith("." + a["serial"])), None)
+        if (a["case_id"], a["date"], a["lot"]) not in held or epc is None or state[epc]["out"] or state[epc]["lot"]["lot"] != a["lot"]:
+            fail(f"held allocation {a['serial']}: not a held case shipment, or not on hand")
+
+    periods = sorted({(r["period_start"], r["period_end"]) for r in load("channel/inventory-852.json")["reports"]})
+    for r in load("channel/inventory-852.json")["reports"]:
+        sp, a, b = r["pharmacy_id"], r["period_start"], r["period_end"]
+        nxt = str(date.fromisoformat(b) + timedelta(days=1))
+        mine = []
+        for epc, s in state.items():
+            if package_of(epc)["ndc"] != r["ndc"]:
+                continue
+            arrive = None
+            for e in events:
+                if e["type"] == "AggregationEvent" and e["action"] == "DELETE" and epc in e["childEPCs"] and sp_by_loc.get(e["bizLocation"]["id"]) == sp:
+                    arrive = e["eventTime"][:10]
+            if arrive:
+                mine.append((arrive, s.get("out_day"), s["out"], s["lot"]["lot"]))
+        on = lambda d: [m for m in mine if m[0] < d and (m[1] is None or m[1] >= d)]
+        calc = {
+            "opening_on_hand": len(on(a)),
+            "received": sum(a <= m[0] <= b for m in mine),
+            "dispensed": sum(m[2] == "dispensed" and a <= m[1] <= b for m in mine),
+            "closing_on_hand": len(on(nxt)),
+        }
+        adj = -sum(m[2] == "destroyed" and a <= m[1] <= b for m in mine)
+        lots_on = {}
+        for m in on(nxt):
+            lots_on[m[3]] = lots_on.get(m[3], 0) + 1
+        for k, v in calc.items():
+            if r[k] != v:
+                fail(f"852 {sp} {r['ndc']} {a}: {k} is {r[k]}, EPCIS gives {v}")
+        if sum(x["quantity"] for x in r["adjustments"]) != adj:
+            fail(f"852 {sp} {r['ndc']} {a}: adjustments differ from EPCIS destruction events")
+        if r["opening_on_hand"] + r["received"] - r["dispensed"] + sum(x["quantity"] for x in r["adjustments"]) != r["closing_on_hand"]:
+            fail(f"852 {sp} {r['ndc']} {a}: the row does not balance")
+        if {x["lot"]: x["quantity"] for x in r["lots_on_hand"]} != lots_on:
+            fail(f"852 {sp} {r['ndc']} {a}: lots_on_hand differ from EPCIS")
+
+    ships = load("channel/shipments.json")["shipments"]
+    for s in ships:
+        for line in s["lines"]:
+            if line["lot"] not in lots or lots[line["lot"]]["expiry"] != line["expiry"]:
+                fail(f"{s['id']}: lot or expiry is wrong")
+            if "sscc" in line and (not re.fullmatch(r"\d{18}", line["sscc"]) or gs1_check(line["sscc"][:-1]) != line["sscc"][-1]):
+                fail(f"{s['id']}: SSCC {line['sscc']} has a wrong check digit")
+        if s["kind"] == "sale" and not s.get("dscsa"):
+            fail(f"{s['id']}: sale without DSCSA transaction data")
+        if re.search(r"price|amount|cost", json.dumps(s), re.I):
+            fail(f"{s['id']}: carries a price; the pack has none")
+    readme_counts(text("README.md"), [
+        (r"(\d+) EPCIS events covering (\d+) serial numbers", (len(events), len(state))),
+        (r"(\d+) dispense records \((\d+) of them case shipments\)", (len(records), sum(bool(r["hub_case_id"]) for r in records))),
+        (r"(\d+) monthly inventory rows", (len(load("channel/inventory-852.json")["reports"]),)),
+        (r"(\d+) product shipments", (len(ships),)),
+    ])
+
+
+SPL_EXCERPT_CODES = {"34066-1", "43683-2", "34067-9", "34068-7", "43678-2", "34070-3", "43685-7", "34084-4", "34073-7", "43684-0", "49489-8"}
+
+
+def check_spl():
+    import xml.etree.ElementTree as ET
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import render
+    rel = "label/label-spl.xml"
+    body = text(rel)
+    if body != render.build_spl():
+        fail(f"{rel}: out of date with label.md or product-identifiers.json; run scripts/render.py")
+    try:
+        root = ET.fromstring(body.encode())
+    except ET.ParseError as e:
+        fail(f"{rel}: not well-formed XML: {e}")
+        return
+    ns = {"v": "urn:hl7-org:v3"}
+    if root.find("v:code", ns).get("code") != "34391-3":
+        fail(f"{rel}: document code is not 34391-3")
+    allowed = {c for c, _ in render.SPL_SECTIONS.values()} | {render.UNCLASSIFIED[0], "48780-1", "51945-4"}
+    titles = set()
+    for sec in root.iter("{urn:hl7-org:v3}section"):
+        code = sec.find("v:code", ns).get("code")
+        if code not in allowed:
+            fail(f"{rel}: unexpected section code {code}")
+        if sec.find("v:excerpt", ns) is not None and code not in SPL_EXCERPT_CODES:
+            fail(f"{rel}: highlights in section {code}, where FDA does not allow them")
+        t = sec.find("v:title", ns)
+        titles.add("".join(t.itertext()) if t is not None else "")
+    for m in re.finditer(r"^#{2,3} (\d+(?:\.\d+)?) (.+)$", text("label/label.md"), re.M):
+        if f"{m.group(1)} {m.group(2)}" not in titles:
+            fail(f"{rel}: label section {m.group(1)} is missing")
+    packs = [p["ndc"] for p in load("product/product-identifiers.json")["packages"]]
+    codes = [c.get("code") for c in root.iter("{urn:hl7-org:v3}code") if c.get("codeSystem") == render.NDC_OID]
+    for ndc in packs:
+        ten = render.ndc10(ndc)
+        if not re.fullmatch(r"\d{5}-\d{3}-\d{2}", ten) or ten not in codes:
+            fail(f"{rel}: 10-digit NDC for {ndc} missing or malformed")
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -1343,6 +1567,8 @@ def main():
     reports, ae_coverage = check_safety(lots)
     crm_coverage = check_field_force(claims_doc, set(srds), reports)
     check_payer()
+    check_channel()
+    check_spl()
     for owner, ids in [(r["id"], r["provokes"]) for r in reports.values()]:
         for f in ids:
             if f not in faults:

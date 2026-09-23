@@ -116,7 +116,7 @@ def stamp():
 def save(path, rows):
     tmp = path.with_suffix(".tmp")
     with tmp.open("w", newline="") as f:
-        csv.writer(f).writerows(rows)
+        csv.writer(f, lineterminator="\n").writerows(rows)
     tmp.replace(path)
 
 

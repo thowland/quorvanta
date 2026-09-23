@@ -155,7 +155,7 @@ def main():
     order = list(CHECKS)
     rows.sort(key=lambda r: (r["priority"], order.index(r["kind"]), r["name"].lower()))
     with OUT.open("w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     by = {}

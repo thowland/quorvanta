@@ -131,6 +131,8 @@ python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real bran
 python3 scripts/render.py                              # regenerate program-terms.md, product-identifiers.md, payer/formulary-fhir.json and label/label-spl.xml
 python3 scripts/build_channel.py                       # regenerate channel/ from the cases, claims, lots and CRM
 .venv/bin/python scripts/generate_population.py        # regenerate population/ (needs Faker; see sources/README.md)
+python3 scripts/extract_names.py                       # refresh names-to-check.csv, the invented names needing clearance
+python3 scripts/namecheck.py --limit 90                # exact-phrase web search per name; needs search API credentials (see its docstring)
 ```
 
 Run the validator after any edit. It checks:

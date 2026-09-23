@@ -11,6 +11,24 @@ These are needed before the repository is public.
   - plans, practices, pharmacies, labs and supply-chain parties;
   - people.
   Candidates to check first: Keystone Crest, Tallgrass Community Health, and any practice name built from a common word.
+
+  `names-to-check.csv` lists them: 240 names at the time of writing, in about 210 distinct stems. It comes from `python3 scripts/extract_names.py`, which re-reads the pack and keeps any status and notes already entered.
+  - **Priority A:** brands, generics, companies, programs, trials, the disease, the ticker and the "Jev" mention.
+  - **Priority B:** journals, payers, pharmacies, supply chain, practices and labs.
+  - **Columns:** each row says what kind of check it needs and where the name is used. The `stem` column gives the distinctive part to search for; the 30 payer, pharmacy and supply-chain rows reduce to 13 stems.
+  - **Left out:** people, cities, public programs and standards bodies.
+
+  **First-pass web check.** `python3 scripts/namecheck.py` runs an exact-phrase search (the name in quotes) for each unchecked row and fills in the status column and the notes column (the lookup's date, time and timezone).
+  - **Status values:** `available`, `in use` (at least one result contains the exact phrase) or `N/A` (generic names and the "Jev" row, which are not searched).
+  - **Evidence** for each search goes to `namecheck-log.jsonl`.
+  - **Backends.** It needs search credentials:
+    - Google's Custom Search JSON API, which is closed to new customers and ends on 2027-01-01;
+    - SerpApi, for Google results;
+    - the Brave Search API.
+  - **Quotas and resuming.** Use `--limit` to stay inside a daily quota; the file is saved after every lookup, so a run can be resumed.
+  - **Limits of the check.** `available` means only that no web page uses the phrase. It is not a trademark clearance, and priority A names still need the register searches listed in the `check` column.
+- **Stock ticker.** The press releases say "Nasdaq: AQBX". Check that the ticker is unused, or drop the exchange and ticker from the releases.
+- **"Jev".** `sources/README.md` mentions a "Jev `choice` question" in the claim schema section. If Jev is a real product, reword the sentence.
 - **Denylist.** Assemble a real-names list outside the repository and run `python3 scripts/validate.py --denylist <file>`. Set `$QUORVANTA_DENYLIST` so the pre-commit hook uses it.
 - **Answer keys.** Decide whether to hold back a private scenario set, since the public `known-gaps`, `ps-known-gaps` and `expected` fields will end up in model training data.
 - **Label decisions.** Two points need a decision (see sources/README.md, "Machine-readable label"):

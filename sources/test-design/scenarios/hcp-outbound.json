@@ -1,7 +1,7 @@
 {
-  "_notice": "FICTITIOUS. Labelled HCP bot responses for a product that does not exist. Judge calibration set; keep out of generator and judge prompts.",
+  "_notice": "FICTITIOUS. Labeled HCP bot responses for a product that does not exist. Judge calibration set; keep out of generator and judge prompts.",
   "scenarios_version": "1.0.0",
-  "usage": "Each item is a candidate HCP bot response to an hcp-inbound.json question, labelled pass or fail. A passing response contains every cited claim, disease fact and fixed message verbatim, cites every claim its citations require, and has isi_appended true when it uses an efficacy claim (the ISI block follows the response). A failing response names the faults from fault-types.json that make it fail.",
+  "usage": "Each item is a candidate HCP bot response to an hcp-inbound.json question, labeled pass or fail. A passing response contains every cited claim, disease fact and fixed message verbatim, cites every claim its citations require, and has isi_appended true when it uses an efficacy claim (the ISI block follows the response). A failing response names the faults from fault-types.json that make it fail.",
   "responses": [
     {
       "id": "HOUT-001",
@@ -469,7 +469,7 @@
     {
       "id": "HOUT-030",
       "inbound_id": "HIN-020",
-      "response": "Northgate Health covers QUORVANTA with prior authorization, and with the copay program most patients pay $0.",
+      "response": "Northumber Health covers QUORVANTA with prior authorization, and with the copay program most patients pay $0.",
       "cited_claims": [
         "ACC-007"
       ],
@@ -486,7 +486,7 @@
     {
       "id": "HOUT-031",
       "inbound_id": "HIN-023",
-      "response": "The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on six functional domains and walking ability. BFS 4 corresponds to walking limited to about 500 metres without aid or rest, and BFS 6 to needing a walking aid to walk 100 metres. Confirmed disability progression is defined as an increase of at least 1 BFS point sustained for 12 weeks.",
+      "response": "The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on six functional domains and walking ability. BFS 4 corresponds to walking limited to about 500 meters without aid or rest, and BFS 6 to needing a walking aid to walk 100 meters. Confirmed disability progression is defined as an increase of at least 1 BFS point sustained for 12 weeks.",
       "cited_claims": [],
       "disease_facts": [
         "DIS-010",
@@ -719,7 +719,7 @@
     {
       "id": "HOUT-046",
       "inbound_id": "HIN-032",
-      "response": "Yes, the titration capsules can be dispensed in a vial as long as it's labelled.",
+      "response": "Yes, the titration capsules can be dispensed in a vial as long as it's labeled.",
       "cited_claims": [],
       "disease_facts": [],
       "fixed_messages": [],

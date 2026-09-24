@@ -36,7 +36,7 @@ References: REF-001, REF-004, REF-010
 
 **Typical question:** Can QUORVANTA be given to a patient on hemodialysis?
 
-QUORVANTA is not recommended in patients with moderate or severe renal impairment because of increased exposure to the inactive metabolite hydroxypropyl glutarimide (HPG), which rose 2.1-fold and 3.2-fold in moderate and severe impairment in a single-dose study. No patients on hemodialysis were studied, and the dialyzability of HPG is unknown. Arden Quay Biosciences has no data to support use in end-stage renal disease.
+QUORVANTA is not recommended in patients with moderate or severe renal impairment because of increased exposure to the inactive metabolite hydroxypropyl glavorimide (HPG), which rose 2.1-fold and 3.2-fold in moderate and severe impairment in a single-dose study. No patients on hemodialysis were studied, and the dialyzability of HPG is unknown. Arden Quay Biosciences has no data to support use in end-stage renal disease.
 
 References: REF-001, REF-007
 

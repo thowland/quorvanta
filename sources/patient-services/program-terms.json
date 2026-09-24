@@ -1,9 +1,9 @@
 {
-  "_notice": "FICTITIOUS. QuorvantaConnect, the Arden Quay Patient Assistance Foundation and every term, amount and threshold here are invented for a product that does not exist. This is the full text summarised by REF-022; where they overlap they must agree.",
+  "_notice": "FICTITIOUS. QuorvantaConnect, the Arden Quay Patient Assistance Foundation and every term, amount and threshold here are invented for a product that does not exist. This is the full text summarized by REF-022; where they overlap they must agree.",
   "program": "QuorvantaConnect",
   "terms_version": "2.1",
   "effective": "2026-01-01",
-  "summarised_by": "REF-022",
+  "summarized_by": "REF-022",
   "contact": {
     "phone": "1-800-555-0183",
     "hours": "Monday through Friday, 8 a.m. to 8 p.m. Eastern Time",
@@ -148,7 +148,7 @@
         },
         {
           "id": "PGM-BRIDGE.3",
-          "text": "Bridge supply provides up to 60 days of QUORVANTA in total, dispensed in 30-day fills by Tidewater Specialty Pharmacy and shipped within 2 business days of approval. A patient starting treatment receives the 14-day starting dose within the first fill."
+          "text": "Bridge supply provides up to 60 days of QUORVANTA in total, dispensed in 30-day fills by Tigerwater Specialty Pharmacy and shipped within 2 business days of approval. A patient starting treatment receives the 14-day starting dose within the first fill."
         },
         {
           "id": "PGM-BRIDGE.4",
@@ -170,7 +170,7 @@
       "provisions": [
         {
           "id": "PGM-PAP.1",
-          "text": "The Arden Quay Patient Assistance Foundation is a nonprofit organisation sponsored by Arden Quay Biosciences that provides QUORVANTA at no cost to eligible patients."
+          "text": "The Arden Quay Patient Assistance Foundation is a nonprofit organization sponsored by Arden Quay Biosciences that provides QUORVANTA at no cost to eligible patients."
         },
         {
           "id": "PGM-PAP.2",
@@ -194,7 +194,7 @@
         },
         {
           "id": "PGM-PAP.7",
-          "text": "Approved patients receive QUORVANTA in 30-day supplies shipped by Tidewater Specialty Pharmacy, at no cost and with no copay."
+          "text": "Approved patients receive QUORVANTA in 30-day supplies shipped by Tigerwater Specialty Pharmacy, at no cost and with no copay."
         },
         {
           "id": "PGM-PAP.8",
@@ -294,7 +294,7 @@
     },
     {
       "id": "PGM-PRIV",
-      "title": "Privacy, authorised contacts and communications",
+      "title": "Privacy, authorized contacts and communications",
       "provisions": [
         {
           "id": "PGM-PRIV.1",
@@ -302,11 +302,11 @@
         },
         {
           "id": "PGM-PRIV.2",
-          "text": "Before discussing a patient's case, QuorvantaConnect confirms the caller's identity. Case information is shared only with the patient, the prescriber's office, and people the patient has named as authorised contacts."
+          "text": "Before discussing a patient's case, QuorvantaConnect confirms the caller's identity. Case information is shared only with the patient, the prescriber's office, and people the patient has named as authorized contacts."
         },
         {
           "id": "PGM-PRIV.3",
-          "text": "A patient names an authorised contact on the Start Form or by telling QuorvantaConnect after verifying their identity, and may remove one at any time. A legal representative with documentation on file is treated as the patient."
+          "text": "A patient names an authorized contact on the Start Form or by telling QuorvantaConnect after verifying their identity, and may remove one at any time. A legal representative with documentation on file is treated as the patient."
         },
         {
           "id": "PGM-PRIV.4",

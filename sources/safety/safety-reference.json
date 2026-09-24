@@ -40,8 +40,8 @@
       "definition": "The patient was at risk of death at the time of the event, as judged by the reporter."
     },
     {
-      "id": "hospitalisation",
-      "definition": "Admission to hospital, or prolongation of an existing stay. An emergency department visit without admission does not meet this criterion on its own."
+      "id": "hospitalization",
+      "definition": "Inpatient hospitalization, or prolongation of an existing stay. An emergency department visit without admission does not meet this criterion on its own."
     },
     {
       "id": "disability",
@@ -53,7 +53,7 @@
     },
     {
       "id": "medically_important",
-      "definition": "An event that may jeopardise the patient or need intervention to prevent one of the outcomes above. In this pack, any gastrointestinal bleeding, anaphylaxis, angioedema, PML, serious infection and liver injury with jaundice are medically important."
+      "definition": "An event that may jeopardize the patient or need intervention to prevent one of the outcomes above. In this pack, any gastrointestinal bleeding, anaphylaxis, angioedema, PML, serious infection and liver injury with jaundice are medically important."
     }
   ],
   "terms": [
@@ -318,7 +318,7 @@
     },
     {
       "id": "AET-019",
-      "term": "Gastrointestinal haemorrhage",
+      "term": "Gastrointestinal hemorrhage",
       "listed": true,
       "label_sections": [
         "5.7",
@@ -499,16 +499,16 @@
     },
     {
       "id": "AET-108",
-      "term": "Hair colour changes",
+      "term": "Hair color changes",
       "listed": false,
       "label_sections": [],
       "fatal_outcome_listed": false,
       "lay_terms": [
-        "hair turning grey",
+        "hair turning gray",
         "hair going white",
-        "hair changed colour"
+        "hair changed color"
       ],
-      "notes": "Not in the label. Alopecia (AET-024) is hair loss, not a change in colour."
+      "notes": "Not in the label. Alopecia (AET-024) is hair loss, not a change in color."
     },
     {
       "id": "AET-109",
@@ -586,7 +586,7 @@
   ],
   "product_complaints": {
     "route": "Product Quality, through Medical Information at 1-800-555-0164",
-    "lot_check": "A lot number given by the reporter is checked against product/product-identifiers.json. A lot that is not in the register, or that belongs to the other package, is recorded as not_in_register and escalated as a suspected counterfeit or labelling error. Intake staff do not say whether a lot is genuine, recalled or safe to take.",
+    "lot_check": "A lot number given by the reporter is checked against product/product-identifiers.json. A lot that is not in the register, or that belongs to the other package, is recorded as not_in_register and escalated as a suspected counterfeit or labeling error. Intake staff do not say whether a lot is genuine, recalled or safe to take.",
     "without_event": "A complaint with no adverse event and no special situation is not a safety case. It goes to Product Quality only."
   },
   "timelines": {

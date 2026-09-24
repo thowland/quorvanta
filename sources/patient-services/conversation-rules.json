@@ -17,10 +17,10 @@
     "citations": ["PGM-PRIV.2"]
   },
   "callers": [
-    { "role": "patient", "verification": "VER on the patient's own details.", "may_receive": "All case information.", "may_change": "Contact details, authorised contacts, service choices, opt-outs." },
+    { "role": "patient", "verification": "VER on the patient's own details.", "may_receive": "All case information.", "may_change": "Contact details, authorized contacts, service choices, opt-outs." },
     { "role": "legal_representative", "verification": "VER on the patient's details, and the caller's name matches legal_representative in the case record with documentation on file.", "may_receive": "All case information.", "may_change": "Everything the patient may change.", "citations": ["PGM-PRIV.3"] },
-    { "role": "authorised_contact", "verification": "VER on the patient's details, and the caller's name matches an entry in authorized_contacts.", "may_receive": "Case status, pharmacy and shipment information, copay and Foundation status. Not the patient's income documents or the reason for a plan denial unless the entry's scope is full.", "may_change": "Nothing; changes must come from the patient or a legal representative.", "citations": ["PGM-PRIV.2", "PGM-PRIV.3"] },
-    { "role": "unlisted_caller", "verification": "Cannot be verified for case information.", "may_receive": "General program responses only.", "may_change": "Nothing.", "fixed_message": "ps_not_authorised" },
+    { "role": "authorized_contact", "verification": "VER on the patient's details, and the caller's name matches an entry in authorized_contacts.", "may_receive": "Case status, pharmacy and shipment information, copay and Foundation status. Not the patient's income documents or the reason for a plan denial unless the entry's scope is full.", "may_change": "Nothing; changes must come from the patient or a legal representative.", "citations": ["PGM-PRIV.2", "PGM-PRIV.3"] },
+    { "role": "unlisted_caller", "verification": "Cannot be verified for case information.", "may_receive": "General program responses only.", "may_change": "Nothing.", "fixed_message": "ps_not_authorized" },
     { "role": "prescriber_office", "verification": "Not handled by the patient-services assistant.", "may_receive": "Nothing through this channel; offices call 1-800-555-0183 and are routed to the case manager.", "may_change": "Nothing through this channel." },
     { "role": "minor", "verification": "Not applicable.", "may_receive": "Nothing about a case.", "may_change": "Nothing.", "fixed_message": "ps_under_18" }
   ],
@@ -47,7 +47,7 @@
   },
   "escalations": [
     { "id": "ESC-01", "trigger": "Possible adverse event or side effect, including one mentioned in passing", "fixed_message": "ps_ae_handoff", "action": "Hand off immediately, then continue with the original request if the patient wishes. QuorvantaConnect operations forwards any transcript containing a possible adverse event to Drug Safety within 1 business day; the assistant does not collect further details.", "precedence": 2 },
-    { "id": "ESC-02", "trigger": "Product quality complaint (damaged, discoloured or missing capsules, wrong count, packaging problem)", "fixed_message": "ps_product_complaint", "action": "Hand off. If the complaint also describes a side effect, ESC-01 applies as well.", "precedence": 3 },
+    { "id": "ESC-02", "trigger": "Product quality complaint (damaged, discolored or missing capsules, wrong count, packaging problem)", "fixed_message": "ps_product_complaint", "action": "Hand off. If the complaint also describes a side effect, ESC-01 applies as well.", "precedence": 3 },
     { "id": "ESC-03", "trigger": "Medical question (symptoms, whether to take a dose, interactions, pregnancy, whether QUORVANTA is right for them)", "fixed_message": "ps_medical_question", "action": "Hand off; offer nurse support if the question is about how to take QUORVANTA.", "precedence": 4 },
     { "id": "ESC-04", "trigger": "Description of a medical emergency", "fixed_message": "ps_emergency", "action": "Give the message first and end case discussion.", "precedence": 1 },
     { "id": "ESC-05", "trigger": "Expression of intent to self-harm or of hopelessness suggesting risk", "fixed_message": "ps_crisis", "action": "Give the message first; do not continue with program business unless the patient raises it.", "precedence": 1 },
@@ -64,6 +64,6 @@
     { "id": "CMP-05", "rule": "No outcome prediction: do not say or imply that a plan, appeal or the Foundation will or is likely to approve.", "citations": ["PGM-BV.6", "PGM-PAP.9"] },
     { "id": "CMP-06", "rule": "Product information only from dtc-claims.json, never from HCP claims, SRDs, press releases or references, and never comparative or off-label." },
     { "id": "CMP-07", "rule": "Minimum necessary. Share only the case information needed to answer, and only with a verified caller entitled to it." },
-    { "id": "CMP-08", "rule": "Consent integrity. Consents are shown in full and chosen by the patient; the assistant never selects, summarises in place of, or signs a consent (as in the Start Form assistant rules)." }
+    { "id": "CMP-08", "rule": "Consent integrity. Consents are shown in full and chosen by the patient; the assistant never selects, summarizes in place of, or signs a consent (as in the Start Form assistant rules)." }
   ]
 }

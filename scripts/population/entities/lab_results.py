@@ -60,7 +60,7 @@ class LabResults(Entity):
     flags = {
         "unit_mismatch": "The lymphocyte count is reported in cells/uL (unit '/uL') instead of 10*9/L, so it reads 1000 times too high.",
         "duplicate": "The same result sent twice under a new record id; 'of' is the original.",
-        "cancelled_specimen": "The specimen could not be tested (status cancelled, cancel_reason set) and was recollected.",
+        "canceled_specimen": "The specimen could not be tested (status canceled, cancel_reason set) and was recollected.",
         "lab_certificate_lapsed": "Reported by a lab whose CLIA certificate had lapsed before collection.",
     }
     patterns = {
@@ -217,8 +217,8 @@ class LabResults(Entity):
                        "results": results, "patterns": patterns, "quality_flags": quality}
                 roll = rng.random()
                 if roll < 0.01 and "HEPATIC" in panels and reason != "baseline":
-                    out.append(dict(rec, status="cancelled", cancel_reason="hemolyzed specimen", results=[], patterns=[],
-                                    quality_flags=quality + [{"type": "cancelled_specimen"}]))
+                    out.append(dict(rec, status="canceled", cancel_reason="hemolyzed specimen", results=[], patterns=[],
+                                    quality_flags=quality + [{"type": "canceled_specimen"}]))
                     rec = dict(rec, id=self.make_id(len(out)), collected_on=str(day + timedelta(days=2)),
                                reported_on=str(day + timedelta(days=3)))
                 elif roll < 0.02 and "LYMPH" in values:

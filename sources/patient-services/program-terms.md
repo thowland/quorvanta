@@ -2,7 +2,7 @@
 
 > Everything here is invented. QuorvantaConnect, the Arden Quay Patient Assistance Foundation, and every amount, threshold and timeline do not exist. Generated from `program-terms.json` by `scripts/render.py`; do not edit by hand.
 
-Version 2.1, effective 2026-01-01. Summarised in the bibliography as REF-022.
+Version 2.1, effective 2026-01-01. Summarized in the bibliography as REF-022.
 
 **1-800-555-0183**, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Fax 1-800-555-0184. quorvantaconnect.example. English and Spanish; telephone interpreters for other languages.
 
@@ -45,20 +45,20 @@ Version 2.1, effective 2026-01-01. Summarised in the bibliography as REF-022.
 
 - `PGM-BRIDGE.1` Bridge supply provides QUORVANTA at no cost to eligible patients while their insurance coverage is delayed.
 - `PGM-BRIDGE.2` Bridge supply is available to patients with commercial or employer-sponsored insurance who meet the copay program's eligibility rules (PGM-COPAY.1 and PGM-COPAY.2), have a valid prescription and a complete enrollment, and whose coverage is delayed because a prior authorization is pending, an appeal is pending, or a network exception is pending.
-- `PGM-BRIDGE.3` Bridge supply provides up to 60 days of QUORVANTA in total, dispensed in 30-day fills by Tidewater Specialty Pharmacy and shipped within 2 business days of approval. A patient starting treatment receives the 14-day starting dose within the first fill.
+- `PGM-BRIDGE.3` Bridge supply provides up to 60 days of QUORVANTA in total, dispensed in 30-day fills by Tigerwater Specialty Pharmacy and shipped within 2 business days of approval. A patient starting treatment receives the 14-day starting dose within the first fill.
 - `PGM-BRIDGE.4` Bridge supply is available once in any 12-month period and cannot be extended beyond 60 days.
 - `PGM-BRIDGE.5` Bridge supply ends when the plan approves coverage, when the 60 days are used, or when all appeals are finally denied. If coverage is finally denied, the case manager screens the patient for the Arden Quay Patient Assistance Foundation.
 - `PGM-BRIDGE.6` Bridge supply is not a sample, is not billed to insurance, and does not count toward the copay program's annual maximum.
 
 ## Arden Quay Patient Assistance Foundation
 
-- `PGM-PAP.1` The Arden Quay Patient Assistance Foundation is a nonprofit organisation sponsored by Arden Quay Biosciences that provides QUORVANTA at no cost to eligible patients.
+- `PGM-PAP.1` The Arden Quay Patient Assistance Foundation is a nonprofit organization sponsored by Arden Quay Biosciences that provides QUORVANTA at no cost to eligible patients.
 - `PGM-PAP.2` To be eligible, a patient must live in the United States, be 18 or older, have a prescription for QUORVANTA for its approved use, and have a household income at or below 500% of the current Federal Poverty Guidelines for their household size.
 - `PGM-PAP.3` Patients without insurance may apply. Patients with insurance may apply if their plan has denied coverage of QUORVANTA and the denial has been appealed at least once, or if they have Medicare Part D and meet the Foundation's additional criteria (PGM-GOV.4).
 - `PGM-PAP.4` An application needs a patient section, a prescriber section, and proof of household income: the most recent federal tax return, two recent pay stubs, a benefits award letter, or a signed statement of no income. Insured applicants also provide the plan's denial.
 - `PGM-PAP.5` The Foundation decides within 5 business days of receiving a complete application, and tells the patient and the prescriber in writing.
 - `PGM-PAP.6` Approval lasts 12 months. The patient must re-apply with updated income documents before approval ends; QuorvantaConnect sends a reminder 60 days in advance.
-- `PGM-PAP.7` Approved patients receive QUORVANTA in 30-day supplies shipped by Tidewater Specialty Pharmacy, at no cost and with no copay.
+- `PGM-PAP.7` Approved patients receive QUORVANTA in 30-day supplies shipped by Tigerwater Specialty Pharmacy, at no cost and with no copay.
 - `PGM-PAP.8` A patient who appears to qualify for Medicaid is asked to apply for it. The Foundation may provide QUORVANTA while the Medicaid application is pending, for up to 90 days.
 - `PGM-PAP.9` The Foundation's decisions are made on the published criteria only. QuorvantaConnect staff cannot approve an application or make exceptions.
 
@@ -88,10 +88,10 @@ Version 2.1, effective 2026-01-01. Summarised in the bibliography as REF-022.
 - `PGM-NURSE.3` Patients who choose reminders receive blood test reminders based on the schedule in the Prescribing Information (before starting, 3 months after starting, then every 6 months) and refill reminders, by text or phone.
 - `PGM-NURSE.4` Nurse support calls are optional. A patient may stop them at any time without affecting other services.
 
-## Privacy, authorised contacts and communications
+## Privacy, authorized contacts and communications
 
 - `PGM-PRIV.1` QuorvantaConnect uses a patient's information under the HIPAA authorization signed at enrollment, for enrollment, benefits verification, financial assistance, prescription coordination and support services.
-- `PGM-PRIV.2` Before discussing a patient's case, QuorvantaConnect confirms the caller's identity. Case information is shared only with the patient, the prescriber's office, and people the patient has named as authorised contacts.
-- `PGM-PRIV.3` A patient names an authorised contact on the Start Form or by telling QuorvantaConnect after verifying their identity, and may remove one at any time. A legal representative with documentation on file is treated as the patient.
+- `PGM-PRIV.2` Before discussing a patient's case, QuorvantaConnect confirms the caller's identity. Case information is shared only with the patient, the prescriber's office, and people the patient has named as authorized contacts.
+- `PGM-PRIV.3` A patient names an authorized contact on the Start Form or by telling QuorvantaConnect after verifying their identity, and may remove one at any time. A legal representative with documentation on file is treated as the patient.
 - `PGM-PRIV.4` Patients may opt out of text messages by replying STOP, and may opt out of any contact by calling 1-800-555-0183.
 - `PGM-PRIV.5` Patients may revoke the HIPAA authorization at any time by writing to QuorvantaConnect. Revocation ends program services that depend on it but does not affect the patient's treatment.

@@ -1,5 +1,5 @@
 {
-  "_notice": "FICTITIOUS. Generated clinicians who do not exist. Names pair a Faker first name with a double-barrelled surname and never repeat a core cast member. NPI-shaped ids begin with 91 (the core cast uses 90), which the national registry never assigns, and carry a valid check digit. Phones use 555-01xx; emails use .example.",
+  "_notice": "FICTITIOUS. Generated clinicians who do not exist. Names pair a Faker first name with a double-barreled surname and never repeat a core cast member. NPI-shaped ids begin with 91 (the core cast uses 90), which the national registry never assigns, and carry a valid check digit. Phones use 555-01xx; emails use .example.",
   "population_version": "1.0.0",
   "entity": "hcps",
   "generated": {

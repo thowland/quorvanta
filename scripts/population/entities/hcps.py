@@ -21,7 +21,7 @@ class Hcps(Entity):
     references = {"primary_office_id": "offices", "other_office_ids[]": "offices",
                   "previous_office_id": "offices", "quality_flags[].of": "hcps"}
     must_match = {"state": ["primary_office_id", "state"], "phone": ["primary_office_id", "phone"]}
-    notice = ("FICTITIOUS. Generated clinicians who do not exist. Names pair a Faker first name with a double-barrelled "
+    notice = ("FICTITIOUS. Generated clinicians who do not exist. Names pair a Faker first name with a double-barreled "
               "surname and never repeat a core cast member. NPI-shaped ids begin with 91 (the core cast uses 90), which the "
               "national registry never assigns, and carry a valid check digit. Phones use 555-01xx; emails use .example.")
     usage = ("A prescriber universe for targeting, segmentation, territory alignment and master-data testing, alongside the "

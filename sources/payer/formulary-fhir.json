@@ -266,7 +266,7 @@
               ]
             }
           ],
-          "name": "Northgate Health commercial formulary",
+          "name": "Northumber Health commercial formulary",
           "period": {
             "start": "2026-01-01",
             "end": "2026-12-31"
@@ -404,7 +404,7 @@
               ]
             }
           ],
-          "name": "Northgate Medicare Part D formulary",
+          "name": "Northumber Medicare Part D formulary",
           "period": {
             "start": "2026-01-01",
             "end": "2026-12-31"

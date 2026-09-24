@@ -4,7 +4,7 @@
 
 ## What Brennick syndrome is
 
-Brennick syndrome (BrS) is a chronic, immune-mediated disorder of the central nervous system characterised by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibres. `[DIS-001]`
+Brennick syndrome (BrS) is a chronic, immune-mediated disorder of the central nervous system characterized by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibers. `[DIS-001]`
 
 An estimated 410,000 adults in the United States were living with BrS in 2021. BrS is diagnosed about 2.5 times as often in women as in men, and symptoms most often begin between the ages of 20 and 45. `[DIS-002, DIS-003]`
 
@@ -20,11 +20,11 @@ In the natural history registry, about half of untreated patients with relapsing
 
 ## Diagnosis and assessment
 
-Diagnosis under the 2021 IBSC criteria requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region. `[DIS-008]`
+Diagnosis under the 2021 IBSC criteria requires a typical clinical episode, MRI lesions in at least two of four characteriztic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region. `[DIS-008]`
 
 On MRI, T2 lesions reflect areas of current or past inflammation, and contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks. `[DIS-009]`
 
-The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on six functional domains and walking ability. BFS 4 corresponds to walking limited to about 500 metres without aid or rest, and BFS 6 to needing a walking aid to walk 100 metres. Confirmed disability progression is defined as an increase of at least 1 BFS point sustained for 12 weeks. `[DIS-010, DIS-011]`
+The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on six functional domains and walking ability. BFS 4 corresponds to walking limited to about 500 meters without aid or rest, and BFS 6 to needing a walking aid to walk 100 meters. Confirmed disability progression is defined as an increase of at least 1 BFS point sustained for 12 weeks. `[DIS-010, DIS-011]`
 
 ## Treatment
 

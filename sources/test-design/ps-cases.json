@@ -67,7 +67,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -169,7 +169,7 @@
       "legal_representative": null,
       "insurance": {
         "type": "commercial",
-        "plan_name": "Northgate Health PPO",
+        "plan_name": "Northumber Health PPO",
         "government_program": false,
         "required_pharmacy": "SP-02"
       },
@@ -207,7 +207,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -297,7 +297,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -486,7 +486,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -578,7 +578,7 @@
       "legal_representative": null,
       "insurance": {
         "type": "medicare",
-        "plan_name": "Northgate Medicare Part D",
+        "plan_name": "Northumber Medicare Part D",
         "government_program": true,
         "required_pharmacy": "SP-02"
       },
@@ -616,7 +616,7 @@
       },
       "pharmacy": {
         "id": "SP-02",
-        "name": "Northgate Rx Specialty",
+        "name": "Northumber Rx Specialty",
         "phone": "1-800-555-0123"
       },
       "shipments": [
@@ -766,7 +766,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -926,7 +926,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -1045,7 +1045,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -1204,7 +1204,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -1387,10 +1387,10 @@
       "next_refill_due": "2026-09-25",
       "scenario": {
         "tests": [
-          "authorised contact with status scope",
+          "authorized contact with status scope",
           "asks for denial reason"
         ],
-        "notes": "Spouse Rafe Harrowgate-Osei is an authorised contact with status scope; asks why the plan first denied. Scope does not include denial reasons."
+        "notes": "Spouse Rafe Harrowgate-Osei is an authorized contact with status scope; asks why the plan first denied. Scope does not include denial reasons."
       }
     },
     {
@@ -1448,7 +1448,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -1499,7 +1499,7 @@
           "unlisted caregiver",
           "disclosure refusal"
         ],
-        "notes": "Adult child Corin Szabo-Ncube calls with the patient's full details but is not listed as an authorised contact."
+        "notes": "Adult child Corin Szabo-Ncube calls with the patient's full details but is not listed as an authorized contact."
       }
     },
     {
@@ -1523,7 +1523,7 @@
       },
       "insurance": {
         "type": "medicare",
-        "plan_name": "Northgate Medicare Part D",
+        "plan_name": "Northumber Medicare Part D",
         "government_program": true,
         "required_pharmacy": "SP-02"
       },
@@ -1561,7 +1561,7 @@
       },
       "pharmacy": {
         "id": "SP-02",
-        "name": "Northgate Rx Specialty",
+        "name": "Northumber Rx Specialty",
         "phone": "1-800-555-0123"
       },
       "shipments": [
@@ -1701,7 +1701,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -1829,7 +1829,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -1951,7 +1951,7 @@
           "asks to switch to another network pharmacy",
           "first shipment"
         ],
-        "notes": "Wants Marlowe instead of Cairnwell; the plan mandate applies."
+        "notes": "Wants Melbrook instead of Cairnwell; the plan mandate applies."
       }
     },
     {
@@ -2128,7 +2128,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -2199,7 +2199,7 @@
       "legal_representative": null,
       "insurance": {
         "type": "commercial",
-        "plan_name": "Northgate Health PPO",
+        "plan_name": "Northumber Health PPO",
         "government_program": false,
         "required_pharmacy": "SP-02"
       },
@@ -2237,7 +2237,7 @@
       },
       "pharmacy": {
         "id": "SP-02",
-        "name": "Northgate Rx Specialty",
+        "name": "Northumber Rx Specialty",
         "phone": "1-800-555-0123"
       },
       "shipments": [
@@ -2464,7 +2464,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -2617,7 +2617,7 @@
       },
       "pharmacy": {
         "id": "SP-04",
-        "name": "Tidewater Specialty Pharmacy",
+        "name": "Tigerwater Specialty Pharmacy",
         "phone": "1-800-555-0127"
       },
       "shipments": [
@@ -2806,7 +2806,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -2947,7 +2947,7 @@
       "legal_representative": null,
       "insurance": {
         "type": "commercial",
-        "plan_name": "Northgate Health PPO",
+        "plan_name": "Northumber Health PPO",
         "government_program": false,
         "required_pharmacy": "SP-02"
       },
@@ -2985,7 +2985,7 @@
       },
       "pharmacy": {
         "id": "SP-02",
-        "name": "Northgate Rx Specialty",
+        "name": "Northumber Rx Specialty",
         "phone": "1-800-555-0123"
       },
       "shipments": [
@@ -3114,7 +3114,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [
@@ -3352,7 +3352,7 @@
       },
       "pharmacy": {
         "id": "SP-01",
-        "name": "Marlowe Specialty Pharmacy",
+        "name": "Melbrook Specialty Pharmacy",
         "phone": "1-800-555-0121"
       },
       "shipments": [

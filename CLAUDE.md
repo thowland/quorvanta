@@ -8,7 +8,7 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
 
 ## Non-negotiable invariants
 
-- **Nothing real.** No real drug, brand, company, product or software vendor names anywhere, including in README prose about where the pack came from. The pack was originally modelled on a real label; all traces of that were deliberately removed and must not come back.
+- **Nothing real.** No real drug, brand, company, product or software vendor names anywhere, including in README prose about where the pack came from. The pack was originally modeled on a real label; all traces of that were deliberately removed and must not come back.
 - **Fiction markers:**
   - Phone numbers use the reserved `1-800-555-01xx` range; synthetic patients use `(xxx) 555-01xx`.
   - Web and email domains use `.example`.
@@ -60,7 +60,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
   - bridge supply is capped at 60 days, and `days_dispensed` must equal the sum of bridge shipments;
   - capsules = days × 2 for the starting dose and days × 4 for the maintenance dose;
   - bridge and Foundation product ships from SP-04;
-  - plan-mandated pharmacies must be honoured.
+  - plan-mandated pharmacies must be honored.
 - Add a new case by editing the JSON directly and checking its arithmetic.
 
 **Unbranded disease content** (`disease/`): `disease-facts.json` holds DIS-* facts, each citing approved findings (REF-024 to REF-028).
@@ -110,7 +110,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
 
 **Scenarios** (`test-design/scenarios/`):
-- `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services, SF-* for adverse event intake, CF-* for field records), and every fault needs at least one failing example in a labelled set.
+- `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services, SF-* for adverse event intake, CF-* for field records), and every fault needs at least one failing example in a labeled set.
 - A passing HCP response must meet all of these:
   - contain its cited claims, disease facts and fixed messages word for word;
   - match its inbound scenario's claim set, which is already closed over `requires`;

@@ -250,8 +250,8 @@
           "type": "choice",
           "options": [
             "No preference",
-            "Marlowe Specialty Pharmacy",
-            "Tidewater Specialty Pharmacy",
+            "Melbrook Specialty Pharmacy",
+            "Tigerwater Specialty Pharmacy",
             "Halverson Health System Pharmacy (Halverson Health patients only)"
           ],
           "required": false,

@@ -2,7 +2,7 @@
   "_notice": "FICTITIOUS. Standard response documents for a product that does not exist. Every study, author and figure is invented.",
   "srd_set_version": "1.0.0",
   "standard_disclaimer": "The information provided is in response to your unsolicited request and is intended for healthcare professionals. It is not intended to be promotional. Please refer to the full Prescribing Information for QUORVANTA. Arden Quay Biosciences does not recommend the use of QUORVANTA in any manner other than as described in the Prescribing Information.",
-  "usage": "SRDs are reactive Medical Information content. They may discuss off-label and unpublished data because they answer unsolicited requests; the chatbot must not draw on them for outbound responses. In the test bench they define what the fallback hands off to, and they seed scenarios where the correct bot behaviour is the fallback message.",
+  "usage": "SRDs are reactive Medical Information content. They may discuss off-label and unpublished data because they answer unsolicited requests; the chatbot must not draw on them for outbound responses. In the test bench they define what the fallback hands off to, and they seed scenarios where the correct bot behavior is the fallback message.",
   "srds": [
     {
       "id": "SRD-001",
@@ -58,7 +58,7 @@
       "gap_id": "GAP-04",
       "title": "Use of QUORVANTA in end-stage renal disease and dialysis",
       "typical_question": "Can QUORVANTA be given to a patient on hemodialysis?",
-      "response": "QUORVANTA is not recommended in patients with moderate or severe renal impairment because of increased exposure to the inactive metabolite hydroxypropyl glutarimide (HPG), which rose 2.1-fold and 3.2-fold in moderate and severe impairment in a single-dose study. No patients on hemodialysis were studied, and the dialyzability of HPG is unknown. Arden Quay Biosciences has no data to support use in end-stage renal disease.",
+      "response": "QUORVANTA is not recommended in patients with moderate or severe renal impairment because of increased exposure to the inactive metabolite hydroxypropyl glavorimide (HPG), which rose 2.1-fold and 3.2-fold in moderate and severe impairment in a single-dose study. No patients on hemodialysis were studied, and the dialyzability of HPG is unknown. Arden Quay Biosciences has no data to support use in end-stage renal disease.",
       "references": [
         "REF-001",
         "REF-007"

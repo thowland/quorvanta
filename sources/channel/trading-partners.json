@@ -65,7 +65,7 @@
     },
     {
       "id": "TP-SP-01",
-      "name": "Marlowe Specialty Pharmacy",
+      "name": "Melbrook Specialty Pharmacy",
       "role": "dispenser",
       "pharmacy_id": "SP-01",
       "ncpdp": "99-00141",
@@ -73,7 +73,7 @@
       "locations": [
         {
           "id": "LOC-SP-01",
-          "name": "Marlowe Specialty Pharmacy dispensing site",
+          "name": "Melbrook Specialty Pharmacy dispensing site",
           "ref": "00001",
           "tz": "-04:00",
           "gln": "0200001000010",
@@ -85,7 +85,7 @@
     },
     {
       "id": "TP-SP-02",
-      "name": "Northgate Rx Specialty",
+      "name": "Northumber Rx Specialty",
       "role": "dispenser",
       "pharmacy_id": "SP-02",
       "ncpdp": "99-00287",
@@ -93,7 +93,7 @@
       "locations": [
         {
           "id": "LOC-SP-02",
-          "name": "Northgate Rx Specialty dispensing site",
+          "name": "Northumber Rx Specialty dispensing site",
           "ref": "00001",
           "tz": "-04:00",
           "gln": "0200002000019",
@@ -125,7 +125,7 @@
     },
     {
       "id": "TP-SP-04",
-      "name": "Tidewater Specialty Pharmacy",
+      "name": "Tigerwater Specialty Pharmacy",
       "role": "dispenser",
       "pharmacy_id": "SP-04",
       "ncpdp": "99-00418",
@@ -133,7 +133,7 @@
       "locations": [
         {
           "id": "LOC-SP-04",
-          "name": "Tidewater Specialty Pharmacy dispensing site",
+          "name": "Tigerwater Specialty Pharmacy dispensing site",
           "ref": "00001",
           "tz": "-04:00",
           "gln": "0200004000017",

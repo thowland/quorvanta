@@ -219,7 +219,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Marlowe Specialty Pharmacy",
+            "name": "Melbrook Specialty Pharmacy",
             "gln": "0200001000003"
           },
           "transaction_date": "2026-06-26",
@@ -297,7 +297,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Northgate Rx Specialty",
+            "name": "Northumber Rx Specialty",
             "gln": "0200002000002"
           },
           "transaction_date": "2026-06-30",
@@ -336,7 +336,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Northgate Rx Specialty",
+            "name": "Northumber Rx Specialty",
             "gln": "0200002000002"
           },
           "transaction_date": "2026-07-02",
@@ -375,7 +375,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Tidewater Specialty Pharmacy",
+            "name": "Tigerwater Specialty Pharmacy",
             "gln": "0200004000000"
           },
           "transaction_date": "2026-07-07",
@@ -492,7 +492,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Marlowe Specialty Pharmacy",
+            "name": "Melbrook Specialty Pharmacy",
             "gln": "0200001000003"
           },
           "transaction_date": "2026-07-26",
@@ -609,7 +609,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Marlowe Specialty Pharmacy",
+            "name": "Melbrook Specialty Pharmacy",
             "gln": "0200001000003"
           },
           "transaction_date": "2026-07-28",
@@ -648,7 +648,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Northgate Rx Specialty",
+            "name": "Northumber Rx Specialty",
             "gln": "0200002000002"
           },
           "transaction_date": "2026-07-30",
@@ -765,7 +765,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Tidewater Specialty Pharmacy",
+            "name": "Tigerwater Specialty Pharmacy",
             "gln": "0200004000000"
           },
           "transaction_date": "2026-08-06",
@@ -843,7 +843,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Northgate Rx Specialty",
+            "name": "Northumber Rx Specialty",
             "gln": "0200002000002"
           },
           "transaction_date": "2026-08-16",
@@ -882,7 +882,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Marlowe Specialty Pharmacy",
+            "name": "Melbrook Specialty Pharmacy",
             "gln": "0200001000003"
           },
           "transaction_date": "2026-08-25",
@@ -921,7 +921,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Tidewater Specialty Pharmacy",
+            "name": "Tigerwater Specialty Pharmacy",
             "gln": "0200004000000"
           },
           "transaction_date": "2026-08-27",
@@ -960,7 +960,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Marlowe Specialty Pharmacy",
+            "name": "Melbrook Specialty Pharmacy",
             "gln": "0200001000003"
           },
           "transaction_date": "2026-08-29",
@@ -999,7 +999,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Northgate Rx Specialty",
+            "name": "Northumber Rx Specialty",
             "gln": "0200002000002"
           },
           "transaction_date": "2026-08-29",
@@ -1116,7 +1116,7 @@
             "gln": "0300000000001"
           },
           "buyer": {
-            "name": "Tidewater Specialty Pharmacy",
+            "name": "Tigerwater Specialty Pharmacy",
             "gln": "0200004000000"
           },
           "transaction_date": "2026-09-07",

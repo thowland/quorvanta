@@ -14,7 +14,7 @@
     },
     {
       "id": "PRC-02",
-      "name": "Northgate Health pharmacy benefits",
+      "name": "Northumber Health pharmacy benefits",
       "bin": "000520",
       "pcns": [
         "NGHCOM",
@@ -142,7 +142,7 @@
     },
     {
       "code": "RJ-07",
-      "meaning": "Drug utilisation alert: therapeutic duplication with dimethyl tavorate",
+      "meaning": "Drug utilization alert: therapeutic duplication with dimethyl tavorate",
       "standard_equivalent": "a DUR reject for therapeutic duplication"
     }
   ],
@@ -194,7 +194,7 @@
     },
     {
       "id": "FRM-NG-COM",
-      "name": "Northgate Health commercial formulary",
+      "name": "Northumber Health commercial formulary",
       "program": "commercial",
       "period": {
         "start": "2026-01-01",
@@ -221,7 +221,7 @@
     },
     {
       "id": "FRM-NG-PD",
-      "name": "Northgate Medicare Part D formulary",
+      "name": "Northumber Medicare Part D formulary",
       "program": "medicare",
       "period": {
         "start": "2026-01-01",
@@ -496,7 +496,7 @@
     },
     {
       "id": "PLN-04",
-      "name": "Northgate Health PPO",
+      "name": "Northumber Health PPO",
       "type": "commercial",
       "processor_id": "PRC-02",
       "pcn": "NGHCOM",
@@ -506,7 +506,7 @@
     },
     {
       "id": "PLN-05",
-      "name": "Northgate Medicare Part D",
+      "name": "Northumber Medicare Part D",
       "type": "medicare",
       "processor_id": "PRC-02",
       "pcn": "NGHPD",

@@ -21,7 +21,7 @@
   "quality_flags": {
     "unit_mismatch": "The lymphocyte count is reported in cells/uL (unit '/uL') instead of 10*9/L, so it reads 1000 times too high.",
     "duplicate": "The same result sent twice under a new record id; 'of' is the original.",
-    "cancelled_specimen": "The specimen could not be tested (status cancelled, cancel_reason set) and was recollected.",
+    "canceled_specimen": "The specimen could not be tested (status canceled, cancel_reason set) and was recollected.",
     "lab_certificate_lapsed": "Reported by a lab whose CLIA certificate had lapsed before collection."
   },
   "patterns": {
@@ -68811,13 +68811,13 @@
         "CBC",
         "HEPATIC"
       ],
-      "status": "cancelled",
+      "status": "canceled",
       "cancel_reason": "hemolyzed specimen",
       "results": [],
       "patterns": [],
       "quality_flags": [
         {
-          "type": "cancelled_specimen"
+          "type": "canceled_specimen"
         }
       ]
     },

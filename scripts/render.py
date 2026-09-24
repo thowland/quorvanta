@@ -27,7 +27,7 @@ def render_program_terms():
         "Generated from `program-terms.json` by `scripts/render.py`; do not edit by hand.",
         "",
         f"Version {data['terms_version']}, effective {data['effective']}. "
-        f"Summarised in the bibliography as {data['summarised_by']}.",
+        f"Summarized in the bibliography as {data['summarized_by']}.",
         "",
         f"**{c['phone']}**, {c['hours']}. Fax {c['fax']}. {c['portal']}. {c['languages']}.",
     ]

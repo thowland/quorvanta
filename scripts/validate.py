@@ -286,9 +286,9 @@ def check_patient_services(claims, refs, network):
     for pid, ptext in provisions.items():
         if f"`{pid}` {ptext}" not in md:
             fail(f"patient-services/program-terms.md: {pid} missing or out of date; run scripts/render.py")
-    ref = refs.get(terms["summarised_by"])
+    ref = refs.get(terms["summarized_by"])
     if ref is None:
-        fail(f"program-terms: summarised_by {terms['summarised_by']} does not exist")
+        fail(f"program-terms: summarized_by {terms['summarized_by']} does not exist")
     elif f"v{terms['terms_version']}" not in ref["location"] or terms["effective"] not in ref["location"]:
         fail(f"{ref['id']}: location '{ref['location']}' does not match program terms v{terms['terms_version']}, {terms['effective']}")
 
@@ -475,7 +475,7 @@ def check_cases(cases_doc, statuses, network):
 
         for contact in c["authorized_contacts"]:
             if contact.get("scope") not in ("status", "full"):
-                fail(f"{cid}: authorised contact {contact.get('name')} has no valid scope")
+                fail(f"{cid}: authorized contact {contact.get('name')} has no valid scope")
 
 
 
@@ -617,7 +617,7 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
     statuses = {s["code"]: s for s in load("patient-services/case-statuses.json")["statuses"]}
     cases = {c["case_id"]: c for c in load("test-design/ps-cases.json")["cases"]}
     pgaps = {g["id"] for g in load("test-design/ps-known-gaps.json")["gaps"]}
-    entitled = {"patient", "legal_representative", "authorised_contact"}
+    entitled = {"patient", "legal_representative", "authorized_contact"}
 
     convs = {c["id"]: c for c in load(base + "ps-conversations.json")["conversations"]}
     for cid, c in convs.items():
@@ -695,10 +695,10 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
     expected = [
         (r"(\d+) fault types \((\d+) for the HCP bot, (\d+) for the patient-services assistant, (\d+) for adverse event intake and (\d+) for field records\)",
          (len(faults),) + tuple(sum(f.startswith(p) for f in faults) for p in ("HF", "PF", "SF", "CF"))),
-        (r"(\d+) labelled HCP questions", (len(inbound),)),
-        (r"(\d+) labelled HCP bot responses \((\d+) pass, (\d+) fail\)", (len(hout), count(hout, "pass"), count(hout, "fail"))),
+        (r"(\d+) labeled HCP questions", (len(inbound),)),
+        (r"(\d+) labeled HCP bot responses \((\d+) pass, (\d+) fail\)", (len(hout), count(hout, "pass"), count(hout, "fail"))),
         (r"(\d+) multi-turn patient-services conversations", (len(convs),)),
-        (r"(\d+) labelled patient-services replies \((\d+) pass, (\d+) fail\)", (len(pout), count(pout, "pass"), count(pout, "fail"))),
+        (r"(\d+) labeled patient-services replies \((\d+) pass, (\d+) fail\)", (len(pout), count(pout, "pass"), count(pout, "fail"))),
         (r"(\d+) approved unbranded disease facts", (len(disease),)),
     ]
     for pattern, want in expected:
@@ -948,7 +948,7 @@ def check_safety(lots):
         (r"(\d+) event terms \((\d+) in the label", (len(terms), sum(t["listed"] for t in terms.values()))),
         (r"(\d+) special situations", (len(sits),)),
         (r"(\d+) adverse event reports", (len(reports),)),
-        (r"(\d+) labelled intake assessments \((\d+) pass, (\d+) fail\)",
+        (r"(\d+) labeled intake assessments \((\d+) pass, (\d+) fail\)",
          (len(items), sum(a["verdict"] == "pass" for a in items), sum(a["verdict"] == "fail" for a in items))),
     ]
     readme_counts(readme, expected)
@@ -1094,7 +1094,7 @@ def check_field_force(claims_doc, srd_ids, reports):
         (r"(\d+) prescribers at (\d+) accounts", (len(hcps), len(hcos))),
         (r"(\d+) field calls", (len(log["calls"]),)),
         (r"(\d+) approved email templates", (len(templates),)),
-        (r"(\d+) labelled call notes and emails \((\d+) pass, (\d+) fail\)",
+        (r"(\d+) labeled call notes and emails \((\d+) pass, (\d+) fail\)",
          (len(notes), sum(n["verdict"] == "pass" for n in notes), sum(n["verdict"] == "fail" for n in notes))),
     ])
     return coverage
@@ -1665,9 +1665,9 @@ def check_lab_results(docs):
             fail(f"{where}: lab_certificate_lapsed flag does not match the lab's certificate date")
         if lab and p["state"] not in lab["states_served"]:
             fail(f"{where}: lab {lab['id']} does not serve {p['state']}")
-        if r["status"] == "cancelled":
-            if r["results"] or "cancelled_specimen" not in flags:
-                fail(f"{where}: a cancelled specimen has results or no flag")
+        if r["status"] == "canceled":
+            if r["results"] or "canceled_specimen" not in flags:
+                fail(f"{where}: a canceled specimen has results or no flag")
             continue
         values = {}
         for x in r["results"]:
@@ -1761,10 +1761,10 @@ def main():
             if f not in faults:
                 fail(f"{owner}: unknown fault {f}")
     for f in sorted((ae_coverage | crm_coverage) - set(faults)):
-        fail(f"labelled sets: unknown fault {f}")
+        fail(f"labeled sets: unknown fault {f}")
     for f in faults:
         if f not in coverage | ae_coverage | crm_coverage:
-            fail(f"fault-types: {f} has no failing example in the labelled sets")
+            fail(f"fault-types: {f} has no failing example in the labeled sets")
     check_fiction_markers(read_denylist(args.denylist))
     report()
 

@@ -1,7 +1,7 @@
 {
-  "_notice": "FICTITIOUS. Labelled adverse event intake assessments for reports about a product that does not exist. Judge calibration set; keep out of generator and judge prompts.",
+  "_notice": "FICTITIOUS. Labeled adverse event intake assessments for reports about a product that does not exist. Judge calibration set; keep out of generator and judge prompts.",
   "scenarios_version": "1.0.0",
-  "usage": "Each item is a candidate intake assessment for one ae-intake.json report, labelled pass or fail. A passing assessment equals the report's expected assessment. A failing one names the SF-* faults that make it fail.",
+  "usage": "Each item is a candidate intake assessment for one ae-intake.json report, labeled pass or fail. A passing assessment equals the report's expected assessment. A failing one names the SF-* faults that make it fail.",
   "assessments": [
     {
       "id": "AEA-001",
@@ -29,7 +29,7 @@
         "due": null,
         "internal_forward_late": false,
         "follow_up": [
-          "whether he has seen a healthcare provider or been admitted to hospital",
+          "whether he has seen a healthcare provider or been admitted to the hospital",
           "onset date and current outcome"
         ]
       },
@@ -89,7 +89,7 @@
         "internal_forward_late": false,
         "follow_up": [
           "patient age 55; lot QV26E030",
-          "whether he has seen a healthcare provider or been admitted to hospital",
+          "whether he has seen a healthcare provider or been admitted to the hospital",
           "onset date and current outcome"
         ]
       },
@@ -114,7 +114,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           }
@@ -151,7 +151,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           }
@@ -226,7 +226,7 @@
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "life_threatening"
             ]
           }
@@ -264,7 +264,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "life_threatening"
             ]
           }
@@ -355,12 +355,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "hospitalised with acute kidney injury",
+            "verbatim": "hospitalized with acute kidney injury",
             "term": "AET-102",
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -392,12 +392,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "hospitalised with acute kidney injury",
+            "verbatim": "hospitalized with acute kidney injury",
             "term": "AET-102",
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -775,7 +775,7 @@
       },
       "verdict": "pass",
       "faults": [],
-      "explanation": "Serious because the reporter judged it life-threatening and it is medically important; no hospitalisation; listed, so periodic."
+      "explanation": "Serious because the reporter judged it life-threatening and it is medically important; no hospitalization; listed, so periodic."
     },
     {
       "id": "AEA-023",
@@ -792,7 +792,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "life_threatening",
               "medically_important"
             ]
@@ -815,7 +815,7 @@
       "faults": [
         "SF-02"
       ],
-      "explanation": "Adds hospitalisation for an emergency visit without admission."
+      "explanation": "Adds hospitalization for an emergency visit without admission."
     },
     {
       "id": "AEA-024",
@@ -1028,12 +1028,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "generalised seizure; admitted overnight",
+            "verbatim": "generalized seizure; admitted overnight",
             "term": "AET-107",
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -1066,12 +1066,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "generalised seizure; admitted overnight",
+            "verbatim": "generalized seizure; admitted overnight",
             "term": "AET-015",
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -1106,7 +1106,7 @@
         "reporter_type": "consumer",
         "events": [
           {
-            "verbatim": "hair turning grey quickly; not falling out",
+            "verbatim": "hair turning gray quickly; not falling out",
             "term": "AET-108",
             "listed": false,
             "fatal": false,
@@ -1128,7 +1128,7 @@
       },
       "verdict": "pass",
       "faults": [],
-      "explanation": "Hair colour change is its own unlisted term; not serious, so periodic."
+      "explanation": "Hair color change is its own unlisted term; not serious, so periodic."
     },
     {
       "id": "AEA-033",
@@ -1140,7 +1140,7 @@
         "reporter_type": "consumer",
         "events": [
           {
-            "verbatim": "hair turning grey quickly; not falling out",
+            "verbatim": "hair turning gray quickly; not falling out",
             "term": "AET-024",
             "listed": true,
             "fatal": false,
@@ -1164,7 +1164,7 @@
       "faults": [
         "SF-03"
       ],
-      "explanation": "Codes greying hair to alopecia, which is listed."
+      "explanation": "Codes graying hair to alopecia, which is listed."
     },
     {
       "id": "AEA-034",
@@ -1181,7 +1181,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           },
@@ -1226,7 +1226,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           },
@@ -1273,7 +1273,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           }
@@ -1389,7 +1389,7 @@
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -1411,7 +1411,7 @@
       "faults": [
         "SF-02"
       ],
-      "explanation": "Records the emergency-room cast as hospitalisation."
+      "explanation": "Records the emergency-room cast as hospitalization."
     }
   ]
 }

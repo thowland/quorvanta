@@ -55,23 +55,23 @@ For volume, `scripts/generate_population.py` builds offices, HCPs, office staff,
 
 ## Demonstrating with it
 
-A demonstration needs a story as well as data, and the pack has one. The product moves from topline results through approval to commercial availability, with press releases at each step. The patient-support cases have histories that can be walked through on screen, from enrolment and benefits verification through prior authorization and appeal, copay support and bridge supply to shipments that can be traced to a serialized bottle. Representatives have territories, call histories and approved emails, and the medical information responses answer the questions a prescriber would ask. All of it can be recorded, screenshotted and shared publicly without an NDA (non-disclosure agreement) around the data.
+A demonstration needs a story as well as data, and the pack has one. The product moves from topline results through approval to commercial availability, with press releases at each step. The patient-support cases have histories that can be walked through on screen, from enrollment and benefits verification through prior authorization and appeal, copay support and bridge supply to shipments that can be traced to a serialized bottle. Representatives have territories, call histories and approved emails, and the medical information responses answer the questions a prescriber would ask. All of it can be recorded, screenshotted and shared publicly without an NDA (non-disclosure agreement) around the data.
 
 ### Visual identity
 
-The product has a visual identity for demonstrations, interface mock-ups and training material. A plausible brand keeps reviewers' attention on the behaviour being shown, where placeholder styling tends to draw comments that have nothing to do with the system. The mark is an open circular Q in deep teal crossed by an apricot diagonal, set beside the wordmark with the generic name beneath it, on an ivory ground.
+The product has a visual identity for demonstrations, interface mock-ups and training material. A plausible brand keeps reviewers' attention on the behavior being shown, where placeholder styling tends to draw comments that have nothing to do with the system. The mark is an open circular Q in deep teal crossed by an apricot diagonal, set beside the wordmark with the generic name beneath it, on an ivory ground.
 
 <p align="center">
-  <img src="assets/quorvanta-identity-package/identity-board.png" width="860" alt="Quorvanta identity board: the logo lockup, the standalone Q symbol, a reversed logo on deep teal, the five-colour palette, and mock-ups of a carton, a brand card reading 'A little more possibility.' and a poster, over the footer 'An imaginary therapy for an imaginary condition.'">
+  <img src="assets/quorvanta-identity-package/identity-board.png" width="860" alt="Quorvanta identity board: the logo lockup, the standalone Q symbol, a reversed logo on deep teal, the five-color palette, and mock-ups of a carton, a brand card reading 'A little more possibility.' and a poster, over the footer 'An imaginary therapy for an imaginary condition.'">
 </p>
 
-`assets/quorvanta-identity-package/` holds the logo in a light version and a reverse version for dark backgrounds, the identity board, the brand guide and the prompts used to generate the images. The images are generated raster concept art, so small lettering and mock-up copy can vary between them. Where they disagree, the brand guide's spelling, colour values and copy are authoritative; the board, for example, labels ink as #243633, where the guide gives #243638. The logo should be redrawn as vector artwork before any print use. The guide's copy rules match the pack's own: the brand line is "A little more possibility.", and no identity material may carry clinical statistics or therapeutic promises, which can come only from the approved claims.
+`assets/quorvanta-identity-package/` holds the logo in a light version and a reverse version for dark backgrounds, the identity board, the brand guide and the prompts used to generate the images. The images are generated raster concept art, so small lettering and mock-up copy can vary between them. Where they disagree, the brand guide's spelling, color values and copy are authoritative; the board, for example, labels ink as #243633, where the guide gives #243638. The logo should be redrawn as vector artwork before any print use. The guide's copy rules match the pack's own: the brand line is "A little more possibility.", and no identity material may carry clinical statistics or therapeutic promises, which can come only from the approved claims.
 
 ## Testing with it
 
-Commercial systems tend to fail at the joins between these pieces. A chatbot paraphrases an approved claim until it no longer says what the label says; a patient-support assistant answers a Medicare patient with copay-program language written for the commercially insured. A test can only catch those failures if the pieces agree exactly, so that a wrong answer is objectively wrong, and the pack adds labelled test material on top of that agreement.
+Commercial systems tend to fail at the joins between these pieces. A chatbot paraphrases an approved claim until it no longer says what the label says; a patient-support assistant answers a Medicare patient with copay-program language written for the commercially insured. A test can only catch those failures if the pieces agree exactly, so that a wrong answer is objectively wrong, and the pack adds labeled test material on top of that agreement.
 
-There are questions an HCP might ask a chatbot, with the claims a correct answer must use; multi-turn patient-support conversations with the expected handling at each turn, including when identity verification must happen before any case detail is disclosed; and adverse event reports, each with the correct intake assessment. Every expected answer is drawn verbatim from approved text, so it can be checked mechanically. Alongside these are sets of candidate answers labelled pass or fail, each failing answer naming its faults from a taxonomy of 51 fault types covering the ways fluent output goes wrong in regulated settings, such as attributing a predecessor drug's trial result to the new product, dropping the comparator from a relative risk figure, filling a silence in the label with plausible advice, predicting a prior authorization outcome, or starting a safety reporting clock at the wrong receipt. A system can be scored against the expected answers, and a judge model can be calibrated against the labelled sets.
+There are questions an HCP might ask a chatbot, with the claims a correct answer must use; multi-turn patient-support conversations with the expected handling at each turn, including when identity verification must happen before any case detail is disclosed; and adverse event reports, each with the correct intake assessment. Every expected answer is drawn verbatim from approved text, so it can be checked mechanically. Alongside these are sets of candidate answers labeled pass or fail, each failing answer naming its faults from a taxonomy of 51 fault types covering the ways fluent output goes wrong in regulated settings, such as attributing a predecessor drug's trial result to the new product, dropping the comparator from a relative risk figure, filling a silence in the label with plausible advice, predicting a prior authorization outcome, or starting a safety reporting clock at the wrong receipt. A system can be scored against the expected answers, and a judge model can be calibrated against the labeled sets.
 
 The data also contains documented traps, planted on purpose, which must not be fixed:
 - a withdrawn claim;
@@ -93,7 +93,7 @@ git config core.hooksPath scripts/git-hooks      # run the validator before ever
 python3 scripts/validate.py                      # check every cross-reference, figure and fiction marker
 ```
 
-From there, pick the layer that matches the system you are working on and read its section in `sources/README.md`, then load the content that system would hold in production: the claims library and references for an HCP assistant or content tool, for example, the program terms, cases and payer transactions for a hub platform, or the field force, prescribers and population for a CRM. If you are testing, put the matching scenarios in `sources/test-design/` through the system and score its output against the expected answers, calibrating any judge model against the labelled pass and fail sets before trusting its scores.
+From there, pick the layer that matches the system you are working on and read its section in `sources/README.md`, then load the content that system would hold in production: the claims library and references for an HCP assistant or content tool, for example, the program terms, cases and payer transactions for a hub platform, or the field force, prescribers and population for a CRM. If you are testing, put the matching scenarios in `sources/test-design/` through the system and score its output against the expected answers, calibrating any judge model against the labeled pass and fail sets before trusting its scores.
 
 To generate a larger population, install the pinned dependency and run the generator:
 
@@ -123,8 +123,13 @@ The fiction is also enforced mechanically:
 
 - **No medical information.** The pack imitates the structure and language of real labeling and program material closely, but its content has been through no review of any kind. It must not be read as medical information.
 - **Standards conformance.** The FHIR and SPL files follow the published structures but break a few requirements on purpose. An invented drug has no RxNorm code, no UNII substance code and no DUNS number, and each exception is documented where it occurs.
-- **Name clearance.** The invented names have not yet been cleared against real trademarks, companies or products. `scripts/names-to-check.csv` lists them for that work, and `BACKLOG.md` tracks it with the other release tasks.
 - **Public answer keys.** Because the answer keys are public, they will eventually reach the training data of language models. Anyone relying on the pack for evaluation should keep a set of scenarios of their own that has never been published.
+
+## Invented names
+
+We have tried to invent wholly imaginary names, but new products, trials and companies come into existence all the time, so a name that is clear today may not stay clear. `python3 scripts/extract_names.py` lists every invented name in the pack in `scripts/names-to-check.csv`, and `python3 scripts/namecheck.py` runs an exact-phrase web search for each one; both should be run periodically to make sure no collisions have appeared. We most recently reviewed the names on September 24, 2026.
+
+If you find that you or your company's information was inadvertently included here, please contact us by opening an issue at [github.com/thowland/quorvanta](https://github.com/thowland/quorvanta/issues), and we will remove it promptly.
 
 ## Extending it
 
@@ -138,6 +143,6 @@ The fiction is also enforced mechanically:
 
 New population entity types are single modules under `scripts/population/entities/`, and the validator checks them from their own file headers. Contributions should keep the validator passing and should never introduce a real drug, company, product, plan, pharmacy or person.
 
-## Licence
+## License
 
 The content under `sources/` and the identity package under `assets/` are licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0), and the tooling under `scripts/` under the GNU General Public License v3.0. See `LICENSE` and `LICENSES/`. LOINC codes used in the pack are covered by the notice in `LICENSE`.

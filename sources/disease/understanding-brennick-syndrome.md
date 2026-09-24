@@ -4,7 +4,7 @@
 
 ## What is Brennick syndrome?
 
-Brennick syndrome is a long-term condition in which the immune system causes inflammation in the brainstem and spinal cord, which can damage nerve fibres. `[DIS-001]`
+Brennick syndrome is a long-term condition in which the immune system causes inflammation in the brainstem and spinal cord, which can damage nerve fibers. `[DIS-001]`
 
 About 410,000 adults in the United States live with Brennick syndrome. Brennick syndrome is more common in women, and it usually starts between the ages of 20 and 45. `[DIS-002, DIS-003]`
 

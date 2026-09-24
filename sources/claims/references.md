@@ -46,7 +46,7 @@ Type: journal_article.
 - `REF-005.2` Low-fat and medium-fat meals reduced Cmax by approximately 10% and 22%.
 - `REF-005.3` Time to peak was delayed from 2 hours fasted to 4 hours with low- or medium-fat meals and 6.5 hours with the high-fat meal.
 
-**REF-006** Quiroga-Pell S, Bergstrom-Lahti E, Ferrante-Wu J. Ethanol co-ingestion and the in vivo release characteristics of soriximel tavorate delayed-release capsules. *Journal of Tavorate Pharmacology* 2020;12(1):19-26. doi:10.5555/jtp.2020.12.19  
+**REF-006** Quiroga-Pell S, Bergstrom-Lahti E, Ferrante-Wu J. Ethanol co-ingestion and the in vivo release characteriztics of soriximel tavorate delayed-release capsules. *Journal of Tavorate Pharmacology* 2020;12(1):19-26. doi:10.5555/jtp.2020.12.19  
 Type: journal_article. Note: Finding 4 matters: the data and the advice diverge, and INT-004 must travel with ADM-003.
 
 - `REF-006.1` Co-ingestion with 5% and 40% v/v ethanol did not alter total MMT exposure relative to water.
@@ -54,7 +54,7 @@ Type: journal_article. Note: Finding 4 matters: the data and the advice diverge,
 - `REF-006.3` No dose dumping was observed under any condition.
 - `REF-006.4` The authors nonetheless recommend that patients avoid alcohol at the time of dosing, citing tolerability rather than exposure.
 
-**REF-007** Ferrante-Wu J, Okafor DN, Lindqvist-Amara P. Pharmacokinetics of soriximel tavorate and its metabolite hydroxypropyl glutarimide in renal impairment. *Journal of Tavorate Pharmacology* 2020;12(4):201-209. doi:10.5555/jtp.2020.12.201  
+**REF-007** Ferrante-Wu J, Okafor DN, Lindqvist-Amara P. Pharmacokinetics of soriximel tavorate and its metabolite hydroxypropyl glavorimide in renal impairment. *Journal of Tavorate Pharmacology* 2020;12(4):201-209. doi:10.5555/jtp.2020.12.201  
 Type: journal_article.
 
 - `REF-007.1` In a single-dose study of 8 subjects per cohort, MMT exposure showed no clinically relevant change with renal impairment.
@@ -155,7 +155,7 @@ Type: program_terms.
 **REF-023** Arden Quay Biosciences, Inc. QUORVANTA limited distribution network notice. *Arden Quay Biosciences* 2024;v1.0, effective 2024-02-26.  
 Type: distribution_notice.
 
-- `REF-023.1` QUORVANTA is available only through the network specialty pharmacies listed in the notice: Marlowe Specialty Pharmacy, Northgate Rx Specialty, Cairnwell Specialty, Tidewater Specialty Pharmacy, and Halverson Health System Pharmacy for its own patients.
+- `REF-023.1` QUORVANTA is available only through the network specialty pharmacies listed in the notice: Melbrook Specialty Pharmacy, Northumber Rx Specialty, Cairnwell Specialty, Tigerwater Specialty Pharmacy, and Halverson Health System Pharmacy for its own patients.
 - `REF-023.2` All national network pharmacies ship to all 50 states and the District of Columbia.
 - `REF-023.3` Prescriptions may be submitted by the QUORVANTA enrollment form, by e-prescription to a network pharmacy, or by fax to a network pharmacy.
 - `REF-023.4` Where a patient's plan mandates a pharmacy, the prescription is routed to that pharmacy; otherwise the patient chooses among network pharmacies.
@@ -164,17 +164,17 @@ Type: distribution_notice.
 **REF-024** Tavistock-Moreau E, Lindqvist-Amara P, Okafor DN, Sørlie-Nakamura T for the IBSC Diagnostic Criteria Panel. Diagnosis and classification of Brennick syndrome: 2021 revision of the IBSC criteria. *Brennick Syndrome Research and Treatment* 2021;38(2):141-158. doi:10.5555/bsrt.2021.38.141  
 Type: journal_article.
 
-- `REF-024.1` Brennick syndrome is a chronic, immune-mediated disorder of the central nervous system characterised by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibres.
+- `REF-024.1` Brennick syndrome is a chronic, immune-mediated disorder of the central nervous system characterized by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibers.
 - `REF-024.2` The disease course is classified as first clinical episode, relapsing-remitting, progressive with activity (active progressive), progressive without activity (non-active progressive), or primary progressive.
 - `REF-024.3` A relapse is new or worsening neurological symptoms lasting at least 48 hours, in the absence of fever or infection, at least 30 days after the start of any previous relapse.
-- `REF-024.4` Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region.
+- `REF-024.4` Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteriztic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region.
 - `REF-024.5` T2 lesions reflect areas of current or past inflammation; contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks.
 
 **REF-025** Halvorsen KE, Pryce-Dunn H, Villaseñor M. The Brennick Functional Scale: development, reliability and validity. *Journal of Relapsing Neuroinflammatory Disease* 2011;19(3):201-214. doi:10.5555/jrnd.2011.19.201  
 Type: journal_article.
 
 - `REF-025.1` The Brennick Functional Scale (BFS) is a clinician-rated scale from 0 (normal neurological examination) to 8 (unable to walk), in whole-point steps, based on examination of six functional domains (motor, sensory, balance, vision, bladder and bowel, cognition) and walking ability.
-- `REF-025.2` BFS 4 corresponds to walking limited to about 500 metres without aid or rest; BFS 6 to needing a walking aid to walk 100 metres.
+- `REF-025.2` BFS 4 corresponds to walking limited to about 500 meters without aid or rest; BFS 6 to needing a walking aid to walk 100 meters.
 - `REF-025.3` A change of at least 1 point sustained for 12 weeks exceeded measurement variability and is proposed as the definition of confirmed disability progression.
 
 **REF-026** Castellan-Ruiz M, Brandt-Okoye L, Wexford H. Prevalence of Brennick syndrome in the United States: a multi-source claims analysis. *Neuroepidemiology Reports* 2023;12(1):33-45. doi:10.5555/ner.2023.12.33  

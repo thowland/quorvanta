@@ -28,7 +28,7 @@
     "ps_crisis": "I'm really glad you told me. If you are thinking about harming yourself, please call or text 988 to reach the 988 Suicide & Crisis Lifeline, any time, day or night. If you are in immediate danger, call 911.",
     "ps_verification_required": "I can help with that once I've confirmed who I'm speaking with. Please tell me the patient's full name and date of birth, and either the ZIP code we have on file or the QuorvantaConnect case number.",
     "ps_verification_failed": "I wasn't able to confirm those details, so I can't discuss this case here. Please call QuorvantaConnect at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time, and a case manager can help.",
-    "ps_not_authorised": "I'm not able to share details about this case with you, because you're not listed as an authorised contact. The patient can add you by calling QuorvantaConnect at 1-800-555-0183. I'm happy to answer general questions about the program.",
+    "ps_not_authorized": "I'm not able to share details about this case with you, because you're not listed as an authorized contact. The patient can add you by calling QuorvantaConnect at 1-800-555-0183. I'm happy to answer general questions about the program.",
     "ps_human_transfer": "I'll connect you with a QuorvantaConnect case manager now.",
     "ps_after_hours": "QuorvantaConnect case managers are available Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. If you leave your name and number, someone will call you back the next business day. If you think you're having a side effect, you can call Drug Safety at 1-800-555-0142.",
     "ps_under_18": "QuorvantaConnect is for adults. If you're under 18, please ask a parent or guardian to contact us at 1-800-555-0183, and talk to your healthcare provider about your treatment.",
@@ -323,7 +323,7 @@
     {
       "id": "PSR-031",
       "topic": "bridge",
-      "text": "Bridge supply covers up to 60 days in total, sent in 30-day fills by Tidewater Specialty Pharmacy within 2 business days of approval. If you're just starting, your first fill includes your 2-week starting dose. It's available once in any 12 months and can't be extended past 60 days.",
+      "text": "Bridge supply covers up to 60 days in total, sent in 30-day fills by Tigerwater Specialty Pharmacy within 2 business days of approval. If you're just starting, your first fill includes your 2-week starting dose. It's available once in any 12 months and can't be extended past 60 days.",
       "citations": [
         "PGM-BRIDGE.3",
         "PGM-BRIDGE.4"
@@ -357,7 +357,7 @@
     {
       "id": "PSR-040",
       "topic": "foundation",
-      "text": "The Arden Quay Patient Assistance Foundation is a nonprofit that gives QUORVANTA at no cost to people who qualify. If you're approved, Tidewater Specialty Pharmacy sends it to you in 30-day supplies, with nothing to pay.",
+      "text": "The Arden Quay Patient Assistance Foundation is a nonprofit that gives QUORVANTA at no cost to people who qualify. If you're approved, Tigerwater Specialty Pharmacy sends it to you in 30-day supplies, with nothing to pay.",
       "citations": [
         "PGM-PAP.1",
         "PGM-PAP.7"
@@ -617,7 +617,7 @@
     {
       "id": "PSR-080",
       "topic": "privacy",
-      "text": "To protect your privacy, we confirm who we're speaking with before we discuss a case. We share case details only with you, your healthcare provider's office, and people you've named as authorised contacts.",
+      "text": "To protect your privacy, we confirm who we're speaking with before we discuss a case. We share case details only with you, your healthcare provider's office, and people you've named as authorized contacts.",
       "citations": [
         "PGM-PRIV.2"
       ],
@@ -628,7 +628,7 @@
     {
       "id": "PSR-081",
       "topic": "privacy",
-      "text": "You can name someone, such as a family member or caregiver, as an authorised contact on your Start Form or by calling us, and you can remove them at any time.",
+      "text": "You can name someone, such as a family member or caregiver, as an authorized contact on your Start Form or by calling us, and you can remove them at any time.",
       "citations": [
         "PGM-PRIV.3"
       ],

@@ -104,6 +104,6 @@ Dear {{patient.first_name}},
 
 {{pap.status_text}} `[PSR-107]`
 
-Tidewater Specialty Pharmacy will send QUORVANTA to you in 30-day supplies, with nothing to pay. `[PSR-040]`
+Tigerwater Specialty Pharmacy will send QUORVANTA to you in 30-day supplies, with nothing to pay. `[PSR-040]`
 
 Foundation approval lasts 12 months. You'll need to re-apply with updated income documents before it ends; we'll remind you 60 days ahead. `[PSR-044]`

@@ -8,10 +8,10 @@ QUORVANTA is available only through the pharmacies listed here. Retail and non-n
 
 | Pharmacy | Role | Phone | Fax | Hours | Ships to |
 | --- | --- | --- | --- | --- | --- |
-| Marlowe Specialty Pharmacy (SP-01) | network; Primary network pharmacy; receives prescriptions routed by QuorvantaConnect when no payer mandate applies. | 1-800-555-0121 | 1-800-555-0122 | Mon-Fri 8am-9pm ET, Sat 9am-5pm ET | All 50 states and DC |
-| Northgate Rx Specialty (SP-02) | network; Mandated for members of Northgate Health commercial and Medicare Part D plans. | 1-800-555-0123 | 1-800-555-0124 | Mon-Fri 7am-10pm ET, Sat 8am-6pm ET | All 50 states and DC |
+| Melbrook Specialty Pharmacy (SP-01) | network; Primary network pharmacy; receives prescriptions routed by QuorvantaConnect when no payer mandate applies. | 1-800-555-0121 | 1-800-555-0122 | Mon-Fri 8am-9pm ET, Sat 9am-5pm ET | All 50 states and DC |
+| Northumber Rx Specialty (SP-02) | network; Mandated for members of Northumber Health commercial and Medicare Part D plans. | 1-800-555-0123 | 1-800-555-0124 | Mon-Fri 7am-10pm ET, Sat 8am-6pm ET | All 50 states and DC |
 | Cairnwell Specialty (SP-03) | network; Mandated for members of Cairnwell-administered plans. | 1-800-555-0125 | 1-800-555-0126 | Mon-Fri 8am-8pm ET | All 50 states and DC |
-| Tidewater Specialty Pharmacy (SP-04) | network; Also dispenses bridge supply and patient assistance foundation product on behalf of QuorvantaConnect. | 1-800-555-0127 | 1-800-555-0128 | Mon-Fri 8am-8pm ET, Sat 9am-1pm ET | All 50 states and DC |
+| Tigerwater Specialty Pharmacy (SP-04) | network; Also dispenses bridge supply and patient assistance foundation product on behalf of QuorvantaConnect. | 1-800-555-0127 | 1-800-555-0128 | Mon-Fri 8am-8pm ET, Sat 9am-1pm ET | All 50 states and DC |
 | Halverson Health System Pharmacy (SP-05) | limited; Integrated delivery network pharmacy admitted to the network for its own patients; not a national option. | 1-800-555-0129 | 1-800-555-0130 | Mon-Fri 8am-6pm CT | IL, IN, WI, MI (Halverson Health patients only) |
 
 ## Three ways to prescribe

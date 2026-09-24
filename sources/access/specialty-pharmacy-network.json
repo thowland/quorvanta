@@ -6,7 +6,7 @@
   "pharmacies": [
     {
       "id": "SP-01",
-      "name": "Marlowe Specialty Pharmacy",
+      "name": "Melbrook Specialty Pharmacy",
       "parent": "Independent",
       "role": "network",
       "ncpdp": "99-00141 (fictitious)",
@@ -18,15 +18,15 @@
     },
     {
       "id": "SP-02",
-      "name": "Northgate Rx Specialty",
-      "parent": "Northgate Health (fictitious integrated PBM)",
+      "name": "Northumber Rx Specialty",
+      "parent": "Northumber Health (fictitious integrated PBM)",
       "role": "network",
       "ncpdp": "99-00287 (fictitious)",
       "phone": "1-800-555-0123",
       "fax": "1-800-555-0124",
       "hours": "Mon-Fri 7am-10pm ET, Sat 8am-6pm ET",
       "states": "All 50 states and DC",
-      "notes": "Mandated for members of Northgate Health commercial and Medicare Part D plans."
+      "notes": "Mandated for members of Northumber Health commercial and Medicare Part D plans."
     },
     {
       "id": "SP-03",
@@ -42,7 +42,7 @@
     },
     {
       "id": "SP-04",
-      "name": "Tidewater Specialty Pharmacy",
+      "name": "Tigerwater Specialty Pharmacy",
       "parent": "Independent",
       "role": "network",
       "ncpdp": "99-00418 (fictitious)",
@@ -81,7 +81,7 @@
   ],
   "hcp_facing_answers": {
     "which_pharmacy": "Name all national network pharmacies and explain plan mandates; do not recommend one.",
-    "why_limited": "Limited distribution supports the blood-test schedule, patient enrollment in support services and consistent counselling on titration and flushing. (Fictitious rationale; no REMS applies.)",
+    "why_limited": "Limited distribution supports the blood-test schedule, patient enrollment in support services and consistent counseling on titration and flushing. (Fictitious rationale; no REMS applies.)",
     "out_of_state_or_travel": "All national network pharmacies ship to all 50 states and DC.",
     "my_usual_pharmacy": "If it is not listed, it cannot order QUORVANTA; QuorvantaConnect can transfer the prescription."
   }

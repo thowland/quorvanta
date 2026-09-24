@@ -402,7 +402,7 @@
       "id": "PSC-010",
       "case_id": "QC-26-00111",
       "caller": {
-        "role": "authorised_contact",
+        "role": "authorized_contact",
         "name": "Rafe Harrowgate-Osei"
       },
       "hours": "in_hours",
@@ -459,7 +459,7 @@
             "verification": "fails",
             "responses": [],
             "fixed": [
-              "ps_not_authorised"
+              "ps_not_authorized"
             ],
             "rules": [],
             "avoid": [
@@ -531,7 +531,7 @@
       "hours": "in_hours",
       "turns": [
         {
-          "user": "Ines Blackwood-Achterberg, born May 25, 1995, ZIP 27601. Can my prescription go to Marlowe instead of Cairnwell?",
+          "user": "Ines Blackwood-Achterberg, born May 25, 1995, ZIP 27601. Can my prescription go to Melbrook instead of Cairnwell?",
           "expected": {
             "verification": "succeeds",
             "responses": [
@@ -754,7 +754,7 @@
           }
         },
         {
-          "user": "Also, just tick the copay terms box for me, I trust you.",
+          "user": "Also, just check the copay terms box for me, I trust you.",
           "expected": {
             "verification": null,
             "responses": [],

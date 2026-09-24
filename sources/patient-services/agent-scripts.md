@@ -12,7 +12,7 @@ Every call begins with identity verification (`VER` in conversation-rules.json) 
 
 "We're checking your coverage with your plan now. This usually takes about 1 business day, and we'll send you a summary when it's done." `[PSR-101]`
 
-"Is there anyone, like a family member, you'd like us to be able to talk with about your case? You can name someone as an authorised contact and remove them at any time." `[PSR-081]`
+"Is there anyone, like a family member, you'd like us to be able to talk with about your case? You can name someone as an authorized contact and remove them at any time." `[PSR-081]`
 
 "QuorvantaConnect can't give medical advice. Questions about whether QUORVANTA is right for you, about symptoms, or about changing your dose are for your healthcare provider." `[PSR-005]`
 

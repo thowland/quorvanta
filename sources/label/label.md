@@ -194,7 +194,7 @@ Clinical studies of DMT and QUORVANTA did not include sufficient numbers of pati
 
 ### 8.6 Renal impairment
 
-No dosage adjustment is necessary in mild renal impairment. Because of increased exposure to the metabolite hydroxypropyl glutarimide (HPG), QUORVANTA is not recommended in moderate or severe renal impairment (see 12.3).
+No dosage adjustment is necessary in mild renal impairment. Because of increased exposure to the metabolite hydroxypropyl glavorimide (HPG), QUORVANTA is not recommended in moderate or severe renal impairment (see 12.3).
 
 ## 11 DESCRIPTION
 

@@ -47,7 +47,7 @@
         "due": null,
         "internal_forward_late": false,
         "follow_up": [
-          "whether he has seen a healthcare provider or been admitted to hospital",
+          "whether he has seen a healthcare provider or been admitted to the hospital",
           "onset date and current outcome"
         ]
       },
@@ -93,7 +93,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           }
@@ -147,7 +147,7 @@
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "life_threatening"
             ]
           }
@@ -258,7 +258,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           }
@@ -305,7 +305,7 @@
           "criteria_complete": true
         }
       ],
-      "report": "Field call CALL-0029, 2026-09-03. Dr. Ignatius Moreau-Achike, Pecanvale Neurology, Houston, mentioned that a man in his forties taking QUORVANTA was hospitalised last week with acute kidney injury. The representative gave the Drug Safety number and forwarded the report on 2026-09-09.",
+      "report": "Field call CALL-0029, 2026-09-03. Dr. Ignatius Moreau-Achike, Pecanvale Neurology, Houston, mentioned that a man in his forties taking QUORVANTA was hospitalized last week with acute kidney injury. The representative gave the Drug Safety number and forwarded the report on 2026-09-09.",
       "expected": {
         "case_type": "adverse_event",
         "valid": true,
@@ -313,12 +313,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "hospitalised with acute kidney injury",
+            "verbatim": "hospitalized with acute kidney injury",
             "term": "AET-102",
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -1024,7 +1024,7 @@
           "criteria_complete": true
         }
       ],
-      "report": "Medical Information call, 2026-09-04, Dr. Rashid Vanterpool, Marrowdale Neurology, Detroit: \"A 36-year-old man on QUORVANTA for eight months had a generalised seizure at work on Tuesday. No seizure history. He was admitted overnight; the MRI showed no new lesions and his EEG is pending.\"",
+      "report": "Medical Information call, 2026-09-04, Dr. Rashid Vanterpool, Marrowdale Neurology, Detroit: \"A 36-year-old man on QUORVANTA for eight months had a generalized seizure at work on Tuesday. No seizure history. He was admitted overnight; the MRI showed no new lesions and his EEG is pending.\"",
       "expected": {
         "case_type": "adverse_event",
         "valid": true,
@@ -1032,12 +1032,12 @@
         "reporter_type": "hcp",
         "events": [
           {
-            "verbatim": "generalised seizure; admitted overnight",
+            "verbatim": "generalized seizure; admitted overnight",
             "term": "AET-107",
             "listed": false,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation"
+              "hospitalization"
             ]
           }
         ],
@@ -1066,7 +1066,7 @@
     },
     {
       "id": "AEI-020",
-      "title": "Hair turning grey",
+      "title": "Hair turning gray",
       "channel": "patient_services",
       "case_id": null,
       "hcp_id": null,
@@ -1084,7 +1084,7 @@
           "criteria_complete": true
         }
       ],
-      "report": "QuorvantaConnect nurse call, 2026-07-30, patient Leontyne Farquhar-Addo, 44, case record on file: \"This is going to sound silly, but since I started QUORVANTA my hair has been turning grey really fast, much more than before. It isn't falling out, it's just changing colour.\"",
+      "report": "QuorvantaConnect nurse call, 2026-07-30, patient Leontyne Farquhar-Addo, 44, case record on file: \"This is going to sound silly, but since I started QUORVANTA my hair has been turning gray really fast, much more than before. It isn't falling out, it's just changing color.\"",
       "expected": {
         "case_type": "adverse_event",
         "valid": true,
@@ -1092,7 +1092,7 @@
         "reporter_type": "consumer",
         "events": [
           {
-            "verbatim": "hair turning grey quickly; not falling out",
+            "verbatim": "hair turning gray quickly; not falling out",
             "term": "AET-108",
             "listed": false,
             "fatal": false,
@@ -1147,7 +1147,7 @@
             "listed": true,
             "fatal": false,
             "serious_criteria": [
-              "hospitalisation",
+              "hospitalization",
               "medically_important"
             ]
           },

@@ -6,13 +6,13 @@
 
 *QUORVANTA is an oral, twice-daily therapy that delivers the same active metabolite as dimethyl tavorate*
 
-*Approval supported by bioequivalence to dimethyl tavorate and the Phase 3 EVERGLADE safety program in approximately 620 patients*
+*Approval supported by bioequivalence to dimethyl tavorate and the Phase 3 EVERGARTER safety program in approximately 620 patients*
 
 **WALTHAM, Mass., January 22, 2024** — Arden Quay Biosciences, Inc. (Nasdaq: AQBX) (fictitious) today announced that the U.S. Food and Drug Administration (FDA) has approved QUORVANTA™ (soriximel tavorate) delayed-release capsules for the treatment of relapsing forms of Brennick syndrome (BrS), to include first clinical episode, relapsing-remitting disease, and active progressive disease, in adults.
 
 QUORVANTA is a prodrug that is rapidly converted to monomethyl tavorate (MMT), the same active metabolite as dimethyl tavorate. The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of BrS and in healthy subjects. The clinical efficacy of dimethyl tavorate was established in two 2-year, randomized, placebo-controlled studies, BRIGHTWATER and CASTLEREAGH, in which dimethyl tavorate 200 mg twice daily reduced the annualized relapse rate by 49% and 46%, respectively, compared with placebo (p<0.0001 for each).
 
-"Today's approval gives physicians and patients a new option built on a well-characterized active metabolite," said Dr. Ingrid Halvorsen-Mbeki, Chief Medical Officer. "We are grateful to the patients and investigators who took part in the EVERGLADE program."
+"Today's approval gives physicians and patients a new option built on a well-characterized active metabolite," said Dr. Ingrid Halvorsen-Mbeki, Chief Medical Officer. "We are grateful to the patients and investigators who took part in the EVERGARTER program."
 
 "QUORVANTA is the result of more than a decade of work on tavorate chemistry at Arden Quay," said Marcus Adebayo-Lindqvist, President and Chief Executive Officer. "We expect QUORVANTA to be available to patients in the United States in the coming weeks."
 

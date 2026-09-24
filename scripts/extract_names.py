@@ -27,7 +27,7 @@ CHECKS = {
     "ticker": "Stock exchange symbol lookup",
     "trial": "Clinical trial registries (study acronyms), web search",
     "disease": "Medical terminologies and literature, web search",
-    "organisation": "Web search; professional bodies and journals",
+    "organization": "Web search; professional bodies and journals",
     "payer": "Health plan, PBM and insurer names; trademark registers, web search",
     "pharmacy": "Pharmacy and specialty pharmacy names; state board listings, web search",
     "provider": "Practice, clinic and health system names; web search",
@@ -36,7 +36,7 @@ CHECKS = {
     "reference": "A real product or vendor named in prose; decide whether it may stay",
 }
 PRIORITY = {"brand": "A", "nonproprietary": "A", "company": "A", "program": "A", "ticker": "A", "trial": "A",
-            "disease": "A", "organisation": "B", "payer": "B", "pharmacy": "B", "supply_chain": "B", "reference": "A",
+            "disease": "A", "organization": "B", "payer": "B", "pharmacy": "B", "supply_chain": "B", "reference": "A",
             "provider": "B", "lab": "B"}
 
 
@@ -74,11 +74,11 @@ def collect():
     add(product["generic"], "nonproprietary", "product")
     add(product["predecessor"]["name"], "nonproprietary", "product predecessor")
     add("monomethyl tavorate", "nonproprietary", "active metabolite")
-    add("hydroxypropyl glutarimide", "nonproprietary", "inactive metabolite")
+    add("hydroxypropyl glavorimide", "nonproprietary", "inactive metabolite")
     add(product["company"], "company", "manufacturer")
     add(product["condition"]["name"], "disease", "condition")
     add(product["condition"]["disability_scale"].split(" (")[0], "disease", "disability scale")
-    add("International Brennick Syndrome Consortium", "organisation", "disease body")
+    add("International Brennick Syndrome Consortium", "organization", "disease body")
     add("QuorvantaConnect", "program", "patient support program")
     add("Arden Quay Patient Assistance Foundation", "program", "patient assistance foundation")
     add("QUORVANTA Pregnancy Registry", "program", "pregnancy exposure registry")
@@ -93,12 +93,12 @@ def collect():
     for r in load("claims/references.json")["references"]:
         venue = re.sub(r" \(fictitious.*\)$", "", r["venue"])
         if "Arden Quay" not in venue:
-            add(venue, "organisation", "journal, meeting or preprint server")
+            add(venue, "organization", "journal, meeting or preprint server")
         for a in r["authors"]:
             if "Group" in a:
-                add(re.sub(r"^for the ", "", a), "organisation", "study group")
+                add(re.sub(r"^for the ", "", a), "organization", "study group")
     text = "\n".join(p.read_text() for p in SRC.rglob("*.md"))
-    for trial in sorted(set(re.findall(r"\b(BRIGHTWATER|CASTLEREAGH|EVERGLADE(?:-\d)?)\b", text))):
+    for trial in sorted(set(re.findall(r"\b(BRIGHTWATER|CASTLEREAGH|EVERGARTER(?:-\d)?)\b", text))):
         add(trial, "trial", "study name")
 
     for p in load("access/specialty-pharmacy-network.json")["pharmacies"]:

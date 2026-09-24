@@ -98,7 +98,7 @@ STATES = {
     "WV": (1.8, ["304"]), "WI": (5.9, ["414", "608"]), "WY": (0.6, ["307"]),
 }
 
-# Surname stock: Latin-script Faker locales, so double-barrelled names mix origins
+# Surname stock: Latin-script Faker locales, so double-barreled names mix origins
 # the way the hand-written cast does.
 SURNAME_LOCALES = ["en_US", "es_MX", "en_GB", "pl_PL", "it_IT", "de_DE", "fr_FR", "pt_BR", "nl_NL",
                    "sv_SE", "fi_FI", "tr_TR", "yo_NG", "zu_ZA", "ga_IE"]
@@ -183,7 +183,7 @@ class People:
                 return name
 
     def person(self, sex=None):
-        """A first name and a double-barrelled surname that no core cast member has."""
+        """A first name and a double-barreled surname that no core cast member has."""
         while True:
             sex = sex or self.rng.choice(["female", "male"])
             first = self.first.first_name_female() if sex == "female" else self.first.first_name_male()

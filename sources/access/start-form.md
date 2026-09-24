@@ -60,7 +60,7 @@ Electronic signatures are accepted under ESIGN/UETA (fictitious statement). The 
 | C4. Nurse support calls | boolean | Yes |  |
 | C5. Blood test and refill reminders by text | boolean | Yes | show_if: A10 is Yes |
 | C6. Patient assistance foundation screening (uninsured or underinsured) | boolean | No |  |
-| C7. Preferred network specialty pharmacy, if your plan allows a choice | choice | No | Options: No preference, Marlowe Specialty Pharmacy, Tidewater Specialty Pharmacy, Halverson Health System Pharmacy (Halverson Health patients only); note: Plan-mandated pharmacies override this choice. |
+| C7. Preferred network specialty pharmacy, if your plan allows a choice | choice | No | Options: No preference, Melbrook Specialty Pharmacy, Tigerwater Specialty Pharmacy, Halverson Health System Pharmacy (Halverson Health patients only); note: Plan-mandated pharmacies override this choice. |
 
 ## Section D: Prescription (completed by prescriber)
 

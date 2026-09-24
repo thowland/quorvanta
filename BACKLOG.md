@@ -76,4 +76,4 @@ Turn some generated patients into full journeys: enrollment, benefits check, pri
 
 - **Pricing and gross-to-net.** List price, rebates, chargebacks, Medicaid rebates and 340B. The pack has no approved price (PGAP-09), so adding one reverses a design decision.
 - **Other languages and markets.** The pack is US English; the only Spanish-language case is QC-26-00114.
-- **Free-text corpora.** Contact-centre transcripts, community posts and market-research verbatims. They would need LLM generation, labels, and the same fiction and denylist checks as everything else.
+- **Free-text corpora.** Contact-center transcripts, community posts and market-research verbatims. They would need LLM generation, labels, and the same fiction and denylist checks as everything else.

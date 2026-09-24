@@ -20,7 +20,7 @@ In the natural history registry, about half of untreated patients with relapsing
 
 ## Diagnosis and assessment
 
-Diagnosis under the 2021 IBSC criteria requires a typical clinical episode, MRI lesions in at least two of four characteriztic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region. `[DIS-008]`
+Diagnosis under the 2021 IBSC criteria requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region. `[DIS-008]`
 
 On MRI, T2 lesions reflect areas of current or past inflammation, and contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks. `[DIS-009]`
 

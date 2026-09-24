@@ -46,7 +46,7 @@ Type: journal_article.
 - `REF-005.2` Low-fat and medium-fat meals reduced Cmax by approximately 10% and 22%.
 - `REF-005.3` Time to peak was delayed from 2 hours fasted to 4 hours with low- or medium-fat meals and 6.5 hours with the high-fat meal.
 
-**REF-006** Quiroga-Pell S, Bergstrom-Lahti E, Ferrante-Wu J. Ethanol co-ingestion and the in vivo release characteriztics of soriximel tavorate delayed-release capsules. *Journal of Tavorate Pharmacology* 2020;12(1):19-26. doi:10.5555/jtp.2020.12.19  
+**REF-006** Quiroga-Pell S, Bergstrom-Lahti E, Ferrante-Wu J. Ethanol co-ingestion and the in vivo release characteristics of soriximel tavorate delayed-release capsules. *Journal of Tavorate Pharmacology* 2020;12(1):19-26. doi:10.5555/jtp.2020.12.19  
 Type: journal_article. Note: Finding 4 matters: the data and the advice diverge, and INT-004 must travel with ADM-003.
 
 - `REF-006.1` Co-ingestion with 5% and 40% v/v ethanol did not alter total MMT exposure relative to water.
@@ -167,7 +167,7 @@ Type: journal_article.
 - `REF-024.1` Brennick syndrome is a chronic, immune-mediated disorder of the central nervous system characterized by inflammation around small blood vessels in the brainstem and spinal cord, with damage to nearby nerve fibers.
 - `REF-024.2` The disease course is classified as first clinical episode, relapsing-remitting, progressive with activity (active progressive), progressive without activity (non-active progressive), or primary progressive.
 - `REF-024.3` A relapse is new or worsening neurological symptoms lasting at least 48 hours, in the absence of fever or infection, at least 30 days after the start of any previous relapse.
-- `REF-024.4` Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteriztic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region.
+- `REF-024.4` Diagnosis requires a typical clinical episode, MRI lesions in at least two of four characteristic regions (brainstem, cervical spinal cord, cerebellar peduncles, periaqueductal region), and exclusion of other causes; a positive cerebrospinal fluid BRK index may substitute for one MRI region.
 - `REF-024.5` T2 lesions reflect areas of current or past inflammation; contrast-enhancing (CE+) lesions indicate inflammation active within approximately the previous 6 weeks.
 
 **REF-025** Halvorsen KE, Pryce-Dunn H, Villaseñor M. The Brennick Functional Scale: development, reliability and validity. *Journal of Relapsing Neuroinflammatory Disease* 2011;19(3):201-214. doi:10.5555/jrnd.2011.19.201  

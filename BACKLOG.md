@@ -6,11 +6,7 @@ Ideas for extending the QUORVANTA pack, with open decisions and release tasks. N
 
 These are needed before the repository is public.
 
-- **Name clearance.** Only QUORVANTA has been searched, and only once. Every invented name needs checking against real ones, including the hand-built names and the generated population:
-  - the generic, the disease, the company;
-  - plans, practices, pharmacies, labs and supply-chain parties;
-  - people.
-  Candidates to check first: Keystone Crest, Tallgrass Community Health, and any practice name built from a common word.
+- **Name clearance.** Every name in `scripts/names-to-check.csv` was reviewed on 2026-09-24 and is marked `verified`. That review found six collisions, which were renamed: DERAVINE to DRAVINEX, hydroxypropyl glutarimide to hydroxypropyl glavorimide, EVERGLADE to EVERGARTER, Northgate to Northumber, Tidewater to Tigerwater and Marlowe to Melbrook. New products, trials and companies appear all the time, so the check should be repeated periodically and before each release. People in the generated population are still unchecked.
 
   `scripts/names-to-check.csv` lists them: 240 names at the time of writing, in about 210 distinct stems. It comes from `python3 scripts/extract_names.py`, which re-reads the pack and keeps any status and notes already entered.
   - **Priority A:** brands, generics, companies, programs, trials, the disease, the ticker and the "Jev" mention.
@@ -19,7 +15,7 @@ These are needed before the repository is public.
   - **Left out:** people, cities, public programs and standards bodies.
 
   **First-pass web check.** `python3 scripts/namecheck.py` runs an exact-phrase search (the name in quotes) for each unchecked row and fills in the status column and the notes column (the lookup's date, time and timezone).
-  - **Status values:** `available`, `in use` (at least one result contains the exact phrase) or `N/A` (generic names and the "Jev" row, which are not searched).
+  - **Status values:** `available`, `in use` (at least one result contains the exact phrase) or `N/A` (generic names and the "Jev" row, which are not searched). Rows reviewed by hand are marked `verified`, with the review date in the notes; `namecheck.py` skips them unless run with `--recheck`.
   - **Evidence** for each search goes to `scripts/namecheck-log.jsonl`.
   - **Backends.** It needs search credentials:
     - Google's Custom Search JSON API, which is closed to new customers and ends on 2027-01-01;

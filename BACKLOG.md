@@ -47,6 +47,18 @@ Planned for later. The concern is repository size, so the design generates docum
 - **What gets committed.** A committed manifest (JSON) lists each document with its template, source record and the fields an extraction tool should return. A script renders the PDFs locally from the manifest into an ignored folder, so the repository stays small and the expected fields stay under validation.
 - **Why.** It targets document-AI and OCR testing, where almost no public pharma data exists.
 
+## Master data management
+
+The population already carries master-data problems with an answer key: duplicate HCPs (same NPI, name variant), moved and deactivated prescribers, retired prescribers still targeted, duplicate and closed offices, departed and multi-office staff, and patients who are duplicates or share a name, or a name and date of birth. A matching or cleansing tool can be scored against those flags. What is missing is the MDM layer itself:
+
+- **Several sources per person.** Each HCP or patient comes from one generated file. Real MDM reconciles the same person arriving from several systems, each with its own ids and its own variations. For HCPs that would be the CRM, the Start Form's prescriber section, the 867 dispense feed's prescriber NPI, the email platform and portal registrations; for patients, the hub, the specialty pharmacy and the texting platform.
+- **Golden records and crosswalks.** A master file mapping every source record to its master id, kept in `test-design/` as the answer key for match-and-merge.
+- **Survivorship rules.** A rules file, in the style of `engagement/campaign-rules.json`, saying which source wins for address, phone, specialty and consent and how conflicts are settled, so the validator can recompute every golden record.
+- **The core cast inside the population.** The 30 core prescribers and 29 hub cases never appear in the generated files, so nothing yet has to resolve a hub case against a population patient.
+- **Identity in the outreach data.** Texts are keyed on the population patient id. Shared household phone numbers and a reassigned number, where consent belongs to the previous owner, would give consent resolution something to catch.
+
+The work is roughly the size of the engagement layer: source feeds with realistic variation (nicknames, suffixes, address formats, stale specialties, phone formats), the master file and crosswalk, the survivorship rules and their validator checks, and the outreach tie-ins.
+
 ## Complete patient journeys
 
 Turn some generated patients into full journeys: enrollment, benefits check, prior authorization, shipments, claims, EPCIS and 867 records, then persistence and discontinuation. Discontinuation reasons would match the label's rates. This is the largest item, because every generated patient then has to pass the payer and channel checks. `scripts/build_channel.py` and the payer data would need to accept generated patients as well as the hand-built cases.

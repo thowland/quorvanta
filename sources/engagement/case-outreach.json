@@ -1,0 +1,1060 @@
+{
+  "_notice": "FICTITIOUS. Text messages and campaign memberships for synthetic support-program cases, for a program and product that do not exist.",
+  "outreach_version": "1.0.0",
+  "log_start": "2026-06-01",
+  "as_of": "2026-09-22",
+  "usage": "Outreach for eight of the hand-built cases in test-design/ps-cases.json, from log_start to as_of, in the same shape as population/sms-messages.json and campaign-memberships.json. Each case entry adds what the case record does not hold: the enrollment date, the Start Form choices texting depends on, the opt-in state in force at log_start (null for a case that enrolled during the log), and the date the first fill shipped. Fills are the case's shipments that have left the pharmacy, with bridge and Foundation supply counted like any other; a shipment awaiting the patient is not a fill. Steps that fell due before log_start, and memberships that began before it, are not in the log. One text breaks a rule on purpose and is flagged. The validator recomputes every text and membership from the case, its shipments and the inbound keywords.",
+  "cases": [
+    {
+      "case_id": "QC-26-00101",
+      "enrolled_on": "2026-01-02",
+      "contact_consent": true,
+      "text_reminders": true,
+      "text_status_at_start": "opt_in",
+      "started_on": "2026-03-20",
+      "notes": "Opted in before the log; refill reminders only, all on time."
+    },
+    {
+      "case_id": "QC-26-00114",
+      "enrolled_on": "2026-04-03",
+      "contact_consent": true,
+      "text_reminders": true,
+      "text_status_at_start": "opt_in",
+      "started_on": "2026-04-13",
+      "notes": "Spanish-language reminders; a free-text thank-you gets the Spanish auto-reply."
+    },
+    {
+      "case_id": "QC-26-00112",
+      "enrolled_on": "2026-05-22",
+      "contact_consent": true,
+      "text_reminders": true,
+      "text_status_at_start": "opt_in",
+      "started_on": "2026-06-01",
+      "notes": "First-month nurse offer, then STOP after a reminder. One later reminder is sent anyway and flagged after_opt_out."
+    },
+    {
+      "case_id": "QC-26-00119",
+      "enrolled_on": "2026-06-18",
+      "contact_consent": true,
+      "text_reminders": false,
+      "text_status_at_start": null,
+      "started_on": "2026-06-29",
+      "notes": "Enrolls in the log; the refill due 2026-08-28 never ships (pharmacy awaiting patient), so the late-refill track runs to completion."
+    },
+    {
+      "case_id": "QC-26-00103",
+      "enrolled_on": "2026-06-08",
+      "contact_consent": true,
+      "text_reminders": false,
+      "text_status_at_start": null,
+      "started_on": "2026-06-15",
+      "notes": "Enrolls in the log; bridge supply runs out 2026-08-14 while the appeal is pending. Free text about running out goes to the case manager."
+    },
+    {
+      "case_id": "QC-26-00124",
+      "enrolled_on": "2025-08-28",
+      "contact_consent": true,
+      "text_reminders": true,
+      "text_status_at_start": "opt_in",
+      "started_on": "2025-09-15",
+      "notes": "Foundation approval lapsed 2026-09-07; the refill due 2026-09-10 is late and the late-refill track is open on the as_of date."
+    },
+    {
+      "case_id": "QC-26-00120",
+      "enrolled_on": "2026-09-01",
+      "contact_consent": true,
+      "text_reminders": false,
+      "text_status_at_start": null,
+      "started_on": null,
+      "notes": "New enrollment, benefits verification waiting on information: never-start texts, commercial cost version."
+    },
+    {
+      "case_id": "QC-26-00123",
+      "enrolled_on": "2026-08-28",
+      "contact_consent": true,
+      "text_reminders": false,
+      "text_status_at_start": null,
+      "started_on": null,
+      "notes": "Uninsured, Foundation denied on income: never-start texts, the non-copay cost version."
+    }
+  ],
+  "messages": [
+    {
+      "id": "CSMS-001",
+      "patient_id": "QC-26-00101",
+      "direction": "outbound",
+      "at": "2026-06-15T14:05:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-18",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-002",
+      "patient_id": "QC-26-00101",
+      "direction": "outbound",
+      "at": "2026-07-15T14:12:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-18",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-003",
+      "patient_id": "QC-26-00101",
+      "direction": "outbound",
+      "at": "2026-08-14T22:40:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-17",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-004",
+      "patient_id": "QC-26-00101",
+      "direction": "outbound",
+      "at": "2026-09-13T15:00:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-16",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-005",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-06-08T21:40:00Z",
+      "message_id": "MSG-ACT-01",
+      "language": "English",
+      "body": "QuorvantaConnect: Reply YES to get texts about your enrollment, prescription and reminders. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": "CMP-ACTIVATION",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-08",
+        "step": 0
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-006",
+      "patient_id": "QC-26-00103",
+      "direction": "inbound",
+      "at": "2026-06-08T22:03:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "YES",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": "opt_in",
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-007",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-06-08T22:03:40Z",
+      "message_id": "MSG-ACT-02",
+      "language": "English",
+      "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-006",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-008",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-06-25T15:00:00Z",
+      "message_id": "MSG-DR-NURSE",
+      "language": "English",
+      "body": "QuorvantaConnect: Our nurses can talk with you about what to expect in your first months of treatment. Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "first_month",
+        "day0": "2026-06-15",
+        "step": 10
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-009",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-08-21T14:30:00Z",
+      "message_id": "MSG-DR-LATE-HELP",
+      "language": "English",
+      "body": "QuorvantaConnect: If you're having trouble getting your refill, including with cost or insurance, we can help. Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "late_refill",
+        "day0": "2026-08-14",
+        "step": 7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-010",
+      "patient_id": "QC-26-00103",
+      "direction": "inbound",
+      "at": "2026-08-21T14:52:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "I ran out last week and my appeal is still pending. Can you send more?",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": "case_manager",
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-011",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-08-21T14:52:40Z",
+      "message_id": "MSG-REPLY-RECEIVED",
+      "language": "English",
+      "body": "QuorvantaConnect: We can't answer texts here. A case manager will call you. If you think you're having a side effect, call Drug Safety at 1-800-555-0142. For an emergency, call 911.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-010",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-012",
+      "patient_id": "QC-26-00103",
+      "direction": "outbound",
+      "at": "2026-08-28T14:40:00Z",
+      "message_id": "MSG-DR-LATE-HCP",
+      "language": "English",
+      "body": "QuorvantaConnect: We're here if you need help with your prescription. If you have questions about your treatment, talk to your healthcare provider. Call us at 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "late_refill",
+        "day0": "2026-08-14",
+        "step": 14
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-013",
+      "patient_id": "QC-26-00112",
+      "direction": "outbound",
+      "at": "2026-06-11T19:00:00Z",
+      "message_id": "MSG-DR-NURSE",
+      "language": "English",
+      "body": "QuorvantaConnect: Our nurses can talk with you about what to expect in your first months of treatment. Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "first_month",
+        "day0": "2026-06-01",
+        "step": 10
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-014",
+      "patient_id": "QC-26-00112",
+      "direction": "outbound",
+      "at": "2026-06-28T16:30:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-01",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-015",
+      "patient_id": "QC-26-00112",
+      "direction": "outbound",
+      "at": "2026-07-28T16:10:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-31",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-016",
+      "patient_id": "QC-26-00112",
+      "direction": "inbound",
+      "at": "2026-07-29T00:02:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "STOP",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": "opt_out",
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-017",
+      "patient_id": "QC-26-00112",
+      "direction": "outbound",
+      "at": "2026-07-29T00:02:40Z",
+      "message_id": "MSG-STOP",
+      "language": "English",
+      "body": "QuorvantaConnect: You won't get any more texts from us. To stop all contact, call 1-800-555-0183. Reply START to sign up again.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-016",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-018",
+      "patient_id": "QC-26-00112",
+      "direction": "outbound",
+      "at": "2026-08-27T15:45:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-30",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": [
+        {
+          "type": "after_opt_out"
+        }
+      ]
+    },
+    {
+      "id": "CSMS-019",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-06-09T17:30:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: Pronto le toca su próximo resurtido. Su farmacia especializada se comunicará con usted para programar la entrega. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-12",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-020",
+      "patient_id": "QC-26-00114",
+      "direction": "inbound",
+      "at": "2026-06-09T17:48:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "Gracias",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": "case_manager",
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-021",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-06-09T17:48:40Z",
+      "message_id": "MSG-REPLY-RECEIVED",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: No podemos responder mensajes aquí. Un administrador de casos lo llamará. Si cree que tiene un efecto secundario, llame a Seguridad de Medicamentos al 1-800-555-0142. En una emergencia, llame al 911.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-020",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-022",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-07-09T17:15:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: Pronto le toca su próximo resurtido. Su farmacia especializada se comunicará con usted para programar la entrega. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-12",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-023",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-08-08T14:50:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: Pronto le toca su próximo resurtido. Su farmacia especializada se comunicará con usted para programar la entrega. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-11",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-024",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-09-07T15:20:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: Pronto le toca su próximo resurtido. Su farmacia especializada se comunicará con usted para programar la entrega. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-10",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-025",
+      "patient_id": "QC-26-00119",
+      "direction": "outbound",
+      "at": "2026-06-18T19:10:00Z",
+      "message_id": "MSG-ACT-01",
+      "language": "English",
+      "body": "QuorvantaConnect: Reply YES to get texts about your enrollment, prescription and reminders. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": "CMP-ACTIVATION",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-18",
+        "step": 0
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-026",
+      "patient_id": "QC-26-00119",
+      "direction": "inbound",
+      "at": "2026-06-18T19:22:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "Yes",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": "opt_in",
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-027",
+      "patient_id": "QC-26-00119",
+      "direction": "outbound",
+      "at": "2026-06-18T19:22:40Z",
+      "message_id": "MSG-ACT-02",
+      "language": "English",
+      "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-026",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-028",
+      "patient_id": "QC-26-00119",
+      "direction": "outbound",
+      "at": "2026-07-09T17:35:00Z",
+      "message_id": "MSG-DR-NURSE",
+      "language": "English",
+      "body": "QuorvantaConnect: Our nurses can talk with you about what to expect in your first months of treatment. Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "first_month",
+        "day0": "2026-06-29",
+        "step": 10
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-029",
+      "patient_id": "QC-26-00119",
+      "direction": "outbound",
+      "at": "2026-09-04T15:15:00Z",
+      "message_id": "MSG-DR-LATE-HELP",
+      "language": "English",
+      "body": "QuorvantaConnect: If you're having trouble getting your refill, including with cost or insurance, we can help. Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "late_refill",
+        "day0": "2026-08-28",
+        "step": 7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-030",
+      "patient_id": "QC-26-00119",
+      "direction": "outbound",
+      "at": "2026-09-11T15:05:00Z",
+      "message_id": "MSG-DR-LATE-HCP",
+      "language": "English",
+      "body": "QuorvantaConnect: We're here if you need help with your prescription. If you have questions about your treatment, talk to your healthcare provider. Call us at 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "late_refill",
+        "day0": "2026-08-28",
+        "step": 14
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-031",
+      "patient_id": "QC-26-00120",
+      "direction": "outbound",
+      "at": "2026-09-01T17:20:00Z",
+      "message_id": "MSG-ACT-01",
+      "language": "English",
+      "body": "QuorvantaConnect: Reply YES to get texts about your enrollment, prescription and reminders. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": "CMP-ACTIVATION",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-01",
+        "step": 0
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-032",
+      "patient_id": "QC-26-00120",
+      "direction": "inbound",
+      "at": "2026-09-01T17:47:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "YES",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": "opt_in",
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-033",
+      "patient_id": "QC-26-00120",
+      "direction": "outbound",
+      "at": "2026-09-01T17:47:40Z",
+      "message_id": "MSG-ACT-02",
+      "language": "English",
+      "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-032",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-034",
+      "patient_id": "QC-26-00120",
+      "direction": "outbound",
+      "at": "2026-09-15T16:10:00Z",
+      "message_id": "MSG-NS-STATUS",
+      "language": "English",
+      "body": "QuorvantaConnect: Your case manager is working on the next steps for your prescription. Questions? Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+      "campaign_id": "CMP-NEVERSTART",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-01",
+        "step": 14
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-035",
+      "patient_id": "QC-26-00120",
+      "direction": "outbound",
+      "at": "2026-09-22T16:30:00Z",
+      "message_id": "MSG-NS-COST-COMMERCIAL",
+      "language": "English",
+      "body": "QuorvantaConnect: If you have commercial insurance, the copay program may lower what you pay. Call 1-800-555-0183 to ask your case manager. Reply STOP to cancel.",
+      "campaign_id": "CMP-NEVERSTART",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-01",
+        "step": 21
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-036",
+      "patient_id": "QC-26-00123",
+      "direction": "outbound",
+      "at": "2026-08-28T18:15:00Z",
+      "message_id": "MSG-ACT-01",
+      "language": "English",
+      "body": "QuorvantaConnect: Reply YES to get texts about your enrollment, prescription and reminders. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": "CMP-ACTIVATION",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-28",
+        "step": 0
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-037",
+      "patient_id": "QC-26-00123",
+      "direction": "inbound",
+      "at": "2026-08-28T18:31:00Z",
+      "message_id": null,
+      "language": null,
+      "body": "yes",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": null,
+      "keyword": "opt_in",
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-038",
+      "patient_id": "QC-26-00123",
+      "direction": "outbound",
+      "at": "2026-08-28T18:31:40Z",
+      "message_id": "MSG-ACT-02",
+      "language": "English",
+      "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+      "campaign_id": null,
+      "schedule": null,
+      "in_reply_to": "CSMS-037",
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-039",
+      "patient_id": "QC-26-00123",
+      "direction": "outbound",
+      "at": "2026-09-11T17:00:00Z",
+      "message_id": "MSG-NS-STATUS",
+      "language": "English",
+      "body": "QuorvantaConnect: Your case manager is working on the next steps for your prescription. Questions? Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+      "campaign_id": "CMP-NEVERSTART",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-28",
+        "step": 14
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-040",
+      "patient_id": "QC-26-00123",
+      "direction": "outbound",
+      "at": "2026-09-18T17:20:00Z",
+      "message_id": "MSG-NS-COST-OTHER",
+      "language": "English",
+      "body": "QuorvantaConnect: If cost is a concern, your case manager can tell you about other ways to get help. Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-NEVERSTART",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-28",
+        "step": 21
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-041",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-06-09T20:00:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-12",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-042",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-07-09T20:10:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-12",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-043",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-08-08T15:30:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-08-11",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-044",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-09-07T15:25:00Z",
+      "message_id": "MSG-REM-REFILL",
+      "language": "English",
+      "body": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-REFILL-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-09-10",
+        "step": -3
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-045",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-09-17T17:00:00Z",
+      "message_id": "MSG-DR-LATE-HELP",
+      "language": "English",
+      "body": "QuorvantaConnect: If you're having trouble getting your refill, including with cost or insurance, we can help. Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "CMP-DISCON-RISK",
+      "schedule": {
+        "track": "late_refill",
+        "day0": "2026-09-10",
+        "step": 7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    }
+  ],
+  "memberships": [
+    {
+      "id": "CCMB-01",
+      "patient_id": "QC-26-00112",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "first_month",
+      "day0": "2026-06-01",
+      "entered_on": "2026-06-11",
+      "exited_on": "2026-06-11",
+      "exit_reason": "completed",
+      "sends": [
+        "CSMS-013"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-02",
+      "patient_id": "QC-26-00119",
+      "campaign_id": "CMP-ACTIVATION",
+      "track": null,
+      "day0": "2026-06-18",
+      "entered_on": "2026-06-18",
+      "exited_on": "2026-06-18",
+      "exit_reason": "opted_in",
+      "sends": [
+        "CSMS-025"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-03",
+      "patient_id": "QC-26-00119",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "first_month",
+      "day0": "2026-06-29",
+      "entered_on": "2026-07-09",
+      "exited_on": "2026-07-09",
+      "exit_reason": "completed",
+      "sends": [
+        "CSMS-028"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-04",
+      "patient_id": "QC-26-00119",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "late_refill",
+      "day0": "2026-08-28",
+      "entered_on": "2026-09-04",
+      "exited_on": "2026-09-11",
+      "exit_reason": "completed",
+      "sends": [
+        "CSMS-029",
+        "CSMS-030"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-05",
+      "patient_id": "QC-26-00103",
+      "campaign_id": "CMP-ACTIVATION",
+      "track": null,
+      "day0": "2026-06-08",
+      "entered_on": "2026-06-08",
+      "exited_on": "2026-06-08",
+      "exit_reason": "opted_in",
+      "sends": [
+        "CSMS-005"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-06",
+      "patient_id": "QC-26-00103",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "first_month",
+      "day0": "2026-06-15",
+      "entered_on": "2026-06-25",
+      "exited_on": "2026-06-25",
+      "exit_reason": "completed",
+      "sends": [
+        "CSMS-008"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-07",
+      "patient_id": "QC-26-00103",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "late_refill",
+      "day0": "2026-08-14",
+      "entered_on": "2026-08-21",
+      "exited_on": "2026-08-28",
+      "exit_reason": "completed",
+      "sends": [
+        "CSMS-009",
+        "CSMS-012"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-08",
+      "patient_id": "QC-26-00124",
+      "campaign_id": "CMP-DISCON-RISK",
+      "track": "late_refill",
+      "day0": "2026-09-10",
+      "entered_on": "2026-09-17",
+      "exited_on": null,
+      "exit_reason": null,
+      "sends": [
+        "CSMS-045"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-09",
+      "patient_id": "QC-26-00120",
+      "campaign_id": "CMP-ACTIVATION",
+      "track": null,
+      "day0": "2026-09-01",
+      "entered_on": "2026-09-01",
+      "exited_on": "2026-09-01",
+      "exit_reason": "opted_in",
+      "sends": [
+        "CSMS-031"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-10",
+      "patient_id": "QC-26-00120",
+      "campaign_id": "CMP-NEVERSTART",
+      "track": null,
+      "day0": "2026-09-01",
+      "entered_on": "2026-09-15",
+      "exited_on": null,
+      "exit_reason": null,
+      "sends": [
+        "CSMS-034",
+        "CSMS-035"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-11",
+      "patient_id": "QC-26-00123",
+      "campaign_id": "CMP-ACTIVATION",
+      "track": null,
+      "day0": "2026-08-28",
+      "entered_on": "2026-08-28",
+      "exited_on": "2026-08-28",
+      "exit_reason": "opted_in",
+      "sends": [
+        "CSMS-036"
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "CCMB-12",
+      "patient_id": "QC-26-00123",
+      "campaign_id": "CMP-NEVERSTART",
+      "track": null,
+      "day0": "2026-08-28",
+      "entered_on": "2026-09-11",
+      "exited_on": null,
+      "exit_reason": null,
+      "sends": [
+        "CSMS-039",
+        "CSMS-040"
+      ],
+      "quality_flags": []
+    }
+  ]
+}

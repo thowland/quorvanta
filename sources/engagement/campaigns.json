@@ -1,0 +1,88 @@
+{
+  "_notice": "FICTITIOUS. Patient outreach campaigns for a support program and product that do not exist.",
+  "campaigns_version": "1.0.0",
+  "usage": "Each campaign is a schedule of approved texts (approved-messages.json) keyed to a reference date, with the conditions a patient must meet on each step's day. The rules in campaign-rules.json apply to every step. A step is evaluated at the start of its day in the patient's local time, using only fills shipped and keywords received before that moment; if the patient qualifies, the text is sent that day inside quiet hours, unless an opt-out keyword arrives first. A fill shipped on a step's day does not stop that step. Membership and every send can be recomputed from the patient record, the fills and the inbound keywords.",
+  "eligibility": {
+    "all_texts": "Adult on the step's day (ENG-09) and a language with approved versions (ENG-07).",
+    "campaign_texts": "CNS-TEXT-OPTIN in force (ENG-01), program status enrolled."
+  },
+  "campaigns": [
+    {
+      "id": "CMP-ACTIVATION",
+      "name": "Text activation",
+      "reference_date": "program.enrolled_on",
+      "enters_if": "Enrolled with CNS-CONTACT, adult, supported language.",
+      "steps": [
+        { "day": 0, "message": "MSG-ACT-01" },
+        { "day": 7, "message": "MSG-ACT-01", "only_if": "No opt-in or opt-out keyword yet" }
+      ],
+      "exits": [
+        { "reason": "opted_in", "when": "An opt-in keyword; exits on that day" },
+        { "reason": "opted_out", "when": "An opt-out keyword; exits on that day" },
+        { "reason": "no_reply", "when": "Day 14 with no keyword" }
+      ],
+      "measure": "Share of enrolled patients opted in within 14 days"
+    },
+    {
+      "id": "CMP-NEVERSTART",
+      "name": "Never-start support",
+      "reference_date": "program.enrolled_on",
+      "enters_if": "On day 14: CNS-TEXT-OPTIN in force, no fill shipped, prescription not canceled.",
+      "steps": [
+        { "day": 14, "message": "MSG-NS-STATUS" },
+        { "day": 21, "message": "MSG-NS-COST-COMMERCIAL", "only_if": "Commercial insurance with no government program (ENG-11)" },
+        { "day": 21, "message": "MSG-NS-COST-OTHER", "only_if": "Government insurance, a government secondary, or no insurance" },
+        { "day": 35, "message": "MSG-NS-FIRST-FILL" }
+      ],
+      "exits": [
+        { "reason": "first_fill", "when": "The first fill ships; exits on its ship date" },
+        { "reason": "prescriber_canceled", "when": "The prescriber cancels the prescription; exits on that date" },
+        { "reason": "opted_out", "when": "An opt-out keyword; exits on that day" },
+        { "reason": "completed", "when": "Day 35, after the last step" }
+      ],
+      "measure": "Share of members whose first fill ships within 60 days of enrollment, against eligible patients who are not texted"
+    },
+    {
+      "id": "CMP-DISCON-RISK",
+      "name": "Discontinuation risk",
+      "tracks": [
+        {
+          "id": "first_month",
+          "reference_date": "therapy.started_on (the first fill's ship date)",
+          "enters_if": "On day 10: CNS-TEXT-OPTIN in force, treatment not discontinued.",
+          "steps": [
+            { "day": 10, "message": "MSG-DR-NURSE" }
+          ],
+          "exits": [
+            { "reason": "completed", "when": "Day 10, after the step" }
+          ]
+        },
+        {
+          "id": "late_refill",
+          "reference_date": "A fill's due date: its ship date plus its days' supply. One membership per late fill.",
+          "enters_if": "On day 7 after the due date: no later fill shipped, treatment not discontinued, CNS-TEXT-OPTIN in force.",
+          "steps": [
+            { "day": 7, "message": "MSG-DR-LATE-HELP" },
+            { "day": 14, "message": "MSG-DR-LATE-HCP" }
+          ],
+          "exits": [
+            { "reason": "refilled", "when": "The next fill ships; exits on its ship date" },
+            { "reason": "discontinued", "when": "Treatment is discontinued; exits on that date" },
+            { "reason": "opted_out", "when": "An opt-out keyword; exits on that day" },
+            { "reason": "completed", "when": "Day 14, after the last step" }
+          ]
+        }
+      ],
+      "measure": "Share of late_refill members who refill within 30 days of the due date"
+    }
+  ],
+  "program_texts": [
+    {
+      "id": "PGM-REFILL-REMINDERS",
+      "name": "Refill reminders",
+      "reference_date": "Each fill's due date",
+      "rule": "MSG-REM-REFILL 3 days before the due date, if on that day: CNS-TEXT-OPTIN and CNS-TEXT-REMINDERS in force, no later fill shipped, treatment not discontinued.",
+      "citations": ["PGM-NURSE.3"]
+    }
+  ]
+}

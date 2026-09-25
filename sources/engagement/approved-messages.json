@@ -1,0 +1,150 @@
+{
+  "_notice": "FICTITIOUS. Approved text messages for a support program and product that do not exist. Phone numbers use the reserved 555-01xx range.",
+  "library_version": "1.0.0",
+  "usage": "Every automated text QuorvantaConnect sends is one of these messages, word for word, in the patient's language (campaign-rules.json ENG-07 and ENG-08). Each message cites the program provisions, fixed messages or rules that support it. The Spanish version of each message is an approved translation of the English one and carries the same citations.",
+  "messages": [
+    {
+      "id": "MSG-ACT-01",
+      "purpose": "Activation: asks for the text opt-in",
+      "kind": "activation",
+      "versions": {
+        "English": "QuorvantaConnect: Reply YES to get texts about your enrollment, prescription and reminders. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Responda SI para recibir mensajes sobre su inscripción, su receta y recordatorios. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responda AYUDA para obtener ayuda o STOP para cancelar."
+      },
+      "citations": ["CONSENT-CONTACT", "PGM-PRIV.4"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-ACT-02",
+      "purpose": "Confirms an opt-in keyword",
+      "kind": "keyword_reply",
+      "versions": {
+        "English": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Ya está inscrito para recibir mensajes. Pueden aplicarse tarifas de mensajes y datos. Responda AYUDA para obtener ayuda o STOP para cancelar."
+      },
+      "citations": ["PGM-PRIV.4"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-HELP",
+      "purpose": "Answers a help keyword",
+      "kind": "keyword_reply",
+      "versions": {
+        "English": "QuorvantaConnect: Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel texts.",
+        "Spanish": "QuorvantaConnect: Llame al 1-800-555-0183, de lunes a viernes, de 8 a.m. a 8 p.m., hora del Este. Responda STOP para cancelar los mensajes."
+      },
+      "citations": ["PGM-GEN.3", "PGM-PRIV.4"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-STOP",
+      "purpose": "Confirms an opt-out keyword",
+      "kind": "keyword_reply",
+      "versions": {
+        "English": "QuorvantaConnect: You won't get any more texts from us. To stop all contact, call 1-800-555-0183. Reply START to sign up again.",
+        "Spanish": "QuorvantaConnect: Ya no recibirá más mensajes de texto. Para dejar de recibir cualquier contacto, llame al 1-800-555-0183. Responda START para volver a inscribirse."
+      },
+      "citations": ["PGM-PRIV.4"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-REPLY-RECEIVED",
+      "purpose": "Answers free text; the text itself goes to the case manager",
+      "kind": "keyword_reply",
+      "versions": {
+        "English": "QuorvantaConnect: We can't answer texts here. A case manager will call you. If you think you're having a side effect, call Drug Safety at 1-800-555-0142. For an emergency, call 911.",
+        "Spanish": "QuorvantaConnect: No podemos responder mensajes aquí. Un administrador de casos lo llamará. Si cree que tiene un efecto secundario, llame a Seguridad de Medicamentos al 1-800-555-0142. En una emergencia, llame al 911."
+      },
+      "citations": ["ps_ae_handoff", "ps_emergency", "ESC-01"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-REM-REFILL",
+      "purpose": "Refill reminder, 3 days before a refill is due",
+      "kind": "reminder",
+      "versions": {
+        "English": "QuorvantaConnect: Your next refill is due soon. Your specialty pharmacy will contact you to schedule delivery. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Pronto le toca su próximo resurtido. Su farmacia especializada se comunicará con usted para programar la entrega. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-NURSE.3", "PGM-PHARM.4"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-NS-STATUS",
+      "purpose": "Never-start, step 1: the case is in progress",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: Your case manager is working on the next steps for your prescription. Questions? Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Su administrador de casos está trabajando en los próximos pasos de su receta. ¿Preguntas? Llame al 1-800-555-0183, de lunes a viernes, de 8 a.m. a 8 p.m., hora del Este. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-GEN.3", "PGM-GEN.6"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-NS-COST-COMMERCIAL",
+      "purpose": "Never-start, step 2, for commercial insurance with no government program",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: If you have commercial insurance, the copay program may lower what you pay. Call 1-800-555-0183 to ask your case manager. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Si tiene seguro comercial, el programa de copago puede reducir lo que paga. Llame al 1-800-555-0183 para preguntarle a su administrador de casos. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-COPAY.1", "PGM-GEN.6"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-NS-COST-OTHER",
+      "purpose": "Never-start, step 2, for government insurance or no insurance",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: If cost is a concern, your case manager can tell you about other ways to get help. Call 1-800-555-0183. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Si le preocupa el costo, su administrador de casos puede informarle sobre otras formas de obtener ayuda. Llame al 1-800-555-0183. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-GOV.1", "PGM-PAP.1", "PGM-GEN.6"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-NS-FIRST-FILL",
+      "purpose": "Never-start, step 3: no first fill yet",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: We haven't confirmed your first delivery yet. Call 1-800-555-0183 to check your status or ask questions. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Todavía no hemos confirmado su primera entrega. Llame al 1-800-555-0183 para consultar su estado o hacer preguntas. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-PHARM.3", "PGM-GEN.6"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-DR-NURSE",
+      "purpose": "Discontinuation risk, first month: offers the nurse line",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: Our nurses can talk with you about what to expect in your first months of treatment. Call 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Nuestras enfermeras pueden hablar con usted sobre qué esperar en los primeros meses de tratamiento. Llame al 1-800-555-0183, de lunes a viernes, de 8 a.m. a 8 p.m., hora del Este. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-NURSE.1", "PGM-GEN.3"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-DR-LATE-HELP",
+      "purpose": "Discontinuation risk, late refill, step 1",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: If you're having trouble getting your refill, including with cost or insurance, we can help. Call 1-800-555-0183. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Si tiene problemas para obtener su resurtido, incluso con el costo o el seguro, podemos ayudarle. Llame al 1-800-555-0183. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-GEN.6", "PGM-PHARM.5"],
+      "status": "approved"
+    },
+    {
+      "id": "MSG-DR-LATE-HCP",
+      "purpose": "Discontinuation risk, late refill, step 2",
+      "kind": "campaign",
+      "versions": {
+        "English": "QuorvantaConnect: We're here if you need help with your prescription. If you have questions about your treatment, talk to your healthcare provider. Call us at 1-800-555-0183. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: Estamos aquí si necesita ayuda con su receta. Si tiene preguntas sobre su tratamiento, hable con su proveedor de atención médica. Llámenos al 1-800-555-0183. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-GEN.4", "PGM-NURSE.2", "ps_medical_question"],
+      "status": "approved"
+    }
+  ]
+}

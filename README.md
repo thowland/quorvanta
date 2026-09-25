@@ -37,15 +37,16 @@ The foundation is a fictitious prescribing information document (the label), wri
 | Supply chain | Serial-level EPCIS (GS1's standard for supply-chain events) history, Drug Supply Chain Security Act (DSCSA) transaction data, and pharmacy dispense (EDI 867) and inventory (EDI 852) feeds that reconcile with the events and with the cases |
 | Safety | Drug Safety conventions and 22 adverse event reports arriving through every company channel |
 | Field force | Territories, representatives, prescribers, approved emails and a call log checked against field compliance rules |
+| Engagement and outreach | Texting consent and opt-in rules, approved text messages in English and Spanish, never-start and discontinuation-risk campaigns, refill reminders, and the resulting message logs and campaign memberships, with HCP email engagement and HCP portal sessions |
 | Label as SPL | The label rendered as HL7 Structured Product Labeling XML, the format FDA receives |
 | Disease and market | Unbranded disease education for HCPs and patients, a competitor landscape with no efficacy data, and press releases from topline results through approval and commercial availability |
-| Generated population | Offices, HCPs, office staff, patients, labs and monitoring lab results at volume, for CRM, master-data and load testing |
+| Generated population | Offices, HCPs, office staff, patients, labs, monitoring lab results, refills, text messages, campaign memberships, HCP emails and portal sessions at volume, for CRM, master-data, outreach and load testing |
 
 `sources/README.md` is the detailed reference, covering each file, the cast, the claim schema, the timeline and the test patterns built into the data.
 
 ## Building against it
 
-The pack is plain JSON, Markdown and XML with stable identifiers, and the records join across files the way production data does: a patient-support case names its prescriber, who appears in the field force's call log; its plan shipments have paid claims in the payer transactions; and a bottle shipped to it during the channel window can be followed by serial number back through the pharmacy's dispense feed and the EPCIS events to the lot it was made in. That makes it usable as seed data for a CRM, a hub platform, a data warehouse or a master-data service, where the joins are usually the first thing a stub gets wrong.
+The pack is plain JSON, Markdown and XML with stable identifiers, and the records join across files the way production data does: a patient-support case names its prescriber, who appears in the field force's call log; its plan shipments have paid claims in the payer transactions; and a bottle shipped to it during the channel window can be followed by serial number back through the pharmacy's dispense feed and the EPCIS events to the lot it was made in. That makes it usable as seed data for a CRM, a hub platform, a data warehouse, a master-data service or an omnichannel engagement platform, where the joins are usually the first thing a stub gets wrong. The outreach layer is a good example: a patient's never-start or late-refill texts follow from their enrollment, fills and STOP replies under written rules, so a campaign engine or next-best-action model can be built against the same logic the validator uses to check it.
 
 Where a standard format exists, the pack uses it. The formulary is published as FHIR resources, the label as SPL, the serialization history as EPCIS events and the pharmacy feeds in the shape of EDI 867 and 852 data, so parsers and integrations can be exercised without waiting on a trading partner. The few places where an invented drug cannot meet a standard (it has no RxNorm code, for instance) are documented where they occur.
 

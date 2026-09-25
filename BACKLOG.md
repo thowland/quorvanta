@@ -21,7 +21,6 @@ Each of these is one module in `scripts/population/entities/`. The validator che
 | QuorvantaConnect staff | Case managers, nurses and supervisors, with queues and schedules. | The core cases already name case managers. |
 | Medical information requests at volume | Unsolicited questions from generated HCPs, each routed to the SRD that answers it, or to the fallback. | Operational metrics such as turnaround and repeat askers. |
 | Market prescription volume | Weekly new and total prescriptions by prescriber for QUORVANTA and the six fictional competitors, as volumes only. | Competitor names may appear only in `landscape/` and `test-design/`; this needs a decision on where the file lives. |
-| Omnichannel engagement | Email opens and clicks for the approved rep emails, HCP portal sessions, and patient text opt-ins and STOP replies. | Feeds next-best-action and consent-management testing. |
 | Payers at volume | More employers and plans, and formulary positions over time. | Must stay consistent with `payer/plans.json`. |
 
 ## Scenarios built on existing data
@@ -33,6 +32,10 @@ Each of these is one module in `scripts/population/entities/`. The validator che
   - an HCP question about starting in low counts (GAP-08);
   - an adverse event report for the liver-injury signal;
   - blood-test reminders for overdue counts (PGM-NURSE.3).
+- **Outreach scenarios.** The second phase of the engagement work in `engagement/`:
+  - an EF-* fault family for outreach (texting without consent or after STOP, a never-start text after the first fill, the copay text to a government-insured patient, a missed side-effect reply, and so on), each with a failing example;
+  - labeled inbound text replies, including side-effect mentions that must be forwarded to Drug Safety the same day and linked into `ae-intake.json`, medical questions, and replies from someone other than the patient;
+  - labeled campaign-audience and next-best-action decisions for a set of patients, with the expected suppressions.
 - **Label history.** A v1.1 safety update with retired claims, to test bots answering from superseded content.
 - **Adversarial prompts.** Prompt-injection and jailbreak attempts against the HCP bot and patient-services guardrails.
 

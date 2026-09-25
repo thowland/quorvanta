@@ -1548,6 +1548,8 @@ def field_values(record, path):
 def check_population():
     """Generated entities in sources/population/: generic checks driven by each file's own header."""
     from datetime import date
+    rules, msgs = check_engagement_content()
+    check_case_outreach(rules, msgs)
     folder = SRC / "population"
     if not folder.exists():
         return
@@ -1624,6 +1626,10 @@ def check_population():
                         fail(f"{where} {rid}: plan {plan} is not in payer/plans.json")
     if {"lab-results", "patients", "labs"} <= set(docs):
         check_lab_results(docs)
+    if {"patients", "refills", "sms-messages", "campaign-memberships"} <= set(docs):
+        check_population_engagement(docs, rules, msgs)
+    if {"hcps", "hcp-emails", "portal-sessions"} <= set(docs):
+        check_hcp_engagement(docs)
 
 
 def ckd_epi_2021(creat, age, sex):
@@ -1711,6 +1717,507 @@ def check_lab_results(docs):
         for k, v in derived.items():
             if (k in pats) != v:
                 fail(f"{where}: pattern {k} is {'missing' if v else 'not supported by the values'}")
+
+
+# ---- engagement: texting, outreach campaigns, HCP email and the HCP portal ------------------
+
+ENG_LANGUAGES = ("English", "Spanish")
+ENG_CAMPAIGNS = ("CMP-NEVERSTART", "CMP-DISCON-RISK")
+ENG_REASONS = ("to_minor", "unsupported_language", "no_opt_in", "after_opt_out", "no_reminder_choice", "situation_ended")
+
+
+def check_engagement_content():
+    """Rules, approved texts and campaigns: ids resolve, wording stays inside the rules."""
+    rules = load("engagement/campaign-rules.json")
+    msgs = {m["id"]: m for m in load("engagement/approved-messages.json")["messages"]}
+    camps = load("engagement/campaigns.json")
+    terms = load("patient-services/program-terms.json")
+    provisions = {p["id"] for s in terms["sections"] for p in s["provisions"]}
+    ps = load("patient-services/ps-responses.json")
+    conv = load("patient-services/conversation-rules.json")
+    known = (provisions | set(ps["fixed_messages"]) | {r["id"] for r in ps["responses"]}
+             | {e["id"] for e in conv["escalations"]} | {c["id"] for c in conv["compliance"]}
+             | set(load("access/start-form.json")["consent_texts"])
+             | {r["id"] for r in load("crm/field-force.json")["field_rules"]})
+    rule_ids = {r["id"] for r in rules["rules"]}
+    for r in rules["rules"]:
+        for c in r["citations"]:
+            if c not in known:
+                fail(f"campaign-rules {r['id']}: citation {c} does not resolve")
+    for m in msgs.values():
+        for c in m["citations"]:
+            if c not in known and c not in rule_ids:
+                fail(f"approved-messages {m['id']}: citation {c} does not resolve")
+        if set(m["versions"]) != set(ENG_LANGUAGES):
+            fail(f"approved-messages {m['id']}: needs exactly an English and a Spanish version")
+        for lang, wording in m["versions"].items():
+            if not wording.startswith("QuorvantaConnect: "):
+                fail(f"approved-messages {m['id']} ({lang}): must open by naming the sender, QuorvantaConnect")
+            if re.search(r"\bquorvanta\b|brennick|\bmg\b|capsule|flushing", wording, re.I):
+                fail(f"approved-messages {m['id']} ({lang}): names the product, the condition, a dose or a symptom (ENG-08)")
+    steps = [s for c in camps["campaigns"] for s in c.get("steps", [])]
+    steps += [s for c in camps["campaigns"] for t in c.get("tracks", []) for s in t["steps"]]
+    for s in steps:
+        if s["message"] not in msgs:
+            fail(f"campaigns: step message {s['message']} is not an approved message")
+    readme_counts(text("README.md"), [
+        (r"(\d+) outreach rules \(ENG-01 to ENG-(\d+)\)", (len(rules["rules"]), len(rules["rules"]))),
+        (r"(\d+) approved text messages", (len(msgs),)),
+        (r"Texts and campaign memberships for (\d+) of the hand-built cases", (len(load("engagement/case-outreach.json")["cases"]),)),
+    ])
+    zones = rules["time_zones"]["zones"]
+    try:
+        from zoneinfo import ZoneInfo
+        for st, z in zones.items():
+            ZoneInfo(z)
+    except Exception as e:  # noqa: BLE001 - any failure to load a zone is a data problem here
+        fail(f"campaign-rules: time zone does not load: {e}")
+    return rules, msgs
+
+
+class Outreach:
+    """An independent reading of engagement/ for one person: what was due, and why anything else was not."""
+
+    def __init__(self, rules, msgs, person, fills, inbound, as_of, start=None, initial=None):
+        """fills: (ship date, days' supply) pairs. start and initial: where a log begins mid-history, its first
+        day and the opt-in state (opt_in, opt_out or None) in force at that moment."""
+        from zoneinfo import ZoneInfo
+        from datetime import date, timedelta
+        self.msgs, self.p, self.as_of, self.start = msgs, person, as_of, start
+        self.tz = ZoneInfo(rules["time_zones"]["zones"][person["state"]])
+        self.fills = sorted(fills)
+        self.kw = []
+        words = {k: set(v) for k, v in rules["keywords"].items() if k != "match"}
+        self.words = words
+        for t, text in inbound:
+            k = self.keyword(text)
+            if k in ("opt_in", "opt_out"):
+                self.kw.append((t, k))
+        if start and initial:
+            self.kw.append((self.day_start(start) - timedelta(seconds=1), initial))
+        self.kw.sort()
+        d = lambda s: date.fromisoformat(s) if s else None  # noqa: E731
+        self.enrolled, self.started = d(person["enrolled_on"]), d(person["started_on"])
+        self.stopped, self.canceled = d(person["discontinued_on"]), d(person["canceled_on"])
+
+    def keyword(self, text):
+        import unicodedata
+        w = unicodedata.normalize("NFKD", text.strip()).encode("ascii", "ignore").decode().upper()
+        return next((k for k, ws in self.words.items() if w in ws), None)
+
+    def local(self, t):
+        return t.astimezone(self.tz)
+
+    def day_start(self, day):
+        from datetime import datetime, time
+        return datetime.combine(day, time(0, 0), self.tz)
+
+    def opted_in(self, t):
+        last = [k for kt, k in self.kw if kt < t]
+        return bool(last) and last[-1] == "opt_in"
+
+    def ever_opted_out(self, t):
+        return any(k == "opt_out" for kt, k in self.kw if kt < t)
+
+    def adult(self, day):
+        from datetime import date
+        b = date.fromisoformat(self.p["dob"])
+        return day.year - b.year - ((day.month, day.day) < (b.month, b.day)) >= 18
+
+    def steps(self):
+        """(day, campaign, track, day0, step, message, fill ref) for every step up to as_of."""
+        from datetime import timedelta
+        e, out = self.enrolled, []
+        if e is None:
+            return out
+        commercial = self.p["insurance_type"] == "commercial" and not self.p["government"]
+        out += [(e, "CMP-ACTIVATION", None, e, 0, "MSG-ACT-01", None), (e + timedelta(days=7), "CMP-ACTIVATION", None, e, 7, "MSG-ACT-01", None)]
+        for step, m in ((14, "MSG-NS-STATUS"), (21, "MSG-NS-COST-COMMERCIAL" if commercial else "MSG-NS-COST-OTHER"), (35, "MSG-NS-FIRST-FILL")):
+            out.append((e + timedelta(days=step), "CMP-NEVERSTART", None, e, step, m, None))
+        if self.started:
+            out.append((self.started + timedelta(days=10), "CMP-DISCON-RISK", "first_month", self.started, 10, "MSG-DR-NURSE", None))
+        for f, days in self.fills:
+            due = f + timedelta(days=days)
+            out.append((due - timedelta(days=3), "PGM-REFILL-REMINDERS", None, due, -3, "MSG-REM-REFILL", f))
+            out.append((due + timedelta(days=7), "CMP-DISCON-RISK", "late_refill", due, 7, "MSG-DR-LATE-HELP", f))
+            out.append((due + timedelta(days=14), "CMP-DISCON-RISK", "late_refill", due, 14, "MSG-DR-LATE-HCP", f))
+        return sorted((s for s in out if s[0] <= self.as_of and (self.start is None or s[0] >= self.start)),
+                      key=lambda s: (s[0], s[1], s[4]))
+
+    def why_not(self, s, members):
+        """None if step s is due at the start of its day, otherwise the reason it is not (or 'skip')."""
+        day, camp, track, day0, step, msg, ref = s
+        t = self.day_start(day)
+        key = (camp, track, day0)
+        first = {"CMP-NEVERSTART": 14, "first_month": 10, "late_refill": 7}
+        if camp in ENG_CAMPAIGNS and key not in members and step != first.get(track or camp):
+            return "skip"
+        if camp == "CMP-ACTIVATION" and step == 7 and (key not in members or any(kt < t for kt, _ in self.kw)):
+            return "skip"
+        if not self.adult(day):
+            return "to_minor"
+        if self.p["language"] not in ENG_LANGUAGES:
+            return "unsupported_language"
+        if camp == "CMP-ACTIVATION":
+            return None if self.p["contact_consent"] else "skip"
+        if not self.opted_in(t):
+            return "after_opt_out" if self.ever_opted_out(t) else "no_opt_in"
+        stopped = self.stopped is not None and self.stopped <= day
+        later_fill = ref is not None and any(ref < f < day for f, _ in self.fills)
+        if camp == "PGM-REFILL-REMINDERS":
+            if not self.p["text_reminders"]:
+                return "no_reminder_choice"
+            return "situation_ended" if stopped or later_fill else None
+        if camp == "CMP-NEVERSTART":
+            ended = any(f < day for f, _ in self.fills) or (self.canceled is not None and self.canceled <= day)
+        elif track == "first_month":
+            ended = stopped
+        else:
+            ended = stopped or later_fill
+        return "situation_ended" if ended else None
+
+    def expected(self):
+        """Steps due, and the memberships they open."""
+        due, members = [], {}
+        if self.enrolled is None:
+            return due, members
+        for s in self.steps():
+            r = self.why_not(s, members)
+            if r is None:
+                key = (s[1], s[2], s[3])
+                if key not in members and (s[1] in ENG_CAMPAIGNS or s[1] == "CMP-ACTIVATION"):
+                    members[key] = s[0]
+                due.append(s)
+        return due, members
+
+    def exit(self, camp, track, day0, entered):
+        from datetime import timedelta
+        kws = [(self.local(t).date(), k) for t, k in self.kw]
+        out_day = next((d for d, k in kws if k == "opt_out" and d >= entered), None)
+        ex = []
+        if camp == "CMP-ACTIVATION":
+            first = next(((d, k) for d, k in kws if d >= entered), None)
+            ex.append((first[0], "opted_in" if first[1] == "opt_in" else "opted_out") if first and first[0] <= day0 + timedelta(days=14)
+                      else (day0 + timedelta(days=14), "no_reply"))
+        elif camp == "CMP-NEVERSTART":
+            if self.fills:
+                ex.append((self.fills[0][0], "first_fill"))
+            if self.canceled:
+                ex.append((self.canceled, "prescriber_canceled"))
+            ex.append((day0 + timedelta(days=35), "completed"))
+        elif track == "first_month":
+            ex.append((day0 + timedelta(days=10), "completed"))
+        else:
+            ref = max(f for f, days in self.fills if f + timedelta(days=days) == day0)
+            nxt = [f for f, _ in self.fills if f > ref]
+            if nxt:
+                ex.append((nxt[0], "refilled"))
+            if self.stopped:
+                ex.append((self.stopped, "discontinued"))
+            ex.append((day0 + timedelta(days=14), "completed"))
+        if out_day and camp != "CMP-ACTIVATION":
+            ex.append((out_day, "opted_out"))
+        ex = [x for x in ex if x[0] >= entered]
+        e = min(ex) if ex else None
+        return None if e is None or e[0] > self.as_of else e
+
+
+def check_outreach(label, rules, msgs, people, fills, log, memberships, as_of, start=None):
+    """Recompute every text and membership for a set of people from their fills and inbound keywords."""
+    from datetime import datetime, timedelta, date
+    ts = lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))  # noqa: E731
+    by_person, by_id = {}, {r["id"]: r for r in log}
+    for r in log:
+        by_person.setdefault(r["patient_id"], []).append(r)
+    mem_by_person = {}
+    for m in memberships:
+        mem_by_person.setdefault(m["patient_id"], []).append(m)
+    for pid, rows in by_person.items():
+        if pid not in people:
+            fail(f"{label}: texts for {pid}, who is not an enrolled person here")
+    for pid, p in people.items():
+        rows = sorted(by_person.get(pid, []), key=lambda r: (r["at"], r["id"]))
+        inbound = [(ts(r["at"]), r["body"]) for r in rows if r["direction"] == "inbound"]
+        o = Outreach(rules, msgs, p, fills.get(pid, []), inbound, as_of, start, p.get("text_status_at_start"))
+        lang = p["language"] if p["language"] in ENG_LANGUAGES else "English"
+        # Inbound: keyword recognized, free text routed.
+        for r in rows:
+            if r["direction"] != "inbound":
+                continue
+            k = o.keyword(r["body"])
+            if r["keyword"] != k or r["routed_to"] != (None if k else "case_manager"):
+                fail(f"{label} {r['id']}: keyword should be {k} and free text routed to the case manager")
+        # Keyword replies.
+        replies = {r["in_reply_to"]: r for r in rows if r["direction"] == "outbound" and r["in_reply_to"]}
+        for r in rows:
+            if r["direction"] != "inbound":
+                continue
+            t = ts(r["at"])
+            k = o.keyword(r["body"])
+            want = {"opt_in": "MSG-ACT-02", "opt_out": "MSG-STOP", "help": "MSG-HELP"}.get(k)
+            if k is None and o.opted_in(t):
+                want = "MSG-REPLY-RECEIVED"
+            got = replies.get(r["id"])
+            if (got and got["message_id"]) != want:
+                fail(f"{label} {r['id']}: reply should be {want}, got {got and got['message_id']}")
+            elif got and not (timedelta(0) < ts(got["at"]) - t <= timedelta(minutes=2)):
+                fail(f"{label} {got['id']}: keyword reply more than 2 minutes after {r['id']}")
+        # Scheduled texts against what was due.
+        due, members = o.expected()
+        due_keys = {(s[1], s[2], str(s[3]), s[4]): s for s in due}
+        seen, sent_for = set(), {}
+        campaign_days = []
+        for r in rows:
+            if r["direction"] != "outbound":
+                continue
+            flags = {f["type"] for f in r["quality_flags"]}
+            want = set()
+            t = ts(r["at"])
+            day = o.local(t).date()
+            if r["language"] != lang or r["body"] != msgs.get(r["message_id"], {}).get("versions", {}).get(lang):
+                fail(f"{label} {r['id']}: body is not {r['message_id']} in {lang}, word for word (ENG-07, ENG-08)")
+            if r["in_reply_to"] is None:
+                if r["schedule"] is None:
+                    fail(f"{label} {r['id']}: an outbound text with no schedule is not a keyword reply")
+                    continue
+                s = r["schedule"]
+                key = (r["campaign_id"], s["track"], s["day0"], s["step"])
+                if not 8 <= o.local(t).hour < 21:
+                    want.add("quiet_hours")
+                if key in seen:
+                    want.add("duplicate_step")
+                elif key in due_keys and due_keys[key][0] == day:
+                    sent_for.setdefault(key, []).append(r["id"])
+                else:
+                    day0 = date.fromisoformat(s["day0"])
+                    ref = next((f for f, days in o.fills if f + timedelta(days=days) == day0), None) \
+                        if r["campaign_id"] == "PGM-REFILL-REMINDERS" or s["track"] == "late_refill" else None
+                    step = (day, r["campaign_id"], s["track"], day0, s["step"], r["message_id"], ref)
+                    why = o.why_not(step, members)
+                    if why in ENG_REASONS:
+                        want.add(why)
+                    else:
+                        fail(f"{label} {r['id']}: {key} was not due on {day} and no rule explains why it was sent")
+                seen.add(key)
+                commercial = p["insurance_type"] == "commercial" and not p["government"]
+                if r["message_id"] == "MSG-NS-COST-COMMERCIAL" and not commercial:
+                    want.add("wrong_cost_version")
+                if r["campaign_id"] in ENG_CAMPAIGNS:
+                    campaign_days.append(day)
+                    if sum(1 for d in campaign_days if (day - d).days < 7) > 2:
+                        want.add("frequency_cap")
+            if flags != want:
+                fail(f"{label} {r['id']}: quality flags {sorted(flags)} should be {sorted(want)}")
+        for key, s in due_keys.items():
+            if key in sent_for:
+                continue
+            opt_out_that_day = any(k == "opt_out" and o.local(t).date() == s[0] for t, k in o.kw)
+            if not opt_out_that_day and s[0] < as_of:
+                fail(f"{label} {pid}: {key} was due on {s[0]} but was not sent")
+        # Memberships.
+        want_m = {}
+        for (camp, track, day0), entered in members.items():
+            e = o.exit(camp, track, day0, entered)
+            want_m[(camp, track, str(day0))] = (str(entered), str(e[0]) if e else None, e[1] if e else None,
+                                                 sorted(i for k, ids in sent_for.items() if k[:3] == (camp, track, str(day0)) for i in ids))
+        got_m = {(m["campaign_id"], m["track"], m["day0"]): (m["entered_on"], m["exited_on"], m["exit_reason"], sorted(m["sends"]))
+                 for m in mem_by_person.get(pid, [])}
+        for key in sorted(set(got_m) | set(want_m), key=str):
+            if got_m.get(key) != want_m.get(key):
+                fail(f"{label} {pid}: membership {key} is {got_m.get(key)}; the rules give {want_m.get(key)}")
+
+
+def check_case_outreach(rules, msgs):
+    """The hand-built cases' texts and memberships, recomputed from each case's record and shipments."""
+    from datetime import date, timedelta
+    doc = load("engagement/case-outreach.json")
+    cases = {c["case_id"]: c for c in load("test-design/ps-cases.json")["cases"]}
+    start, as_of = date.fromisoformat(doc["log_start"]), date.fromisoformat(doc["as_of"])
+    people, fills = {}, {}
+    for e in doc["cases"]:
+        c = cases.get(e["case_id"])
+        if c is None:
+            fail(f"case-outreach: {e['case_id']} is not a case")
+            continue
+        shipped = {}
+        for s in c["shipments"]:
+            if s["status"] in ("SHIP_SHIPPED", "SHIP_DELIVERED"):
+                shipped[s["date"]] = shipped.get(s["date"], 0) + s["days"]
+        fills[e["case_id"]] = sorted((date.fromisoformat(d), n) for d, n in shipped.items())
+        first = c["shipments"][0]["date"] if c["shipments"] else None
+        known = [d for d in (c["bv"]["completed_on"], c["copay"]["enrolled_on"], c["pa"]["submitted_on"], c["pap"]["applied_on"], first) if d]
+        if e["started_on"] != first or (known and e["enrolled_on"] > min(known)):
+            fail(f"case-outreach {e['case_id']}: started_on must be the first shipment, and enrollment must come before the case's first dated event")
+        if (e["text_status_at_start"] is None) != (e["enrolled_on"] >= doc["log_start"]):
+            fail(f"case-outreach {e['case_id']}: a case enrolled before log_start needs its opt-in state at log_start, and only such a case")
+        p = c["patient"]
+        people[e["case_id"]] = {"dob": p["dob"], "state": p["state"], "language": p["language"],
+                                "insurance_type": c["insurance"]["type"], "government": c["insurance"]["government_program"],
+                                "enrolled_on": e["enrolled_on"], "contact_consent": e["contact_consent"],
+                                "text_reminders": e["text_reminders"], "started_on": e["started_on"], "discontinued_on": None,
+                                "canceled_on": None, "text_status_at_start": e["text_status_at_start"]}
+    ids = [m["id"] for m in doc["messages"]] + [m["id"] for m in doc["memberships"]]
+    if len(ids) != len(set(ids)):
+        fail("case-outreach: duplicate ids")
+    msg_ids = {m["id"] for m in doc["messages"]}
+    for m in doc["memberships"]:
+        if not set(m["sends"]) <= msg_ids:
+            fail(f"case-outreach {m['id']}: sends name unknown messages")
+    for m in doc["messages"]:
+        if m["in_reply_to"] and m["in_reply_to"] not in msg_ids:
+            fail(f"case-outreach {m['id']}: in_reply_to names an unknown message")
+    check_outreach("engagement/case-outreach.json", rules, msgs, people, fills, doc["messages"], doc["memberships"], as_of, start)
+
+
+def check_population_engagement(docs, rules, msgs):
+    from datetime import date, datetime, timedelta
+    as_of = date.fromisoformat(docs["patients"]["generated"]["as_of"])
+    patients = {p["id"]: p for p in docs["patients"]["records"]}
+    # Refills against therapy.
+    fills = {}
+    net = load("access/specialty-pharmacy-network.json")["pharmacies"]
+    net_ids = {x["id"] for x in net}
+    plans = {p["name"]: p for p in load("payer/plans.json")["plans"]}
+    per_patient = {}
+    for f in docs["refills"]["records"]:
+        per_patient.setdefault(f["patient_id"], []).append(f)
+    for pid, rows in per_patient.items():
+        p = patients[pid]
+        th = p["therapy"]
+        rows = [f for f in rows if not f["quality_flags"]]
+        rows.sort(key=lambda f: f["fill_number"])
+        where = f"population/refills.json {pid}"
+        if not th["started_on"] or rows[0]["shipped_on"] != th["started_on"]:
+            fail(f"{where}: the first fill must ship on therapy.started_on")
+        ins = p["insurance"]
+        plan = plans.get(ins["plan_name"]) or {}
+        want = ("SP-04" if ins["type"] == "none" else "SP-05" if plan.get("name") == "Halverson Health Employee Plan"
+                else plan.get("required_pharmacy") if (plan.get("required_pharmacy") or "").startswith("SP-") else None)
+        pharmacies = {f["pharmacy_id"] for f in rows}
+        if len(pharmacies) != 1 or not pharmacies <= net_ids or (want and pharmacies != {want}):
+            fail(f"{where}: fills must come from one network pharmacy, the plan's required one where it has one")
+        prev = None
+        for i, f in enumerate(rows, 1):
+            shipped, due = date.fromisoformat(f["shipped_on"]), date.fromisoformat(f["due_on"])
+            ok = (f["fill_number"] == i and f["days_supply"] == 30 and due == shipped + timedelta(days=30)
+                  and (f["package"], f["capsules"]) == (("PKG-STARTER", 92) if i == 1 else ("PKG-120", 120))
+                  and f["source"] == ("foundation" if ins["type"] == "none" else "plan") and shipped <= as_of
+                  and (not th["discontinued_on"] or f["shipped_on"] < th["discontinued_on"]))
+            if not ok:
+                fail(f"{where} {f['id']}: fill number, package, supply, source or date is wrong")
+            late = prev and (shipped - prev).days >= 7
+            pats = {x["type"]: x for x in f["patterns"]}
+            if bool(late) != ("late_fill" in pats) or (late and pats["late_fill"]["days_late"] != (shipped - prev).days):
+                fail(f"{where} {f['id']}: late_fill pattern does not match the dates")
+            lapsed = i == len(rows) and th["status"] == "on_therapy" and (as_of - due).days > 30
+            if lapsed != ("lapsed_at_as_of" in pats):
+                fail(f"{where} {f['id']}: lapsed_at_as_of pattern does not match the dates")
+            prev = due
+        fills[pid] = [(date.fromisoformat(f["shipped_on"]), f["days_supply"]) for f in rows]
+    for pid, p in patients.items():
+        dup = any(f["type"] == "duplicate" for f in p["quality_flags"])
+        if p["therapy"]["started_on"] and not dup and pid not in per_patient:
+            fail(f"population/refills.json: {pid} started treatment but has no fills")
+    for f in docs["refills"]["records"]:
+        for q in f["quality_flags"]:
+            orig = next((x for x in docs["refills"]["records"] if x["id"] == q["of"]), None)
+            if not orig or {k: v for k, v in orig.items() if k not in ("id", "patterns", "quality_flags")} != \
+                    {k: v for k, v in f.items() if k not in ("id", "patterns", "quality_flags")}:
+                fail(f"population/refills.json {f['id']}: a duplicate must repeat its original")
+    # Texts and memberships.
+    people = {}
+    for pid, p in patients.items():
+        if p["program"]["status"] != "enrolled" or any(f["type"] == "duplicate" for f in p["quality_flags"]):
+            continue
+        th, ins = p["therapy"], p["insurance"]
+        people[pid] = {"dob": p["dob"], "state": p["state"], "language": p["language"], "insurance_type": ins["type"],
+                       "government": ins["government_program"], "enrolled_on": p["program"]["enrolled_on"],
+                       "contact_consent": p["communications"]["contact_consent"], "text_reminders": p["communications"]["text_reminders"],
+                       "started_on": th["started_on"], "discontinued_on": th["discontinued_on"], "canceled_on": th["prescription_canceled_on"]}
+    check_outreach("population/sms-messages.json", rules, msgs, people, fills, docs["sms-messages"]["records"],
+                   docs["campaign-memberships"]["records"], as_of)
+
+
+def check_hcp_engagement(docs):
+    """Approved emails against consent, status and territory; portal sessions against their flags."""
+    from datetime import datetime, timedelta
+    ts = lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))  # noqa: E731
+    hcps = {h["id"]: h for h in docs["hcps"]["records"]}
+    ff = load("crm/field-force.json")
+    rep_states = {t["rep_id"]: set(t["states"]) for t in ff["territories"]}
+    templates = {t["id"]: t for t in load("crm/approved-emails.json")["templates"]}
+    pages = docs["hcp-emails"]["template_pages"]
+    unsub = {}
+    emails = sorted(docs["hcp-emails"]["records"], key=lambda r: r["sent_at"])
+    by_id = {r["id"]: r for r in emails}
+    for r in emails:
+        h, where = hcps[r["hcp_id"]], f"population/hcp-emails.json {r['id']}"
+        sent = ts(r["sent_at"])
+        want = set()
+        if r["template_id"] not in templates or templates[r["template_id"]]["status"] != "approved" or r["to"] != h["email"]:
+            fail(f"{where}: not an approved template, or not to the prescriber's address")
+        if not h["consent"]["approved_email"] or (r["hcp_id"] in unsub and unsub[r["hcp_id"]] < sent):
+            want.add("email_without_consent")
+        if h["status"] == "retired" or (h["status"] == "npi_deactivated" and h["deactivated_on"] <= r["sent_at"][:10]):
+            want.add("email_to_inactive")
+        if h["state"] not in rep_states.get(r["sender_id"], set()):
+            want.add("email_outside_territory")
+        if {f["type"] for f in r["quality_flags"]} != want:
+            fail(f"{where}: quality flags should be {sorted(want)}")
+        evs = r["events"]
+        delivered = next((ts(e["at"]) for e in evs if e["type"] == "delivered"), None)
+        if any(e["type"] == "bounced" for e in evs) != (delivered is None) or (delivered is None and len(evs) != 1):
+            fail(f"{where}: a bounced email has no other events, and every other email is delivered")
+        human_open = min((ts(e["at"]) for e in evs if e["type"] == "opened" and not e["machine"]), default=None)
+        for e in evs:
+            t = ts(e["at"])
+            if e["type"] == "opened" and e["machine"] != (t - delivered <= timedelta(seconds=5)):
+                fail(f"{where}: an open within 5 seconds of delivery is machine, and only that (ENG-13)")
+            if e["type"] == "clicked":
+                scanner = t - delivered <= timedelta(seconds=10) and (human_open is None or t < human_open)
+                if e["machine"] != scanner or e["page"] != pages[r["template_id"]]:
+                    fail(f"{where}: click machine flag or linked page is wrong (ENG-13)")
+            if e["type"] == "unsubscribed":
+                unsub.setdefault(r["hcp_id"], t)
+    catalog = docs["portal-sessions"]["pages"]
+    sessions = docs["portal-sessions"]["records"]
+    spans = {}
+    for s in sessions:
+        start = ts(s["started_at"])
+        last = s["page_views"][-1]
+        spans[s["id"]] = (start, start + timedelta(seconds=last["offset"] + last["seconds"]))
+    for s in sessions:
+        where = f"population/portal-sessions.json {s['id']}"
+        want = {}
+        if any(v["page"] not in catalog for v in s["page_views"]):
+            fail(f"{where}: page not in the catalog")
+            continue
+        if len(s["page_views"]) >= 15 and all(v["seconds"] < 2 for v in s["page_views"]):
+            want["bot_session"] = None
+        if s["hcp_id"] is None and any(catalog[v["page"]]["gated"] for v in s["page_views"]):
+            want["gated_page_unverified"] = None
+        if s["hcp_id"]:
+            h = hcps[s["hcp_id"]]
+            if h["status"] == "retired" or (h["status"] == "npi_deactivated" and h["deactivated_on"] <= s["started_at"][:10]):
+                want["inactive_prescriber_login"] = None
+            a0, a1 = spans[s["id"]]
+            for o in sessions:
+                if o["id"] != s["id"] and o["hcp_id"] == s["hcp_id"] and o["region"] != s["region"]:
+                    b0, b1 = spans[o["id"]]
+                    if a0 < b1 and b0 < a1:
+                        want["shared_login"] = o["id"]
+        got = {f["type"]: f.get("of") for f in s["quality_flags"]}
+        if got != want:
+            fail(f"{where}: quality flags {got} should be {want}")
+        if (s["source"] == "email") != bool(s["email_id"]):
+            fail(f"{where}: only an email session carries email_id")
+        if s["email_id"]:
+            e = by_id.get(s["email_id"])
+            clicks = [ts(x["at"]) for x in (e or {}).get("events", []) if x["type"] == "clicked" and not x["machine"]]
+            start = ts(s["started_at"])
+            if not e or e["hcp_id"] != s["hcp_id"] or not any(timedelta(0) <= start - c <= timedelta(seconds=60) for c in clicks) \
+                    or s["page_views"][0]["page"] != pages[e["template_id"]]:
+                fail(f"{where}: an email session starts within 60 seconds of a human click, on the linked page")
 
 
 def read_denylist(path):

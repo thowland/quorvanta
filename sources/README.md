@@ -8,7 +8,7 @@ The fictional world is set in late September 2026. The case records are as of 20
 
 ## Where to start
 
-Pick the row that matches the system you are building, demonstrating or testing. The middle column is what that system would hold in production; the last column is the labeled material to score it against. Everything in the last column lives in `test-design/` and must stay out of anything the system under test, or a model judging it, can see. The one exception is the case records in `test-design/ps-cases.json`, which a patient-services system may read one at a time, and only after the caller has passed identity verification.
+Pick the row that matches the system you are building, demonstrating or testing. The middle column is what that system would hold in production; the last column is the labeled material to score it against. The labeled scenarios and answer keys live in `test-design/` and must stay out of anything the system under test, or a model judging it, can see. The one exception is the case records in `test-design/ps-cases.json`, which a patient-services system may read one at a time, and only after the caller has passed identity verification.
 
 | System | Give it | Score it against |
 | --- | --- | --- |
@@ -20,6 +20,7 @@ Pick the row that matches the system you are building, demonstrating or testing.
 | Claims management, modular content or promotional review | `label/`, `claims/`, `promotional/`, `patient/dtc-claims.json` | The claim-by-claim annotations in the promotional pieces, and the traps in [Claims and references](#claims-and-references) |
 | Supply chain, serialization and channel analytics | `product/`, `channel/` | The anomalies listed in [Channel and serialization](#channel-and-serialization) |
 | Label and regulatory tooling | `label/label.md`, `label/label-spl.xml` | The deliberate departures in [Machine-readable label](#machine-readable-label) |
+| Consent management, outreach and next-best-action | `engagement/` rules, messages and campaigns; `population/` patients, refills, text messages, campaign memberships, HCP emails and portal sessions | The flagged breaches in `sms-messages.json`, `hcp-emails.json` and `portal-sessions.json`, and the memberships, all of which the validator recomputes from the rules |
 | Master data, matching and load testing | `population/`, with `crm/field-force.json` for the core cast | The `quality_flags` in each population file |
 
 For a demonstration, [The cast](#the-cast) and [Timeline](#timeline) give the story, the press releases give the corporate voice, the case records give patient histories that can be walked through on screen, and the identity package in `assets/` at the repository root gives the brand.
@@ -33,6 +34,7 @@ Everything rests on `label/label.md`. A figure appears there first and is repeat
 - **Questions the library cannot answer:** each gap in `test-design/known-gaps.json` names the standard response document in `medical-information/srds.json` that answers it, and each SRD points back to its gap.
 - **Patient services:** program terms (`patient-services/program-terms.json`, the full text behind REF-022) → approved responses (`ps-responses.json`, each citing provisions or DTC claims) → letters, IVR prompts, call scripts and case status wording, each line tagged to what supports it.
 - **A patient's history:** a case in `test-design/ps-cases.json` → its prescriber in `crm/field-force.json` and the field calls about it → its payer coverage, benefit checks, prior authorizations and claims in `payer/transactions.json` → its shipments in `channel/dispense-867.json` → each bottle's serial history in `channel/epcis-events.json` → the lot it was made in, in `product/product-identifiers.json`.
+- **Outreach:** a patient's enrollment, Start Form choices, fills and inbound keywords → the texts due under `engagement/campaigns.json` → the message log and campaign memberships. The same chain runs for eight hand-built cases in `engagement/case-outreach.json`.
 - **Adverse events:** each report in `test-design/scenarios/ae-intake.json` links back to the conversation, HCP question or field call it came from.
 
 ## Layout
@@ -56,8 +58,9 @@ sources/
 ├── channel/               Trading partners, shipments with DSCSA data, EPCIS events, 867 dispense and 852 inventory feeds
 ├── safety/                Drug Safety conventions: event terms, seriousness, special situations, timelines
 ├── crm/                   Territories, field staff, accounts, prescribers, approved emails, call log
+├── engagement/            Texting and outreach rules, approved text messages, campaigns, and outreach for eight cases
 ├── press/                 Corporate press releases
-├── population/            Generated offices, HCPs, office staff, patients, labs and lab results
+├── population/            Generated offices, HCPs, office staff, patients, labs, lab results, refills, texts, emails and portal visits
 └── test-design/           Known gaps, synthetic cases, labeled scenarios and judge rubrics (keep out of prompts)
 ```
 
@@ -101,8 +104,12 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `crm/field-force.json` | 6 territories, field staff (representatives, managers, MSLs), 30 prescribers at 25 accounts with NPI-shaped ids, segments, call plans, email consent and a no-see flag, and eight field rules | CRM and field-force tooling |
 | `crm/approved-emails.json` | 3 approved email templates, each assembled from approved claim text plus the safety summary | Field email checks |
 | `crm/call-log.json` | 38 field calls, July to September 2026, with pieces shown, claims delivered, Medical Information requests and adverse event forwards; one deliberate late forward | CRM compliance and safety reconciliation |
+| `engagement/campaign-rules.json` | Consents, opt-in keywords, time zones by state, and 13 outreach rules (ENG-01 to ENG-13) covering texting, quiet hours, frequency, language, suppression, HCP email and machine opens | Consent-management and outreach tools |
+| `engagement/approved-messages.json` | 13 approved text messages, each in English and Spanish, each cited to the provisions, fixed messages or rules behind it | The only text a patient may be sent |
+| `engagement/campaigns.json` | Text activation, never-start support and discontinuation risk (first-month and late-refill tracks), plus refill reminders: steps, entry and exit conditions | Campaign engines and next-best-action |
+| `engagement/case-outreach.json` | Texts and campaign memberships for 8 of the hand-built cases, June to September 2026 | Demonstrations that follow one patient across channels |
 | `press/` | Three press releases: Phase 3 EVERGARTER topline (October 2022), FDA approval (January 2024), commercial availability and QuorvantaConnect (February 2024) | Corporate context and demonstrations; two more out-of-label sources |
-| `population/` | Generated offices, HCPs, office staff, patients, labs and lab results. *Generated* | CRM, master-data, matching and load testing |
+| `population/` | Generated offices, HCPs, office staff, patients, labs, lab results, refills, text messages, campaign memberships, HCP emails and HCP portal sessions. *Generated* | CRM, master-data, matching, outreach and load testing |
 | `test-design/known-gaps.json` | 24 topics the library leaves uncovered on purpose, with the expected bot behavior and the SRD that covers each (six have none and go to the fallback or access referral) | Answer key; scenario authors only |
 | `test-design/ps-known-gaps.json` | 29 patient-services situations the library deliberately stops at, with expected behavior and the cases that exercise them | Answer key; scenario authors only |
 | `test-design/ps-cases.json` | 29 synthetic QuorvantaConnect case records as of 2026-09-22, each naming the behaviors it tests | Hub data; the patient-services assistant sees one case only after verification |
@@ -273,6 +280,33 @@ Day 0 is the first receipt of a valid report by anyone working for the company, 
 | SF-09 | Invented case detail | A cause of death the caller never gave | AEI-013 |
 | SF-10 | Wrong reportability | A 15-day report because the case has a serious event and an unlisted event, though they are different events | AEI-021 |
 
+## Engagement and outreach
+
+`engagement/` holds the rules QuorvantaConnect texts patients by, the only texts it may send, and the campaigns that decide when to send them. The generated population and eight of the hand-built cases carry the resulting message logs, so an outreach engine, a consent-management tool or a next-best-action model has both the rules and a history to be checked against.
+
+**Consent comes in layers.** The Start Form's contact consent (E2) allows only the activation text. A YES reply to it is the text opt-in, which every other text needs, and STOP ends it at once. Refill reminders also need the Start Form's text-reminder choice (C5). Keyword replies (YES, STOP, HELP and their Spanish equivalents) are answered within two minutes whatever the hour; everything else goes out between 8 a.m. and 9 p.m. in the patient's local time, taken from their state. Patients whose language has no approved texts (anything but English and Spanish) get none, and a case manager calls with an interpreter.
+
+**The campaigns.**
+- **Text activation** asks for the opt-in on the day of enrollment and once more a week later.
+- **Never-start support** texts an opted-in patient with no first fill on days 14, 21 and 35 after enrollment. Day 21 has two versions: the copay program for commercial insurance, and "other ways to get help" for government insurance or none (ENG-11). It stops at the first fill or a canceled prescription.
+- **Discontinuation risk** offers the nurse line on day 10 of treatment (`first_month`) and texts twice when a refill is 7 days late (`late_refill`), stopping at the refill or discontinuation.
+- **Refill reminders** go 3 days before each fill runs out, to patients who chose them.
+
+No text names the product, the condition, a dose, a symptom or anything from the case, and no campaign asks anyone to start, continue or restart treatment (ENG-08, ENG-10).
+
+**What the validator recomputes.** From each patient's record, fills and inbound keywords alone, it works out every text that was due, every membership with its exit, and the reason any other text should not have gone. Each deliberate breach in the logs is flagged with the rule it breaks:
+- a text to a minor or in the wrong language;
+- a campaign text with no opt-in, or after STOP;
+- a reminder without the reminder choice;
+- a never-start text after the first fill;
+- a text sent at night;
+- the copay text sent to an uninsured patient;
+- a step sent three times in three days.
+
+The HCP side works the same way: approved emails to prescribers without consent, after an unsubscribe, to a retired prescriber or outside the representative's territory are flagged, and opens and clicks from privacy proxies and security scanners are marked as machine activity (ENG-13). Portal sessions flag bots, a shared login, a deactivated prescriber signing in, and a gated page served to an anonymous visitor.
+
+Replies that mention a side effect are not in the generated logs. Free text in the population is always benign, and labeled replies that must reach Drug Safety are planned as scenarios (see `BACKLOG.md`).
+
 ## Payer transactions
 
 `payer/` gives each case the payer-side history that produced its statuses. Every plan shipment that left the pharmacy has a paid claim for its package's NDC and quantity. Bridge and Foundation shipments are never billed to a plan. Copay program claims add up to each case's `copay.used_ytd`. Benefit checks, prior authorization requests, decisions and appeals fall on the case's dates. The formulary position explains each status. Northumber and Harborline plans require prior authorization for new starts only, so continuing patients go straight through. The Part D plan for case QC-26-00113 requires it for everyone, and a 2025 authorization is on file.
@@ -325,7 +359,7 @@ The validator fails if the SPL differs from a fresh render of the label. It woul
 
 ## Generated population
 
-`population/` adds volume around the hand-built cast: offices and the health systems they belong to, HCPs, office staff (office managers, prior authorization coordinators, nurses, billing staff), patients, the labs that run their monitoring blood tests, and the results. It is for CRM, master-data, targeting and load testing. It is made by `scripts/generate_population.py`, which uses Faker, pinned in `scripts/requirements.txt`. That script is the only tool in the repository that needs a third-party library:
+`population/` adds volume around the hand-built cast: offices and the health systems they belong to, HCPs, office staff (office managers, prior authorization coordinators, nurses, billing staff), patients, the labs that run their monitoring blood tests, and the results. It also carries each patient's fills, text messages and campaign memberships, and each prescriber's approved emails and HCP portal sessions (see [Engagement and outreach](#engagement-and-outreach)). It is for CRM, master-data, targeting, outreach and load testing. It is made by `scripts/generate_population.py`, which uses Faker, pinned in `scripts/requirements.txt`. That script is the only tool in the repository that needs a third-party library:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
@@ -335,7 +369,7 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 .venv/bin/python scripts/generate_population.py --list
 ```
 
-The default sizes are 150 offices, 600 HCPs, 250 office staff, 500 patients, 60 labs, and lab results for 400 patients on treatment. For `lab-results`, `--count` sets the number of patients monitored. The same seed and Faker version always give the same files, and each entity has its own random stream. Regenerating one entity alone leaves the others' output unchanged. If anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
+The default sizes are 150 offices, 600 HCPs, 250 office staff, 500 patients, 60 labs, and lab results for 400 patients on treatment. For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream. Regenerating one entity alone leaves the others' output unchanged. If anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
 
 The generator keeps to the pack's fiction:
 - names pair a Faker first name with a double-barreled surname drawn from fifteen locales, and never repeat a core cast member;
@@ -343,7 +377,7 @@ The generator keeps to the pack's fiction:
 - cities are Faker inventions, with real state codes and ZIP codes;
 - phones are 555-01xx, emails and domains are `.example`, NPIs start with 91 (the core cast uses 90), and lab CLIA numbers start with 99D, a state code that is never issued.
 
-Generated records are context and volume, never answer keys. Patients have identities, insurance, a prescriber and a treatment start and stop date, but no shipments or claims; only the 29 hand-built cases have those.
+Generated records are context and volume, never answer keys. Patients have identities, insurance, a prescriber, a treatment start and stop date, the Start Form choices that texting depends on, and a fill history in `refills.json`, but no claims, lots or serial numbers; only the 29 hand-built cases have those. About one enrolled patient in ten has no first fill, with a reason recorded, and a few of those had the prescription canceled.
 
 **Monitoring results** follow the label.
 - **Schedule.** A baseline blood count, liver tests and renal function before starting (2.1). A blood count at 3 months and every 6 months after that (2.4). Liver tests when clinically indicated. Blood counts until recovery for patients who stopped because of lymphopenia (5.4).
@@ -383,7 +417,8 @@ Run the validator after any change. It checks that ids resolve and links run bot
 
 `BACKLOG.md` at the repository root holds the full list, with release tasks and open decisions. In short:
 
-- **More generated entities.** Speaker programs and Open Payments, QuorvantaConnect staff, Medical Information requests, market prescription volume and omnichannel engagement.
+- **More generated entities.** Speaker programs and Open Payments, QuorvantaConnect staff, Medical Information requests and market prescription volume.
+- **Outreach scenarios.** Labeled text replies, including side-effect mentions that must reach Drug Safety, and labeled campaign-audience decisions, with a fault family of their own.
 - **Scenarios on existing data.** A mock lot recall traced through EPCIS, a periodic safety report, and scenarios triggered by the lab-result patterns.
 - **Documents.** Filled letters and forms for document-AI testing, generated on demand from a committed manifest rather than stored as PDFs.
 - **Complete patient journeys** for generated patients, through payer and channel data.

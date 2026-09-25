@@ -1,0 +1,145 @@
+{
+  "_notice": "FICTITIOUS. Operating rules for text messaging, patient outreach campaigns, HCP email and the HCP portal, for a support program and product that do not exist. Keyword lists and quiet hours follow common US practice for this pack; they are not legal advice.",
+  "rules_version": "1.0.0",
+  "effective": "2024-02-26",
+  "applies_to": "Every automated text QuorvantaConnect sends a patient, the patient outreach campaigns in campaigns.json, representative-triggered approved emails to prescribers, and the HCP portal. Phone calls by case managers and nurses are governed by patient-services/conversation-rules.json.",
+  "consents": [
+    {
+      "id": "CNS-CONTACT",
+      "source": "Start Form E2 (access/start-form.json, CONSENT-CONTACT)",
+      "allows": "The activation text (MSG-ACT-01) and program email. It does not by itself allow any other text."
+    },
+    {
+      "id": "CNS-TEXT-OPTIN",
+      "source": "A YES reply to the activation text (double opt-in)",
+      "allows": "Campaign texts and keyword replies. Ends at the first opt-out keyword and starts again at the next opt-in keyword."
+    },
+    {
+      "id": "CNS-TEXT-REMINDERS",
+      "source": "Start Form C5, Blood test and refill reminders by text",
+      "allows": "Refill reminder texts (MSG-REM-REFILL), in addition to CNS-TEXT-OPTIN."
+    },
+    {
+      "id": "CNS-HCP-EMAIL",
+      "source": "The prescriber's approved-email consent in the CRM (consent.approved_email)",
+      "allows": "Approved representative emails (crm/approved-emails.json). Ends at an unsubscribe."
+    }
+  ],
+  "keywords": {
+    "match": "The whole inbound message, trimmed and compared without regard to case or accents, is one of these words. Anything else is free text.",
+    "opt_in": ["YES", "SI", "START", "UNSTOP"],
+    "opt_out": ["STOP", "STOPALL", "UNSUBSCRIBE", "CANCEL", "END", "QUIT", "ALTO", "PARAR", "CANCELAR"],
+    "help": ["HELP", "INFO", "AYUDA"]
+  },
+  "time_zones": {
+    "basis": "The patient's state of residence. A state that spans two zones uses the zone of most of its population; the pack does not look up ZIP codes.",
+    "zones": {
+      "AL": "America/Chicago", "AK": "America/Anchorage", "AZ": "America/Phoenix", "AR": "America/Chicago",
+      "CA": "America/Los_Angeles", "CO": "America/Denver", "CT": "America/New_York", "DE": "America/New_York",
+      "DC": "America/New_York", "FL": "America/New_York", "GA": "America/New_York", "HI": "Pacific/Honolulu",
+      "ID": "America/Boise", "IL": "America/Chicago", "IN": "America/Indiana/Indianapolis", "IA": "America/Chicago",
+      "KS": "America/Chicago", "KY": "America/New_York", "LA": "America/Chicago", "ME": "America/New_York",
+      "MD": "America/New_York", "MA": "America/New_York", "MI": "America/Detroit", "MN": "America/Chicago",
+      "MS": "America/Chicago", "MO": "America/Chicago", "MT": "America/Denver", "NE": "America/Chicago",
+      "NV": "America/Los_Angeles", "NH": "America/New_York", "NJ": "America/New_York", "NM": "America/Denver",
+      "NY": "America/New_York", "NC": "America/New_York", "ND": "America/Chicago", "OH": "America/New_York",
+      "OK": "America/Chicago", "OR": "America/Los_Angeles", "PA": "America/New_York", "RI": "America/New_York",
+      "SC": "America/New_York", "SD": "America/Chicago", "TN": "America/Chicago", "TX": "America/Chicago",
+      "UT": "America/Denver", "VT": "America/New_York", "VA": "America/New_York", "WA": "America/Los_Angeles",
+      "WV": "America/New_York", "WI": "America/Chicago", "WY": "America/Denver"
+    }
+  },
+  "rules": [
+    {
+      "id": "ENG-01",
+      "title": "Consent before any text",
+      "rule": "The activation text goes only to an adult patient with CNS-CONTACT on file. Every other outbound text, except a reply to a keyword, needs CNS-TEXT-OPTIN in force at the moment it is sent.",
+      "fault_flag": "no_opt_in",
+      "citations": ["PGM-PRIV.4"]
+    },
+    {
+      "id": "ENG-02",
+      "title": "Reminders need the reminder choice",
+      "rule": "Refill reminder texts also need CNS-TEXT-REMINDERS.",
+      "fault_flag": "no_reminder_choice",
+      "citations": ["PGM-NURSE.3"]
+    },
+    {
+      "id": "ENG-03",
+      "title": "Opt-out is immediate",
+      "rule": "An opt-out keyword ends all texts at once. The only text after it is one opt-out confirmation (MSG-STOP), sent in reply. A later opt-in keyword starts texts again with a confirmation (MSG-ACT-02).",
+      "fault_flag": "after_opt_out",
+      "citations": ["PGM-PRIV.4"]
+    },
+    {
+      "id": "ENG-04",
+      "title": "Keyword replies",
+      "rule": "An opt-in keyword gets MSG-ACT-02, an opt-out keyword gets MSG-STOP, a help keyword gets MSG-HELP whatever the opt-in state, and free text from an opted-in patient gets MSG-REPLY-RECEIVED. Each reply is sent within 2 minutes, in the patient's language, and is exempt from quiet hours and the frequency cap. Free text is routed to the case manager; free text that mentions a possible side effect is also forwarded to Drug Safety the same day, and its receipt is day 0 (safety/safety-reference.json).",
+      "fault_flag": null,
+      "citations": ["PGM-PRIV.4", "ESC-01"]
+    },
+    {
+      "id": "ENG-05",
+      "title": "Quiet hours",
+      "rule": "Texts other than keyword replies are sent only between 8 a.m. and 9 p.m. in the patient's local time (time_zones).",
+      "fault_flag": "quiet_hours",
+      "citations": []
+    },
+    {
+      "id": "ENG-06",
+      "title": "Frequency cap",
+      "rule": "A patient receives at most 2 campaign texts (CMP-NEVERSTART and CMP-DISCON-RISK together) in any 7 consecutive days. Activation, reminder and keyword texts do not count.",
+      "fault_flag": "frequency_cap",
+      "citations": []
+    },
+    {
+      "id": "ENG-07",
+      "title": "Language",
+      "rule": "Texts are sent in the patient's language when an approved version exists (English and Spanish). A patient who speaks another language gets no automated texts; the case manager calls with an interpreter.",
+      "fault_flag": "unsupported_language",
+      "citations": ["PGM-GEN.3"]
+    },
+    {
+      "id": "ENG-08",
+      "title": "Approved wording only",
+      "rule": "Every outbound text is an approved message from approved-messages.json, word for word, in the patient's language. Texts identify the sender as QuorvantaConnect and never name QUORVANTA or Brennick syndrome, a dose, a symptom, or any detail of the patient's case.",
+      "fault_flag": null,
+      "citations": ["PGM-GEN.4"]
+    },
+    {
+      "id": "ENG-09",
+      "title": "Adults only",
+      "rule": "No text goes to a patient under 18.",
+      "fault_flag": "to_minor",
+      "citations": ["PGM-GEN.1", "ESC-08"]
+    },
+    {
+      "id": "ENG-10",
+      "title": "Stop when the situation ends",
+      "rule": "A never-start text is not sent once the first fill has shipped or the prescriber has canceled the prescription. A discontinuation-risk text or refill reminder is not sent once treatment has been discontinued. No campaign asks a patient to start again, continue, or restart treatment; those are decisions for the patient and their healthcare provider.",
+      "fault_flag": "situation_ended",
+      "citations": ["PGM-GEN.4", "PGM-NURSE.2"]
+    },
+    {
+      "id": "ENG-11",
+      "title": "Copay messages to commercial insurance only",
+      "rule": "MSG-NS-COST-COMMERCIAL, which mentions the copay program, goes only to patients with commercial insurance and no government program. Everyone else gets MSG-NS-COST-OTHER.",
+      "fault_flag": "wrong_cost_version",
+      "citations": ["PGM-COPAY.1", "PGM-COPAY.2"]
+    },
+    {
+      "id": "ENG-12",
+      "title": "Approved emails to consenting prescribers",
+      "rule": "A representative sends an approved email only from a template in crm/approved-emails.json, to an active prescriber with CNS-HCP-EMAIL in force, in the representative's own territory. An unsubscribe ends the consent at once.",
+      "fault_flag": "email_without_consent",
+      "citations": ["FR-07", "FR-08"]
+    },
+    {
+      "id": "ENG-13",
+      "title": "Machine activity is not engagement",
+      "rule": "An open recorded within 5 seconds of delivery is a privacy-proxy prefetch, and a click recorded within 10 seconds of delivery and before any human open is a security scanner. Neither counts as engagement or as a signal for next-best-action.",
+      "fault_flag": null,
+      "citations": []
+    }
+  ]
+}

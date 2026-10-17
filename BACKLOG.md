@@ -23,11 +23,7 @@ Each of these is one module in `scripts/population/entities/`. The validator che
 
 ## Documents
 
-Planned for later. The concern is repository size, so the design generates documents on demand rather than committing them:
-
-- **Content.** Filled benefits letters and Start Forms, plan approval and denial letters, appeal letters, Foundation decisions and fax cover sheets, some made to look scanned or faxed.
-- **What gets committed.** A committed manifest (JSON) lists each document with its template, source record and the fields an extraction tool should return. A script renders the PDFs locally from the manifest into an ignored folder, so the repository stays small and the expected fields stay under validation.
-- **Why.** It targets document-AI and OCR testing, where almost no public pharma data exists.
+Filled benefits letters and Start Forms, plan approval and denial letters, appeal letters, Foundation decisions and fax cover sheets, some made to look scanned or faxed, would support document-AI and OCR testing, where almost no public pharma data exists. Committing the PDFs would bloat the repository, so the design commits only a JSON manifest listing each document with its template, source record and the fields an extraction tool should return. A script renders the PDFs locally from the manifest into an ignored folder, which keeps the repository small and the expected fields under validation.
 
 ## Master data management
 
@@ -47,6 +43,6 @@ Turn some generated patients into full journeys: enrollment, benefits check, pri
 
 ## Deferred on purpose
 
-- **Pricing and gross-to-net.** List price, rebates, chargebacks, Medicaid rebates and 340B. The pack has no approved price (PGAP-09), so adding one reverses a design decision.
-- **Other languages and markets.** The pack is US English; the only Spanish-language case is QC-26-00114.
+- **Pricing and gross-to-net.** List price, rebates, chargebacks, Medicaid rebates and 340B. The pack has no approved price (PGAP-09 in `sources/test-design/ps-known-gaps.json`), so adding one reverses a design decision.
+- **Other languages and markets.** The pack is US English; the only Spanish-language hub case is QC-26-00114 in `sources/test-design/ps-cases.json`, though the outreach texts and some generated patients are in Spanish.
 - **Free-text corpora.** Contact-center transcripts, community posts and market-research verbatims. They would need LLM generation, labels, and the same fiction and denylist checks as everything else.

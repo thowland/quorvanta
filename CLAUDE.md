@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. It also serves as a test bed for adverse event intake, payer and benefits processing, and CRM and field-force compliance. The pack is public on GitHub under CC BY-SA 4.0 (content in `sources/` and the identity package in `assets/`) and GPL-3.0 (scripts). There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
+This is a synthetic test dataset, not software: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. It also serves as a test bed for adverse event intake, payer and benefits processing, CRM and field-force compliance, supply-chain serialization and recall tracing, patient outreach and consent, medical information operations, and master-data matching on the generated population. The pack is public on GitHub under CC BY-SA 4.0 (content in `sources/` and the identity package in `assets/`) and GPL-3.0 (scripts). There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
 
 ## Non-negotiable invariants
 
-- **Nothing real.** No real drug, brand, company, product or software vendor names anywhere, including in README prose about where the pack came from. The pack was originally modeled on a real label; all traces of that were deliberately removed and must not come back.
+- **Nothing real.** No real drug, brand, company, product or software vendor names anywhere, including in README prose about where the pack came from. The pack was originally modeled on a real label; all traces of that were removed and must not come back.
 - **Fiction markers:**
   - Phone numbers use the reserved `1-800-555-01xx` range; synthetic patients use `(xxx) 555-01xx`.
   - Web and email domains use `.example`.
   - DOIs use the `10.5555` prefix.
-  - NCPDP ids use a `99-` prefix.
+  - NCPDP ids use a `99-` prefix (a convention; the validator does not check it).
   - NDCs use the unassigned labeler `00000`; GTIN-14 check digits must be correct.
   - Prescriber NPIs are 10 digits beginning with `9`, with a correct check digit (Luhn over the `80840` prefix). The core cast uses `90`, the generated population `91`.
   - Lab CLIA numbers are `99D` plus seven digits.
@@ -22,10 +22,10 @@ This is not software. It is a synthetic test dataset: an invented drug (QUORVANT
   - GS1: the manufacturer's company prefix is `0300000`, the one inside the GTINs. Every other trading partner uses `0200001` to `0200011`, in the restricted-circulation range; GLN and SSCC check digits must be correct.
   - Event coding uses the pack's own `AET-*` terms. Never add MedDRA codes or NCPDP code values; both are licensed.
   - Every JSON file carries a top-level `_notice` field.
-  - Every Markdown document opens with a "Everything here is invented" blockquote.
-  - Keep all of these markers in any new file.
+  - Every Markdown document under `sources/` opens with an "Everything here is invented" blockquote.
+  - Keep all of these markers in any new file. The validator's fiction checks (phones, domains, notices, the denylist) scan `sources/` only; the root documents and `assets/` are reviewed by hand.
 - **Numbers must agree everywhere.** A figure lives first in `sources/label/label.md` and reappears in claims, references, promo pieces, SRDs, patient materials and press releases. Arm sizes sum to study totals, the pooled safety population equals the two twice-daily arms, and relative reductions follow from the stated rates. When changing a number, grep every file for it.
-- **Deliberate traps are features, not bugs.** Do not "fix" them:
+- **Deliberate traps.** These are planted on purpose; do not "fix" them:
   - the withdrawn claim `EFF-013`;
   - the three references marked `not_approved_for_promotional_use` (REF-019 to REF-021);
   - findings that support no claim (`REF-003.7`, `REF-011.7`);
@@ -71,7 +71,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 **Product identifiers** (`product/product-identifiers.json`): two packages, the bottle of 120 (`PKG-120`) and the 30-day starter bottle of 92 (`PKG-STARTER`), with NDCs, GTINs, bottle label text and a lot register.
 - Data (`ndc`, payer claims, 867 records, the FHIR formulary) carries the 11-digit billing NDC, `00000-0190-01`. Labeling (label section 16, claim SUP-004, promotional text and the bottle labels) prints the 10-digit form, `00000-190-01`, as the SPL and the GTINs do. The validator enforces the split.
 - Lots are `QV`/`QS` + 2-digit year + month letter + 3-digit sequence, and expire at the end of the 24th month after manufacture.
-- Every case shipment names its package and, once shipped, its lot. The lot must exist, match the package, be made before shipping, and outlast the supply.
+- Every case shipment names its package and, once shipped, its lot. The lot must exist, match the package, be made before shipping and outlast the supply.
 - A first fill is one starter bottle (28 starting-dose capsules plus 64 maintenance capsules); later fills are bottles of 120. QUORVANTA is dispensed only in the original container, so partial fills are not possible.
 - The Markdown is generated: edit the JSON and run `scripts/render.py`.
 
@@ -102,7 +102,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - Refill and blood test reminders (`program_texts`) are not campaigns and open no membership. Blood test reminders follow the label 2.4 schedule from the first fill, never the lab results, which the program does not see.
 
 **Channel** (`channel/`) is generated by `scripts/build_channel.py` from the cases, payer claims, lot register and CRM data. Re-run it after changing any of those.
-- Every serial's EPCIS history must be well formed: commissioned once with its lot and expiry, then packed, shipped, received and unpacked, and dispensed or destroyed at most once. A bottle may not be dispensed from a lot that expires before its 30-day supply is used.
+- Every serial's EPCIS history must be well formed: commissioned once with its lot and expiration date, then packed, shipped, received and unpacked, and dispensed or destroyed at most once. A bottle may not be dispensed from a lot that expires before its 30-day supply is used.
 - Each 867 record matches one dispensing event. The case shipments in the window match the case records, and plan shipments match the pharmacy on the paid claim.
 - Every 852 row can be recomputed from the events.
 - No price appears anywhere.
@@ -116,7 +116,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - `patterns` (clinical or business situations) and `quality_flags` (data problems) are separate. The validator re-derives the lab-results patterns and eGFR from the values, so change the generator, not the output.
 - Deferred ideas live in `BACKLOG.md`.
 
-**Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
+**Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and `sources/README.md`; the validator enforces this.
 
 **Scenarios** (`test-design/scenarios/`):
 - `fault-types.json` defines the fault ids (HF-* for the HCP bot, PF-* for patient services, SF-* for adverse event intake, CF-* for field records, RF-* for mock recall traces), and every fault needs at least one failing example in a labeled set.
@@ -140,27 +140,32 @@ python3 scripts/validate.py                            # all integrity checks; e
 python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real brand/company names
 python3 scripts/render.py                              # regenerate program-terms.md, product-identifiers.md, payer/formulary-fhir.json and label/label-spl.xml
 python3 scripts/build_channel.py                       # regenerate channel/ from the cases, claims, lots and CRM
-.venv/bin/python scripts/generate_population.py        # regenerate population/ (needs Faker; see sources/README.md)
-python3 scripts/extract_names.py                       # refresh scripts/names-to-check.csv, the invented names needing clearance
+.venv/bin/python scripts/generate_population.py        # regenerate population/ (Faker; Python 3.10+)
+.venv/bin/python scripts/generate_population.py --list # entity types, default counts and dependencies
+.venv/bin/python scripts/generate_population.py --count hcps=1000  # every entity, with one count overridden
+python3 scripts/extract_names.py                       # rewrite scripts/names-to-check.csv; takes no options, so even --help rewrites it
 python3 scripts/namecheck.py --limit 90                # exact-phrase web search per name; needs search API credentials (see its docstring)
 ```
 
+Create the virtual environment once with `python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt`. `--entity NAME` regenerates one entity type and `--with-deps` adds the entities it requires; regenerating an entity without the files that reference it leaves them out of step, so prefer regenerating everything.
+
 Run the validator after any edit. It checks:
-- JSON parses and carries `_notice`, and every Markdown file has a fiction notice;
+- JSON parses and carries `_notice`, and every Markdown and XML file under `sources/` has a fiction notice;
 - citations, `requires` and `derives_from` ids resolve, and no approved claim cites a non-approved reference;
 - promo and DTC materials use only approved claims, and promo unit text appears verbatim in its Markdown rendering;
 - gap↔SRD links run both ways, and each JSON/Markdown pair is in sync;
 - the counts in `sources/README.md` still match the data;
 - phones, DOIs and domains use the fiction ranges;
-- product identifiers: NDC and GTIN formats, lot format and expiry, and case shipments against the lot register and packages;
-- disease pieces match their facts and stay unbranded; competitor names stay in landscape/ and test-design/;
+- product identifiers: NDC and GTIN formats, lot format and expiration dates, and case shipments against the lot register and packages;
+- disease pieces match their facts and stay unbranded; competitor names stay in landscape/, test-design/ and sources/README.md;
 - scenarios: ids resolve, correct answers are verbatim and complete, verification order holds, every fault type has a failing example;
 - patient services: provision, response, status and tag references resolve; placeholders resolve against the cases; the case records obey the program rules; and the README's patient-services counts match;
 - safety: event terms against label sections, and every intake report's expected assessment recomputed from its receipts and events;
 - field force: NPIs, territories, prescriber-case links, template bodies, and each call's field rules against its declared deviations;
-- channel: GLNs and prefixes, each serial's EPCIS history, 867 records against events and cases, 852 rows recomputed from events, no prices;
+- channel: GLNs, SSCCs, GTIN check digits and prefixes, each serial's EPCIS history, 867 records against events and cases, 852 rows recomputed from events, no prices;
 - mock recall: each drill's answer key recomputed from EPCIS, the 867 feed, shipments, case records and paid claims; labeled traces scored against it;
-- population: ids, declared references and must_match fields, flag legends, 91-prefixed NPIs, .example emails, adult patients unless flagged, and plan names; MI requests' routing, turnaround, flags and repeat patterns;
+- engagement: the approved messages' content rules, and every due text, membership and exit in `case-outreach.json` and the generated logs recomputed under ENG-01 to ENG-13, with each breach carrying its rule's flag; HCP emails against consent, status and territory, and portal sessions against their flags;
+- population: ids, declared references and must_match fields, flag legends, 91-prefixed NPIs, 99D CLIA numbers, .example emails, adult patients unless flagged, plan names, and undeclared core cast names; lab-result patterns and eGFR re-derived from the values; MI requests' routing, turnaround, flags and repeat patterns; the staff roster's shifts, hourly coverage, supervisors and core case managers, and each patient's case manager; scenarios' `population_refs` against the generated records;
 - SPL: identical to a fresh render, section codes and highlight placement, and 10-digit NDCs;
 - payer: BIN range, plans and coverages, claims against shipments, copay arithmetic, benefit-check and PA history against the cases, and the FHIR bundle against `plans.json`.
 

@@ -51,4 +51,4 @@ The identity board demonstrates a fictional carton, an editorial card, and a pos
 - logo-lockup-reverse.png — the same lockup with the deep teal recolored to ivory #F7F4EB and the apricot kept, for dark backgrounds (the reverse treatment above). Derived from logo-lockup.png, not generated separately.
 - prompts.txt — exact generation and refinement prompts.
 
-Created with the built-in image generation tool. These are raster concept assets, not vector masters. Generated lettering, color rendering, and tiny mockup copy can vary; the spelling, HEX values, and copy in this guide are authoritative. For final print production, redraw and standardize the chosen logo as vector artwork and replace all mockup copy with typeset text.
+Created with the built-in image generation tool. These are raster concept assets, not vector masters. Generated lettering, color rendering, and tiny mock-up copy can vary; the spelling, HEX values, and copy in this guide are authoritative. For final print production, redraw and standardize the chosen logo as vector artwork and replace all mock-up copy with typeset text.

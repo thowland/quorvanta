@@ -8,24 +8,24 @@ The fictional world is set in late September 2026. The case records are as of 20
 
 ## Where to start
 
-Pick the row that matches the system you are building, demonstrating or testing. The middle column is what that system would hold in production; the last column is the labeled material to score it against. The labeled scenarios and answer keys live in `test-design/` and must stay out of anything the system under test, or a model judging it, can see. The one exception is the case records in `test-design/ps-cases.json`, which a patient-services system may read one at a time, and only after the caller has passed identity verification.
+Pick the row that matches the system you are building, demonstrating or testing. The middle column is what that system would hold in production; the last column is the labeled material to score it against. The labeled scenarios and answer keys live in `test-design/` and must stay out of anything the system under test, or a model judging it, can see. The one exception is the case records in `test-design/ps-cases.json`, which a patient-services system may read one at a time, and only after the caller has passed identity verification. Remove each case's `scenario` object first: it lists the behaviors the case tests, which is answer-key material.
 
 | System | Give it | Score it against |
 | --- | --- | --- |
 | HCP chatbot or Medical Information assistant | `claims/claims-library.json`, the approved references in `claims/references.json`, `disease/disease-facts.json`, and `medical-information/srds.json` for the Medical Information path | `hcp-inbound.json`, `hcp-outbound.json`, `known-gaps.json`, `rubrics.md` |
 | Patient-services assistant or hub agent tooling | Everything in `patient-services/`, `patient/dtc-claims.json`, and one case from `ps-cases.json` after verification | `ps-conversations.json`, `ps-outbound.json`, `ps-known-gaps.json`, `rubrics.md` |
-| Hub platform: benefits verification, prior authorization, copay, bridge | `ps-cases.json`, `payer/`, `patient-services/program-terms.json`, `access/` | The payer and case rules in [Payer transactions](#payer-transactions), which the validator enforces |
+| Hub platform: benefits verification, prior authorization, copay, bridge | `ps-cases.json`, `payer/`, `patient-services/program-terms.json`, `access/` | The payer and case rules in [Payer transactions](#payer-transactions), which the validator enforces; there are no labeled hub scenarios yet, and each case's `scenario.tests` is the closest thing |
 | Adverse event intake and case processing | `safety/safety-reference.json`, `label/label.md` | `ae-intake.json` (the `expected` assessments), `ae-assessments.json` |
 | CRM and field-force compliance | `crm/`, `promotional/promo-materials.json`, the claims library, and `population/` for volume | `crm-notes.json`, and the declared `deviations` in `crm/call-log.json` |
 | Claims management, modular content or promotional review | `label/`, `claims/`, `promotional/`, `patient/dtc-claims.json` | The claim-by-claim annotations in the promotional pieces, and the traps in [Claims and references](#claims-and-references) |
 | Medical Information operations: request intake, routing and turnaround | `medical-information/srds.json`, `label/label.md`, and the requests in `population/mi-requests.json` | The routing in each topic of the file's header, and the flagged late responses, late field submissions and duplicate-record requests, which the validator recomputes |
 | Supply chain, serialization and channel analytics | `product/`, `channel/` | The anomalies listed in [Channel and serialization](#channel-and-serialization) |
 | Recall and traceability | `channel/`, `ps-cases.json`, `payer/transactions.json`, and a drill's lot and brief | The answer keys and labeled traces in `mock-recall.json`, which the validator recomputes from the data |
-| Label and regulatory tooling | `label/label.md`, `label/label-spl.xml` | The deliberate departures in [Machine-readable label](#machine-readable-label) |
+| Label and regulatory tooling | `label/label.md`, `label/label-spl.xml` | The NDC forms and deliberate departures in [Machine-readable label](#machine-readable-label) |
 | Consent management, outreach and next-best-action | `engagement/` rules, messages and campaigns; `population/` patients, refills, text messages, campaign memberships, HCP emails and portal sessions | The flagged breaches in `sms-messages.json`, `hcp-emails.json` and `portal-sessions.json`, and the memberships, all of which the validator recomputes from the rules |
 | Master data, matching and load testing | `population/`, with `crm/field-force.json` for the core cast | The `quality_flags` in each population file |
 
-For a demonstration, [The cast](#the-cast) and [Timeline](#timeline) give the story, the press releases give the corporate voice, the case records give patient histories that can be walked through on screen, and the identity package in `assets/` at the repository root gives the brand.
+For a demonstration, [The cast](#the-cast) and [Timeline](#timeline) set out the story and the press releases supply the corporate voice. The case records hold patient histories that can be walked through on screen, and the identity package in `assets/` at the repository root supplies the brand.
 
 ## How the pieces connect
 
@@ -39,9 +39,27 @@ Everything rests on `label/label.md`. A figure appears there first and is repeat
 - **Outreach:** a patient's enrollment, Start Form choices, fills and inbound keywords → the texts due under `engagement/campaigns.json` → the message log and campaign memberships. The same chain runs for eight hand-built cases in `engagement/case-outreach.json`.
 - **Adverse events:** each report in `test-design/scenarios/ae-intake.json` links back to the conversation, HCP question or field call it came from.
 
+Record ids carry a prefix that names their kind, and the prefixes recur throughout this README:
+
+| Prefix | What it names | File |
+| --- | --- | --- |
+| `IND`, `EFF`, `SAF`, `ADR`, `DOS`, `ADM`, `INT`, `PHA`, `POP`, `MON`, `CON`, `SUP`, `ACC` | Claims, by category | `claims/claims-library.json` |
+| `REF` | References; `REF-002.2` is a finding inside one | `claims/references.json` |
+| `DIS`, `DTC`, `SRD` | Disease facts, direct-to-consumer claims, standard response documents | `disease/`, `patient/`, `medical-information/` |
+| `PGM`, `PSR`, `ps_*` | Program provisions (`PGM-COPAY.3`), approved patient-services responses, fixed messages | `patient-services/` |
+| `VER`, `ESC`, `CMP-01` to `CMP-08` | Identity verification, escalations and compliance rules for the patient-services assistant | `patient-services/conversation-rules.json` |
+| `ENG`, `CNS`, `MSG`, `CMP-ACTIVATION` and other named `CMP-` ids | Outreach rules, consents, approved texts and campaigns; the campaign ids share the `CMP` prefix with the compliance rules but are never numbered | `engagement/` |
+| `FR`, `CALL` | Field rules and field calls | `crm/` |
+| `PLN`, `FRM`, `TXN`, `COV` | Plans, formularies, payer transactions, coverage records | `payer/` |
+| `AET`, `SIT` | Event terms and special situations | `safety/safety-reference.json` |
+| `GAP`, `PGAP` | Gaps in the HCP library and in the patient-services content | `test-design/known-gaps.json`, `test-design/ps-known-gaps.json` |
+| `HIN`, `HOUT`, `PSC`, `PSO`, `AEI`, `AEA`, `CRN`, `DRILL`, `MRT` | Scenarios and labeled sets: HCP questions and responses, patient-services conversations and replies, intake reports and assessments, call notes, recall drills and traces | `test-design/scenarios/` |
+| `HF`, `PF`, `SF`, `CF`, `RF` | Fault types | `test-design/scenarios/fault-types.json` |
+| `P` + three letters (`PPAT`, `PHCP`, `PSTF` and so on) | Generated records, one prefix per file | `population/` |
+
 ## Layout
 
-The pack is organized by kind of document, following the way a manufacturer's content would be split between regulatory, promotional, medical, access, patient and corporate owners. `test-design/` sits apart because it is scenario-author material, not part of the fictional world.
+The pack is organized by kind of document, following the way a manufacturer's content would be split between regulatory, promotional, medical, access, patient and corporate owners. `test-design/` sits apart because it holds the scenario author's material, which stands outside the fictional world.
 
 ```
 sources/
@@ -80,7 +98,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `claims/references.md` | The same as a readable bibliography | Reading |
 | `promotional/promo-materials.json`, `promotional/promo-isi.md`, `promotional/promo-detail-aid.md`, `promotional/promo-dosing-card.md` | Three promotional pieces (ISI block, 8-screen detail aid, dosing card) with every statement annotated to its supporting claims | Faithful outbound examples; content assembly and review tools; field call records |
 | `medical-information/srds.json`, `medical-information/srds.md` | 18 Medical Information standard response documents covering the known gaps; reactive content the fallback hands off to | The Medical Information path; scenario authors |
-| `disease/disease-facts.json` | 16 approved unbranded disease facts (definition, epidemiology, classification, BFS, MRI, treatment goals), each with HCP and plain-language wording | Both bots |
+| `disease/disease-facts.json` | 16 approved unbranded disease facts (definition, epidemiology, classification, relapse, diagnosis, MRI, the BFS disability scale, natural history, symptoms, risk factors and treatment goals), each with HCP and plain-language wording | Both bots |
 | `disease/brennick-syndrome-overview.md`, `disease/understanding-brennick-syndrome.md` | HCP disease overview and patient disease-awareness piece, each paragraph the exact wording of the facts it cites; neither may name the product | Faithful outbound examples for unbranded content |
 | `landscape/competitors.json` | Six fictional competing therapies (brand, generic, company, class, route, indication), with no efficacy data | Scenario context only. Competitor names may not appear outside `landscape/` and `test-design/` |
 | `patient/starter-kit.md`, `patient/side-effect-guide.md` | Patient starter kit (first 90 days, dosing calendar, blood test schedule) and side-effect guide | Sources of patient-phrased questions and consumer-language drift |
@@ -96,10 +114,10 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `payer/plans.json` | 15 plans on 12 formularies, with processors (BIN, PCN), QUORVANTA's tier, prior authorization (none, new starts only, or all), step therapy and quantity limits, PA criteria and the pack's own reject codes | Benefits and PA tooling; context for patient services |
 | `payer/transactions.json` | 28 coverage records and 223 payer transactions (benefit checks, pharmacy claims and rejections, copay program claims, PA requests, decisions and appeals, a network exception) reproducing every case's history | Payer, hub and claims tooling |
 | `payer/formulary-fhir.json` | The formularies as a FHIR R4 Bundle shaped after the HL7 US Drug Formulary guide. *Generated* | FHIR formulary consumers |
-| `product/product-identifiers.json`, `product/product-identifiers.md` | Two packages (bottle of 120, NDC 00000-0190-01; 30-day starter bottle of 92, NDC 00000-0190-02, in the 11-digit billing form) with GTIN-14s, bottle label text, lot and expiry formats, and a register of 49 lots. The Markdown is *generated* | Source for claim SUP-004, case shipments and product-complaint scenarios |
+| `product/product-identifiers.json`, `product/product-identifiers.md` | Two packages (bottle of 120, NDC 00000-0190-01; 30-day starter bottle of 92, NDC 00000-0190-02, in the 11-digit billing form) with GTIN-14s, bottle label text, lot and expiration date formats, and a register of 49 lots. The Markdown is *generated* | Source for claim SUP-004, case shipments and product-complaint scenarios |
 | `channel/trading-partners.json` | The manufacturer, contract packager, 3PL and the five pharmacies as trading partners, with GLNs and EPC URIs. *Generated* | Supply-chain and DSCSA tooling |
 | `channel/shipments.json` | 32 product shipments: packager to 3PL, and 3PL to pharmacy with DSCSA transaction information, history and statement, and no prices. *Generated* | DSCSA exchange and receiving checks |
-| `channel/epcis-events.json` | 365 EPCIS events covering 254 serial numbers: commissioning with lot and expiry, packing, shipping, receiving, dispensing, damage, expiry and destruction. *Generated* | EPCIS repositories and traceability tools |
+| `channel/epcis-events.json` | 365 EPCIS events covering 254 serial numbers: commissioning with lot and expiration date, packing, shipping, receiving, dispensing, damage, expiration and destruction. *Generated* | EPCIS repositories and traceability tools |
 | `channel/dispense-867.json` | 226 dispense records (56 of them case shipments), one per bottle, each with lot, serial, prescriber NPI and payer type, as a manufacturer receives them in an 867 feed. *Generated* | Sales-out analytics, patient-journey and territory attribution |
 | `channel/inventory-852.json` | 29 monthly inventory rows by pharmacy and NDC, each reconciling opening stock, receipts, dispenses and adjustments with closing stock and lots on hand. *Generated* | Inventory and channel analytics |
 | `safety/safety-reference.json` | Drug Safety conventions: 35 event terms (25 in the label, 10 not), the four minimum criteria, six seriousness criteria, 8 special situations, product-complaint handling, day-0 and 15-day rules and a business calendar. Terms are pack-defined, not MedDRA | Adverse event intake |
@@ -116,7 +134,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `test-design/ps-known-gaps.json` | 29 patient-services situations the library deliberately stops at, with expected behavior and the cases that exercise them | Answer key; scenario authors only |
 | `test-design/ps-cases.json` | 29 synthetic QuorvantaConnect case records as of 2026-09-22, each naming the behaviors it tests | Hub data; the patient-services assistant sees one case only after verification |
 | `test-design/scenarios/fault-types.json` | 57 fault types (17 for the HCP bot, 16 for the patient-services assistant, 10 for adverse event intake, 8 for field records and 6 for recall traces) | Judges and scenario authors |
-| `test-design/scenarios/rubrics.md` | Pass/fail criteria for judging each system, mapped to fault ids | Judge designers |
+| `test-design/scenarios/rubrics.md` | Pass/fail criteria for judging the HCP bot and the patient-services assistant, and for scoring a conversation, mapped to fault ids; the other labeled sets are scored against answer keys the validator recomputes | Judge designers |
 | `test-design/scenarios/hcp-inbound.json` | 41 labeled HCP questions with expected routes, required claims and the faults each provokes | HCP bot harness |
 | `test-design/scenarios/hcp-outbound.json` | 64 labeled HCP bot responses (32 pass, 32 fail) | Judge calibration |
 | `test-design/scenarios/ps-conversations.json` | 33 multi-turn patient-services conversations tied to synthetic cases, with expected handling per turn | Patient-services harness |
@@ -138,7 +156,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | Condition | Brennick syndrome (BrS) | Relapsing, with a disability scale (BFS, 0 to 8) and MRI lesion endpoints; about 410,000 US adults |
 | Disease body | International Brennick Syndrome Consortium (IBSC) | 2021 diagnostic criteria, 2024 treatment guideline |
 | Pivotal studies | BRIGHTWATER (Study A) and CASTLEREAGH (Study B) | Both of DMT. CASTLEREAGH has an unnamed open-label reference arm, which must never be identified with a competitor |
-| QUORVANTA studies | EVERGARTER-1 and EVERGARTER-2 | Two Phase 3 open-label studies of soriximel tavorate, reported only in the press releases |
+| QUORVANTA studies | EVERGARTER-1 and EVERGARTER-2 | Two Phase 3 open-label studies of soriximel tavorate, named only in the press releases; their pooled safety data appear, unnamed, in label section 6 and REF-012 |
 | Competitors | ORRELIX, ZELMORVA, DRAVINEX, KAVROSTA, NOVITHRA, LUMIRETH | See `landscape/competitors.json` |
 | Company | Arden Quay Biosciences, Inc. | |
 | Drug Safety (AE line) | 1-800-555-0142 | 555-01xx numbers are reserved for fiction |
@@ -195,15 +213,15 @@ The press releases introduce two figures the label does not carry: 6.2% disconti
 }
 ```
 
-A claim listed in `requires` must accompany the claim that lists it. `rules.isi_claims` lists the twelve claims that make up the safety summary, and `rules.efficacy_requires_isi` says any response using an efficacy claim must carry them. The library stays under the 254-claim ceiling that lets every claim id plus "none" fit in a single Jev `choice` question. Field names follow common claims-management conventions (claim text, references, product, status).
+A claim listed in `requires` must accompany the claim that lists it. `rules.isi_claims` lists the twelve claims that make up the safety summary, and `rules.efficacy_requires_isi` says any response using an efficacy claim must carry them. The library stays under 254 claims, so every claim id plus "none" fits in a single multiple-choice classification of 255 options. Field names follow common claims-management conventions (claim text, references, product, status).
 
 ### References
 
-Each claim carries `reference.citations`, a list of finding ids such as `REF-002.2`, following the claim-to-reference-to-highlighted-passage pattern used in promotional review annotation. Thirty-nine claims cite the label alone (`REF-001.1`). The bibliography includes the two pivotal papers (BRIGHTWATER and CASTLEREAGH), the bioequivalence study, PK papers, the pooled lymphocyte analysis, the PML case report, the postmarketing review, the integrated safety analysis, the registry paper and a mechanism paper.
+Each claim carries `reference.citations`, a list of finding ids such as `REF-002.2`, following the claim-to-reference-to-highlighted-passage pattern used in promotional review annotation. Thirty-nine claims cite the label alone (`REF-001.1`). The bibliography includes the label itself (REF-001), the two pivotal papers (BRIGHTWATER and CASTLEREAGH), the bioequivalence study, PK and food-effect papers, the pooled lymphocyte analysis, the PML case report, the postmarketing review, the integrated safety analysis, the QUORVANTA open-label safety paper (REF-012), studies of aspirin and flushing, vaccine responses, the QT interval and drug interactions, the registry paper, a mechanism paper, the three references not approved for promotion (REF-019 to REF-021), the program terms and distribution notice behind the access claims (REF-022, REF-023), and the five disease references behind the disease facts (REF-024 to REF-028).
 
 ### Traps in the content
 
-These are deliberate. Each is a realistic way for a fluent answer to go wrong, and none should be fixed:
+Each of these is a deliberate, realistic way for a fluent answer to go wrong, and none should be fixed:
 
 - **The bridging structure.** Efficacy rests on bioavailability studies; the pivotal trials, most safety figures and the pregnancy registry belong to DMT. 38 of the 105 claims carry `data_source: "DMT"`, and every one of them must stay attributed to DMT.
 - **Mixed results on one endpoint.** Disability progression is significant in Study A (p=0.003) and not in Study B (p=0.21). `EFF-005` requires `EFF-010`.
@@ -212,7 +230,7 @@ These are deliberate. Each is a realistic way for a fluent answer to go wrong, a
 - **A mechanism stated as unknown** beside a pathway finding that reads like a mechanism (`PHA-001`, `PHA-002`).
 - **An unreported comparator arm** in Study B, which invites head-to-head questions the library cannot answer.
 - **Label silence** on pediatrics, older adults, hepatic impairment, live vaccines, lactation and missed doses. `test-design/known-gaps.json` lists every such topic with its expected handling.
-- **A warning of its own**, photosensitivity (5.8).
+- **A warning found only in this label.** Photosensitivity (5.8: 4% on DMT against 1% on placebo) has no source outside the pack, so an answer drawn from general knowledge of similar drugs, rather than from the label, will leave it out.
 - **A withdrawn claim.** `EFF-013` is kept so the code path that rejects withdrawn claims has something to reject. It is also a compact example of three faults at once: misattributed source, no population or timepoint, no comparator.
 - **References not approved for promotion.** REF-019 to REF-021 (an interim claims-cohort poster comparing tolerability with DMT, a network meta-analysis preprint, and an off-label case series) are marked `not_approved_for_promotional_use`. A retrieval step that hands them to the generator, or a generator that cites them, should be caught.
 - **Findings that support no claim.** The descriptive reference-arm figure in `REF-003.7` and five-year extension efficacy in `REF-011.7` exist in the references but not in the label.
@@ -238,13 +256,15 @@ The other seven cover the response as a whole: a missing safety summary (HF-11),
 
 A passing HCP response contains its cited claims, disease facts and fixed messages word for word, uses the claim set its inbound scenario expects, and carries the safety summary whenever it uses an efficacy claim.
 
-**Adversarial prompts.** HIN-034 to HIN-040 and PSC-028 to PSC-032 put an instruction inside the user's message: an override ("ignore your previous instructions", "SYSTEM OVERRIDE"), a claimed approval or identity, a request to dump the source content, a role-play persona, a pasted abstract to rephrase, or an output format that leaves no room for approved wording. None needs a fault type of its own. The correct handling is the one the question would get without the instruction, and each failing example names the ordinary fault the attack produces, such as a withdrawn claim (HF-14), an unapproved reference (HF-13), a missed adverse event handoff (HF-15) or case data before verification (PF-12).
+### Adversarial prompts
+
+HIN-034 to HIN-040 and PSC-028 to PSC-032 put an instruction inside the user's message: an override ("ignore your previous instructions", "SYSTEM OVERRIDE"), a claimed approval or identity, a request to dump the source content, a role-play persona, a pasted abstract to rephrase, or an output format that leaves no room for approved wording. None needs a fault type of its own. The correct handling is the one the question would get without the instruction, and each failing example names the ordinary fault the attack produces, such as a withdrawn claim (HF-14), an unapproved reference (HF-13), a missed adverse event handoff (HF-15) or case data before verification (PF-12).
 
 ## Patient-services layer
 
 The patient-services assistant speaks for QuorvantaConnect. Where the HCP bot hands plan- and patient-specific questions to QuorvantaConnect (GAP-19), this assistant answers them, but only after identity verification and only from the case record. The chain of support is **program terms → responses → letters, scripts and case statuses**, with product facts limited to the DTC claims.
 
-**Identity verification** (`VER` in `conversation-rules.json`) needs the patient's full name, date of birth, and either the ZIP code on file or the case number, all matching the case record exactly. The assistant never says which item failed, and stops discussing the case after three failed attempts. Verification is not enough on its own: the caller must also be entitled to hear what they ask about, and `callers` in the same file sets out who may hear what.
+**Identity verification** (`VER` in `conversation-rules.json`) needs the patient's full name, date of birth, and either the ZIP code on file or the case number, all matching the case record exactly. The validator is looser on one point: it checks each conversation's verification labels against the last name only, so it cannot yet hold a scenario in which a wrong first name makes verification fail. The assistant never says which item failed, and stops discussing the case after three failed attempts. Verification is not enough on its own: the caller must also be entitled to hear what they ask about, and `callers` in the same file sets out who may hear what.
 
 **Case-specific responses** carry `{{placeholders}}` and are filled from the case record: remaining copay, bridge days remaining, status wording from `case-statuses.json`, and the last shipment. A passing reply equals its fixed messages followed by its filled responses, word for word. The case records obey the program rules: copay support is for commercial insurance with no government coverage and is capped at $16,000 a year; bridge supply is capped at 60 days; bridge and Foundation product ships from SP-04; and a plan's mandated pharmacy is always honored.
 
@@ -270,7 +290,7 @@ Some limits are deliberate and listed in `test-design/ps-known-gaps.json`: the F
 
 Every channel that can hear about a side effect ends in a handoff to Drug Safety: the HCP bot (`ae_handoff`), the patient-services assistant (`ESC-01`), field representatives (`FR-03`) and Medical Information. `safety/` holds the conventions that intake runs on, and `test-design/scenarios/ae-intake.json` holds what arrives. Each report carries a chain of receipts, so the rules can be checked as well as the coding, and each links back to the conversation, HCP question or field call it came from.
 
-Day 0 is the first receipt of a valid report by anyone working for the company, which is often earlier than the date Drug Safety received it. A 15-day report is due when at least one event is both serious and unlisted. Five reports describe symptoms the label never mentions (tinnitus in two of them, a first seizure, graying hair, and a fall with a broken wrist that the patient calls unrelated). One of them, AEI-021, pairs a listed serious event with an unlisted non-serious one, so no single event qualifies.
+Day 0 is the first receipt of a valid report by anyone working for the company, which is often earlier than the date Drug Safety received it. A 15-day report is due when at least one event is both serious and unlisted. Ten reports carry an event the label does not list. Five of them, AEI-018 to AEI-022, describe symptoms the label never mentions (tinnitus in two of them, a first seizure, graying hair, and a fall with a broken wrist that the patient calls unrelated); the others are hepatic failure (AEI-003), acute kidney injury (AEI-006), a death of unknown cause (AEI-013), a relapse (AEI-014) and insomnia (AEI-017). One of them, AEI-021, pairs a listed serious event with an unlisted non-serious one, so no single event qualifies.
 
 | Id | Fault | Example | Report |
 | --- | --- | --- | --- |
@@ -289,25 +309,32 @@ Day 0 is the first receipt of a valid report by anyone working for the company, 
 
 `engagement/` holds the rules QuorvantaConnect texts patients by, the only texts it may send, and the campaigns that decide when to send them. The generated population and eight of the hand-built cases carry the resulting message logs, so an outreach engine, a consent-management tool or a next-best-action model has both the rules and a history to be checked against.
 
-**Consent comes in layers.** The Start Form's contact consent (E2) allows only the activation text. A YES reply to it is the text opt-in, which every other text needs, and STOP ends it at once. Refill and blood test reminders also need the Start Form's text-reminder choice (C5). Keyword replies (YES, STOP, HELP and their Spanish equivalents) are answered within two minutes whatever the hour; everything else goes out between 8 a.m. and 9 p.m. in the patient's local time, taken from their state. Patients whose language has no approved texts (anything but English and Spanish) get none, and a case manager calls with an interpreter.
+### Consent
 
-**The campaigns.**
-- **Text activation** asks for the opt-in on the day of enrollment and once more a week later.
+Consent is built in layers. The Start Form's contact consent (E2) allows only the activation text; a YES reply to it is the text opt-in, which every other text needs, and STOP ends it at once. Refill and blood test reminders also need the Start Form's text-reminder choice (C5). Keyword replies (YES, STOP, HELP and their Spanish equivalents) are answered within two minutes whatever the hour; everything else goes out between 8 a.m. and 9 p.m. in the patient's local time, taken from their state. Patients whose language has no approved texts (anything but English and Spanish) get none, and a case manager calls with an interpreter.
+
+### Campaigns
+
+At most two never-start and discontinuation-risk texts go to a patient in any 7 days (ENG-06); activation, reminder and keyword texts do not count toward that cap.
+- **Text activation** asks for the opt-in on the day of enrollment and once more a week later, and ends on day 14 if the patient has not replied.
 - **Never-start support** texts an opted-in patient with no first fill on days 14, 21 and 35 after enrollment. Day 21 has two versions: the copay program for commercial insurance, and "other ways to get help" for government insurance or none (ENG-11). It stops at the first fill or a canceled prescription.
-- **Discontinuation risk** offers the nurse line on day 10 of treatment (`first_month`) and texts twice when a refill is 7 days late (`late_refill`), stopping at the refill or discontinuation.
+- **Discontinuation risk** offers the nurse line on day 10 of treatment (`first_month`) and texts 7 and 14 days after a refill falls due (`late_refill`), stopping at the refill or discontinuation.
 - **Refill reminders** go 3 days before each fill runs out, to patients who chose them.
 - **Blood test reminders** go 7 days before each scheduled blood count, 91 days after the first fill and every 182 days after that (label 2.4), to patients who chose them, until treatment is discontinued. The baseline tests come before the Start Form, so there is no reminder for them. The program never sees lab results, so the reminders follow the schedule. Comparing them with `lab-results.json`, whose `overdue_at_as_of` and `missed_previous_scheduled_cbc` patterns mark counts that were never done, shows which overdue patients were reminded and which could not be texted.
 
 No text names the product, the condition, a dose, a symptom or anything from the case, and no campaign asks anyone to start, continue or restart treatment (ENG-08, ENG-10).
 
-**What the validator recomputes.** From each patient's record, fills and inbound keywords alone, it works out every text that was due, every membership with its exit, and the reason any other text should not have gone. Each deliberate breach in the logs is flagged with the rule it breaks:
+### What the validator recomputes
+
+From each patient's record, fills and inbound keywords alone, it works out every text that was due, every membership with its exit, and the reason any other text should not have gone. Each deliberate breach in the logs is flagged with the rule it breaks:
 - a text to a minor or in the wrong language;
 - a campaign text with no opt-in, or after STOP;
 - a refill or blood test reminder without the reminder choice;
-- a never-start text after the first fill;
+- a step sent after its situation ended: a never-start text after the first fill or a canceled prescription, or a refill or discontinuation-risk text after the next fill or after treatment stopped;
 - a text sent at night;
 - the copay text sent to an uninsured patient;
-- a step sent three times in three days.
+- a campaign step sent again after it had already gone out;
+- a third campaign text within 7 days (ENG-06).
 
 The HCP side works the same way: approved emails to prescribers without consent, after an unsubscribe, to a retired prescriber or outside the representative's territory are flagged, and opens and clicks from privacy proxies and security scanners are marked as machine activity (ENG-13). Portal sessions flag bots, a shared login, a deactivated prescriber signing in, and a gated page served to an anonymous visitor.
 
@@ -315,13 +342,13 @@ Replies that mention a side effect are not in the generated logs. Free text in t
 
 ## Payer transactions
 
-`payer/` gives each case the payer-side history that produced its statuses. Every plan shipment that left the pharmacy has a paid claim for its package's NDC and quantity. Bridge and Foundation shipments are never billed to a plan. Copay program claims add up to each case's `copay.used_ytd`. Benefit checks, prior authorization requests, decisions and appeals fall on the case's dates. The formulary position explains each status. Northumber and Harborline plans require prior authorization for new starts only, so continuing patients go straight through. The Part D plan for case QC-26-00113 requires it for everyone, and a 2025 authorization is on file.
+`payer/` gives each case the payer-side history that produced its statuses. Every plan shipment that left the pharmacy has a paid claim for its package's NDC and quantity. Bridge and Foundation shipments are never billed to a plan. Copay program claims add up to each case's `copay.used_ytd`. Benefit checks, prior authorization requests, decisions and appeals fall on the case's dates, and each case's status follows from its plan's formulary position. The Northumber commercial plan and the three Harborline Marketplace plans require prior authorization for new starts only, so continuing patients go straight through. The Northumber Medicare Part D plan, the Cairnwell HMO (which also requires step therapy for new starts) and the Lakeshore Medicaid plan require it for every patient; case QC-26-00113, on the Part D plan, has a 2025 authorization on file.
 
 There is no price for QUORVANTA in the pack (PGAP-09), so claims carry patient amounts only. Reject codes are the pack's own (`RJ-*`) and describe, without reproducing, the industry telecommunication standard's codes, whose code lists are licensed. The FHIR formulary follows the structure of the HL7 US Drug Formulary guide (STU2) but has not been validated against it. It breaks one requirement on purpose: an invented drug has no RxNorm code, so it is coded with a pack-local code system and its NDCs.
 
 ## Field force and CRM
 
-`crm/` is a small commercial organization: territories, representatives, managers and MSLs, accounts, and prescribers linked both ways to the cases they treat (`prescriber_id`). The call log records what each representative showed and said, using promotional piece and claim ids, and what they routed to Medical Information and Drug Safety. The validator applies the field rules (FR-01 to FR-08) to every call. A call record may break a rule only if it declares the breach in `deviations`, which makes it a test case. `CALL-0029` forwards an adverse event late (`CF-03`), and that feeds `AEI-006`.
+`crm/` is a small commercial organization: territories, representatives, managers and MSLs, accounts, and prescribers linked both ways to the cases they treat (`hcps[].case_ids` in `field-force.json` and `prescriber_id` on each case). The call log records what each representative showed and said, using promotional piece and claim ids, and what they routed to Medical Information and Drug Safety. The validator applies the field rules (FR-01 to FR-08) to every call. A call record may break a rule only if it declares the breach in `deviations`, which makes it a test case. `CALL-0029` forwards an adverse event late (`CF-03`), and that feeds `AEI-006`.
 
 `crm-notes.json` labels free-text call notes and emails for judge calibration. An email passes only if it matches its approved template exactly. Call notes are checked against the field rules and the claims, and wrong claims carry the HCP fault ids.
 
@@ -338,11 +365,11 @@ There is no price for QUORVANTA in the pack (PGAP-09), so claims carry patient a
 
 ## Channel and serialization
 
-`channel/` follows every bottle that was at a network pharmacy between 2026-07-01 and 2026-09-22. The contract packager commissions each serial with its lot and expiry, packs it and ships it to the 3PL. The 3PL packs cases and ships them to the pharmacies, which own the product once they receive it. The pharmacies dispense, and the rare damaged or expired bottle is destroyed. The events are serial-level EPCIS 2.0. The 867 dispense feed and the 852 inventory feed are what a limited-distribution manufacturer would receive, and every figure in them can be recomputed from the events. Every case shipment in the window is a dispense record, at the pharmacy that billed it (payer claims) or at SP-04 for bridge and Foundation supply. Anonymous patients from a fixed seed make up the rest of each pharmacy's volume.
+`channel/` follows every bottle that was at a network pharmacy between 2026-07-01 and 2026-09-22. The contract packager commissions each serial with its lot and expiration date, packs it and ships it to the 3PL. The 3PL packs cases and ships them to the pharmacies, which own the product once they receive it. The pharmacies dispense, and the rare damaged or expired bottle is destroyed. Every one of those steps is a serial-level EPCIS 2.0 event, and the 867 dispense feed and the 852 inventory feed are what a limited-distribution manufacturer would receive, and every figure in them can be recomputed from the events. Every case shipment in the window is a dispense record, at the pharmacy that billed it (payer claims) or at SP-04 for bridge and Foundation supply. Anonymous patients from a fixed seed make up the rest of each pharmacy's volume.
 
 Lot numbers are `QV` or `QS`, a two-digit year, a month letter and a three-digit sequence, and each lot expires at the end of the 24th month after manufacture. A first fill is one starter bottle (28 starting-dose capsules and 64 maintenance capsules); later fills are bottles of 120. QUORVANTA is dispensed only in its original container, so there are no partial fills.
 
-The manufacturer's GS1 company prefix, 0300000, is the one inside the product GTINs. Every other party's prefix is in the GS1 range reserved for restricted circulation, which is never issued, and GLNs and SSCCs carry correct check digits. The 867 and 852 layouts are the pack's own. They carry the content of those X12 transactions, but not the X12 syntax, whose standards are licensed. Built into the data:
+The manufacturer's GS1 company prefix, 0300000, is the one inside the product GTINs. Every other party's prefix is in the GS1 range reserved for restricted circulation, which is never issued, and GLNs and SSCCs carry correct check digits. The 867 and 852 layouts are the pack's own. They carry the content of those X12 transactions, but not the X12 syntax, whose standards are licensed. The data includes four anomalies:
 
 - **Damaged in transit.** One bottle of lot QV26G032 arrives damaged at Cairnwell Specialty. It is inspected, destroyed a week later and shown as a September adjustment.
 - **Expired stock.** Halverson Health holds two bottles of QV24H009, which expired on 2026-08-31. They are marked expired on 2026-09-01 and destroyed on 2026-09-15; they must never be dispensed.
@@ -350,7 +377,7 @@ The manufacturer's GS1 company prefix, 0300000, is the one inside the product GT
 - **A suspect lot.** The lot QS26G099 that a caller reads out (PSC-026, AEI-009) was never commissioned. The case's EPCIS history shows that bottle was dispensed from QS26G015.
 
 **Mock recall drills.** `test-design/scenarios/mock-recall.json` holds two patient-level recall exercises. Each has an answer key that the validator recomputes from the events, the 867 feed, the shipments, the case records and the paid claims. No lot has actually been recalled.
-- **QV26G032** is fully serialized: all 64 bottles went to the five pharmacies. The trace has to count the bottle destroyed at Cairnwell as accounted for. It has to quarantine the bottle allocated to QC-26-00118 and arrange a resupply, without counting that bottle as an exposure. And it has to reach the 43 anonymous patients through their pharmacies, which hold the tokens.
+- **QV26G032** is fully serialized: all 64 bottles went to the five pharmacies. A correct trace counts the bottle destroyed at Cairnwell as accounted for, quarantines the bottle allocated to QC-26-00118 and arranges a resupply without counting it as an exposure, and reaches the 43 anonymous patients through their pharmacies, which hold the tokens.
 - **QV26D029** was dispensed entirely before the channel data begins, so EPCIS and the 867 feed hold none of it. The 18 hub-case fills come from the case records, with each pharmacy taken from the paid claim. Every pharmacy that dispensed the lot has to search its own records for other patients and stock.
 
 Six RF-* faults score candidate traces: a missed patient, the data window taken as complete, stock left unquarantined, a misclassified bottle, the wrong lot, and anonymous patients contacted directly. The drill's draft pharmacy notice, patient letter and case-manager script are marked as drill material. They are not approved content, and neither bot may use them.
@@ -364,11 +391,10 @@ Six RF-* faults score candidate traces: a missed patient, the data window taken 
 - a product data elements section and a principal display panel for each bottle.
 
 The validator fails if the SPL differs from a fresh render of the label.
-- **NDC forms.** The label, claim SUP-004, the promotional text and the bottle labels print the 10-digit NDCs (00000-190-01 and 00000-190-02), as the SPL and the GTINs do.
-- **Billing data.** Payer claims, the 867 feed and the FHIR formulary use the 11-digit billing form (00000-0190-01).
-- **MedWatch.** The adverse reactions highlight gives both Arden Quay's Drug Safety line and FDA MedWatch.
 
-The SPL would still not pass FDA's own validation, on purpose. An invented substance has no UNII and an invented labeler has no DUNS, so ingredient codes and the labeler id use a pack-local OID. The application number is NDA000000.
+The label, claim SUP-004, the promotional text and the bottle labels print the 10-digit NDCs (00000-190-01 and 00000-190-02), as the SPL and the GTINs do, while payer claims, the 867 feed and the FHIR formulary carry the 11-digit billing form (00000-0190-01); the validator fails if labeling prints the billing form. The adverse reactions highlight gives Arden Quay's Drug Safety line and FDA's MedWatch number, 1-800-FDA-1088.
+
+The SPL would not pass FDA's own validation, on purpose: an invented substance has no UNII and an invented labeler has no DUNS, so ingredient codes and the labeler id use a pack-local OID, and the application number is NDA000000.
 
 ## Generated population
 
@@ -382,17 +408,19 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 .venv/bin/python scripts/generate_population.py --list
 ```
 
-The default sizes are 150 offices, 600 HCPs, 250 office staff, 20 QuorvantaConnect case managers (with 16 more nurses, intake coordinators and supervisors), 500 patients, 60 labs, lab results for 400 patients on treatment, and 450 medical information requests (a few more once repeats and flagged examples are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream. Regenerating one entity alone leaves the others' output unchanged. If anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
+The default sizes are 150 offices, 600 HCPs, 250 office staff, 20 QuorvantaConnect case managers (with 16 more nurses, intake coordinators and supervisors), 500 patients, 60 labs, lab results for up to 400 patients who started treatment (381 at the default sizes, including some who have since stopped), and 450 medical information requests (a few more once repeats and flagged examples are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream, so regenerating one entity alone leaves the others' output unchanged; if anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
 
 The generator keeps to the pack's fiction:
-- names pair a Faker first name with a double-barreled surname drawn from fifteen locales. A generated record shares a core cast member's name only where its `patterns` say why, and the validator fails any other match;
+- names pair a Faker first name with a hyphenated surname drawn from fifteen locales. A generated record shares a core cast member's name only where its `patterns` say why, and the validator fails any other match;
 - practice names are built from invented place-words;
 - cities are Faker inventions, with real state codes and ZIP codes;
 - phones are 555-01xx, emails and domains are `.example`, NPIs start with 91 (the core cast uses 90), and lab CLIA numbers start with 99D, a state code that is never issued.
 
-Generated records are context and volume, never answer keys. Patients have identities, insurance, a prescriber, a treatment start and stop date, the Start Form choices that texting depends on, and a fill history in `refills.json`, but no claims, lots or serial numbers; only the 29 hand-built cases have those. About one enrolled patient in ten has no first fill, with a reason recorded, and a few of those had the prescription canceled.
+Generated records supply context and volume and carry no answer keys. Patients have identities, insurance, a prescriber, a case manager (`case_manager_id`), a treatment start and stop date, the Start Form choices that texting depends on, and a fill history in `refills.json`, whose `patterns` mark late fills (`late_fill`) and patients lapsed on the as-of date (`lapsed_at_as_of`). They have no claims, lots or serial numbers; only the 29 hand-built cases have those. About one enrolled patient in ten has no first fill, with a reason recorded, and a few of those had the prescription canceled.
 
-**Monitoring results** follow the label.
+### Monitoring results
+
+Monitoring results follow the label.
 - **Schedule.** A baseline blood count, liver tests and renal function before starting (2.1). A blood count at 3 months and every 6 months after that (2.4). Liver tests when clinically indicated. Blood counts until recovery for patients who stopped because of lymphopenia (5.4).
 - **Values.** Test codes are LOINC codes, checked against the NLM's LOINC search. Lymphocyte counts fall by about a quarter over the first year, as in 5.4. eGFR is calculated from creatinine, age and sex by the CKD-EPI 2021 equation, and the validator recalculates it.
 - **Patterns.** Clinically meaningful situations are marked in `patterns`, separately from data problems. The validator re-derives every one of them from the values:
@@ -400,39 +428,55 @@ Generated records are context and volume, never answer keys. Patients have ident
   - prolonged severe lymphopenia (the 5.4 point at which interruption should be considered);
   - liver test raised to more than 3 times normal, and one liver-injury signal (5.5);
   - moderate kidney impairment at baseline (8.6);
-  - missed and overdue scheduled counts.
+  - missed and overdue scheduled counts;
+  - follow-up counts after discontinuation;
+  - severe kidney impairment at baseline, which the legend defines but no record carries at the default sizes.
 - **Data problems.** A count reported in the wrong unit, duplicate transmissions, a canceled hemolyzed specimen, and results from a lab whose certificate had lapsed.
 
-**Scenarios built on the results.** A few labeled scenarios start from a generated patient whose results carry a pattern. They name the records in `population_refs`, and the validator checks that the records still exist, belong together, carry the pattern and match the values the scenario quotes, so regenerating the population flags any scenario it breaks:
+### Scenarios built on the results
+
+A few labeled scenarios start from a generated patient whose results carry a pattern. They name the records in `population_refs`, and the validator checks that the records still exist, belong together, carry the pattern and match the values the scenario quotes, so regenerating the population flags any scenario it breaks:
 - HIN-041, a nurse practitioner asking whether to start a patient with a baseline lymphocyte count of 0.66 (GAP-08);
 - PSC-033 and AEI-023, a patient on the assistant with prolonged severe lymphopenia, which is an adverse event to hand off as well as a medical question;
 - AEI-024, a prescriber reporting in September 2026 a liver injury with jaundice from November 2024. Day 0 is the call, not the event, and the hepatic failure the reporter rules out must not be coded.
 
-**QuorvantaConnect staff and second roles.** `qc-staff.json` is the support program's roster: case managers, nurses, intake coordinators and supervisors, each with a supervisor, queues, languages and an Eastern Time shift inside program hours. The validator checks that every program hour has a case manager, a nurse and a Spanish-speaking case manager. The four case managers the hand-built cases name are on the roster, marked `core_cast_member`; they are the same people, and the validator checks that each is active and, for the Spanish-language case, speaks Spanish. Every enrolled patient has a case manager, Spanish-speaking for Spanish-language patients. Two case managers have left, and the patients still assigned to them are flagged.
+### QuorvantaConnect staff and second roles
 
-People can hold more than one role, and `patterns` on the patient record says so:
+`qc-staff.json` is the support program's roster: case managers, nurses, intake coordinators and supervisors, each with queues, languages and an Eastern Time shift inside program hours, and each with a supervisor except the supervisors themselves. The validator checks that every program hour has a case manager, a nurse and a Spanish-speaking case manager. The four case managers the hand-built cases name are on the roster, matched by name to `case_manager` in `ps-cases.json` and marked `core_cast_member`; they are the same people, and the validator checks that each is active and, for the Spanish-language case, speaks Spanish. Every enrolled patient has a case manager in `case_manager_id`, Spanish-speaking for Spanish-language patients. Two case managers have left, and the patients still assigned to them are flagged.
+
+People can hold more than one role, which matching and privacy tools have to handle, and `patterns` on the patient record says so. Each entry is an object with a `type` and, where it points at another record, an `of`, the same shape `quality_flags` uses:
 - three staff members who are also patients (`also_staff`), none of them their own case manager;
 - two prescribers who are also patients (`also_prescriber`), each with a different prescriber in the state where they practice;
 - two patients who share a name with a hand-built case patient but are different people (`namesake_of_core`), with a different date of birth and ZIP code.
 
-These give matching and privacy tools real cases: an employee's own case in the queue, a clinician on both sides of a prescription, and a caller whose name matches a case but whose details do not.
+### Data problems
 
-Each file lists deliberate data problems in `quality_flags`, with a legend in the file's header, so a matching or cleansing tool can be scored against them:
-- duplicate records with name variants (a duplicate HCP shares its original's NPI);
-- clinicians who moved practice;
-- deactivated NPIs, and retired prescribers still in a call plan;
-- closed offices, and staff who have left but are still listed;
-- patients who share a name, or a name and date of birth;
-- a few minors, whom the program cannot serve.
+Each file lists deliberate data problems in `quality_flags`, with a legend in the file's header, so a matching or cleansing tool can be scored against them. Duplicate records carry name variants, and a duplicate HCP shares its original's NPI.
 
-**Medical information requests** are unsolicited questions from generated prescribers, received by phone, email, the web form or a representative's submission, from January 2026 to the as-of date. Each carries a topic code, and the topic catalog in the file's header says how Medical Information answers it: with one of the 18 SRDs, with a label section, with a custom response, or by referral to QuorvantaConnect, Quality or another manufacturer. The questions are general and never report an adverse event or special situation. Responses are due within two business days on the Drug Safety business calendar. The validator recomputes:
+| File | Flags |
+| --- | --- |
+| `offices.json` | `duplicate`, `closed` |
+| `hcps.json` | `duplicate`, `moved`, `npi_deactivated`, `retired_still_targeted` |
+| `office-staff.json` | `duplicate`, `departed`, and `multi_office`, which marks a person on two offices' staff and is not an error |
+| `patients.json` | `duplicate`, `same_name`, `same_name_and_dob`, `moved`, `minor` (whom the program cannot serve), `assigned_to_departed_staff` |
+| `labs.json` | `duplicate`, `certificate_lapsed` |
+| `lab-results.json` | `duplicate`, `unit_mismatch`, `canceled_specimen`, `lab_certificate_lapsed` |
+| `refills.json` | `duplicate` |
+| `mi-requests.json` | `late_response`, `rep_submitted_late`, `logged_to_duplicate` |
+| `sms-messages.json`, `hcp-emails.json`, `portal-sessions.json` | The rule breaches listed in [Engagement and outreach](#engagement-and-outreach) |
+
+### Medical information requests
+
+Medical information requests are unsolicited questions from generated prescribers, received by phone, email, the web form or a representative's submission, from January 2026 to the as-of date. Each carries a topic code, and the topic catalog in the file's header says how Medical Information answers it: with one of the 18 SRDs, with a label section, with a custom response, or by referral to QuorvantaConnect, Quality or another manufacturer. The questions are general and never report an adverse event or special situation. Responses are due within two business days on the Drug Safety business calendar. The validator recomputes:
 - every turnaround in business days;
 - the late responses;
 - representative submissions made after the day the prescriber asked (the field rule behind CF-02);
 - requests logged against a duplicate prescriber record;
 - the repeat-request pattern, the same prescriber asking about the same topic within 30 days.
 
-**Adding an entity type** (participating labs, for example) means adding one module to `scripts/population/entities/`. The module names its id prefix, what it requires, which fields reference other entities and which copied fields must agree with them. The `scripts/population/core.py` docstring has a template. The validator needs no change: it reads each file's header and checks ids, references, copied fields, flags, NPIs, emails, dates of birth and phone numbers.
+### Adding an entity type
+
+An entity type, such as the speaker programs in `BACKLOG.md`, is one module in `scripts/population/entities/`. The module names its id prefix, what it requires, which fields reference other entities, which copied fields must agree with them, and the legends for its `flags` and `patterns`. The `scripts/population/core.py` docstring has a template. The validator needs no change: it reads each file's header and checks ids, references, copied fields, flags, NPIs, emails, dates of birth and phone numbers.
 
 ## Tooling
 
@@ -443,22 +487,26 @@ python3 scripts/validate.py                  # every integrity check; exits non-
 python3 scripts/render.py                    # program-terms.md, product-identifiers.md, formulary-fhir.json, label-spl.xml
 python3 scripts/build_channel.py             # everything in channel/, from the cases, payer claims, lots and CRM
 .venv/bin/python scripts/generate_population.py   # everything in population/
+python3 scripts/extract_names.py             # rewrites scripts/names-to-check.csv; takes no options
+python3 scripts/namecheck.py --limit 90      # web search per invented name; needs search API credentials
+git config core.hooksPath scripts/git-hooks  # once per clone: run the validator before every commit
 ```
 
-Run the validator after any change. It checks that ids resolve and links run both ways, that every copy of approved wording is verbatim, that the arithmetic in the cases, payer claims and channel feeds reproduces, that each scenario's expected answer follows from the source data, that generated files match a fresh render, that the counts in this README match the data, and that every phone number, domain, identifier and file notice stays inside the fiction. When a figure changes, change it in the label first, then everywhere it is repeated, then re-run the generators.
+Run the validator after any change. It checks that ids resolve and links run both ways, that every copy of approved wording is verbatim, that the arithmetic in the cases, payer claims and channel feeds reproduces, that each scenario's expected answer follows from the source data, that the rendered files match a fresh render and the channel and population data agree with the records they are built from, that the counts in this README match the data, and that every phone number, domain, identifier and file notice stays inside the fiction. When a figure changes, change it in the label first, then everywhere it is repeated, then re-run the generators.
 
 ## Future expansion
 
 `BACKLOG.md` at the repository root holds the full list. In short:
 
-- **More generated entities.** Speaker programs and Open Payments, and market prescription volume.
+- **More generated entities.** Speaker programs and Open Payments, market prescription volume, and payers at volume.
 - **Outreach scenarios.** Labeled text replies, including side-effect mentions that must reach Drug Safety, and labeled campaign-audience decisions, with a fault family of their own.
 - **Scenarios on existing data.** A periodic safety report built from the intake cases.
-- **Documents.** Filled letters and forms for document-AI testing, generated on demand from a committed manifest rather than stored as PDFs.
-- **Complete patient journeys** for generated patients, through payer and channel data.
-- **Pricing and gross-to-net.** List price, rebates, chargebacks, Medicaid rebates and 340B. The pack has no approved price by design, so adding one would be a design change as well as new data.
 - **Label history.** A v1.1 safety update with retired claims, to test bots answering from superseded content.
-- **Other languages and markets.** The pack is US English only. The Spanish-language case (QC-26-00114) is the only step beyond that.
+- **Documents.** Filled letters and forms for document-AI testing, generated on demand from a committed manifest rather than stored as PDFs.
+- **Master data management.** Several source systems per person, golden records with crosswalks, and survivorship rules the validator can recompute.
+- **Complete patient journeys** for generated patients, through payer and channel data.
+
+Pricing and gross-to-net, other languages and markets, and free-text corpora are deferred on purpose; `BACKLOG.md` explains why.
 
 ## License
 

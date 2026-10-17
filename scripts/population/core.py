@@ -1,27 +1,30 @@
 """Registry, fiction-safe helpers and writer for the generated population.
 
-To add an entity type (labs, say), create scripts/population/entities/labs.py:
+To add an entity type (speaker programs, say), create
+scripts/population/entities/speaker_programs.py:
 
     from population.core import Entity, register
 
     @register
-    class Labs(Entity):
-        name = "labs"                    # the --entity value
-        id_prefix = "PLAB"               # record ids are PLAB-00001, PLAB-00002, ...
+    class SpeakerPrograms(Entity):
+        name = "speaker-programs"        # the --entity value
+        id_prefix = "PSPK"               # record ids are PSPK-00001, PSPK-00002, ...
         default_count = 100
-        requires = ("offices",)          # entities whose records this one references
-        references = {"office_ids[]": "offices"}   # field -> entity; [] marks a list
-        must_match = {"state": ["office_ids[]", "state"]}   # optional: copied fields that must agree
+        requires = ("hcps",)             # entities whose records this one references
+        references = {"speaker_id": "hcps", "attendee_ids[]": "hcps"}   # field -> entity; [] marks a list
+        must_match = {"speaker_npi": ["speaker_id", "npi"]}   # optional: copied fields that must agree
         notice = "FICTITIOUS. ..."
         usage = "..."
+        flags = {"over_cap": "..."}      # quality_flags legend: data problems
+        patterns = {"repeat_attendee": "..."}   # patterns legend: situations that are not errors
 
         def generate(self, ctx, count):
-            offices = ctx.records("offices")
+            hcps = ctx.records("hcps")
             return [{"id": self.make_id(i), ...} for i in range(count)]
 
 It is picked up automatically. The validator reads each file's header and checks
-ids, declared references, must_match fields, quality flags, NPIs, emails, dates
-of birth and phones without any change there.
+ids, declared references, must_match fields, flag and pattern legends, NPIs,
+emails, dates of birth and phones without any change there.
 """
 
 import json

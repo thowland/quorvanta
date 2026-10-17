@@ -727,6 +727,7 @@ def gtin14(ndc11):
 
 def check_product(claims):
     from datetime import date, timedelta
+    import render
     doc = load("product/product-identifiers.json")
     as_of = date.fromisoformat(doc["as_of"])
     packages = {p["id"]: p for p in doc["packages"]}
@@ -738,9 +739,16 @@ def check_product(claims):
             fail(f"{pid}: NDC {p['ndc']} does not use the unassigned 00000 labeler")
         if p["gtin"] != gtin14(p["ndc"]):
             fail(f"{pid}: GTIN {p['gtin']} should be {gtin14(p['ndc'])}")
-        for where, body in (("label/label.md", label), ("claim SUP-004", sup004), ("product-identifiers.md", md)):
-            if p["ndc"] not in body:
-                fail(f"{where}: NDC {p['ndc']} missing")
+        # Billing data carries the 11-digit NDC; the label, its claim and the bottle print the 10-digit form.
+        ten = render.ndc10(p["ndc"])
+        bottle = "\n".join(doc["bottle_label_text"].get(pid, []))
+        for where, body, ndc in (("label/label.md", label, ten), ("claim SUP-004", sup004, ten),
+                                 (f"{pid} bottle label", bottle, ten), ("product-identifiers.md", md, p["ndc"])):
+            if ndc not in body:
+                fail(f"{where}: NDC {ndc} missing")
+        for where, body in (("label/label.md", label), ("claim SUP-004", sup004), (f"{pid} bottle label", bottle)):
+            if p["ndc"] in body:
+                fail(f"{where}: prints the 11-digit NDC {p['ndc']}; labeling uses {ten}")
     lots = {}
     for lot in doc["lots"]:
         lid = lot["lot"]

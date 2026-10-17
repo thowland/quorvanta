@@ -18,7 +18,7 @@
 
 **Adverse reactions.** Most common adverse reactions (incidence for dimethyl tavorate, which has the same active metabolite as QUORVANTA, ≥10% and ≥2% more than placebo): flushing, abdominal pain, diarrhea, nausea and headache. (6.1)
 
-To report SUSPECTED ADVERSE REACTIONS, contact Arden Quay Biosciences Drug Safety at 1-800-555-0142.
+To report SUSPECTED ADVERSE REACTIONS, contact Arden Quay Biosciences Drug Safety at 1-800-555-0142 or FDA at 1-800-FDA-1088.
 
 **Specific populations.** Pregnancy: based on animal data, may cause fetal harm (8.1). Not recommended in moderate or severe renal impairment (8.6).
 
@@ -269,8 +269,8 @@ In both studies the three-times-daily dose showed no additional benefit over the
 
 QUORVANTA 190 mg delayed-release capsules are hard capsules with a light blue cap and a white body, printed "ST 190" in black ink. They are supplied as:
 
-- Bottles of 120 capsules: NDC 00000-0190-01
-- 30-day starter bottles of 92 capsules, labeled for the 14-day starting dosage followed by the maintenance dosage: NDC 00000-0190-02
+- Bottles of 120 capsules: NDC 00000-190-01
+- 30-day starter bottles of 92 capsules, labeled for the 14-day starting dosage followed by the maintenance dosage: NDC 00000-190-02
 
 Store at 20°C to 25°C (68°F to 77°F); excursions permitted to 15°C to 30°C (59°F to 86°F). Dispense in the original container. Do not remove the desiccant.
 

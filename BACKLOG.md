@@ -1,15 +1,6 @@
 # Backlog
 
-Ideas for extending the QUORVANTA pack, with open decisions and release tasks. Nothing here is part of the dataset. Items are roughly in the order they would pay off, and most extend a thread that already exists, so the validator can check the new data against it.
-
-## Release tasks
-
-These are needed before the repository is public.
-
-- **Denylist.** Assemble a real-names list outside the repository and run `python3 scripts/validate.py --denylist <file>`. Set `$QUORVANTA_DENYLIST` so the pre-commit hook uses it.
-- **Label decisions.** Two points need a decision (see sources/README.md, "Machine-readable label"):
-  - whether to add the MedWatch line to the adverse reactions highlight;
-  - whether section 16 should print 10-digit NDCs, which would also change claim SUP-004.
+Ideas for extending the QUORVANTA pack. Nothing here is part of the dataset. Items are roughly in the order they would pay off, and most extend a thread that already exists, so the validator can check the new data against it.
 
 ## Generated population: new entity types
 

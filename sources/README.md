@@ -96,7 +96,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `payer/plans.json` | 15 plans on 12 formularies, with processors (BIN, PCN), QUORVANTA's tier, prior authorization (none, new starts only, or all), step therapy and quantity limits, PA criteria and the pack's own reject codes | Benefits and PA tooling; context for patient services |
 | `payer/transactions.json` | 28 coverage records and 223 payer transactions (benefit checks, pharmacy claims and rejections, copay program claims, PA requests, decisions and appeals, a network exception) reproducing every case's history | Payer, hub and claims tooling |
 | `payer/formulary-fhir.json` | The formularies as a FHIR R4 Bundle shaped after the HL7 US Drug Formulary guide. *Generated* | FHIR formulary consumers |
-| `product/product-identifiers.json`, `product/product-identifiers.md` | Two packages (bottle of 120, NDC 00000-0190-01; 30-day starter bottle of 92, NDC 00000-0190-02) with GTIN-14s, bottle label text, lot and expiry formats, and a register of 49 lots. The Markdown is *generated* | Source for claim SUP-004, case shipments and product-complaint scenarios |
+| `product/product-identifiers.json`, `product/product-identifiers.md` | Two packages (bottle of 120, NDC 00000-0190-01; 30-day starter bottle of 92, NDC 00000-0190-02, in the 11-digit billing form) with GTIN-14s, bottle label text, lot and expiry formats, and a register of 49 lots. The Markdown is *generated* | Source for claim SUP-004, case shipments and product-complaint scenarios |
 | `channel/trading-partners.json` | The manufacturer, contract packager, 3PL and the five pharmacies as trading partners, with GLNs and EPC URIs. *Generated* | Supply-chain and DSCSA tooling |
 | `channel/shipments.json` | 32 product shipments: packager to 3PL, and 3PL to pharmacy with DSCSA transaction information, history and statement, and no prices. *Generated* | DSCSA exchange and receiving checks |
 | `channel/epcis-events.json` | 365 EPCIS events covering 254 serial numbers: commissioning with lot and expiry, packing, shipping, receiving, dispensing, damage, expiry and destruction. *Generated* | EPCIS repositories and traceability tools |
@@ -130,7 +130,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 
 | Element | Name | Notes |
 | --- | --- | --- |
-| Brand | QUORVANTA | 190 mg delayed-release capsules; NDC 00000-0190-01 (120) and 00000-0190-02 (starter, 92) |
+| Brand | QUORVANTA | 190 mg delayed-release capsules; NDC 00000-190-01 (120) and 00000-190-02 (starter, 92), billed as 00000-0190-01 and 00000-0190-02 |
 | Generic | soriximel tavorate | Prodrug |
 | Predecessor | dimethyl tavorate (DMT) | Same active metabolite; source of nearly all clinical data |
 | Active metabolite | monomethyl tavorate (MMT) | |
@@ -363,11 +363,12 @@ Six RF-* faults score candidate traces: a missed patient, the data window taken 
 - the highlights as excerpts in their sections, with links to the subsections they cite;
 - a product data elements section and a principal display panel for each bottle.
 
-The validator fails if the SPL differs from a fresh render of the label. It would not pass FDA's own validation, for reasons that are deliberate or that belong to the label:
+The validator fails if the SPL differs from a fresh render of the label.
+- **NDC forms.** The label, claim SUP-004, the promotional text and the bottle labels print the 10-digit NDCs (00000-190-01 and 00000-190-02), as the SPL and the GTINs do.
+- **Billing data.** Payer claims, the 867 feed and the FHIR formulary use the 11-digit billing form (00000-0190-01).
+- **MedWatch.** The adverse reactions highlight gives both Arden Quay's Drug Safety line and FDA MedWatch.
 
-- **No UNII or DUNS.** An invented substance has no UNII and an invented labeler has no DUNS, so ingredient codes and the labeler id use a pack-local OID. The application number is NDA000000.
-- **NDC forms.** SPL needs 10-digit NDCs. The pack's 11-digit billing NDC 00000-0190-01 is 00000-190-01 in SPL, as it is inside the GTINs. The label's section 16 prints the 11-digit form, which a real label would not.
-- **No MedWatch line.** FDA requires the adverse reactions highlight to include the MedWatch number. `label.md` gives only Arden Quay's Drug Safety line, and the SPL follows the label.
+The SPL would still not pass FDA's own validation, on purpose. An invented substance has no UNII and an invented labeler has no DUNS, so ingredient codes and the labeler id use a pack-local OID. The application number is NDA000000.
 
 ## Generated population
 
@@ -448,7 +449,7 @@ Run the validator after any change. It checks that ids resolve and links run bot
 
 ## Future expansion
 
-`BACKLOG.md` at the repository root holds the full list, with release tasks and open decisions. In short:
+`BACKLOG.md` at the repository root holds the full list. In short:
 
 - **More generated entities.** Speaker programs and Open Payments, and market prescription volume.
 - **Outreach scenarios.** Labeled text replies, including side-effect mentions that must reach Drug Safety, and labeled campaign-audience decisions, with a fault family of their own.

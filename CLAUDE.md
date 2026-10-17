@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. It also serves as a test bed for adverse event intake, payer and benefits processing, and CRM and field-force compliance. The pack is being prepared for public release on GitHub under CC BY-SA 4.0 (content in `sources/` and the identity package in `assets/`) and GPL-3.0 (scripts). There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
+This is not software. It is a synthetic test dataset: an invented drug (QUORVANTA, soriximel tavorate), an invented disease (Brennick syndrome), an invented company (Arden Quay Biosciences), and the regulatory, promotional, medical, access, patient and press documents around them. The data is used to test a guardrailed HCP chatbot and a patient-services assistant for the support program (QuorvantaConnect) without touching a real product. It also serves as a test bed for adverse event intake, payer and benefits processing, and CRM and field-force compliance. The pack is public on GitHub under CC BY-SA 4.0 (content in `sources/` and the identity package in `assets/`) and GPL-3.0 (scripts). There is no build step; the tooling is in `scripts/` (see Commands). `sources/README.md` is the authoritative description of the pack, covering files, cast, test patterns, claim schema, timeline and fault types.
 
 ## Non-negotiable invariants
 
@@ -69,6 +69,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - Never join a disease fact to a product claim to imply a benefit (HF-16).
 
 **Product identifiers** (`product/product-identifiers.json`): two packages, the bottle of 120 (`PKG-120`) and the 30-day starter bottle of 92 (`PKG-STARTER`), with NDCs, GTINs, bottle label text and a lot register.
+- Data (`ndc`, payer claims, 867 records, the FHIR formulary) carries the 11-digit billing NDC, `00000-0190-01`. Labeling (label section 16, claim SUP-004, promotional text and the bottle labels) prints the 10-digit form, `00000-190-01`, as the SPL and the GTINs do. The validator enforces the split.
 - Lots are `QV`/`QS` + 2-digit year + month letter + 3-digit sequence, and expire at the end of the 24th month after manufacture.
 - Every case shipment names its package and, once shipped, its lot. The lot must exist, match the package, be made before shipping, and outlast the supply.
 - A first fill is one starter bottle (28 starting-dose capsules plus 64 maintenance capsules); later fills are bottles of 120. QUORVANTA is dispensed only in the original container, so partial fills are not possible.
@@ -113,7 +114,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - The validator is driven by each file's header (`id_prefix`, `references`, `must_match`, `quality_flags`), so a new entity type needs no validator change. Keep `scripts/validate.py` standard-library only.
 - Population records never carry scenarios or answer keys, and never reuse a core cast NPI. A generated record may share a core cast name only when its `patterns` declare it: `core_cast_member` (the same person, such as a core case manager on the staff roster) or `namesake_of_core` (a different person). Generators avoid core names unless they assign one on purpose, and the validator fails any undeclared match. People with two roles are linked from the patient record (`also_staff`, `also_prescriber`). Scenarios may point the other way: a scenario built on a generated patient names its records in `population_refs` and quotes their values, and the validator fails it if a regeneration changes them.
 - `patterns` (clinical or business situations) and `quality_flags` (data problems) are separate. The validator re-derives the lab-results patterns and eGFR from the values, so change the generator, not the output.
-- Deferred ideas and release tasks live in `BACKLOG.md`.
+- Deferred ideas live in `BACKLOG.md`.
 
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and the README; the validator enforces this.
 

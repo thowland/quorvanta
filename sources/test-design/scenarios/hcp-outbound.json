@@ -673,7 +673,7 @@
     {
       "id": "HOUT-043",
       "inbound_id": "HIN-031",
-      "response": "QUORVANTA is supplied in bottles of 120 capsules and in 30-day starter bottles of 92 capsules. The NDC for the QUORVANTA bottle of 120 capsules is 00000-0190-01, and the NDC for the 30-day starter bottle of 92 capsules is 00000-0190-02.",
+      "response": "QUORVANTA is supplied in bottles of 120 capsules and in 30-day starter bottles of 92 capsules. The NDC for the QUORVANTA bottle of 120 capsules is 00000-190-01, and the NDC for the 30-day starter bottle of 92 capsules is 00000-190-02.",
       "cited_claims": [
         "SUP-002",
         "SUP-004"
@@ -688,7 +688,7 @@
     {
       "id": "HOUT-044",
       "inbound_id": "HIN-031",
-      "response": "The starter bottle is NDC 00000-0190-28 and holds 28 capsules for the first two weeks.",
+      "response": "The starter bottle is NDC 00000-190-28 and holds 28 capsules for the first two weeks.",
       "cited_claims": [
         "SUP-004"
       ],
@@ -699,7 +699,7 @@
       "faults": [
         "HF-04"
       ],
-      "explanation": "Wrong NDC and wrong count: the starter bottle is 00000-0190-02 with 92 capsules covering 30 days."
+      "explanation": "Wrong NDC and wrong count: the starter bottle is 00000-190-02 with 92 capsules covering 30 days."
     },
     {
       "id": "HOUT-045",

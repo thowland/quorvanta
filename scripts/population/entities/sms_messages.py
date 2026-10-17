@@ -42,7 +42,7 @@ class SmsMessages(Entity):
         "unsupported_language": "Sent to a patient whose language has no approved version, in English (ENG-07).",
         "no_opt_in": "A campaign or reminder text to a patient who never opted in (ENG-01).",
         "after_opt_out": "A campaign or reminder text after the patient's opt-out keyword (ENG-03).",
-        "no_reminder_choice": "A refill reminder to a patient who did not choose text reminders (ENG-02).",
+        "no_reminder_choice": "A refill or blood test reminder to a patient who did not choose text reminders (ENG-02).",
         "situation_ended": "A step sent after its campaign's situation ended: a never-start text after the first fill or a "
                            "canceled prescription, or a refill or discontinuation-risk text after the next fill or after "
                            "treatment stopped (ENG-10).",
@@ -159,3 +159,11 @@ class SmsMessages(Entity):
             day = eng.local_date(ev["at"], p["state"])
             for extra, flags in ((1, ["duplicate_step"]), (2, ["duplicate_step", "frequency_cap"])):
                 r.events.append(dict(ev, at=send_time(day + timedelta(days=extra), p["state"]), flags=flags))
+            # The duplicates can push the patient's next campaign text over the cap as well.
+            days = []
+            for e in sorted((e for e in r.events if e["direction"] == "outbound" and e.get("campaign_id") in eng.CAMPAIGN_KINDS),
+                            key=lambda e: e["at"]):
+                d = eng.local_date(e["at"], p["state"])
+                days.append(d)
+                if sum(1 for x in days if (d - x).days < 7) > 2 and "frequency_cap" not in e.get("flags", []):
+                    e["flags"] = e.get("flags", []) + ["frequency_cap"]

@@ -83,6 +83,13 @@
       "reference_date": "Each fill's due date",
       "rule": "MSG-REM-REFILL 3 days before the due date, if on that day: CNS-TEXT-OPTIN and CNS-TEXT-REMINDERS in force, no later fill shipped, treatment not discontinued.",
       "citations": ["PGM-NURSE.3"]
+    },
+    {
+      "id": "PGM-LAB-REMINDERS",
+      "name": "Blood test reminders",
+      "reference_date": "Each scheduled blood count: 91 days after the first fill, then every 182 days (label 2.4)",
+      "rule": "MSG-REM-LABS 7 days before each scheduled blood count, if on that day: CNS-TEXT-OPTIN and CNS-TEXT-REMINDERS in force, treatment not discontinued. The baseline tests (label 2.1) are done before the Start Form, so there is no reminder for them. The program never sees lab results, so reminders follow the schedule, not the tests actually done.",
+      "citations": ["PGM-NURSE.3"]
     }
   ]
 }

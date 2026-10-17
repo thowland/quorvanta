@@ -12,7 +12,7 @@
       "text_reminders": true,
       "text_status_at_start": "opt_in",
       "started_on": "2026-03-20",
-      "notes": "Opted in before the log; refill reminders only, all on time."
+      "notes": "Opted in before the log; refill reminders and one blood test reminder, all on time."
     },
     {
       "case_id": "QC-26-00114",
@@ -83,6 +83,25 @@
       "id": "CSMS-001",
       "patient_id": "QC-26-00101",
       "direction": "outbound",
+      "at": "2026-06-12T14:00:00Z",
+      "message_id": "MSG-REM-LABS",
+      "language": "English",
+      "body": "QuorvantaConnect: A blood test on your treatment schedule is due in about a week. Please check with your healthcare provider's office about when and where. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-LAB-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-19",
+        "step": -7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-002",
+      "patient_id": "QC-26-00101",
+      "direction": "outbound",
       "at": "2026-06-15T14:05:00Z",
       "message_id": "MSG-REM-REFILL",
       "language": "English",
@@ -99,7 +118,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-002",
+      "id": "CSMS-003",
       "patient_id": "QC-26-00101",
       "direction": "outbound",
       "at": "2026-07-15T14:12:00Z",
@@ -118,7 +137,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-003",
+      "id": "CSMS-004",
       "patient_id": "QC-26-00101",
       "direction": "outbound",
       "at": "2026-08-14T22:40:00Z",
@@ -137,7 +156,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-004",
+      "id": "CSMS-005",
       "patient_id": "QC-26-00101",
       "direction": "outbound",
       "at": "2026-09-13T15:00:00Z",
@@ -156,7 +175,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-005",
+      "id": "CSMS-006",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-06-08T21:40:00Z",
@@ -175,7 +194,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-006",
+      "id": "CSMS-007",
       "patient_id": "QC-26-00103",
       "direction": "inbound",
       "at": "2026-06-08T22:03:00Z",
@@ -190,7 +209,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-007",
+      "id": "CSMS-008",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-06-08T22:03:40Z",
@@ -199,13 +218,13 @@
       "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-006",
+      "in_reply_to": "CSMS-007",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-008",
+      "id": "CSMS-009",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-06-25T15:00:00Z",
@@ -224,7 +243,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-009",
+      "id": "CSMS-010",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-08-21T14:30:00Z",
@@ -243,7 +262,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-010",
+      "id": "CSMS-011",
       "patient_id": "QC-26-00103",
       "direction": "inbound",
       "at": "2026-08-21T14:52:00Z",
@@ -258,7 +277,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-011",
+      "id": "CSMS-012",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-08-21T14:52:40Z",
@@ -267,13 +286,13 @@
       "body": "QuorvantaConnect: We can't answer texts here. A case manager will call you. If you think you're having a side effect, call Drug Safety at 1-800-555-0142. For an emergency, call 911.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-010",
+      "in_reply_to": "CSMS-011",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-012",
+      "id": "CSMS-013",
       "patient_id": "QC-26-00103",
       "direction": "outbound",
       "at": "2026-08-28T14:40:00Z",
@@ -292,7 +311,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-013",
+      "id": "CSMS-014",
       "patient_id": "QC-26-00112",
       "direction": "outbound",
       "at": "2026-06-11T19:00:00Z",
@@ -311,7 +330,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-014",
+      "id": "CSMS-015",
       "patient_id": "QC-26-00112",
       "direction": "outbound",
       "at": "2026-06-28T16:30:00Z",
@@ -330,7 +349,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-015",
+      "id": "CSMS-016",
       "patient_id": "QC-26-00112",
       "direction": "outbound",
       "at": "2026-07-28T16:10:00Z",
@@ -349,7 +368,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-016",
+      "id": "CSMS-017",
       "patient_id": "QC-26-00112",
       "direction": "inbound",
       "at": "2026-07-29T00:02:00Z",
@@ -364,7 +383,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-017",
+      "id": "CSMS-018",
       "patient_id": "QC-26-00112",
       "direction": "outbound",
       "at": "2026-07-29T00:02:40Z",
@@ -373,13 +392,13 @@
       "body": "QuorvantaConnect: You won't get any more texts from us. To stop all contact, call 1-800-555-0183. Reply START to sign up again.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-016",
+      "in_reply_to": "CSMS-017",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-018",
+      "id": "CSMS-019",
       "patient_id": "QC-26-00112",
       "direction": "outbound",
       "at": "2026-08-27T15:45:00Z",
@@ -402,7 +421,7 @@
       ]
     },
     {
-      "id": "CSMS-019",
+      "id": "CSMS-020",
       "patient_id": "QC-26-00114",
       "direction": "outbound",
       "at": "2026-06-09T17:30:00Z",
@@ -421,7 +440,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-020",
+      "id": "CSMS-021",
       "patient_id": "QC-26-00114",
       "direction": "inbound",
       "at": "2026-06-09T17:48:00Z",
@@ -436,7 +455,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-021",
+      "id": "CSMS-022",
       "patient_id": "QC-26-00114",
       "direction": "outbound",
       "at": "2026-06-09T17:48:40Z",
@@ -445,13 +464,32 @@
       "body": "QuorvantaConnect: No podemos responder mensajes aquí. Un administrador de casos lo llamará. Si cree que tiene un efecto secundario, llame a Seguridad de Medicamentos al 1-800-555-0142. En una emergencia, llame al 911.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-020",
+      "in_reply_to": "CSMS-021",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-022",
+      "id": "CSMS-023",
+      "patient_id": "QC-26-00114",
+      "direction": "outbound",
+      "at": "2026-07-06T15:30:00Z",
+      "message_id": "MSG-REM-LABS",
+      "language": "Spanish",
+      "body": "QuorvantaConnect: En aproximadamente una semana le toca un análisis de sangre de su calendario de tratamiento. Consulte con el consultorio de su proveedor de atención médica cuándo y dónde hacérselo. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar.",
+      "campaign_id": "PGM-LAB-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-07-13",
+        "step": -7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-024",
       "patient_id": "QC-26-00114",
       "direction": "outbound",
       "at": "2026-07-09T17:15:00Z",
@@ -470,7 +508,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-023",
+      "id": "CSMS-025",
       "patient_id": "QC-26-00114",
       "direction": "outbound",
       "at": "2026-08-08T14:50:00Z",
@@ -489,7 +527,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-024",
+      "id": "CSMS-026",
       "patient_id": "QC-26-00114",
       "direction": "outbound",
       "at": "2026-09-07T15:20:00Z",
@@ -508,7 +546,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-025",
+      "id": "CSMS-027",
       "patient_id": "QC-26-00119",
       "direction": "outbound",
       "at": "2026-06-18T19:10:00Z",
@@ -527,7 +565,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-026",
+      "id": "CSMS-028",
       "patient_id": "QC-26-00119",
       "direction": "inbound",
       "at": "2026-06-18T19:22:00Z",
@@ -542,7 +580,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-027",
+      "id": "CSMS-029",
       "patient_id": "QC-26-00119",
       "direction": "outbound",
       "at": "2026-06-18T19:22:40Z",
@@ -551,13 +589,13 @@
       "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-026",
+      "in_reply_to": "CSMS-028",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-028",
+      "id": "CSMS-030",
       "patient_id": "QC-26-00119",
       "direction": "outbound",
       "at": "2026-07-09T17:35:00Z",
@@ -576,7 +614,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-029",
+      "id": "CSMS-031",
       "patient_id": "QC-26-00119",
       "direction": "outbound",
       "at": "2026-09-04T15:15:00Z",
@@ -595,7 +633,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-030",
+      "id": "CSMS-032",
       "patient_id": "QC-26-00119",
       "direction": "outbound",
       "at": "2026-09-11T15:05:00Z",
@@ -614,7 +652,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-031",
+      "id": "CSMS-033",
       "patient_id": "QC-26-00120",
       "direction": "outbound",
       "at": "2026-09-01T17:20:00Z",
@@ -633,7 +671,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-032",
+      "id": "CSMS-034",
       "patient_id": "QC-26-00120",
       "direction": "inbound",
       "at": "2026-09-01T17:47:00Z",
@@ -648,7 +686,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-033",
+      "id": "CSMS-035",
       "patient_id": "QC-26-00120",
       "direction": "outbound",
       "at": "2026-09-01T17:47:40Z",
@@ -657,13 +695,13 @@
       "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-032",
+      "in_reply_to": "CSMS-034",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-034",
+      "id": "CSMS-036",
       "patient_id": "QC-26-00120",
       "direction": "outbound",
       "at": "2026-09-15T16:10:00Z",
@@ -682,7 +720,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-035",
+      "id": "CSMS-037",
       "patient_id": "QC-26-00120",
       "direction": "outbound",
       "at": "2026-09-22T16:30:00Z",
@@ -701,7 +739,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-036",
+      "id": "CSMS-038",
       "patient_id": "QC-26-00123",
       "direction": "outbound",
       "at": "2026-08-28T18:15:00Z",
@@ -720,7 +758,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-037",
+      "id": "CSMS-039",
       "patient_id": "QC-26-00123",
       "direction": "inbound",
       "at": "2026-08-28T18:31:00Z",
@@ -735,7 +773,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-038",
+      "id": "CSMS-040",
       "patient_id": "QC-26-00123",
       "direction": "outbound",
       "at": "2026-08-28T18:31:40Z",
@@ -744,13 +782,13 @@
       "body": "QuorvantaConnect: You're signed up for texts. Msg & data rates may apply. Reply HELP for help, STOP to cancel.",
       "campaign_id": null,
       "schedule": null,
-      "in_reply_to": "CSMS-037",
+      "in_reply_to": "CSMS-039",
       "keyword": null,
       "routed_to": null,
       "quality_flags": []
     },
     {
-      "id": "CSMS-039",
+      "id": "CSMS-041",
       "patient_id": "QC-26-00123",
       "direction": "outbound",
       "at": "2026-09-11T17:00:00Z",
@@ -769,7 +807,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-040",
+      "id": "CSMS-042",
       "patient_id": "QC-26-00123",
       "direction": "outbound",
       "at": "2026-09-18T17:20:00Z",
@@ -788,7 +826,26 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-041",
+      "id": "CSMS-043",
+      "patient_id": "QC-26-00124",
+      "direction": "outbound",
+      "at": "2026-06-08T16:00:00Z",
+      "message_id": "MSG-REM-LABS",
+      "language": "English",
+      "body": "QuorvantaConnect: A blood test on your treatment schedule is due in about a week. Please check with your healthcare provider's office about when and where. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+      "campaign_id": "PGM-LAB-REMINDERS",
+      "schedule": {
+        "track": null,
+        "day0": "2026-06-15",
+        "step": -7
+      },
+      "in_reply_to": null,
+      "keyword": null,
+      "routed_to": null,
+      "quality_flags": []
+    },
+    {
+      "id": "CSMS-044",
       "patient_id": "QC-26-00124",
       "direction": "outbound",
       "at": "2026-06-09T20:00:00Z",
@@ -807,7 +864,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-042",
+      "id": "CSMS-045",
       "patient_id": "QC-26-00124",
       "direction": "outbound",
       "at": "2026-07-09T20:10:00Z",
@@ -826,7 +883,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-043",
+      "id": "CSMS-046",
       "patient_id": "QC-26-00124",
       "direction": "outbound",
       "at": "2026-08-08T15:30:00Z",
@@ -845,7 +902,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-044",
+      "id": "CSMS-047",
       "patient_id": "QC-26-00124",
       "direction": "outbound",
       "at": "2026-09-07T15:25:00Z",
@@ -864,7 +921,7 @@
       "quality_flags": []
     },
     {
-      "id": "CSMS-045",
+      "id": "CSMS-048",
       "patient_id": "QC-26-00124",
       "direction": "outbound",
       "at": "2026-09-17T17:00:00Z",
@@ -894,7 +951,7 @@
       "exited_on": "2026-06-11",
       "exit_reason": "completed",
       "sends": [
-        "CSMS-013"
+        "CSMS-014"
       ],
       "quality_flags": []
     },
@@ -908,7 +965,7 @@
       "exited_on": "2026-06-18",
       "exit_reason": "opted_in",
       "sends": [
-        "CSMS-025"
+        "CSMS-027"
       ],
       "quality_flags": []
     },
@@ -922,7 +979,7 @@
       "exited_on": "2026-07-09",
       "exit_reason": "completed",
       "sends": [
-        "CSMS-028"
+        "CSMS-030"
       ],
       "quality_flags": []
     },
@@ -936,8 +993,8 @@
       "exited_on": "2026-09-11",
       "exit_reason": "completed",
       "sends": [
-        "CSMS-029",
-        "CSMS-030"
+        "CSMS-031",
+        "CSMS-032"
       ],
       "quality_flags": []
     },
@@ -951,7 +1008,7 @@
       "exited_on": "2026-06-08",
       "exit_reason": "opted_in",
       "sends": [
-        "CSMS-005"
+        "CSMS-006"
       ],
       "quality_flags": []
     },
@@ -965,7 +1022,7 @@
       "exited_on": "2026-06-25",
       "exit_reason": "completed",
       "sends": [
-        "CSMS-008"
+        "CSMS-009"
       ],
       "quality_flags": []
     },
@@ -979,8 +1036,8 @@
       "exited_on": "2026-08-28",
       "exit_reason": "completed",
       "sends": [
-        "CSMS-009",
-        "CSMS-012"
+        "CSMS-010",
+        "CSMS-013"
       ],
       "quality_flags": []
     },
@@ -994,7 +1051,7 @@
       "exited_on": null,
       "exit_reason": null,
       "sends": [
-        "CSMS-045"
+        "CSMS-048"
       ],
       "quality_flags": []
     },
@@ -1008,7 +1065,7 @@
       "exited_on": "2026-09-01",
       "exit_reason": "opted_in",
       "sends": [
-        "CSMS-031"
+        "CSMS-033"
       ],
       "quality_flags": []
     },
@@ -1022,8 +1079,8 @@
       "exited_on": null,
       "exit_reason": null,
       "sends": [
-        "CSMS-034",
-        "CSMS-035"
+        "CSMS-036",
+        "CSMS-037"
       ],
       "quality_flags": []
     },
@@ -1037,7 +1094,7 @@
       "exited_on": "2026-08-28",
       "exit_reason": "opted_in",
       "sends": [
-        "CSMS-036"
+        "CSMS-038"
       ],
       "quality_flags": []
     },
@@ -1051,8 +1108,8 @@
       "exited_on": null,
       "exit_reason": null,
       "sends": [
-        "CSMS-039",
-        "CSMS-040"
+        "CSMS-041",
+        "CSMS-042"
       ],
       "quality_flags": []
     }

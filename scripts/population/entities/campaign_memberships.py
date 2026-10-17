@@ -32,9 +32,9 @@ class CampaignMemberships(Entity):
             at = datetime.fromisoformat(m["at"].replace("Z", "+00:00"))
             if m["direction"] == "inbound":
                 inbound.setdefault(m["patient_id"], []).append((at, m["body"]))
-            elif m["schedule"] and {f["type"] for f in m["quality_flags"]} <= {"quiet_hours", "wrong_cost_version"}:
-                # Steps sent at the wrong hour or in the wrong version still belong to their membership;
-                # leaked and duplicate steps do not.
+            elif m["schedule"] and {f["type"] for f in m["quality_flags"]} <= {"quiet_hours", "wrong_cost_version", "frequency_cap"}:
+                # Steps sent at the wrong hour, in the wrong version or over the cap still belong to their
+                # membership; leaked and duplicate steps do not.
                 s = m["schedule"]
                 sent[(m["patient_id"], m["campaign_id"], s["track"], s["day0"], s["step"])] = (at, m["id"])
         out = []

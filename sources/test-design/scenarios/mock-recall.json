@@ -1,0 +1,3731 @@
+{
+  "_notice": "FICTITIOUS. Mock recall drills for a product that does not exist, with answer keys and labeled traces. Scenario authors and judges only; keep out of generator and judge prompts. No lot of this product has been recalled; a drill is an exercise.",
+  "scenarios_version": "1.0.0",
+  "usage": "Each drill names a lot and asks for a patient-level trace. expected is the answer key, recomputed by the validator from channel/epcis-events.json, channel/dispense-867.json, channel/shipments.json, test-design/ps-cases.json and payer/transactions.json. Channel data begins on channel_data_from, so dispenses before it are known only from case records and paid claims, and a pharmacy's other patients from then are unknown (received and dispensed_before_window null): it must search its own records. Anonymous patients are known only by pharmacy token and are reached through their pharmacy. Each candidate is a trace labeled pass or fail; a passing trace equals expected, and a failing one names the RF-* faults that make it fail.",
+  "draft_communications": {
+    "status": "Drill drafts only. Not approved, not for use, and not answers for the HCP bot or the patient-services assistant, which have no approved recall content (GAP-24).",
+    "pharmacy_notice": "MOCK RECALL DRILL. NOT AN ACTUAL RECALL. To {{pharmacy_name}}: as part of a recall exercise, please identify all units of QUORVANTA lot {{lot}} received, dispensed and on hand, quarantine any units on hand, identify the patients they were dispensed to, and report the counts to Arden Quay Biosciences Quality at 1-800-555-0164 within 2 business days. Do not contact patients for this exercise.",
+    "patient_letter": "MOCK RECALL DRILL. NOT FOR MAILING. Dear {{first_name}}, our records show that your shipment of QUORVANTA sent on {{shipped_on}} was from lot {{lot}}. Please keep taking QUORVANTA as prescribed unless your healthcare provider tells you otherwise. A QuorvantaConnect case manager will call you to arrange a replacement. Questions? Call QuorvantaConnect at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time.",
+    "case_manager_script": [
+      "MOCK RECALL DRILL. Confirm identity using the full verification rules (VER) before naming a lot or a shipment.",
+      "Name the shipment date and lot from the case record; do not say whether any other lot is affected.",
+      "Do not give medical advice; for questions about taking QUORVANTA, refer the patient to their healthcare provider (ESC-03).",
+      "If the patient mentions a side effect or a problem with the capsules, follow ESC-01 or ESC-02 before anything else."
+    ]
+  },
+  "drills": [
+    {
+      "id": "DRILL-01",
+      "lot": "QV26G032",
+      "initiated_on": "2026-09-22",
+      "depth": "patient",
+      "brief": "Mock recall drill, initiated by Quality on 2026-09-22, to the patient level. Trace every bottle of lot QV26G032 from the channel data, the case records and the paid claims: where it went, who received it, what is still on a shelf and must be quarantined, and who has to be contacted, and by whom.",
+      "tests": [
+        "a bottle damaged on receipt and destroyed is accounted for, not recalled",
+        "a bottle allocated to QC-26-00118 but never shipped is quarantined and the case resupplied, not counted as an exposure",
+        "anonymous patients are reached through their pharmacies"
+      ],
+      "expected": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD",
+              "W6HR72U8ZGAK"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 1,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "serial": "W6HR72U8ZGAK"
+          }
+        ],
+        "destroyed": [
+          {
+            "pharmacy_id": "SP-03",
+            "serial": "WVQTHGU5DL5K"
+          }
+        ],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [
+            "QC-26-00118"
+          ],
+          "patients_to_reach_through_pharmacy": {
+            "SP-01": 17,
+            "SP-02": 16,
+            "SP-03": 6,
+            "SP-04": 1,
+            "SP-05": 3
+          },
+          "pharmacies_to_search_own_records": []
+        }
+      }
+    },
+    {
+      "id": "DRILL-02",
+      "lot": "QV26D029",
+      "initiated_on": "2026-09-22",
+      "depth": "patient",
+      "brief": "Mock recall drill, initiated by Quality on 2026-09-22, to the patient level. Trace every bottle of lot QV26D029 from the channel data, the case records and the paid claims: where it went, who received it, what is still on a shelf and must be quarantined, and who has to be contacted, and by whom.",
+      "tests": [
+        "the lot was dispensed entirely before the channel data begins, so EPCIS and the 867 feed hold none of it",
+        "hub cases come from the case records, with the pharmacy from the paid claim",
+        "every pharmacy that dispensed it must search its own records for other patients and stock"
+      ],
+      "expected": {
+        "lot": "QV26D029",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": null,
+        "serials_in_channel_data": 0,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          }
+        ],
+        "hub_case_dispenses": [],
+        "hub_case_dispenses_before_window": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-18"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-19"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-16"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-11"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-03"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-02"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-01"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "shipped_on": "2026-06-17"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-27"
+          },
+          {
+            "case_id": "QC-26-00119",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-29"
+          },
+          {
+            "case_id": "QC-26-00124",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-08"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-05"
+          },
+          {
+            "case_id": "QC-26-00128",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-09"
+          },
+          {
+            "case_id": "QC-26-00129",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-25"
+          }
+        ],
+        "anonymous_dispenses": [],
+        "held_for_cases": [],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00118",
+            "QC-26-00119",
+            "QC-26-00124",
+            "QC-26-00125",
+            "QC-26-00126",
+            "QC-26-00128",
+            "QC-26-00129"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ]
+        }
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "MRT-001",
+      "drill_id": "DRILL-01",
+      "trace": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD",
+              "W6HR72U8ZGAK"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 1,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "serial": "W6HR72U8ZGAK"
+          }
+        ],
+        "destroyed": [
+          {
+            "pharmacy_id": "SP-03",
+            "serial": "WVQTHGU5DL5K"
+          }
+        ],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [
+            "QC-26-00118"
+          ],
+          "patients_to_reach_through_pharmacy": {
+            "SP-01": 17,
+            "SP-02": 16,
+            "SP-03": 6,
+            "SP-04": 1,
+            "SP-05": 3
+          },
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Every bottle accounted for: dispensed, destroyed, held for a case or on hand, with the outreach routed correctly."
+    },
+    {
+      "id": "MRT-002",
+      "drill_id": "DRILL-01",
+      "trace": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 1,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [],
+        "destroyed": [
+          {
+            "pharmacy_id": "SP-03",
+            "serial": "WVQTHGU5DL5K"
+          }
+        ],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {
+            "SP-01": 17,
+            "SP-02": 16,
+            "SP-03": 6,
+            "SP-04": 1,
+            "SP-05": 3
+          },
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-03"
+      ],
+      "explanation": "Misses the bottle at SP-01 allocated to QC-26-00118; it stays on the shelf and the case is not resupplied from another lot."
+    },
+    {
+      "id": "MRT-003",
+      "drill_id": "DRILL-01",
+      "trace": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD",
+              "W6HR72U8ZGAK"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG",
+              "WVQTHGU5DL5K"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "serial": "W6HR72U8ZGAK"
+          }
+        ],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [
+            "QC-26-00118"
+          ],
+          "patients_to_reach_through_pharmacy": {
+            "SP-01": 17,
+            "SP-02": 16,
+            "SP-03": 6,
+            "SP-04": 1,
+            "SP-05": 3
+          },
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-04"
+      ],
+      "explanation": "Counts the bottle destroyed at SP-03 after it arrived damaged as stock to quarantine."
+    },
+    {
+      "id": "MRT-004",
+      "drill_id": "DRILL-01",
+      "trace": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD",
+              "W6HR72U8ZGAK"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 1,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-19",
+            "serial": "W6HR72U8ZGAK"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [],
+        "destroyed": [
+          {
+            "pharmacy_id": "SP-03",
+            "serial": "WVQTHGU5DL5K"
+          }
+        ],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00118",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {
+            "SP-01": 17,
+            "SP-02": 16,
+            "SP-03": 6,
+            "SP-04": 1,
+            "SP-05": 3
+          },
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-04"
+      ],
+      "explanation": "Treats the bottle allocated to QC-26-00118 as dispensed; the delayed shipment never reached the patient."
+    },
+    {
+      "id": "MRT-005",
+      "drill_id": "DRILL-01",
+      "trace": {
+        "lot": "QV26G032",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": 64,
+        "serials_in_channel_data": 64,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": 27,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 25,
+            "destroyed": 0,
+            "on_hand": 2,
+            "quarantine_serials": [
+              "CWRNZNSUW6FD",
+              "W6HR72U8ZGAK"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": 20,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 19,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "Y267T4JBSZ2S"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "received": 8,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 6,
+            "destroyed": 1,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "L7EC6LFZ23NG"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": 4,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 3,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "3WHK6ALKATBL"
+            ]
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": 5,
+            "dispensed_before_window": 0,
+            "dispensed_in_window": 4,
+            "destroyed": 0,
+            "on_hand": 1,
+            "quarantine_serials": [
+              "4RP9YJ84C5DB"
+            ]
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-16",
+            "serial": "CA454792QZ7Z"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-17",
+            "serial": "6SXAALJQRHZ6"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-14",
+            "serial": "9GETV76R97MR"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-09",
+            "serial": "KJ6MY77AM6S6"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-01",
+            "serial": "EUWUPHP7P8QA"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-05",
+            "serial": "EFCQNN6SJ5M6"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-31",
+            "serial": "CTP525XYWU9A"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-08-30",
+            "serial": "APQEABPUA3QW"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-05",
+            "serial": "AYAB4NK4YA7W"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-10",
+            "serial": "HKPF7EZK78HH"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-09-15",
+            "serial": "LCYLUHU9WG3R"
+          },
+          {
+            "case_id": "QC-26-00122",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-09-16",
+            "serial": "PQRLN256K3CA"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-09-06",
+            "serial": "PRBHVZJRB8RA"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-09-03",
+            "serial": "E82FT5YVV99P"
+          }
+        ],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-688B310A",
+            "dispensed_on": "2026-09-01",
+            "serial": "57Z2D77H9BQV"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2021BBCE",
+            "dispensed_on": "2026-09-03",
+            "serial": "8UKZ4ELLVM35"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A7AEA0AF",
+            "dispensed_on": "2026-09-04",
+            "serial": "J6HSBA38HKFN"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8B91F51C",
+            "dispensed_on": "2026-09-07",
+            "serial": "FDBQ7E7SDS4P"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-883821EB",
+            "dispensed_on": "2026-09-08",
+            "serial": "NKS7M823MJRD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-80DF87B0",
+            "dispensed_on": "2026-09-09",
+            "serial": "TDQMVGEPELWJ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-E8F1A964",
+            "dispensed_on": "2026-09-10",
+            "serial": "2PST5GNW83PD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-055D1902",
+            "dispensed_on": "2026-09-10",
+            "serial": "U9HKH2WUGBUQ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-AA0D4A63",
+            "dispensed_on": "2026-09-10",
+            "serial": "UVT38UXWF3LC"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-2BC199C0",
+            "dispensed_on": "2026-09-14",
+            "serial": "EX6DG9RMBHKZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-287D4FF3",
+            "dispensed_on": "2026-09-15",
+            "serial": "EBFSUXKY839H"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-1DE9C003",
+            "dispensed_on": "2026-09-16",
+            "serial": "YBBLMRMKYHJM"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-9EB1A75C",
+            "dispensed_on": "2026-09-17",
+            "serial": "AZZWWZ5JVGAH"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-0BF1CD02",
+            "dispensed_on": "2026-09-17",
+            "serial": "C6A4CVRCLAMZ"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-A2B08405",
+            "dispensed_on": "2026-09-18",
+            "serial": "4A5S3Y94ZP2C"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-8787B68D",
+            "dispensed_on": "2026-09-22",
+            "serial": "RSD6LBPWCTQD"
+          },
+          {
+            "pharmacy_id": "SP-01",
+            "patient_token": "PT-B4AFF7A7",
+            "dispensed_on": "2026-09-22",
+            "serial": "XESB7PXL75SX"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8612E6A6",
+            "dispensed_on": "2026-09-03",
+            "serial": "RYKV33KTZUXN"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-8670DC0A",
+            "dispensed_on": "2026-09-05",
+            "serial": "D6KJNY4RH5BU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-71C413EC",
+            "dispensed_on": "2026-09-08",
+            "serial": "8ETKGUGUQRUV"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B83DDE3C",
+            "dispensed_on": "2026-09-09",
+            "serial": "6CSYE853QCE4"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-69DE0F2E",
+            "dispensed_on": "2026-09-09",
+            "serial": "ZTMQRNGBWXJB"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-713F2ACF",
+            "dispensed_on": "2026-09-12",
+            "serial": "ECSQDSKZ2X9S"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5C41F2E1",
+            "dispensed_on": "2026-09-12",
+            "serial": "TL3W9KKHZQF2"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-EA035F27",
+            "dispensed_on": "2026-09-13",
+            "serial": "3X8XVW2UL7GL"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-264B03FE",
+            "dispensed_on": "2026-09-13",
+            "serial": "STM7YXPWXU7L"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-FB30BFB8",
+            "dispensed_on": "2026-09-15",
+            "serial": "QDZUHKH7RY5T"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B921165F",
+            "dispensed_on": "2026-09-15",
+            "serial": "VZPUPUGHCK73"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-2C312A3E",
+            "dispensed_on": "2026-09-15",
+            "serial": "WRHTXE9YHZ33"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-518C0054",
+            "dispensed_on": "2026-09-16",
+            "serial": "9V66GZMMK3FH"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-B0B502AD",
+            "dispensed_on": "2026-09-17",
+            "serial": "EW8PSFGG6TN7"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-5BE1ACB2",
+            "dispensed_on": "2026-09-20",
+            "serial": "72ALDJ8VG3PU"
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "patient_token": "PT-932746CC",
+            "dispensed_on": "2026-09-20",
+            "serial": "F6QXS9CY4R4C"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-F21BCF27",
+            "dispensed_on": "2026-09-07",
+            "serial": "JTN39FHP4UWM"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4C5F3DF0",
+            "dispensed_on": "2026-09-07",
+            "serial": "YN4SWN4QZZLD"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-FDAEC003",
+            "dispensed_on": "2026-09-18",
+            "serial": "VNJPRQ5ZY8G6"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-087FFC73",
+            "dispensed_on": "2026-09-20",
+            "serial": "26U6PC4GXKQQ"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-4218EF48",
+            "dispensed_on": "2026-09-20",
+            "serial": "AS8MPWAR4M7A"
+          },
+          {
+            "pharmacy_id": "SP-03",
+            "patient_token": "PT-24D25B1D",
+            "dispensed_on": "2026-09-22",
+            "serial": "7HJ462UL2BX2"
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "patient_token": "PT-E26CD77D",
+            "dispensed_on": "2026-09-12",
+            "serial": "5E4FY395T22S"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-52A8BE32",
+            "dispensed_on": "2026-09-05",
+            "serial": "F4YS9ZQNMQFF"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-437BDA75",
+            "dispensed_on": "2026-09-15",
+            "serial": "S8SBY4MNWC3K"
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "patient_token": "PT-3632894B",
+            "dispensed_on": "2026-09-16",
+            "serial": "24W9H24A4KQM"
+          }
+        ],
+        "held_for_cases": [
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "serial": "W6HR72U8ZGAK"
+          }
+        ],
+        "destroyed": [
+          {
+            "pharmacy_id": "SP-03",
+            "serial": "WVQTHGU5DL5K"
+          }
+        ],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-03",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "PT-055D1902",
+            "PT-087FFC73",
+            "PT-0BF1CD02",
+            "PT-1DE9C003",
+            "PT-2021BBCE",
+            "PT-24D25B1D",
+            "PT-264B03FE",
+            "PT-287D4FF3",
+            "PT-2BC199C0",
+            "PT-2C312A3E",
+            "PT-3632894B",
+            "PT-4218EF48",
+            "PT-437BDA75",
+            "PT-4C5F3DF0",
+            "PT-518C0054",
+            "PT-52A8BE32",
+            "PT-5BE1ACB2",
+            "PT-5C41F2E1",
+            "PT-688B310A",
+            "PT-69DE0F2E",
+            "PT-713F2ACF",
+            "PT-71C413EC",
+            "PT-80DF87B0",
+            "PT-8612E6A6",
+            "PT-8670DC0A",
+            "PT-8787B68D",
+            "PT-883821EB",
+            "PT-8B91F51C",
+            "PT-932746CC",
+            "PT-9EB1A75C",
+            "PT-A2B08405",
+            "PT-A7AEA0AF",
+            "PT-AA0D4A63",
+            "PT-B0B502AD",
+            "PT-B4AFF7A7",
+            "PT-B83DDE3C",
+            "PT-B921165F",
+            "PT-E26CD77D",
+            "PT-E8F1A964",
+            "PT-EA035F27",
+            "PT-F21BCF27",
+            "PT-FB30BFB8",
+            "PT-FDAEC003",
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00122",
+            "QC-26-00125",
+            "QC-26-00126"
+          ],
+          "hub_cases_to_resupply": [
+            "QC-26-00118"
+          ],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-06"
+      ],
+      "explanation": "Puts pharmacy patient tokens on the manufacturer's direct-contact list; those patients are reached through their pharmacies."
+    },
+    {
+      "id": "MRT-006",
+      "drill_id": "DRILL-02",
+      "trace": {
+        "lot": "QV26D029",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": null,
+        "serials_in_channel_data": 0,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          }
+        ],
+        "hub_case_dispenses": [],
+        "hub_case_dispenses_before_window": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-18"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-19"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-16"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-11"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-03"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-02"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-01"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "shipped_on": "2026-06-17"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-27"
+          },
+          {
+            "case_id": "QC-26-00119",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-29"
+          },
+          {
+            "case_id": "QC-26-00124",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-08"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-05"
+          },
+          {
+            "case_id": "QC-26-00128",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-09"
+          },
+          {
+            "case_id": "QC-26-00129",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-25"
+          }
+        ],
+        "anonymous_dispenses": [],
+        "held_for_cases": [],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00118",
+            "QC-26-00119",
+            "QC-26-00124",
+            "QC-26-00125",
+            "QC-26-00126",
+            "QC-26-00128",
+            "QC-26-00129"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ]
+        }
+      },
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Finds the lot only in the case records, takes each pharmacy from the paid claim, and sends every pharmacy to search its own records."
+    },
+    {
+      "id": "MRT-007",
+      "drill_id": "DRILL-02",
+      "trace": {
+        "lot": "QV26D029",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": null,
+        "serials_in_channel_data": 0,
+        "pharmacies": [],
+        "hub_case_dispenses": [],
+        "hub_case_dispenses_before_window": [],
+        "anonymous_dispenses": [],
+        "held_for_cases": [],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [],
+          "hub_cases_to_contact": [],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": []
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-02",
+        "RF-01"
+      ],
+      "explanation": "Finds no serials of the lot in EPCIS or the 867 feed and concludes there is nothing to recall."
+    },
+    {
+      "id": "MRT-008",
+      "drill_id": "DRILL-02",
+      "trace": {
+        "lot": "QV26D029",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": null,
+        "serials_in_channel_data": 0,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          }
+        ],
+        "hub_case_dispenses": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-18",
+            "serial": "9LK6FMVNF2ZG"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-07-19",
+            "serial": "39MN3TB73BSY"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-07-16",
+            "serial": "E7ZQ5LNV7E4E"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-11",
+            "serial": "XK5EKG4YKBZD"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-03",
+            "serial": "EUKV2K5H3PBL"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-07",
+            "serial": "JN3S8E6Z8ET2"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-02",
+            "serial": "YKJESBPMK5MF"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-01",
+            "serial": "Q7DMMQ7DRKB3"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-07-07",
+            "serial": "VAL895TVHV4B"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-12",
+            "serial": "PLUS4NGQG2EY"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "dispensed_on": "2026-07-17",
+            "serial": "AP47TDGDEHFD"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-27",
+            "serial": "AMU47T6YKJ6H"
+          },
+          {
+            "case_id": "QC-26-00119",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-07-29",
+            "serial": "TPD8D4Q5NXHB"
+          },
+          {
+            "case_id": "QC-26-00124",
+            "pharmacy_id": "SP-04",
+            "dispensed_on": "2026-07-12",
+            "serial": "5YS2TG7W6DC4"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-08",
+            "serial": "HQCWJ9JAFSC9"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-07-05",
+            "serial": "8NPTWG7DDDBK"
+          },
+          {
+            "case_id": "QC-26-00128",
+            "pharmacy_id": "SP-02",
+            "dispensed_on": "2026-07-09",
+            "serial": "ZKB3HPJXFU2U"
+          },
+          {
+            "case_id": "QC-26-00129",
+            "pharmacy_id": "SP-01",
+            "dispensed_on": "2026-07-25",
+            "serial": "63986R76HDEG"
+          }
+        ],
+        "hub_case_dispenses_before_window": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-18"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-19"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-16"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-11"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-03"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-02"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-01"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "shipped_on": "2026-06-17"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-27"
+          },
+          {
+            "case_id": "QC-26-00119",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-29"
+          },
+          {
+            "case_id": "QC-26-00124",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-08"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-05"
+          },
+          {
+            "case_id": "QC-26-00128",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-09"
+          },
+          {
+            "case_id": "QC-26-00129",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-25"
+          }
+        ],
+        "anonymous_dispenses": [],
+        "held_for_cases": [],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00118",
+            "QC-26-00119",
+            "QC-26-00124",
+            "QC-26-00125",
+            "QC-26-00126",
+            "QC-26-00128",
+            "QC-26-00129"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ]
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-05"
+      ],
+      "explanation": "Adds the same patients' July fills, which were lot QV26E030."
+    },
+    {
+      "id": "MRT-009",
+      "drill_id": "DRILL-02",
+      "trace": {
+        "lot": "QV26D029",
+        "channel_data_from": "2026-07-01",
+        "released_to_pharmacies": null,
+        "serials_in_channel_data": 0,
+        "pharmacies": [
+          {
+            "pharmacy_id": "SP-01",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-02",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-04",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          },
+          {
+            "pharmacy_id": "SP-05",
+            "received": null,
+            "dispensed_before_window": null,
+            "dispensed_in_window": 0,
+            "destroyed": 0,
+            "on_hand": 0,
+            "quarantine_serials": []
+          }
+        ],
+        "hub_case_dispenses": [],
+        "hub_case_dispenses_before_window": [
+          {
+            "case_id": "QC-26-00101",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-18"
+          },
+          {
+            "case_id": "QC-26-00105",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-19"
+          },
+          {
+            "case_id": "QC-26-00106",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-16"
+          },
+          {
+            "case_id": "QC-26-00107",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-11"
+          },
+          {
+            "case_id": "QC-26-00108",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-03"
+          },
+          {
+            "case_id": "QC-26-00109",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00110",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-02"
+          },
+          {
+            "case_id": "QC-26-00112",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-01"
+          },
+          {
+            "case_id": "QC-26-00113",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-07"
+          },
+          {
+            "case_id": "QC-26-00114",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00117",
+            "pharmacy_id": "SP-05",
+            "shipped_on": "2026-06-17"
+          },
+          {
+            "case_id": "QC-26-00118",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-27"
+          },
+          {
+            "case_id": "QC-26-00124",
+            "pharmacy_id": "SP-04",
+            "shipped_on": "2026-06-12"
+          },
+          {
+            "case_id": "QC-26-00125",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-08"
+          },
+          {
+            "case_id": "QC-26-00126",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-05"
+          },
+          {
+            "case_id": "QC-26-00128",
+            "pharmacy_id": "SP-02",
+            "shipped_on": "2026-06-09"
+          },
+          {
+            "case_id": "QC-26-00129",
+            "pharmacy_id": "SP-01",
+            "shipped_on": "2026-06-25"
+          }
+        ],
+        "anonymous_dispenses": [],
+        "held_for_cases": [],
+        "destroyed": [],
+        "outreach": {
+          "pharmacies_to_notify": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ],
+          "hub_cases_to_contact": [
+            "QC-26-00101",
+            "QC-26-00105",
+            "QC-26-00106",
+            "QC-26-00107",
+            "QC-26-00108",
+            "QC-26-00109",
+            "QC-26-00110",
+            "QC-26-00112",
+            "QC-26-00113",
+            "QC-26-00114",
+            "QC-26-00117",
+            "QC-26-00118",
+            "QC-26-00124",
+            "QC-26-00125",
+            "QC-26-00126",
+            "QC-26-00128",
+            "QC-26-00129"
+          ],
+          "hub_cases_to_resupply": [],
+          "patients_to_reach_through_pharmacy": {},
+          "pharmacies_to_search_own_records": [
+            "SP-01",
+            "SP-02",
+            "SP-04",
+            "SP-05"
+          ]
+        }
+      },
+      "verdict": "fail",
+      "faults": [
+        "RF-01"
+      ],
+      "explanation": "Misses QC-26-00119's June 29 fill at SP-02."
+    }
+  ]
+}

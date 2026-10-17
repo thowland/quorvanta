@@ -1247,6 +1247,140 @@
         "SF-08",
         "SF-02"
       ]
+    },
+    {
+      "id": "AEI-023",
+      "title": "Prolonged low lymphocyte count reported to the QuorvantaConnect assistant",
+      "channel": "patient_services",
+      "case_id": null,
+      "hcp_id": null,
+      "receipts": [
+        {
+          "by": "quorvantaconnect_assistant",
+          "on": "2026-09-14",
+          "ref": "PSC-033",
+          "criteria_complete": true
+        },
+        {
+          "by": "drug_safety",
+          "on": "2026-09-15",
+          "ref": null,
+          "criteria_complete": true
+        }
+      ],
+      "report": "Forwarded transcript, QuorvantaConnect assistant, 2026-09-14. Unverified session: \"This is Lauren Kristiansson-Shabangu, (901) 555-0108. My lymphocytes were 0.25 on my September 3 blood test, and they've been below 0.5 since March of last year. My nurse practitioner wants to talk about stopping. Should I stop taking QUORVANTA now?\" The assistant gave the adverse event handoff and referred the question about stopping to her provider.",
+      "expected": {
+        "case_type": "adverse_event",
+        "valid": true,
+        "missing_criteria": [],
+        "reporter_type": "consumer",
+        "events": [
+          {
+            "verbatim": "my lymphocytes were 0.25 on my September 3 blood test, and they've been below 0.5 since March of last year",
+            "term": "AET-012",
+            "listed": true,
+            "fatal": false,
+            "serious_criteria": []
+          }
+        ],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": false,
+        "listed": true,
+        "reportability": "periodic",
+        "day_0": "2026-09-14",
+        "due": null,
+        "internal_forward_late": false,
+        "follow_up": [
+          "whether QUORVANTA has been interrupted or stopped",
+          "any infections since the counts fell"
+        ]
+      },
+      "tests": [
+        "a lab result reported as a side effect",
+        "prolonged lymphopenia is listed and not serious on its own"
+      ],
+      "provokes": [
+        "SF-01",
+        "SF-02"
+      ],
+      "population_refs": {
+        "patient_id": "PPAT-00183",
+        "hcp_id": "PHCP-00332",
+        "lab_result_ids": [
+          "PLRS-00488"
+        ],
+        "pattern": "prolonged_severe_lymphopenia"
+      }
+    },
+    {
+      "id": "AEI-024",
+      "title": "Liver injury from 2024 reported to Medical Information in 2026",
+      "channel": "hcp",
+      "case_id": null,
+      "hcp_id": null,
+      "receipts": [
+        {
+          "by": "medical_information",
+          "on": "2026-09-08",
+          "ref": null,
+          "criteria_complete": true
+        },
+        {
+          "by": "drug_safety",
+          "on": "2026-09-09",
+          "ref": null,
+          "criteria_complete": true
+        }
+      ],
+      "report": "Medical Information call, 2026-09-08, Dr. Kevin Tron-Förster, Heronmere Neurology Clinic, North Matthewstad, NY: \"I'm going through a patient's chart and I don't think this was ever reported. She's 38, started QUORVANTA in September 2024, and on November 1, 2024 her liver tests came back with ALT 228, AST 286 and total bilirubin 2.9. She was jaundiced. It met Hy's law criteria, but she never went into liver failure and she wasn't admitted.\"",
+      "expected": {
+        "case_type": "adverse_event",
+        "valid": true,
+        "missing_criteria": [],
+        "reporter_type": "hcp",
+        "events": [
+          {
+            "verbatim": "her liver tests came back with ALT 228, AST 286 and total bilirubin 2.9. She was jaundiced",
+            "term": "AET-018",
+            "listed": true,
+            "fatal": false,
+            "serious_criteria": [
+              "medically_important"
+            ]
+          }
+        ],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": true,
+        "listed": true,
+        "reportability": "periodic",
+        "day_0": "2026-09-08",
+        "due": null,
+        "internal_forward_late": false,
+        "follow_up": [
+          "action taken with QUORVANTA",
+          "outcome and the most recent liver tests",
+          "other causes investigated"
+        ]
+      },
+      "tests": [
+        "day 0 is the first receipt, not the event date",
+        "liver failure explicitly denied: do not code hepatic failure",
+        "serious but listed"
+      ],
+      "provokes": [
+        "SF-04",
+        "SF-03"
+      ],
+      "population_refs": {
+        "patient_id": "PPAT-00001",
+        "hcp_id": "PHCP-00400",
+        "lab_result_ids": [
+          "PLRS-00002"
+        ],
+        "pattern": "hepatic_signal"
+      }
     }
   ]
 }

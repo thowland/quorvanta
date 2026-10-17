@@ -693,8 +693,8 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
     pout = load(base + "ps-outbound.json")["replies"]
     count = lambda xs, v: sum(x["verdict"] == v for x in xs)
     expected = [
-        (r"(\d+) fault types \((\d+) for the HCP bot, (\d+) for the patient-services assistant, (\d+) for adverse event intake and (\d+) for field records\)",
-         (len(faults),) + tuple(sum(f.startswith(p) for f in faults) for p in ("HF", "PF", "SF", "CF"))),
+        (r"(\d+) fault types \((\d+) for the HCP bot, (\d+) for the patient-services assistant, (\d+) for adverse event intake, (\d+) for field records and (\d+) for recall traces\)",
+         (len(faults),) + tuple(sum(f.startswith(p) for f in faults) for p in ("HF", "PF", "SF", "CF", "RF"))),
         (r"(\d+) labeled HCP questions", (len(inbound),)),
         (r"(\d+) labeled HCP bot responses \((\d+) pass, (\d+) fail\)", (len(hout), count(hout, "pass"), count(hout, "fail"))),
         (r"(\d+) multi-turn patient-services conversations", (len(convs),)),
@@ -1490,6 +1490,122 @@ def check_channel():
 SPL_EXCERPT_CODES = {"34066-1", "43683-2", "34067-9", "34068-7", "43678-2", "34070-3", "43685-7", "34084-4", "34073-7", "43684-0", "49489-8"}
 
 
+def recall_trace(lot):
+    """The full trace of one lot, worked out from the channel data, the cases and the paid claims."""
+    tp = load("channel/trading-partners.json")
+    sp_at = {l["sgln"]: p["pharmacy_id"] for p in tp["parties"] if p.get("pharmacy_id") for l in p["locations"]}
+    feed = load("channel/dispense-867.json")
+    start = feed["period"]["start"]
+    events = sorted(load("channel/epcis-events.json")["document"]["epcisBody"]["eventList"], key=lambda e: e["eventTime"])
+    serials = {epc.rsplit(".", 1)[1] for e in events if e.get("bizStep") == "commissioning"
+               and e["ilmd"]["cbvmda:lotNumber"] == lot for epc in e["epcList"]}
+    where, fate = {}, {}
+    for e in events:
+        epcs = e.get("epcList") or e.get("childEPCs") or []
+        for epc in epcs:
+            sn = epc.rsplit(".", 1)[1]
+            if sn not in serials:
+                continue
+            loc = e["bizLocation"]["id"]
+            if loc in sp_at:
+                where[sn] = sp_at[loc]
+            if e.get("bizStep") in ("dispensing", "destroying"):
+                fate[sn] = e["bizStep"]
+            elif e.get("bizStep") in ("inspecting", "holding") and sn not in fate:
+                fate[sn] = e["disposition"]
+    by_serial = {r["serial"]: r for r in feed["records"] if r["lot"] == lot}
+    held = {h["serial"]: h for h in feed["held_allocations"] if h["lot"] == lot}
+    sold = {}
+    for sh in load("channel/shipments.json")["shipments"]:
+        if sh["kind"] == "sale":
+            for ln in sh["lines"]:
+                if ln["lot"] == lot:
+                    sp = sh["to"].replace("LOC-", "")
+                    sold[sp] = sold.get(sp, 0) + ln["quantity"]
+    tx = load("payer/transactions.json")
+    primary = {c["id"] for c in tx["coverages"] if c["order"] == "primary"}
+    paid = {(t["case_id"], t["date"]): t["pharmacy_id"] for t in tx["transactions"]
+            if t["type"] == "claim" and t["result"] == "paid" and t["coverage_id"] in primary}
+    before = []
+    for c in load("test-design/ps-cases.json")["cases"]:
+        for sh in c["shipments"]:
+            if sh["lot"] == lot and sh["date"] < start and sh["status"] in ("SHIP_SHIPPED", "SHIP_DELIVERED"):
+                sp = paid[(c["case_id"], sh["date"])] if sh["source"] == "plan" else "SP-04"
+                before.append({"case_id": c["case_id"], "pharmacy_id": sp, "shipped_on": sh["date"]})
+    pharmacies, cases, anon, destroyed = [], [], [], []
+    # A pharmacy that received the lot before the window has no receipt here; what it dispensed then is unknown.
+    for sp in sorted(set(sold) | {b["pharmacy_id"] for b in before}):
+        mine = sorted(sn for sn in serials if where.get(sn) == sp)
+        disp = [sn for sn in mine if fate.get(sn) == "dispensing"]
+        gone = [sn for sn in mine if fate.get(sn) == "destroying"]
+        hand = [sn for sn in mine if sn not in disp and sn not in gone]
+        got = sold.get(sp)
+        pharmacies.append({"pharmacy_id": sp, "received": got, "dispensed_before_window": None if got is None else got - len(mine),
+                           "dispensed_in_window": len(disp), "destroyed": len(gone), "on_hand": len(hand), "quarantine_serials": hand})
+        for sn in disp:
+            r = by_serial[sn]
+            if r["hub_case_id"]:
+                cases.append({"case_id": r["hub_case_id"], "pharmacy_id": sp, "dispensed_on": r["dispense_date"], "serial": sn})
+            else:
+                anon.append({"pharmacy_id": sp, "patient_token": r["patient_token"], "dispensed_on": r["dispense_date"], "serial": sn})
+        destroyed += [{"pharmacy_id": sp, "serial": sn} for sn in gone]
+    cases.sort(key=lambda x: (x["case_id"], x["dispensed_on"]))
+    anon.sort(key=lambda x: (x["pharmacy_id"], x["dispensed_on"], x["serial"]))
+    before.sort(key=lambda x: (x["case_id"], x["shipped_on"]))
+    held_out = sorted(({"case_id": h["case_id"], "pharmacy_id": h["pharmacy_id"], "serial": sn} for sn, h in held.items()),
+                      key=lambda x: x["case_id"])
+    direct = sorted({x["case_id"] for x in cases + before})
+    via = {p["pharmacy_id"]: sum(1 for a in anon if a["pharmacy_id"] == p["pharmacy_id"])
+           + p["dispensed_before_window"] - sum(1 for b in before if b["pharmacy_id"] == p["pharmacy_id"])
+           for p in pharmacies if p["received"] is not None}
+    search = sorted(p["pharmacy_id"] for p in pharmacies if p["received"] is None or p["dispensed_before_window"])
+    return {"lot": lot, "channel_data_from": start, "released_to_pharmacies": sum(sold.values()) if sold else None,
+            "serials_in_channel_data": len(serials),
+            "pharmacies": pharmacies, "hub_case_dispenses": cases, "hub_case_dispenses_before_window": before,
+            "anonymous_dispenses": anon, "held_for_cases": held_out, "destroyed": destroyed,
+            "outreach": {"pharmacies_to_notify": [x["pharmacy_id"] for x in pharmacies], "hub_cases_to_contact": direct,
+                         "hub_cases_to_resupply": [h["case_id"] for h in held_out],
+                         "patients_to_reach_through_pharmacy": {k: v for k, v in via.items() if v},
+                         "pharmacies_to_search_own_records": search}}
+
+
+def check_mock_recall(faults):
+    """Mock recall drills: each answer key recomputed from the data, and each labeled trace scored against it."""
+    doc = load("test-design/scenarios/mock-recall.json")
+    lots = {l["lot"] for l in load("product/product-identifiers.json")["lots"]}
+    drills, coverage = {}, set()
+    for d in doc["drills"]:
+        drills[d["id"]] = d
+        if d["lot"] not in lots:
+            fail(f"{d['id']}: lot {d['lot']} is not in the lot register")
+            continue
+        want = recall_trace(d["lot"])
+        for k in sorted(set(want) | set(d["expected"])):
+            if d["expected"].get(k) != want.get(k):
+                fail(f"{d['id']}: expected.{k} does not match the trace recomputed from the data")
+    for c in doc["candidates"]:
+        d = drills.get(c["drill_id"])
+        if d is None:
+            fail(f"{c['id']}: unknown drill {c['drill_id']}")
+            continue
+        for f in c["faults"]:
+            if f not in faults:
+                fail(f"{c['id']}: unknown fault {f}")
+        same = c["trace"] == d["expected"]
+        if c["verdict"] == "pass" and (not same or c["faults"]):
+            fail(f"{c['id']}: passing trace differs from {d['id']} expected, or lists faults")
+        if c["verdict"] == "fail":
+            if same or not c["faults"]:
+                fail(f"{c['id']}: failing trace equals the expected one or names no fault")
+            coverage |= set(c["faults"])
+    readme_counts(text("README.md"), [
+        (r"(\d+) mock recall drills with (\d+) labeled traces \((\d+) pass, (\d+) fail\)",
+         (len(drills), len(doc["candidates"]), sum(c["verdict"] == "pass" for c in doc["candidates"]),
+          sum(c["verdict"] == "fail" for c in doc["candidates"]))),
+    ])
+    return coverage
+
+
 def check_spl():
     import xml.etree.ElementTree as ET
     sys.path.insert(0, str(ROOT / "scripts"))
@@ -1630,6 +1746,10 @@ def check_population():
         check_population_engagement(docs, rules, msgs)
     if {"hcps", "hcp-emails", "portal-sessions"} <= set(docs):
         check_hcp_engagement(docs)
+    if {"hcps", "mi-requests"} <= set(docs):
+        check_mi_requests(docs, rules)
+    if {"patients", "hcps", "lab-results"} <= set(docs):
+        check_population_refs(docs)
 
 
 def ckd_epi_2021(creat, age, sex):
@@ -1836,6 +1956,10 @@ class Outreach:
             out.append((e + timedelta(days=step), "CMP-NEVERSTART", None, e, step, m, None))
         if self.started:
             out.append((self.started + timedelta(days=10), "CMP-DISCON-RISK", "first_month", self.started, 10, "MSG-DR-NURSE", None))
+            due = self.started + timedelta(days=91)
+            while due <= self.as_of + timedelta(days=7):
+                out.append((due - timedelta(days=7), "PGM-LAB-REMINDERS", None, due, -7, "MSG-REM-LABS", None))
+                due += timedelta(days=182)
         for f, days in self.fills:
             due = f + timedelta(days=days)
             out.append((due - timedelta(days=3), "PGM-REFILL-REMINDERS", None, due, -3, "MSG-REM-REFILL", f))
@@ -1864,7 +1988,7 @@ class Outreach:
             return "after_opt_out" if self.ever_opted_out(t) else "no_opt_in"
         stopped = self.stopped is not None and self.stopped <= day
         later_fill = ref is not None and any(ref < f < day for f, _ in self.fills)
-        if camp == "PGM-REFILL-REMINDERS":
+        if camp in ("PGM-REFILL-REMINDERS", "PGM-LAB-REMINDERS"):
             if not self.p["text_reminders"]:
                 return "no_reminder_choice"
             return "situation_ended" if stopped or later_fill else None
@@ -2220,6 +2344,113 @@ def check_hcp_engagement(docs):
                 fail(f"{where}: an email session starts within 60 seconds of a human click, on the linked page")
 
 
+def check_mi_requests(docs, rules):
+    """Medical information requests: routing against the SRDs and label, turnaround, and flags and patterns recomputed."""
+    from datetime import date, datetime
+    from zoneinfo import ZoneInfo
+    doc = docs["mi-requests"]
+    zones = rules["time_zones"]["zones"]
+    local = lambda s, state: datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(ZoneInfo(zones[state])).date()  # noqa: E731
+    add_bd, is_bd = business_days(load("safety/safety-reference.json")["business_calendar"]["holidays"])
+    srds = {s["id"]: s for s in load("medical-information/srds.json")["srds"]}
+    sections = set(re.findall(r"^#{2,3} (\d+(?:\.\d+)?) ", text("label/label.md"), re.M))
+    hcps = {h["id"]: h for h in docs["hcps"]["records"]}
+    rep_states = {t["rep_id"]: set(t["states"]) for t in load("crm/field-force.json")["territories"]}
+    target = doc["response_target_business_days"]
+    as_of = doc["generated"]["as_of"]
+    keys = {"srd": "srd_id", "prescribing_information": "label_section", "referral": "referred_to", "custom_response": None}
+    for code, t in doc["topics"].items():
+        if t["route"] not in keys:
+            fail(f"population/mi-requests.json topic {code}: unknown route {t['route']}")
+        elif t["route"] == "srd" and (t["srd_id"] not in srds or srds[t["srd_id"]]["status"] != "approved"):
+            fail(f"population/mi-requests.json topic {code}: {t['srd_id']} is not an approved SRD")
+        elif t["route"] == "prescribing_information" and t["label_section"] not in sections:
+            fail(f"population/mi-requests.json topic {code}: label has no section {t['label_section']}")
+    last = {}
+    for r in sorted(doc["records"], key=lambda r: (r["received_at"], r["hcp_id"])):
+        where = f"population/mi-requests.json {r['id']}"
+        t, resp, h = doc["topics"].get(r["topic"]), r["response"], hcps[r["hcp_id"]]
+        if t is None or r["question"] not in t["question_examples"]:
+            fail(f"{where}: unknown topic, or a question not in its examples")
+            continue
+        for route, key in keys.items():
+            if key and resp[key] != (t[key] if t["route"] == route else None):
+                fail(f"{where}: response {key} does not follow topic {r['topic']}")
+        if resp["route"] != t["route"] or h["status"] != "active":
+            fail(f"{where}: response route differs from the topic, or the prescriber is not active")
+        got = local(r["received_at"], "MA")
+        start = str(got) if is_bd(str(got)) else add_bd(str(got), 1)
+        done = str(local(resp["responded_at"], "MA")) if resp["responded_at"] else as_of
+        if resp["responded_at"] and (resp["responded_at"] <= r["received_at"] or done > as_of):
+            fail(f"{where}: response before receipt, or after as_of")
+        if not resp["responded_at"] and (resp["delivered_by"] or r["turnaround_business_days"] is not None):
+            fail(f"{where}: an open request has no delivery or turnaround")
+        if resp["responded_at"]:
+            n, d = 0, start
+            while d < done:
+                d = add_bd(d, 1)
+                n += 1
+            if n != r["turnaround_business_days"]:
+                fail(f"{where}: turnaround is {n} business days, not {r['turnaround_business_days']}")
+        want = set()
+        if done > add_bd(start, target):
+            want.add("late_response")
+        if r["channel"] == "field_rep":
+            if h["state"] not in rep_states.get(r.get("submitted_by"), set()) or h["no_see"]:
+                fail(f"{where}: submitted by a representative who does not cover the prescriber")
+            if r["asked_on"] != str(local(r["received_at"], h["state"])):
+                want.add("rep_submitted_late")
+        if any(f["type"] == "duplicate" for f in h["quality_flags"]):
+            want.add("logged_to_duplicate")
+        if {f["type"] for f in r["quality_flags"]} != want:
+            fail(f"{where}: quality flags should be {sorted(want)}")
+        key = (r["hcp_id"], r["topic"])
+        repeat = [{"type": "repeat_request", "of": last[key][0]}] if key in last and (got - last[key][1]).days <= 30 else []
+        if r["patterns"] != repeat:
+            fail(f"{where}: patterns should be {repeat}")
+        last[key] = (r["id"], got)
+
+
+# The tests whose values a scenario must quote when it cites a lab result with this pattern.
+PATTERN_TESTS = {"low_baseline_lymphocytes": ["LYMPH"], "prolonged_severe_lymphopenia": ["LYMPH"],
+                 "alt_above_3x_uln": ["ALT"], "hepatic_signal": ["ALT", "TBIL"]}
+
+
+def check_population_refs(docs):
+    """Scenarios built on generated records: the records exist, agree, carry the pattern, and the text quotes their values."""
+    base = "test-design/scenarios/"
+    patients = {p["id"]: p for p in docs["patients"]["records"]}
+    hcps = {h["id"] for h in docs["hcps"]["records"]}
+    labs = {r["id"]: r for r in docs["lab-results"]["records"]}
+    items = [(s["id"], s, s["question"]) for s in load(base + "hcp-inbound.json")["scenarios"]]
+    items += [(c["id"], c, " ".join(t["user"] for t in c["turns"])) for c in load(base + "ps-conversations.json")["conversations"]]
+    items += [(r["id"], r, r["report"]) for r in load(base + "ae-intake.json")["reports"]]
+    for oid, obj, words in items:
+        refs = obj.get("population_refs")
+        if not refs:
+            continue
+        p = patients.get(refs["patient_id"])
+        if p is None or refs["hcp_id"] not in hcps or p["prescriber_id"] != refs["hcp_id"]:
+            fail(f"{oid}: population patient or prescriber missing, or the prescriber is not the patient's")
+            continue
+        if refs["pattern"] not in PATTERN_TESTS:
+            fail(f"{oid}: pattern {refs['pattern']} cannot anchor a scenario")
+            continue
+        found = False
+        for lid in refs["lab_result_ids"]:
+            r = labs.get(lid)
+            if r is None or r["patient_id"] != p["id"] or r["ordering_hcp_id"] != refs["hcp_id"]:
+                fail(f"{oid}: lab result {lid} missing or not this patient's, ordered by this prescriber; regenerated population?")
+                continue
+            found |= any(x["type"] == refs["pattern"] for x in r["patterns"])
+            values = {x["test"]: x["value"] for x in r["results"]}
+            for t in PATTERN_TESTS[refs["pattern"]]:
+                if t in values and not re.search(rf"(?<![\d.]){re.escape(str(values[t]))}(?![\d])", words):
+                    fail(f"{oid}: text does not quote {lid}'s {t} value {values[t]}")
+        if not found:
+            fail(f"{oid}: none of its lab results carries the {refs['pattern']} pattern")
+
+
 def read_denylist(path):
     if path is None:
         return []
@@ -2261,16 +2492,17 @@ def main():
     crm_coverage = check_field_force(claims_doc, set(srds), reports)
     check_payer()
     check_channel()
+    recall_coverage = check_mock_recall(faults)
     check_spl()
     check_population()
     for owner, ids in [(r["id"], r["provokes"]) for r in reports.values()]:
         for f in ids:
             if f not in faults:
                 fail(f"{owner}: unknown fault {f}")
-    for f in sorted((ae_coverage | crm_coverage) - set(faults)):
+    for f in sorted((ae_coverage | crm_coverage | recall_coverage) - set(faults)):
         fail(f"labeled sets: unknown fault {f}")
     for f in faults:
-        if f not in coverage | ae_coverage | crm_coverage:
+        if f not in coverage | ae_coverage | crm_coverage | recall_coverage:
             fail(f"fault-types: {f} has no failing example in the labeled sets")
     check_fiction_markers(read_denylist(args.denylist))
     report()

@@ -17,7 +17,7 @@
     {
       "id": "CNS-TEXT-REMINDERS",
       "source": "Start Form C5, Blood test and refill reminders by text",
-      "allows": "Refill reminder texts (MSG-REM-REFILL), in addition to CNS-TEXT-OPTIN."
+      "allows": "Refill and blood test reminder texts (MSG-REM-REFILL, MSG-REM-LABS), in addition to CNS-TEXT-OPTIN."
     },
     {
       "id": "CNS-HCP-EMAIL",
@@ -60,7 +60,7 @@
     {
       "id": "ENG-02",
       "title": "Reminders need the reminder choice",
-      "rule": "Refill reminder texts also need CNS-TEXT-REMINDERS.",
+      "rule": "Refill and blood test reminder texts also need CNS-TEXT-REMINDERS.",
       "fault_flag": "no_reminder_choice",
       "citations": ["PGM-NURSE.3"]
     },
@@ -116,7 +116,7 @@
     {
       "id": "ENG-10",
       "title": "Stop when the situation ends",
-      "rule": "A never-start text is not sent once the first fill has shipped or the prescriber has canceled the prescription. A discontinuation-risk text or refill reminder is not sent once treatment has been discontinued. No campaign asks a patient to start again, continue, or restart treatment; those are decisions for the patient and their healthcare provider.",
+      "rule": "A never-start text is not sent once the first fill has shipped or the prescriber has canceled the prescription. A discontinuation-risk text, refill reminder or blood test reminder is not sent once treatment has been discontinued. No campaign asks a patient to start again, continue, or restart treatment; those are decisions for the patient and their healthcare provider.",
       "fault_flag": "situation_ended",
       "citations": ["PGM-GEN.4", "PGM-NURSE.2"]
     },

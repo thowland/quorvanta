@@ -1412,6 +1412,155 @@
         "SF-02"
       ],
       "explanation": "Records the emergency-room cast as hospitalization."
+    },
+    {
+      "id": "AEA-040",
+      "report_id": "AEI-023",
+      "assessment": {
+        "case_type": "adverse_event",
+        "valid": true,
+        "missing_criteria": [],
+        "reporter_type": "consumer",
+        "events": [
+          {
+            "verbatim": "my lymphocytes were 0.25 on my September 3 blood test, and they've been below 0.5 since March of last year",
+            "term": "AET-012",
+            "listed": true,
+            "fatal": false,
+            "serious_criteria": []
+          }
+        ],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": false,
+        "listed": true,
+        "reportability": "periodic",
+        "day_0": "2026-09-14",
+        "due": null,
+        "internal_forward_late": false,
+        "follow_up": [
+          "whether QUORVANTA has been interrupted or stopped",
+          "any infections since the counts fell"
+        ]
+      },
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Codes the reported lab result as lymphopenia, listed and not serious, with follow-up on treatment and infections."
+    },
+    {
+      "id": "AEA-041",
+      "report_id": "AEI-023",
+      "assessment": {
+        "case_type": "not_valid",
+        "valid": false,
+        "missing_criteria": [
+          "event"
+        ],
+        "reporter_type": "consumer",
+        "events": [],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": false,
+        "listed": null,
+        "reportability": "not_reportable",
+        "day_0": null,
+        "due": null,
+        "internal_forward_late": false,
+        "follow_up": [
+          "whether she has had any side effects"
+        ]
+      },
+      "verdict": "fail",
+      "faults": [
+        "SF-01"
+      ],
+      "explanation": "Treats a lab result as a question about treatment and records no event."
+    },
+    {
+      "id": "AEA-042",
+      "report_id": "AEI-024",
+      "assessment": {
+        "case_type": "adverse_event",
+        "valid": true,
+        "missing_criteria": [],
+        "reporter_type": "hcp",
+        "events": [
+          {
+            "verbatim": "her liver tests came back with ALT 228, AST 286 and total bilirubin 2.9. She was jaundiced",
+            "term": "AET-018",
+            "listed": true,
+            "fatal": false,
+            "serious_criteria": [
+              "medically_important"
+            ]
+          }
+        ],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": true,
+        "listed": true,
+        "reportability": "periodic",
+        "day_0": "2026-09-08",
+        "due": null,
+        "internal_forward_late": false,
+        "follow_up": [
+          "action taken with QUORVANTA",
+          "outcome and the most recent liver tests",
+          "other causes investigated"
+        ]
+      },
+      "verdict": "pass",
+      "faults": [],
+      "explanation": "Day 0 is the 2026 call; liver injury with jaundice is medically important but listed; liver failure is not coded because the reporter denied it."
+    },
+    {
+      "id": "AEA-043",
+      "report_id": "AEI-024",
+      "assessment": {
+        "case_type": "adverse_event",
+        "valid": true,
+        "missing_criteria": [],
+        "reporter_type": "hcp",
+        "events": [
+          {
+            "verbatim": "her liver tests came back with ALT 228, AST 286 and total bilirubin 2.9. She was jaundiced",
+            "term": "AET-018",
+            "listed": true,
+            "fatal": false,
+            "serious_criteria": [
+              "medically_important"
+            ]
+          },
+          {
+            "verbatim": "Hy's law criteria",
+            "term": "AET-101",
+            "listed": false,
+            "fatal": false,
+            "serious_criteria": [
+              "medically_important"
+            ]
+          }
+        ],
+        "special_situations": [],
+        "product_complaint": null,
+        "serious": true,
+        "listed": false,
+        "reportability": "expedited_15_day",
+        "day_0": "2024-11-01",
+        "due": "2024-11-16",
+        "internal_forward_late": false,
+        "follow_up": [
+          "action taken with QUORVANTA",
+          "outcome and the most recent liver tests",
+          "other causes investigated"
+        ]
+      },
+      "verdict": "fail",
+      "faults": [
+        "SF-04",
+        "SF-03"
+      ],
+      "explanation": "Takes the event date as day 0, and codes hepatic failure, which the reporter denied, making the case look expedited."
     }
   ]
 }

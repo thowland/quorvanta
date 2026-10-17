@@ -70,6 +70,17 @@
       "status": "approved"
     },
     {
+      "id": "MSG-REM-LABS",
+      "purpose": "Blood test reminder, 7 days before a scheduled blood count is due",
+      "kind": "reminder",
+      "versions": {
+        "English": "QuorvantaConnect: A blood test on your treatment schedule is due in about a week. Please check with your healthcare provider's office about when and where. Questions? Call 1-800-555-0183. Reply STOP to cancel.",
+        "Spanish": "QuorvantaConnect: En aproximadamente una semana le toca un análisis de sangre de su calendario de tratamiento. Consulte con el consultorio de su proveedor de atención médica cuándo y dónde hacérselo. ¿Preguntas? Llame al 1-800-555-0183. Responda STOP para cancelar."
+      },
+      "citations": ["PGM-NURSE.3"],
+      "status": "approved"
+    },
+    {
       "id": "MSG-NS-STATUS",
       "purpose": "Never-start, step 1: the case is in progress",
       "kind": "campaign",

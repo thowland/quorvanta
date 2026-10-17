@@ -21,6 +21,8 @@ LANGUAGES = {"English", "Spanish"}
 KEYWORDS = {kind: set(words) for kind, words in RULES["keywords"].items() if kind != "match"}
 ZONES = RULES["time_zones"]["zones"]
 CAMPAIGN_KINDS = ("CMP-NEVERSTART", "CMP-DISCON-RISK")
+REMINDERS = ("PGM-REFILL-REMINDERS", "PGM-LAB-REMINDERS")
+LAB_FIRST_DAYS, LAB_EVERY_DAYS, LAB_LEAD_DAYS = 91, 182, 7
 
 
 def keyword(text):
@@ -102,6 +104,11 @@ def candidates(person, fills, as_of):
         out.append((e + timedelta(days=step), "CMP-NEVERSTART", None, e, step, msg, None))
     if person.started_on:
         out.append((person.started_on + timedelta(days=10), "CMP-DISCON-RISK", "first_month", person.started_on, 10, "MSG-DR-NURSE", None))
+        # Blood counts are due 3 months after starting and every 6 months after that (label 2.4).
+        due = person.started_on + timedelta(days=LAB_FIRST_DAYS)
+        while due - timedelta(days=LAB_LEAD_DAYS) <= as_of:
+            out.append((due - timedelta(days=LAB_LEAD_DAYS), "PGM-LAB-REMINDERS", None, due, -LAB_LEAD_DAYS, "MSG-REM-LABS", None))
+            due += timedelta(days=LAB_EVERY_DAYS)
     for f in fills:
         due = f["shipped_on"] + timedelta(days=f["days_supply"])
         out.append((due - timedelta(days=3), "PGM-REFILL-REMINDERS", None, due, -3, "MSG-REM-REFILL", f["shipped_on"]))
@@ -185,10 +192,10 @@ class Replay:
         else:
             if not self.opted_in(when):
                 reason = "after_opt_out" if any(k == "opt_out" for t, k in self.keywords if t < when) else "no_opt_in"
-            elif campaign == "PGM-REFILL-REMINDERS":
+            elif campaign in REMINDERS:
                 if not p.text_reminders:
                     reason = "no_reminder_choice"
-                elif p.discontinued(day) or self.later_fill_before(ref, day):
+                elif p.discontinued(day) or (ref is not None and self.later_fill_before(ref, day)):
                     reason = "situation_ended"
             elif not self._situation_holds(campaign, track, ref, day):
                 reason = "situation_ended"

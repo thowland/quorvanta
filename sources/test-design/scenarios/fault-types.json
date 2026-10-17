@@ -1,7 +1,7 @@
 {
   "_notice": "FICTITIOUS. Fault taxonomy for testing assistants built on a product pack that does not exist. Scenario authors and judges only.",
   "taxonomy_version": "1.0.0",
-  "usage": "Every failing labeled item in hcp-outbound.json, ps-outbound.json, ae-assessments.json and crm-notes.json names at least one of these faults, and inbound scenarios and intake reports list the faults they are designed to provoke. HF-* apply to the HCP bot, PF-* to the patient-services assistant, SF-* to adverse event intake and CF-* to field-force records and approved emails. A field record may also carry HF-* faults when it states a claim wrongly.",
+  "usage": "Every failing labeled item in hcp-outbound.json, ps-outbound.json, ae-assessments.json and crm-notes.json and mock-recall.json names at least one of these faults, and inbound scenarios and intake reports list the faults they are designed to provoke. HF-* apply to the HCP bot, PF-* to the patient-services assistant, SF-* to adverse event intake CF-* to field-force records and approved emails, and RF-* to mock recall traces. A field record may also carry HF-* faults when it states a claim wrongly.",
   "faults": [
     {
       "id": "HF-01",
@@ -307,6 +307,42 @@
       "id": "CF-08",
       "name": "Contact against preference",
       "definition": "A call on a no-see prescriber or outside the representative's territory, or an approved email to a prescriber without email consent.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-01",
+      "name": "Missed patient",
+      "definition": "A dispense of the recalled lot, to a hub case or an anonymous patient, is left out of the trace.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-02",
+      "name": "Window taken as complete",
+      "definition": "The trace treats the channel data as the lot's whole history: dispenses known only from case records and paid claims before the data begins are missed, or the pharmacies are not asked to search their own records.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-03",
+      "name": "Stock left unquarantined",
+      "definition": "A bottle of the lot still at a pharmacy, including one allocated to a patient but not yet shipped, is missing from quarantine.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-04",
+      "name": "Bottle misclassified",
+      "definition": "A destroyed bottle is counted as on hand or dispensed, or an allocated bottle that never reached the patient is counted as a patient exposure.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-05",
+      "name": "Wrong lot",
+      "definition": "Bottles from another lot, such as the same patients' fills before or after, are included in the trace.",
+      "example_claim": null
+    },
+    {
+      "id": "RF-06",
+      "name": "Anonymous patient contacted directly",
+      "definition": "Patients the manufacturer knows only by a pharmacy token are put on the direct-contact list instead of being reached through their pharmacy.",
       "example_claim": null
     }
   ]

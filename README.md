@@ -11,7 +11,7 @@
 
 This repository holds a complete, internally consistent fictional product: an invented drug for an invented disease, marketed by an invented company, together with the regulatory, promotional, medical, access, patient-support, payer, supply-chain, safety and field-force material that a real specialty launch would generate around it. It exists so that anyone working on the software around a commercial product has something complete and unencumbered to develop against, hand to a vendor, put on a screen in a demonstration, and test with, without a real product anywhere in the picture.
 
-## Why a fictional product is useful
+## Constraints on real data
 
 The data that pharma commercial systems run on is hard to work with anywhere outside production, for three reasons.
 
@@ -19,17 +19,17 @@ The data that pharma commercial systems run on is hard to work with anywhere out
 - **Real patient and prescriber data is off limits.** Patient data is protected under HIPAA, and prescriber data is licensed. Any system built or shown on either carries privacy and contractual risk that a development or demonstration environment should not need.
 - **Public synthetic data covers single functions.** Synthetic health records and claims files exist, as do conformance fixtures for standards such as FHIR and EPCIS. Each covers one function, with real drug codes and no product behind it. Nothing public follows one product from its label, through the claims and materials built on that label, into the support program, the payer transactions and the supply chain.
 
-Those constraints bite long before anyone writes a test. Developers end up building against stubs and hand-typed fixtures that do not join up, so integration problems surface late, when the real data finally arrives. Vendor evaluations stall on data-sharing agreements, or go ahead on the vendor's own sample data, which shows their product at its best and tells you little about how it will handle yours. Demonstrations are given on redacted screens or placeholder content, and the reviewers spend the meeting asking about the gaps instead of the system.
+Those constraints affect development long before anyone writes a test. Developers build against stubs and hand-typed fixtures that do not join up, so integration problems surface late, when the real data finally arrives. Vendor evaluations stall on data-sharing agreements, or go ahead on the vendor's own sample data, which is chosen to show their product at its best and says nothing about how it will handle the content and records it will meet in production. Demonstrations are given on redacted screens or placeholder content, and the reviewers spend the meeting asking about the gaps.
 
-Quorvanta is my answer to that. Because nothing in it is real, it can go into a public repository, a vendor sandbox, a continuous integration pipeline or an external model without an agreement or a review, and because the pieces agree with each other exactly, a system built or shown on it behaves the way it would on a real product.
+Quorvanta is my answer to those constraints. Because nothing in it is real, it can go into a public repository, a vendor sandbox, a continuous integration pipeline or an external model without an agreement or a review, and because the pieces agree with each other exactly, a system built or shown on it behaves the way it would on a real product.
 
 ## Launch video
 
-A 33-second overview of the pack is in [`assets/launch-video/`](assets/launch-video/), with the poster frame and credits. It shows the brand, the confession that nothing in it is real, what the pack is for, what it contains, and the deliberate traps.
+A 33-second overview of the pack is in [`assets/launch-video/`](assets/launch-video/), with the poster frame and credits. It covers the brand, the notice that nothing in it is real, the use cases, the contents, and the deliberate traps.
 
 https://github.com/user-attachments/assets/e38dd260-8dcb-4b0e-a5e1-629918f53637
 
-## What is in the pack
+## Contents
 
 The foundation is a fictitious prescribing information document (the label), written in the standard US structure and sections. Everything else is derived from it, and the numbers agree everywhere they appear. The layers built on it are:
 
@@ -62,7 +62,7 @@ For volume, `scripts/generate_population.py` builds offices, HCPs, office staff,
 
 ## Demonstrating with it
 
-A demonstration needs a story as well as data, and the pack has one. The product moves from topline results through approval to commercial availability, with press releases at each step. The patient-support cases have histories that can be walked through on screen, from enrollment and benefits verification through prior authorization and appeal, copay support and bridge supply to shipments that can be traced to a serialized bottle. Representatives have territories, call histories and approved emails, and the medical information responses answer the questions a prescriber would ask. All of it can be recorded, screenshotted and shared publicly without an NDA (non-disclosure agreement) around the data.
+A demonstration needs a story as well as data, so the pack carries one. The product moves from topline results through approval to commercial availability, with press releases at each step. The patient-support cases have histories that can be walked through on screen, from enrollment and benefits verification through prior authorization and appeal, copay support and bridge supply to shipments that can be traced to a serialized bottle. Representatives have territories, call histories and approved emails, and the medical information responses answer the questions a prescriber would ask. All of it can be recorded, screenshotted and shared publicly without an NDA (non-disclosure agreement) around the data.
 
 ### Visual identity
 
@@ -126,7 +126,7 @@ The fiction is also enforced mechanically:
 - NPIs and CLIA numbers use ranges that are never assigned;
 - every file carries a notice that its contents are invented.
 
-## Limits worth knowing
+## Limits
 
 - **No medical information.** The pack imitates the structure and language of real labeling and program material closely, but its content has been through no review of any kind. It must not be read as medical information.
 - **Standards conformance.** The FHIR and SPL files follow the published structures but break a few requirements on purpose. An invented drug has no RxNorm code, no UNII substance code and no DUNS number, and each exception is documented where it occurs.
@@ -134,9 +134,9 @@ The fiction is also enforced mechanically:
 
 ## Invented names
 
-We have tried to invent wholly imaginary names, but new products, trials and companies come into existence all the time, so a name that is clear today may not stay clear. `python3 scripts/extract_names.py` lists every invented name in the pack in `scripts/names-to-check.csv`, and `python3 scripts/namecheck.py` runs an exact-phrase web search for each one; both should be run periodically to make sure no collisions have appeared. We most recently reviewed the names on September 24, 2026.
+I have tried to invent wholly imaginary names, but new products, trials and companies come into existence all the time, so a name that is clear today may not stay clear. `python3 scripts/extract_names.py` lists every invented name in the pack in `scripts/names-to-check.csv`, and `python3 scripts/namecheck.py` runs an exact-phrase web search for each one; both should be run periodically to make sure no collisions have appeared. I most recently reviewed the names on September 24, 2026.
 
-If you find that you or your company's information was inadvertently included here, please contact us by opening an issue at [github.com/thowland/quorvanta](https://github.com/thowland/quorvanta/issues), and we will remove it promptly.
+If you find that your own or your company's information was inadvertently included here, open an issue at [github.com/thowland/quorvanta](https://github.com/thowland/quorvanta/issues) and I will remove it promptly.
 
 ## Extending it
 

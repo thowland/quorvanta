@@ -27,6 +27,8 @@ Quorvanta is my answer to that. Because nothing in it is real, it can go into a 
 
 A 33-second overview of the pack is in [`assets/launch-video/`](assets/launch-video/), with the poster frame and credits. It shows the brand, the confession that nothing in it is real, what the pack is for, what it contains, and the deliberate traps.
 
+https://github.com/user-attachments/assets/e38dd260-8dcb-4b0e-a5e1-629918f53637
+
 ## What is in the pack
 
 The foundation is a fictitious prescribing information document (the label), written in the standard US structure and sections. Everything else is derived from it, and the numbers agree everywhere they appear. The layers built on it are:

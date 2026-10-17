@@ -159,7 +159,8 @@ class Context:
     def _core_names():
         names = set()
         for rel, get in (("crm/field-force.json", lambda d: [f"{h['first_name']} {h['last_name']}" for h in d["hcps"]] + [s["name"] for s in d["staff"]]),
-                         ("test-design/ps-cases.json", lambda d: [f"{c['patient']['first_name']} {c['patient']['last_name']}" for c in d["cases"]])):
+                         ("test-design/ps-cases.json", lambda d: [f"{c['patient']['first_name']} {c['patient']['last_name']}" for c in d["cases"]]
+                          + [c["case_manager"] for c in d["cases"]])):
             path = SRC / rel
             if path.exists():
                 names |= set(get(json.loads(path.read_text())))
@@ -183,7 +184,8 @@ class People:
                 return name
 
     def person(self, sex=None):
-        """A first name and a double-barreled surname that no core cast member has."""
+        """A first name and a double-barreled surname that no core cast member has. An entity that means to reuse a
+        core name (the same person, or a deliberate namesake) assigns it directly and marks it in patterns."""
         while True:
             sex = sex or self.rng.choice(["female", "male"])
             first = self.first.first_name_female() if sex == "female" else self.first.first_name_male()

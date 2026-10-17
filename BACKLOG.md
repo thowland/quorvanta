@@ -18,7 +18,6 @@ Each of these is one module in `scripts/population/entities/`. The validator che
 | Item | What it adds | Notes |
 | --- | --- | --- |
 | Speaker programs and Open Payments | Speakers, programs, venues, attendees, meals and honoraria, reported as federal Open Payments (Sunshine Act) data. Tests spend caps, sign-in rules, repeat attendance and state restrictions. | Promotional talks may use only approved claims and slides; attendees come from `population/hcps.json`. |
-| QuorvantaConnect staff | Case managers, nurses and supervisors, with queues and schedules. | The core cases already name case managers. |
 | Market prescription volume | Weekly new and total prescriptions by prescriber for QUORVANTA and the six fictional competitors, as volumes only. | Competitor names may appear only in `landscape/` and `test-design/`; this needs a decision on where the file lives. |
 | Payers at volume | More employers and plans, and formulary positions over time. | Must stay consistent with `payer/plans.json`. |
 
@@ -46,7 +45,7 @@ The population already carries master-data problems with an answer key: duplicat
 - **Several sources per person.** Each HCP or patient comes from one generated file. Real MDM reconciles the same person arriving from several systems, each with its own ids and its own variations. For HCPs that would be the CRM, the Start Form's prescriber section, the 867 dispense feed's prescriber NPI, the email platform and portal registrations; for patients, the hub, the specialty pharmacy and the texting platform.
 - **Golden records and crosswalks.** A master file mapping every source record to its master id, kept in `test-design/` as the answer key for match-and-merge.
 - **Survivorship rules.** A rules file, in the style of `engagement/campaign-rules.json`, saying which source wins for address, phone, specialty and consent and how conflicts are settled, so the validator can recompute every golden record.
-- **The core cast inside the population.** The 30 core prescribers and 29 hub cases never appear in the generated files, so nothing yet has to resolve a hub case against a population patient.
+- **The core cast inside the population.** The four core case managers are on the generated staff roster, and two generated patients are deliberate namesakes of hub-case patients, but the 30 core prescribers and the hub cases themselves still never appear in the generated files, so nothing yet has to resolve a hub case against a population patient.
 - **Identity in the outreach data.** Texts are keyed on the population patient id. Shared household phone numbers and a reassigned number, where consent belongs to the previous owner, would give consent resolution something to catch.
 
 The work is roughly the size of the engagement layer: source feeds with realistic variation (nicknames, suffixes, address formats, stale specialties, phone formats), the master file and crosswalk, the survivorship rules and their validator checks, and the outreach tie-ins.

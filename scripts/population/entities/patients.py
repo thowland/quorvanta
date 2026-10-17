@@ -22,10 +22,10 @@ class Patients(Entity):
     name = "patients"
     id_prefix = "PPAT"
     default_count = 500
-    requires = ("hcps",)
-    references = {"prescriber_id": "hcps", "quality_flags[].of": "patients"}
-    notice = ("FICTITIOUS. Generated patients who do not exist. Names never repeat a core cast member; cities are Faker "
-              "inventions; phone numbers use the reserved 555-01xx range.")
+    requires = ("hcps", "qc-staff")
+    references = {"prescriber_id": "hcps", "case_manager_id": "qc-staff", "quality_flags[].of": "patients"}
+    notice = ("FICTITIOUS. Generated patients who do not exist. A name repeats a core cast member or another generated "
+              "person only where patterns says why; cities are Faker inventions; phone numbers use the reserved 555-01xx range.")
     usage = ("Support-program identities for identity-verification, matching and load testing. They carry insurance and a "
              "prescriber but no shipments, claims or case statuses; only the 29 hand-built cases in "
              "test-design/ps-cases.json have those. Plan names come from payer/plans.json, limited by state where a "
@@ -34,13 +34,22 @@ class Patients(Entity):
              "date of the first fill (refills.json has every fill); for some it records when and why treatment stopped, "
              "and for enrolled patients with no first fill, why not and whether the prescriber canceled the prescription. "
              "communications holds the Start Form choices that texting depends on: contact_consent (E2) and text_reminders "
-             "(C5); the text opt-in itself is in sms-messages.json. lab-results follow therapy.")
+             "(C5); the text opt-in itself is in sms-messages.json. lab-results follow therapy. Enrolled patients have a "
+             "QuorvantaConnect case manager (qc-staff.json), Spanish-speaking for Spanish-language patients. patterns "
+             "marks people with a second role, a staff member or prescriber who is also a patient, and deliberate "
+             "namesakes of the hand-built case patients.")
     flags = {
         "same_name": "Shares first and last name with 'of', with a different date of birth and ZIP code.",
         "same_name_and_dob": "Shares name and date of birth with 'of'; only the ZIP code tells them apart.",
         "duplicate": "The same person entered twice, with the hyphen dropped from the surname; 'of' is the original.",
         "moved": "Changed address; previous_zip holds the old ZIP code.",
         "minor": "Under 18 on the as_of date. The program is for adults (PGM-GEN.1) and a minor caller stops case discussion (ESC-08).",
+        "assigned_to_departed_staff": "The case manager has left QuorvantaConnect and the patient has not been reassigned.",
+    }
+    patterns = {
+        "also_staff": "The same person as the QuorvantaConnect staff member 'of'. Their case is handled by someone else, and colleagues may see it only as any case manager would.",
+        "also_prescriber": "The same person as the prescriber 'of', a clinician who is also a patient, with a different prescriber.",
+        "namesake_of_core": "Shares a name with the hand-built case patient 'of' (test-design/ps-cases.json) but is a different person, with a different date of birth and ZIP code.",
     }
 
     def generate(self, ctx, count):
@@ -84,7 +93,63 @@ class Patients(Entity):
                 rec["quality_flags"].append({"type": "minor"})
             out.append(rec)
         self._journeys(ctx, out)
+        self._roles(ctx, out)
         return out
+
+    def _roles(self, ctx, out):
+        """Case managers, people with a second role and core namesakes, each from its own random stream."""
+        from faker.providers.person.en_US import Provider
+        staff = ctx.records("qc-staff")
+        cms = [s for s in staff if s["role"] == "case_manager"]
+        departed = [s for s in cms if s["status"] == "left"]
+        active = [s for s in cms if s["status"] == "active"]
+        rng = ctx.rng(self.name + ":case-manager")
+        by_id = {r["id"]: r for r in out}
+        for rec in out:
+            if rec["program"]["status"] != "enrolled" or any(f["type"] == "duplicate" for f in rec["quality_flags"]):
+                continue
+            pool = [s for s in active if rec["language"] != "Spanish" or "Spanish" in s["languages"]]
+            rec["case_manager_id"] = rng.choice(pool)["id"]
+        targets = {f["of"] for r in out for f in r["quality_flags"] if "of" in f}
+        stuck = rng.sample([r for r in out if r["case_manager_id"] and r["language"] != "Spanish" and not r["quality_flags"]
+                            and r["id"] not in targets], 6)
+        for i, rec in enumerate(stuck):
+            rec["case_manager_id"] = departed[i % len(departed)]["id"]
+            rec["quality_flags"].append({"type": "assigned_to_departed_staff"})
+
+        # People with two roles and namesakes take over a clean enrolled adult patient's name. That patient is
+        # nobody's 'of' target, so no same_name or duplicate record loses its match.
+        rng = ctx.rng(self.name + ":roles")
+        free = [r for r in out if not r["quality_flags"] and r["id"] not in targets and r["case_manager_id"]
+                and r["language"] == "English" and r["dob"] < str(AS_OF.replace(year=AS_OF.year - 25))]
+        female = set(Provider.first_names_female)
+
+        def take(first, last, pred=lambda r: True):
+            sex = "female" if first in female else "male"
+            rec = rng.choice([r for r in free if r["sex"] == sex and pred(r)])
+            free.remove(rec)
+            rec["first_name"], rec["last_name"] = first, last
+            return rec
+        for s in [rng.choice([s for s in staff if s["role"] == role and s["status"] == "active" and not s["patterns"]])
+                  for role in ("case_manager", "nurse", "intake_coordinator")]:
+            rec = take(s["first_name"], s["last_name"])
+            rec["patterns"].append({"type": "also_staff", "of": s["id"]})
+            if rec["case_manager_id"] == s["id"]:
+                rec["case_manager_id"] = next(c["id"] for c in active if c["id"] != s["id"] and "Spanish" not in c["languages"])
+        hcps = [h for h in ctx.records("hcps") if h["status"] == "active" and not h["quality_flags"]]
+        states = {r["state"] for r in free}
+        for h in rng.sample([h for h in hcps if h["state"] in states], 2):
+            rec = take(h["first_name"], h["last_name"], lambda r, h=h: r["state"] == h["state"] and r["prescriber_id"] != h["id"])
+            rec["patterns"].append({"type": "also_prescriber", "of": h["id"]})
+        cases = json.loads((SRC / "test-design/ps-cases.json").read_text())["cases"]
+        for c in rng.sample([c for c in cases if c["patient"]["language"] == "English"], 2):
+            p = c["patient"]
+            rec = take(p["first_name"], p["last_name"], lambda r, p=p: r["dob"] != p["dob"] and r["zip"] != p["zip"])
+            rec["patterns"].append({"type": "namesake_of_core", "of": c["case_id"]})
+        for rec in out:
+            dup = next((f["of"] for f in rec["quality_flags"] if f["type"] == "duplicate"), None)
+            if dup:
+                rec["case_manager_id"] = by_id[dup]["case_manager_id"]
 
     def _journeys(self, ctx, out):
         """Therapy and contact choices, from their own random stream so they can change without renaming anyone."""
@@ -156,7 +221,7 @@ class Patients(Entity):
             "id": self.make_id(i), "first_name": first, "last_name": last, "sex": sex, "dob": dob(18, 80),
             "city": people.city(), "state": state, "zip": people.zip(state), "previous_zip": None,
             "phone": people.phone(state), "language": rng.choices(list(LANGUAGES), weights=list(LANGUAGES.values()))[0],
-            "prescriber_id": prescriber["id"],
+            "prescriber_id": prescriber["id"], "case_manager_id": None,
             "insurance": {"type": kind, "plan_name": plan, "secondary_plan_name": secondary,
                           "government_program": kind in ("medicare", "medicaid", "tricare", "va") or secondary is not None},
             "program": {"status": "enrolled" if enrolled else rng.choice(["pending", "declined"]),
@@ -164,5 +229,5 @@ class Patients(Entity):
             "therapy": {"status": "not_started", "started_on": None, "discontinued_on": None, "discontinued_reason": None,
                         "not_started_reason": None, "prescription_canceled_on": None},
             "communications": {"contact_consent": False, "text_reminders": False},
-            "authorized_contacts": contacts, "legal_representative": rep, "quality_flags": [],
+            "authorized_contacts": contacts, "legal_representative": rep, "patterns": [], "quality_flags": [],
         }

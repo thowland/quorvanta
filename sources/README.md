@@ -62,7 +62,7 @@ sources/
 ├── crm/                   Territories, field staff, accounts, prescribers, approved emails, call log
 ├── engagement/            Texting and outreach rules, approved text messages, campaigns, and outreach for eight cases
 ├── press/                 Corporate press releases
-├── population/            Generated offices, HCPs, office staff, patients, labs, lab results, refills, texts, emails, portal visits and MI requests
+├── population/            Generated offices, HCPs, office staff, QuorvantaConnect staff, patients, labs, lab results, refills, texts, emails, portal visits and MI requests
 └── test-design/           Known gaps, synthetic cases, labeled scenarios and judge rubrics (keep out of prompts)
 ```
 
@@ -111,7 +111,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `engagement/campaigns.json` | Text activation, never-start support and discontinuation risk (first-month and late-refill tracks), plus refill and blood test reminders: steps, entry and exit conditions | Campaign engines and next-best-action |
 | `engagement/case-outreach.json` | Texts and campaign memberships for 8 of the hand-built cases, June to September 2026 | Demonstrations that follow one patient across channels |
 | `press/` | Three press releases: Phase 3 EVERGARTER topline (October 2022), FDA approval (January 2024), commercial availability and QuorvantaConnect (February 2024) | Corporate context and demonstrations; two more out-of-label sources |
-| `population/` | Generated offices, HCPs, office staff, patients, labs, lab results, refills, text messages, campaign memberships, HCP emails, HCP portal sessions and medical information requests. *Generated* | CRM, master-data, matching, outreach, Medical Information and load testing |
+| `population/` | Generated offices, HCPs, office staff, QuorvantaConnect staff, patients, labs, lab results, refills, text messages, campaign memberships, HCP emails, HCP portal sessions and medical information requests. *Generated* | CRM, master-data, matching, outreach, Medical Information and load testing |
 | `test-design/known-gaps.json` | 24 topics the library leaves uncovered on purpose, with the expected bot behavior and the SRD that covers each (six have none and go to the fallback or access referral) | Answer key; scenario authors only |
 | `test-design/ps-known-gaps.json` | 29 patient-services situations the library deliberately stops at, with expected behavior and the cases that exercise them | Answer key; scenario authors only |
 | `test-design/ps-cases.json` | 29 synthetic QuorvantaConnect case records as of 2026-09-22, each naming the behaviors it tests | Hub data; the patient-services assistant sees one case only after verification |
@@ -381,10 +381,10 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 .venv/bin/python scripts/generate_population.py --list
 ```
 
-The default sizes are 150 offices, 600 HCPs, 250 office staff, 500 patients, 60 labs, lab results for 400 patients on treatment, and 450 medical information requests (a few more once repeats and flagged examples are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream. Regenerating one entity alone leaves the others' output unchanged. If anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
+The default sizes are 150 offices, 600 HCPs, 250 office staff, 20 QuorvantaConnect case managers (with 16 more nurses, intake coordinators and supervisors), 500 patients, 60 labs, lab results for 400 patients on treatment, and 450 medical information requests (a few more once repeats and flagged examples are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream. Regenerating one entity alone leaves the others' output unchanged. If anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
 
 The generator keeps to the pack's fiction:
-- names pair a Faker first name with a double-barreled surname drawn from fifteen locales, and never repeat a core cast member;
+- names pair a Faker first name with a double-barreled surname drawn from fifteen locales. A generated record shares a core cast member's name only where its `patterns` say why, and the validator fails any other match;
 - practice names are built from invented place-words;
 - cities are Faker inventions, with real state codes and ZIP codes;
 - phones are 555-01xx, emails and domains are `.example`, NPIs start with 91 (the core cast uses 90), and lab CLIA numbers start with 99D, a state code that is never issued.
@@ -406,6 +406,15 @@ Generated records are context and volume, never answer keys. Patients have ident
 - HIN-041, a nurse practitioner asking whether to start a patient with a baseline lymphocyte count of 0.66 (GAP-08);
 - PSC-033 and AEI-023, a patient on the assistant with prolonged severe lymphopenia, which is an adverse event to hand off as well as a medical question;
 - AEI-024, a prescriber reporting in September 2026 a liver injury with jaundice from November 2024. Day 0 is the call, not the event, and the hepatic failure the reporter rules out must not be coded.
+
+**QuorvantaConnect staff and second roles.** `qc-staff.json` is the support program's roster: case managers, nurses, intake coordinators and supervisors, each with a supervisor, queues, languages and an Eastern Time shift inside program hours. The validator checks that every program hour has a case manager, a nurse and a Spanish-speaking case manager. The four case managers the hand-built cases name are on the roster, marked `core_cast_member`; they are the same people, and the validator checks that each is active and, for the Spanish-language case, speaks Spanish. Every enrolled patient has a case manager, Spanish-speaking for Spanish-language patients. Two case managers have left, and the patients still assigned to them are flagged.
+
+People can hold more than one role, and `patterns` on the patient record says so:
+- three staff members who are also patients (`also_staff`), none of them their own case manager;
+- two prescribers who are also patients (`also_prescriber`), each with a different prescriber in the state where they practice;
+- two patients who share a name with a hand-built case patient but are different people (`namesake_of_core`), with a different date of birth and ZIP code.
+
+These give matching and privacy tools real cases: an employee's own case in the queue, a clinician on both sides of a prescription, and a caller whose name matches a case but whose details do not.
 
 Each file lists deliberate data problems in `quality_flags`, with a legend in the file's header, so a matching or cleansing tool can be scored against them:
 - duplicate records with name variants (a duplicate HCP shares its original's NPI);
@@ -441,7 +450,7 @@ Run the validator after any change. It checks that ids resolve and links run bot
 
 `BACKLOG.md` at the repository root holds the full list, with release tasks and open decisions. In short:
 
-- **More generated entities.** Speaker programs and Open Payments, QuorvantaConnect staff and market prescription volume.
+- **More generated entities.** Speaker programs and Open Payments, and market prescription volume.
 - **Outreach scenarios.** Labeled text replies, including side-effect mentions that must reach Drug Safety, and labeled campaign-audience decisions, with a fault family of their own.
 - **Scenarios on existing data.** A periodic safety report built from the intake cases.
 - **Documents.** Filled letters and forms for document-AI testing, generated on demand from a committed manifest rather than stored as PDFs.

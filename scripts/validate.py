@@ -1671,8 +1671,16 @@ def check_population():
         return
     ff = load("crm/field-force.json")
     core_npis = {h["npi"] for h in ff["hcps"]}
-    core_names = {f"{h['first_name']} {h['last_name']}" for h in ff["hcps"]} | {s["name"] for s in ff["staff"]}
-    core_names |= {f"{c['patient']['first_name']} {c['patient']['last_name']}" for c in load("test-design/ps-cases.json")["cases"]}
+    # Every core cast name, with the ids it can be declared against: prescribers, field staff, case patients,
+    # and "case_manager" for the case managers the cases name.
+    core_names = {}
+    for h in ff["hcps"]:
+        core_names.setdefault(f"{h['first_name']} {h['last_name']}", set()).add(h["id"])
+    for st in ff["staff"]:
+        core_names.setdefault(st["name"], set()).add(st["id"])
+    for c in load("test-design/ps-cases.json")["cases"]:
+        core_names.setdefault(f"{c['patient']['first_name']} {c['patient']['last_name']}", set()).add(c["case_id"])
+        core_names.setdefault(c["case_manager"], set()).add("case_manager")
     plan_names = {p["name"] for p in load("payer/plans.json")["plans"]}
     docs = {}
     for path in sorted(folder.glob("*.json")):
@@ -1714,8 +1722,10 @@ def check_population():
                     fail(f"{where} {rid}: CLIA number {r['clia']} is outside the 99D fiction range or reused")
                 if not dup:
                     npi_owner[r["clia"]] = rid
-            if f"{r.get('first_name')} {r.get('last_name')}" in core_names:
-                fail(f"{where} {rid}: repeats a core cast member's name")
+            declared = {x.get("of") for x in r.get("patterns", []) if x["type"] in ("core_cast_member", "namesake_of_core")}
+            full = f"{r.get('first_name')} {r.get('last_name')}"
+            if (full in core_names or declared) and not (declared and declared <= core_names.get(full, set())):
+                fail(f"{where} {rid}: a core cast name is shared only where patterns declares it, against a core id with that name")
             for email in field_values(r, "email"):
                 if not email.endswith(".example"):
                     fail(f"{where} {rid}: email {email} is not in .example")
@@ -1750,6 +1760,8 @@ def check_population():
         check_mi_requests(docs, rules)
     if {"patients", "hcps", "lab-results"} <= set(docs):
         check_population_refs(docs)
+    if {"patients", "hcps", "qc-staff"} <= set(docs):
+        check_staff(docs)
 
 
 def ckd_epi_2021(creat, age, sex):
@@ -2449,6 +2461,75 @@ def check_population_refs(docs):
                     fail(f"{oid}: text does not quote {lid}'s {t} value {values[t]}")
         if not found:
             fail(f"{oid}: none of its lab results carries the {refs['pattern']} pattern")
+
+
+def check_staff(docs):
+    """The QuorvantaConnect roster, its coverage of program hours, and the patients' case managers and second roles."""
+    staff = {x["id"]: x for x in docs["qc-staff"]["records"]}
+    hcps = {h["id"]: h for h in docs["hcps"]["records"]}
+    cases = load("test-design/ps-cases.json")["cases"]
+    days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+    hours = {}
+    for sid, x in staff.items():
+        where = f"population/qc-staff.json {sid}"
+        sched = x["schedule"]
+        if not set(sched["days"]) <= set(days) or not "08:00" <= sched["start"] < sched["end"] <= "20:00" \
+                or sched["time_zone"] != "America/New_York":
+            fail(f"{where}: shift falls outside program hours, 8 a.m. to 8 p.m. Eastern, Monday to Friday")
+        if (x["status"] == "left") != bool(x["left_on"]) or x["hired_on"] > (x["left_on"] or "9999"):
+            fail(f"{where}: status, hire and leaving dates disagree")
+        sup = staff.get(x["supervisor_id"])
+        if (x["role"] == "supervisor") != (sup is None) or (sup and sup["role"] != "supervisor"):
+            fail(f"{where}: supervisors report to none, and everyone else to a supervisor")
+        if x["role"] == "case_manager" and ("spanish_language" in x["queues"]) != ("Spanish" in x["languages"]):
+            fail(f"{where}: the Spanish queue is for Spanish-speaking case managers, and all of them")
+        if x["status"] == "active":
+            for d in sched["days"]:
+                for h in range(8, 20):
+                    if sched["start"] <= f"{h:02d}:00" and f"{h + 1:02d}:00" <= sched["end"]:
+                        hours.setdefault((d, h), set()).add((x["role"], "Spanish" in x["languages"]))
+    for d in days:
+        for h in range(8, 20):
+            got = hours.get((d, h), set())
+            if not {("case_manager", True)} <= got or not any(r == "nurse" for r, _ in got) \
+                    or not any(r == "case_manager" for r, _ in got):
+                fail(f"population/qc-staff.json: {d} {h:02d}:00 lacks a case manager, a nurse or a Spanish-speaking case manager")
+    core = {f"{x['first_name']} {x['last_name']}": x for x in staff.values()
+            if any(p["type"] == "core_cast_member" for p in x["patterns"])}
+    for c in cases:
+        x = core.get(c["case_manager"])
+        if x is None or x["role"] != "case_manager" or x["status"] != "active" \
+                or (c["patient"]["language"] == "Spanish" and "Spanish" not in x["languages"]):
+            fail(f"{c['case_id']}: case manager {c['case_manager']} is not an active, suitable case manager in qc-staff.json")
+    if set(core) != {c["case_manager"] for c in cases}:
+        fail("population/qc-staff.json: core_cast_member marks exactly the case managers the hand-built cases name")
+    patients = {p["id"]: p for p in docs["patients"]["records"]}
+    for pid, p in patients.items():
+        where = f"population/patients.json {pid}"
+        cm = staff.get(p["case_manager_id"])
+        dup = next((f["of"] for f in p["quality_flags"] if f["type"] == "duplicate"), None)
+        if (p["program"]["status"] == "enrolled") != (cm is not None) or (cm and cm["role"] != "case_manager"):
+            fail(f"{where}: every enrolled patient, and only an enrolled one, has a case manager")
+            continue
+        if dup and p["case_manager_id"] != patients[dup]["case_manager_id"]:
+            fail(f"{where}: a duplicate keeps its original's case manager")
+        if cm and p["language"] == "Spanish" and "Spanish" not in cm["languages"]:
+            fail(f"{where}: a Spanish-language patient needs a Spanish-speaking case manager")
+        if cm and (cm["status"] == "left") != any(f["type"] == "assigned_to_departed_staff" for f in p["quality_flags"]):
+            fail(f"{where}: assigned_to_departed_staff marks exactly the patients whose case manager has left")
+        for x in p["patterns"]:
+            other = staff.get(x["of"]) if x["type"] == "also_staff" else hcps.get(x["of"]) if x["type"] == "also_prescriber" else None
+            if x["type"] in ("also_staff", "also_prescriber"):
+                if other is None or (other["first_name"], other["last_name"]) != (p["first_name"], p["last_name"]):
+                    fail(f"{where}: {x['type']} {x['of']} does not exist or has another name")
+                elif x["of"] in (p["case_manager_id"], p["prescriber_id"]):
+                    fail(f"{where}: a patient who is also {x['of']} cannot be their own case manager or prescriber")
+                elif x["type"] == "also_prescriber" and other["state"] != p["state"]:
+                    fail(f"{where}: a prescriber who is a patient lives in the state they practice in")
+            if x["type"] == "namesake_of_core":
+                c = next((c for c in cases if c["case_id"] == x["of"]), None)
+                if c is None or c["patient"]["dob"] == p["dob"] or c["patient"]["zip"] == p["zip"]:
+                    fail(f"{where}: a namesake must differ from {x['of']} in date of birth and ZIP code")
 
 
 def read_denylist(path):

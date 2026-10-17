@@ -1,0 +1,1179 @@
+{
+  "_notice": "FICTITIOUS. Generated staff of a patient support program that does not exist. Addresses use .example; staff have no direct phone numbers and are reached through the program line.",
+  "population_version": "1.0.0",
+  "entity": "qc-staff",
+  "generated": {
+    "generator": "scripts/generate_population.py",
+    "faker_version": "40.39.0",
+    "seed": 20260922,
+    "count": 36,
+    "as_of": "2026-09-22"
+  },
+  "usage": "The QuorvantaConnect roster on the as_of date: case managers (--count sets how many, including the four the hand-built cases in test-design/ps-cases.json name), nurses (PGM-NURSE), intake coordinators and supervisors. Each person has a supervisor (supervisors report to none), queues, languages and a weekly shift in Eastern Time inside program hours, 08:00 to 20:00 Monday to Friday; every program hour is covered by at least one case manager, one nurse and one Spanish-speaking case manager. Spanish-language patients are assigned a Spanish-speaking case manager; patients in other languages use an interpreter with any case manager. Staff who have left keep their record, with status left and left_on. patterns marks the core case managers, who are the same people the hand-built cases name.",
+  "id_prefix": "PSTF",
+  "references": {
+    "supervisor_id": "qc-staff"
+  },
+  "must_match": {},
+  "quality_flags": {},
+  "patterns": {
+    "core_cast_member": "The case manager of that name in test-design/ps-cases.json; the same person, not a namesake."
+  },
+  "records": [
+    {
+      "id": "PSTF-00001",
+      "first_name": "Thomas",
+      "last_name": "Akar-Şener",
+      "role": "supervisor",
+      "supervisor_id": null,
+      "queues": [
+        "escalations"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "thomas.akar-sener@quorvantaconnect.example",
+      "hired_on": "2024-03-09",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00002",
+      "first_name": "Michael",
+      "last_name": "Camargo-Eimer",
+      "role": "supervisor",
+      "supervisor_id": null,
+      "queues": [
+        "escalations"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "michael.camargo-eimer@quorvantaconnect.example",
+      "hired_on": "2026-05-19",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00003",
+      "first_name": "Julia",
+      "last_name": "Aderibigbe-Baron",
+      "role": "supervisor",
+      "supervisor_id": null,
+      "queues": [
+        "escalations"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "julia.aderibigbe-baron@quorvantaconnect.example",
+      "hired_on": "2025-05-01",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00004",
+      "first_name": "Kristen",
+      "last_name": "Correia-Goje",
+      "role": "supervisor",
+      "supervisor_id": null,
+      "queues": [
+        "escalations"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "kristen.correia-goje@quorvantaconnect.example",
+      "hired_on": "2024-05-10",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00005",
+      "first_name": "Priyanka",
+      "last_name": "Deveraux",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "priyanka.deveraux@quorvantaconnect.example",
+      "hired_on": "2024-10-03",
+      "status": "active",
+      "left_on": null,
+      "patterns": [
+        {
+          "type": "core_cast_member",
+          "of": "case_manager"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00006",
+      "first_name": "Rosalind",
+      "last_name": "Achebe-Marr",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "rosalind.achebe-marr@quorvantaconnect.example",
+      "hired_on": "2024-11-03",
+      "status": "active",
+      "left_on": null,
+      "patterns": [
+        {
+          "type": "core_cast_member",
+          "of": "case_manager"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00007",
+      "first_name": "Tomas",
+      "last_name": "Lindqvist-Oyelaran",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "tomas.lindqvist-oyelaran@quorvantaconnect.example",
+      "hired_on": "2024-12-11",
+      "status": "active",
+      "left_on": null,
+      "patterns": [
+        {
+          "type": "core_cast_member",
+          "of": "case_manager"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00008",
+      "first_name": "Wendell",
+      "last_name": "Okafor-Brandt",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "wendell.okafor-brandt@quorvantaconnect.example",
+      "hired_on": "2025-06-07",
+      "status": "active",
+      "left_on": null,
+      "patterns": [
+        {
+          "type": "core_cast_member",
+          "of": "case_manager"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00009",
+      "first_name": "Karen",
+      "last_name": "Marchal-Quezada",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "karen.marchal-quezada@quorvantaconnect.example",
+      "hired_on": "2025-03-15",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00010",
+      "first_name": "Samuel",
+      "last_name": "Sillanpää-Travia",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "samuel.sillanpaa-travia@quorvantaconnect.example",
+      "hired_on": "2025-08-06",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00011",
+      "first_name": "Isabel",
+      "last_name": "Gerlach-Luukkonen",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "isabel.gerlach-luukkonen@quorvantaconnect.example",
+      "hired_on": "2025-09-23",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00012",
+      "first_name": "Amy",
+      "last_name": "Koskela-Kryszkiewicz",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "amy.koskela-kryszkiewicz@quorvantaconnect.example",
+      "hired_on": "2025-06-24",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00013",
+      "first_name": "Randy",
+      "last_name": "Cassiano-Maderna",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "randy.cassiano-maderna@quorvantaconnect.example",
+      "hired_on": "2025-11-15",
+      "status": "left",
+      "left_on": "2026-06-03",
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00014",
+      "first_name": "Michael",
+      "last_name": "Irizarry-Sompisi",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "michael.irizarry-sompisi@quorvantaconnect.example",
+      "hired_on": "2025-08-16",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00015",
+      "first_name": "Lance",
+      "last_name": "Chrodtrud-Hande",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "lance.chrodtrud-hande@quorvantaconnect.example",
+      "hired_on": "2025-11-17",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00016",
+      "first_name": "Hunter",
+      "last_name": "Szczechowicz-Vaessen",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "hunter.szczechowicz-vaessen@quorvantaconnect.example",
+      "hired_on": "2025-01-05",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00017",
+      "first_name": "Brandy",
+      "last_name": "Mkhungo-Leppänen",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "brandy.mkhungo-leppanen@quorvantaconnect.example",
+      "hired_on": "2026-03-21",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00018",
+      "first_name": "David",
+      "last_name": "Sousa-Schäfer",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "david.sousa-schafer@quorvantaconnect.example",
+      "hired_on": "2025-03-01",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00019",
+      "first_name": "Meredith",
+      "last_name": "Davids-Aksu",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "meredith.davids-aksu@quorvantaconnect.example",
+      "hired_on": "2024-08-04",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00020",
+      "first_name": "Tyrone",
+      "last_name": "Monteiro-Olukotun",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "tyrone.monteiro-olukotun@quorvantaconnect.example",
+      "hired_on": "2025-03-12",
+      "status": "left",
+      "left_on": "2026-06-07",
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00021",
+      "first_name": "Joseph",
+      "last_name": "Lehtinen-Akça",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "case_management",
+        "spanish_language"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "joseph.lehtinen-akca@quorvantaconnect.example",
+      "hired_on": "2024-06-09",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00022",
+      "first_name": "Jennifer",
+      "last_name": "Wiese-Kręcisz",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "jennifer.wiese-krecisz@quorvantaconnect.example",
+      "hired_on": "2026-04-17",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00023",
+      "first_name": "Zachary",
+      "last_name": "Collado-Ncala",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "zachary.collado-ncala@quorvantaconnect.example",
+      "hired_on": "2026-05-19",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00024",
+      "first_name": "Teresa",
+      "last_name": "Misiurek-Dindi",
+      "role": "case_manager",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "case_management"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "teresa.misiurek-dindi@quorvantaconnect.example",
+      "hired_on": "2025-09-18",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00025",
+      "first_name": "Kenneth",
+      "last_name": "Kuijpers-Bilir",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "kenneth.kuijpers-bilir@quorvantaconnect.example",
+      "hired_on": "2026-06-09",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00026",
+      "first_name": "Patricia",
+      "last_name": "Jaatinen-Alemdar",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "patricia.jaatinen-alemdar@quorvantaconnect.example",
+      "hired_on": "2025-09-04",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00027",
+      "first_name": "Jo",
+      "last_name": "Pasquier-Marín",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "jo.pasquier-marin@quorvantaconnect.example",
+      "hired_on": "2025-09-27",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00028",
+      "first_name": "Julie",
+      "last_name": "Blanc-Lehmann",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "julie.blanc-lehmann@quorvantaconnect.example",
+      "hired_on": "2024-11-02",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00029",
+      "first_name": "Austin",
+      "last_name": "Lahtinen-Salvo",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "austin.lahtinen-salvo@quorvantaconnect.example",
+      "hired_on": "2024-09-24",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00030",
+      "first_name": "Joseph",
+      "last_name": "Soczówka-Gaines",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "joseph.soczowka-gaines@quorvantaconnect.example",
+      "hired_on": "2025-12-18",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00031",
+      "first_name": "Tracey",
+      "last_name": "Adeleke-Stokes",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "tracey.adeleke-stokes@quorvantaconnect.example",
+      "hired_on": "2025-08-29",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00032",
+      "first_name": "Eric",
+      "last_name": "Dlamdaka-Rautio",
+      "role": "nurse",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "nurse_line"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "eric.dlamdaka-rautio@quorvantaconnect.example",
+      "hired_on": "2026-03-14",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00033",
+      "first_name": "Christopher",
+      "last_name": "Fasasi-Gardner",
+      "role": "intake_coordinator",
+      "supervisor_id": "PSTF-00001",
+      "queues": [
+        "intake"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "christopher.fasasi-gardner@quorvantaconnect.example",
+      "hired_on": "2026-01-13",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00034",
+      "first_name": "Shelby",
+      "last_name": "Yorulmaz-Kobelt",
+      "role": "intake_coordinator",
+      "supervisor_id": "PSTF-00002",
+      "queues": [
+        "intake"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "shelby.yorulmaz-kobelt@quorvantaconnect.example",
+      "hired_on": "2025-03-18",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00035",
+      "first_name": "Virginia",
+      "last_name": "Vaughn-Mbeje",
+      "role": "intake_coordinator",
+      "supervisor_id": "PSTF-00003",
+      "queues": [
+        "intake"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "16:30",
+        "time_zone": "America/New_York"
+      },
+      "email": "virginia.vaughn-mbeje@quorvantaconnect.example",
+      "hired_on": "2024-01-04",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    },
+    {
+      "id": "PSTF-00036",
+      "first_name": "Mary",
+      "last_name": "Grzegorzak-Rosado",
+      "role": "intake_coordinator",
+      "supervisor_id": "PSTF-00004",
+      "queues": [
+        "intake"
+      ],
+      "languages": [
+        "English"
+      ],
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "11:30",
+        "end": "20:00",
+        "time_zone": "America/New_York"
+      },
+      "email": "mary.grzegorzak-rosado@quorvantaconnect.example",
+      "hired_on": "2026-06-21",
+      "status": "active",
+      "left_on": null,
+      "patterns": [],
+      "quality_flags": []
+    }
+  ]
+}

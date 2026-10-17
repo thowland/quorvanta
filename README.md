@@ -23,6 +23,10 @@ Those constraints bite long before anyone writes a test. Developers end up build
 
 Quorvanta is my answer to that. Because nothing in it is real, it can go into a public repository, a vendor sandbox, a continuous integration pipeline or an external model without an agreement or a review, and because the pieces agree with each other exactly, a system built or shown on it behaves the way it would on a real product.
 
+## Launch video
+
+A 33-second overview of the pack is in [`assets/launch-video/`](assets/launch-video/), with the poster frame and credits. It shows the brand, the confession that nothing in it is real, what the pack is for, what it contains, and the deliberate traps.
+
 ## What is in the pack
 
 The foundation is a fictitious prescribing information document (the label), written in the standard US structure and sections. Everything else is derived from it, and the numbers agree everywhere they appear. The layers built on it are:

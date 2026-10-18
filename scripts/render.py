@@ -86,19 +86,30 @@ def site_sources():
     promo = {f"{p['id']}/{u['id']}": u for p in load("promotional/promo-materials.json")["pieces"] for u in p["units"]}
     claims = {c["id"]: c for c in load("claims/claims-library.json")["claims"]}
     dtc = {c["id"]: c for c in load("patient/dtc-claims.json")["claims"]}
-    return promo, claims, dtc
+    approved = {r["revision"]: r["approved_on"] for r in load("regulatory/opdp-submissions.json")["pi_revisions"]}
+    return promo, claims, dtc, approved
 
 
-def site_unit(u, sources):
-    """A website unit as (kind, text, claim ids): refs resolve to promo units, HCP claims or DTC claims word for word."""
-    promo, claims, dtc = sources
+def text_on(item, on, approved):
+    """The wording a claim or promo unit had in a material that went live on `on` (ISO date): a superseded entry
+    applies until the revision that replaced it was approved."""
+    for old in item.get("superseded", []):
+        if on < approved[old["superseded_by"]]:
+            return old["text"]
+    return item["text"]
+
+
+def site_unit(u, sources, on):
+    """A website unit as (kind, text, claim ids) in a version live from `on`: refs resolve to promo units, HCP claims
+    or DTC claims word for word, in the wording they had that day."""
+    promo, claims, dtc, approved = sources
     if "ref" in u:
         p = promo[u["ref"]]
-        return p["kind"], p["text"], p["claims"]
+        return p["kind"], text_on(p, on, approved), p["claims"]
     if "claim" in u:
-        return "body", claims[u["claim"]]["text"], [u["claim"]]
+        return "body", text_on(claims[u["claim"]], on, approved), [u["claim"]]
     if "dtc" in u:
-        return "body", dtc[u["dtc"]]["text"], [u["dtc"]]
+        return "body", text_on(dtc[u["dtc"]], on, approved), [u["dtc"]]
     return u["kind"], u["text"], u.get("claims", [])
 
 
@@ -106,10 +117,10 @@ SITE_FILES = {"WEB-HCP": "regulatory/hcp-website.md", "WEB-DTC": "regulatory/con
 
 
 def build_website(site, sources):
-    def lines(units):
+    def lines(units, on):
         out = []
         for u in units:
-            kind, body, ids = site_unit(u, sources)
+            kind, body, ids = site_unit(u, sources, on)
             if kind == "heading":
                 out.append(f"**{body}**")
             elif kind in ("nav", "notice", "footer"):
@@ -129,7 +140,8 @@ def build_website(site, sources):
         f"# {site['title']}: {site['domain']}, every version (fictitious)",
         "",
         f"> Everything here is invented. QUORVANTA, Arden Quay Biosciences and {site['domain']} do not exist. "
-        "Each statement is followed by the claim ids that support it, as a promotional review annotation would. "
+        "Each version quotes its content in the wording in force on the day it went live, and each statement is "
+        "followed by the claim ids that support it, as a promotional review annotation would. "
         "Generated from `websites.json` by `scripts/render.py`; do not edit by hand.",
         "",
         f"Audience: {site['audience']}. {site['gating']}",
@@ -144,10 +156,10 @@ def build_website(site, sources):
         out += ["", f"## Version {v['version']}, job code {v['job_code']}", "", v["changes"], ""]
         for pg in v["pages"]:
             gated = ", gated" if pg["gated"] else ""
-            out += [f"### {pg['title']} (`{pg['path']}`{gated})", ""] + lines(pg["units"])
+            out += [f"### {pg['title']} (`{pg['path']}`{gated})", ""] + lines(pg["units"], v["live_from"])
             if pg.get("document"):
                 out += [f"The download is `{pg['document']}`.", ""]
-        out += ["### Important Safety Information panel, at the foot of every page", ""] + lines(v["isi"])
+        out += ["### Important Safety Information panel, at the foot of every page", ""] + lines(v["isi"], v["live_from"])
     return "\n".join(out).rstrip("\n") + "\n"
 
 
@@ -266,7 +278,8 @@ SPL_SECTIONS = {
     "17": ("88436-1", "PATIENT COUNSELING INFORMATION"),
 }
 UNCLASSIFIED = ("42229-5", "SPL UNCLASSIFIED SECTION")
-HIGHLIGHT_TARGET = {"Indication": "1", "Dosage and administration": "2", "Dosage form": "3", "Contraindications": "4",
+RECENT_MAJOR_CHANGES = ("43683-2", "RECENT MAJOR CHANGES SECTION")
+HIGHLIGHT_TARGET = {"Recent major changes": "RMC", "Indication": "1", "Dosage and administration": "2", "Dosage form": "3", "Contraindications": "4",
                     "Warnings and precautions": "5", "Adverse reactions": "6", "Specific populations": "8"}
 
 
@@ -366,6 +379,13 @@ def build_spl():
         return "".join(parts)
 
     body = []
+    if "RMC" in highlights:
+        # Recent major changes exist only as a highlight, in a section of their own ahead of section 1.
+        paras = "".join(f"<paragraph>{xml_inline(p, links=True)}</paragraph>" for p in highlights["RMC"])
+        body.append(f'<component><section ID="RMC"><id root="{gid("RMC")}"/>'
+                    f'<code code="{RECENT_MAJOR_CHANGES[0]}" codeSystem="{LOINC}" displayName="{RECENT_MAJOR_CHANGES[1]}"/>'
+                    f'<title>RECENT MAJOR CHANGES</title><effectiveTime value="{eff}"/>'
+                    f"<excerpt><highlight><text>{paras}</text></highlight></excerpt></section></component>")
     majors = [s for s in sections if "." not in s["num"]]
     for major in majors:
         kids = [section_xml(s, []) for s in sections if s["num"].startswith(major["num"] + ".")]

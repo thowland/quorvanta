@@ -1,6 +1,6 @@
 # QUORVANTA (soriximel tavorate): quorvanta.example, every version (fictitious)
 
-> Everything here is invented. QUORVANTA, Arden Quay Biosciences and quorvanta.example do not exist. Each statement is followed by the claim ids that support it, as a promotional review annotation would. Generated from `websites.json` by `scripts/render.py`; do not edit by hand.
+> Everything here is invented. QUORVANTA, Arden Quay Biosciences and quorvanta.example do not exist. Each version quotes its content in the wording in force on the day it went live, and each statement is followed by the claim ids that support it, as a promotional review annotation would. Generated from `websites.json` by `scripts/render.py`; do not edit by hand.
 
 Audience: consumer. No page is gated.
 

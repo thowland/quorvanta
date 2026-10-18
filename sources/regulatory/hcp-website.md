@@ -1,6 +1,6 @@
 # QUORVANTA for healthcare professionals: quorvantahcp.example, every version (fictitious)
 
-> Everything here is invented. QUORVANTA, Arden Quay Biosciences and quorvantahcp.example do not exist. Each statement is followed by the claim ids that support it, as a promotional review annotation would. Generated from `websites.json` by `scripts/render.py`; do not edit by hand.
+> Everything here is invented. QUORVANTA, Arden Quay Biosciences and quorvantahcp.example do not exist. Each version quotes its content in the wording in force on the day it went live, and each statement is followed by the claim ids that support it, as a promotional review annotation would. Generated from `websites.json` by `scripts/render.py`; do not edit by hand.
 
 Audience: professional. Gated pages need a signed-in prescriber whose NPI has been verified.
 
@@ -52,7 +52,7 @@ The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl
 
 **Flushing:** QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo; flushing generally began soon after initiation and usually improved or resolved over time. Taking QUORVANTA with food, or non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing, may reduce the incidence or severity of flushing. `[SAF-019, SAF-020, ADM-004, DOS-005]`
 
-**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
+**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
 
 **Photosensitivity:** Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients. Advise patients to limit exposure to sunlight and ultraviolet light and to use sun protection. `[SAF-025, SAF-026]`
 
@@ -224,7 +224,7 @@ QUORVANTA prescriptions may be submitted using the QUORVANTA enrollment form, by
 
 **Flushing:** QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo; flushing generally began soon after initiation and usually improved or resolved over time. Taking QUORVANTA with food, or non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing, may reduce the incidence or severity of flushing. `[SAF-019, SAF-020, ADM-004, DOS-005]`
 
-**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
+**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
 
 **Photosensitivity:** Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients. Advise patients to limit exposure to sunlight and ultraviolet light and to use sun protection. `[SAF-025, SAF-026]`
 
@@ -279,7 +279,7 @@ The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl
 
 **Flushing:** QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo; flushing generally began soon after initiation and usually improved or resolved over time. Taking QUORVANTA with food, or non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing, may reduce the incidence or severity of flushing. `[SAF-019, SAF-020, ADM-004, DOS-005]`
 
-**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
+**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
 
 **Photosensitivity:** Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients. Advise patients to limit exposure to sunlight and ultraviolet light and to use sun protection. `[SAF-025, SAF-026]`
 
@@ -453,7 +453,7 @@ QUORVANTA prescriptions may be submitted using the QUORVANTA enrollment form, by
 
 **Flushing:** QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo; flushing generally began soon after initiation and usually improved or resolved over time. Taking QUORVANTA with food, or non-enteric coated aspirin (up to 325 mg) 30 minutes before dosing, may reduce the incidence or severity of flushing. `[SAF-019, SAF-020, ADM-004, DOS-005]`
 
-**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, some with fatal outcomes, have been reported in the postmarketing setting with tavoric acid esters, including QUORVANTA, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
+**Serious gastrointestinal reactions:** Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage, and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation. Monitor patients, promptly evaluate, and discontinue QUORVANTA for new or worsening severe gastrointestinal signs and symptoms. `[SAF-022, SAF-024]`
 
 **Photosensitivity:** Photosensitivity reactions occurred in 4% of patients treated with dimethyl tavorate and 1% of placebo patients. Advise patients to limit exposure to sunlight and ultraviolet light and to use sun protection. `[SAF-025, SAF-026]`
 
@@ -468,7 +468,7 @@ QUORVANTA prescriptions may be submitted using the QUORVANTA enrollment form, by
 
 ## Version 3.0, job code AQB-QV-HCW-0926
 
-Rebuilt on the September 2026 prescribing information and promotional set; the access page adds bridge supply, nurse support and the Foundation, and the Start Form download is the 2026 form.
+Rebuilt on the September 2026 prescribing information and promotional set, with the revised serious gastrointestinal reactions statement in the Important Safety Information; the access page adds bridge supply, nurse support and the Foundation, and the Start Form download is the 2026 form.
 
 ### QUORVANTA for healthcare professionals (`/`)
 

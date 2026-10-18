@@ -289,6 +289,27 @@
       "explanation": "34% is not 'about a quarter'; drops the dimethyl tavorate attribution, the meal limits (ADM-002), the aspirin dose and timing, and the serious GI reactions that must accompany the aspirin advice (SAF-022)."
     },
     {
+      "id": "HOUT-065",
+      "inbound_id": "HIN-008",
+      "response": "QUORVANTA may cause flushing. In clinical trials of dimethyl tavorate, 34% of treated patients experienced flushing, compared with 5% on placebo. In trials of dimethyl tavorate, flushing generally began soon after initiation, usually improved or resolved over time, and was mild or moderate in the majority of patients. Taking QUORVANTA with food may reduce the incidence of flushing. If QUORVANTA is taken with food, a high-fat, high-calorie meal or snack should be avoided; the meal or snack should contain no more than 600 calories and no more than 25 g of fat. Non-enteric coated aspirin, up to 325 mg, taken 30 minutes before dosing may reduce the incidence or severity of flushing. Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation.",
+      "cited_claims": [
+        "SAF-019",
+        "SAF-020",
+        "ADM-004",
+        "ADM-002",
+        "DOS-005",
+        "SAF-022"
+      ],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "fail",
+      "faults": [
+        "HF-18"
+      ],
+      "explanation": "States serious gastrointestinal reactions in the wording the September 2026 revision replaced: it leaves out the fatal outcomes and the QUORVANTA postmarketing reports (SAF-022 version 2)."
+    },
+    {
       "id": "HOUT-018",
       "inbound_id": "HIN-009",
       "response": "I do not have approved information that answers that question. Arden Quay Biosciences Medical Information can help at 1-800-555-0164.",
@@ -700,6 +721,23 @@
         "HF-04"
       ],
       "explanation": "Wrong NDC and wrong count: the starter bottle is 00000-190-02 with 92 capsules covering 30 days."
+    },
+    {
+      "id": "HOUT-066",
+      "inbound_id": "HIN-031",
+      "response": "QUORVANTA is supplied in bottles of 120 capsules. The NDC for QUORVANTA is 00000-190-01.",
+      "cited_claims": [
+        "SUP-002",
+        "SUP-004"
+      ],
+      "disease_facts": [],
+      "fixed_messages": [],
+      "isi_appended": false,
+      "verdict": "fail",
+      "faults": [
+        "HF-18"
+      ],
+      "explanation": "Answers from the supply wording before the May 2025 revision, which has no starter bottle and no NDC 00000-190-02."
     },
     {
       "id": "HOUT-045",

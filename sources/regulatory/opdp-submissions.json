@@ -1,7 +1,7 @@
 {
   "_notice": "FICTITIOUS. Form FDA 2253 submissions for a product that does not exist, by a company that does not exist. The application number, sequence numbers, job codes and contact details are invented.",
   "submissions_version": "1.0.0",
-  "usage": "Every Form FDA 2253 (Transmittal of Advertisements and Promotional Labeling) Arden Quay Biosciences submitted to FDA's Office of Prescription Drug Promotion for QUORVANTA, from launch to the as_of date, as structured data rather than the form itself. Each submission carries the prescribing information revision sent with it; each material its job code, what it is (a website version in regulatory/websites.json, a promotional piece, a representative email template or a patient piece), its audience, its type in the pack's own vocabulary, the date of first use the form states, and any rule it breaks in deviations. Each prescribing information revision lists the claims it changed in changed_claims. The validator recomputes every deviation from the rules below, the prescribing information history, the site versions, the email log (population/hcp-emails.json) and the call log. Unbranded disease content is not product promotion and is not submitted; nor are the Start Form and the patient-services letters.",
+  "usage": "Every Form FDA 2253 (Transmittal of Advertisements and Promotional Labeling) Arden Quay Biosciences submitted to FDA's Office of Prescription Drug Promotion for QUORVANTA, from launch to the as_of date, as structured data rather than the form itself. Each submission carries the prescribing information revision sent with it; each material its job code, what it is (a website version in regulatory/websites.json, a promotional piece, a representative email template or a patient piece), its audience, its type in the pack's own vocabulary, the date of first use the form states, and any rule it breaks in deviations. Each prescribing information revision lists the claims it changed in changed_claims, and the materials still carrying the earlier wording on the as_of date, inside their 30-day window, in awaiting_replacement. The validator recomputes every deviation from the rules below, the prescribing information history, the site versions, the email log (population/hcp-emails.json), the call log and the speaker programs (population/speaker-programs.json). Unbranded disease content is not product promotion and is not submitted; nor are the Start Form and the patient-services letters.",
   "as_of": "2026-09-22",
   "application": {
     "type": "NDA",
@@ -34,7 +34,15 @@
     {
       "revision": "09/2026",
       "approved_on": "2026-09-04",
-      "summary": "The current prescribing information, label/label.md. The pack does not record what this revision changed."
+      "summary": "Revises 5.7, Serious gastrointestinal reactions: the postmarketing reports now include QUORVANTA and some fatal outcomes. Section 5.7 is listed under Recent major changes in the highlights. Materials in use on September 4, 2026 that carry the earlier wording, including every Important Safety Information panel, are due for replacement by October 4, 2026.",
+      "changed_claims": {
+        "SAF-022": 2
+      },
+      "awaiting_replacement": [
+        "AQB-QV-RTA-1225",
+        "AQB-QV-RTD-1225",
+        "AQB-QV-RTF-1225"
+      ]
     }
   ],
   "rules": [
@@ -56,7 +64,7 @@
     },
     {
       "id": "PRM-05",
-      "rule": "When a prescribing information revision changes a claim (changed_claims, at the version it reached), every material in use on the approval date that cites the claim is replaced by a filed version within 30 days. Pieces are judged by the claims their current units cite; patient pieces carry no claim ids and are not checked."
+      "rule": "When a prescribing information revision changes a claim (changed_claims, at the version it reached), every material in use on the approval date that cites the claim is replaced by a filed version within 30 days. Pieces are judged by the claims their current units and their ISI piece cite, email templates by their claims and the ISI claims they carry; patient pieces carry no claim ids and are not checked."
     }
   ],
   "submissions": [
@@ -108,6 +116,15 @@
               "note": "Still the card in use on June 15, 2025, 30 days after the May 2025 revision changed SUP-002 and SUP-004; its replacement reached the field on June 23."
             }
           ]
+        },
+        {
+          "material_id": "AQB-QV-SPD-0224",
+          "piece": "PROMO-SPEAKER-DECK",
+          "audience": "professional",
+          "material_type": "speaker_deck",
+          "first_use": "2024-03-19",
+          "description": "Speaker program slide deck, 16 slides, the launch version.",
+          "deviations": []
         }
       ],
       "deviations": []
@@ -308,7 +325,7 @@
           "audience": "professional",
           "material_type": "isi",
           "first_use": "2026-09-14",
-          "description": "Important Safety Information, professional, on the September 2026 prescribing information.",
+          "description": "Important Safety Information, professional, on the September 2026 prescribing information, with the revised serious gastrointestinal reactions statement.",
           "deviations": []
         },
         {
@@ -327,6 +344,15 @@
           "material_type": "dosing_card",
           "first_use": "2026-09-14",
           "description": "Dosing and monitoring card, on the September 2026 prescribing information.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-SPD-0926",
+          "piece": "PROMO-SPEAKER-DECK",
+          "audience": "professional",
+          "material_type": "speaker_deck",
+          "first_use": "2026-09-14",
+          "description": "Speaker program slide deck, 16 slides, on the September 2026 prescribing information.",
           "deviations": []
         }
       ],

@@ -105,6 +105,7 @@ def check_promo_renderings(promo_doc):
         "PROMO-ISI": "promotional/promo-isi.md",
         "PROMO-DETAIL-AID": "promotional/promo-detail-aid.md",
         "PROMO-DOSING-CARD": "promotional/promo-dosing-card.md",
+        "PROMO-SPEAKER-DECK": "promotional/promo-speaker-deck.md",
     }
     for piece in promo_doc["pieces"]:
         rel = renderings.get(piece["id"])
@@ -602,6 +603,9 @@ def check_scenarios(claims_doc, disease, known_gap_ids, srd_ids):
         for cid in r["cited_claims"]:
             if cid in claims and claims[cid]["text"] not in r["response"]:
                 fail(f"{rid}: approved text of {cid} not verbatim in response")
+        for c in claims.values():
+            if any(o["text"] in r["response"] for o in c.get("superseded", [])):
+                fail(f"{rid}: passing response uses the superseded wording of {c['id']} (HF-18)")
         for d in r["disease_facts"]:
             if d in disease and disease[d]["text"] not in r["response"]:
                 fail(f"{rid}: text of {d} not verbatim in response")
@@ -1014,15 +1018,22 @@ def check_field_force(claims_doc, srd_ids, reports):
         if p is None or cid not in p["case_ids"]:
             fail(f"{cid}: prescriber_id {c.get('prescriber_id')} missing or not linked back")
 
+    # A template carries each claim in the wording in force on its first use, as filed on Form FDA 2253.
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import render
+    subs = load("regulatory/opdp-submissions.json")
+    approved = {r["revision"]: r["approved_on"] for r in subs["pi_revisions"]}
+    first_use = {m["material_id"]: m["first_use"] for s in subs["submissions"] for m in s["materials"]}
     isi = claims_doc["rules"]["isi_claims"]
     templates = {}
     for t in load("crm/approved-emails.json")["templates"]:
         templates[t["id"]] = t
+        on = first_use.get(t["job_code"], "9999-12-31")
         for cid in t["claims"] + isi:
             if cid not in claims or claims[cid]["status"] != "approved":
                 fail(f"{t['id']}: claim {cid} missing or not approved")
-            elif claims[cid]["text"] not in t["body"]:
-                fail(f"{t['id']}: text of {cid} not verbatim in the body")
+            elif render.text_on(claims[cid], on, approved) not in t["body"]:
+                fail(f"{t['id']}: text of {cid} as of {on} not verbatim in the body")
         for p in t["pieces"]:
             if p not in pieces:
                 fail(f"{t['id']}: unknown piece {p}")
@@ -1630,7 +1641,8 @@ def check_spl():
     ns = {"v": "urn:hl7-org:v3"}
     if root.find("v:code", ns).get("code") != "34391-3":
         fail(f"{rel}: document code is not 34391-3")
-    allowed = {c for c, _ in render.SPL_SECTIONS.values()} | {render.UNCLASSIFIED[0], "48780-1", "51945-4"}
+    allowed = {c for c, _ in render.SPL_SECTIONS.values()} | {render.UNCLASSIFIED[0], render.RECENT_MAJOR_CHANGES[0],
+                                                           "48780-1", "51945-4"}
     titles = set()
     for sec in root.iter("{urn:hl7-org:v3}section"):
         code = sec.find("v:code", ns).get("code")
@@ -1661,7 +1673,7 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
     import render
     sites_doc, subs_doc = load("regulatory/websites.json"), load("regulatory/opdp-submissions.json")
     sources = render.site_sources()
-    promo_units, claims, dtc = sources
+    promo_units, claims, dtc, approved = sources
     pieces = {p["id"]: p for p in promo_doc["pieces"]}
     templates = {t["id"]: t for t in load("crm/approved-emails.json")["templates"]}
     as_of = subs_doc["as_of"]
@@ -1698,7 +1710,7 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
                             or "dtc" in u and u["dtc"] not in dtc:
                         fail(f"{owner}: {u} does not resolve")
                         continue
-                    kind, _, ids = render.site_unit(u, sources)
+                    kind, _, ids = render.site_unit(u, sources, v["live_from"])
                     if not any(k in u for k in ("ref", "claim", "dtc")):
                         if (kind in CLAIMLESS_KINDS) == bool(ids) or (not hcp and ids):
                             fail(f"{owner}: a {kind} unit {'carries no' if kind in CLAIMLESS_KINDS else 'needs its'} claims; "
@@ -1715,7 +1727,7 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
                     status = (claims.get(c) or dtc.get(c))["status"]
                     if status != "approved":
                         fail(f"{where}: live at {as_of} with {status} claim {c} (PRM-04)")
-            isi = {c for u in v["isi"] for c in render.site_unit(u, sources)[2]}
+            isi = {c for u in v["isi"] for c in render.site_unit(u, sources, v["live_from"])[2]}
             cited[(s["id"], v["version"])] = set(used) | isi
             want = set(claims_doc["rules"]["isi_claims"]) if hcp else {"DTC-012", "DTC-016"}
             if not v["pages"] or not want <= isi:
@@ -1746,11 +1758,31 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
         if c["version"] > 1 and changed.get(c["id"]) != c["version"]:
             fail(f"claims/claims-library.json {c['id']}: version {c['version']} is not named by a prescribing information revision")
 
-    # Recorded first uses: the first send of each email template, and every call that presents a piece.
+    # Superseded wording: one entry per earlier version, each replaced by the revision that brought the next version.
+    raised = {(c, ver): r["revision"] for r in revs for c, ver in r.get("changed_claims", {}).items()}
+    for owner, items in (("claims/claims-library.json", claims), ("patient/dtc-claims.json", dtc)):
+        for c in items.values():
+            old = c.get("superseded", [])
+            texts = [o["text"] for o in old] + [c["text"]]
+            if [o["version"] for o in old] != list(range(1, c["version"])) or len(set(texts)) != len(texts) or \
+                    any(o["superseded_by"] != raised.get((c["id"], o["version"] + 1)) for o in old):
+                fail(f"{owner} {c['id']}: superseded entries must give versions 1 to {c['version'] - 1}, "
+                     "each replaced by the revision that changed the claim to the next version, in distinct wording")
+    for key, u in promo_units.items():
+        for o in u.get("superseded", []):
+            r = next((r for r in revs if r["revision"] == o["superseded_by"]), None)
+            if r is None or not set(r.get("changed_claims", {})) & set(u["claims"]) or o["text"] == u["text"]:
+                fail(f"promotional/promo-materials.json {key}: superseded by {o['superseded_by']}, "
+                     "which changed none of its claims, or in unchanged wording")
+
+    # Recorded first uses: the first send of each email template, the first speaker program on each deck version, and
+    # every call that presents a piece.
     first_send = {}
     for e in load("population/hcp-emails.json")["records"]:
         first_send[e["template_id"]] = min(first_send.get(e["template_id"], e["sent_at"][:10]), e["sent_at"][:10])
     calls = load("crm/call-log.json")["calls"]
+    for prog in load("population/speaker-programs.json")["records"]:
+        first_send[prog["deck_job_code"]] = min(first_send.get(prog["deck_job_code"], prog["date"]), prog["date"])
 
     subs = subs_doc["submissions"]
     if [s["submitted_on"] for s in subs] != sorted(s["submitted_on"] for s in subs) or \
@@ -1788,6 +1820,7 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
                     fail(f"{mw}: unknown piece {m['piece']}")
                     continue
                 piece_materials.setdefault(m["piece"], []).append((m["first_use"], s["submitted_on"], m["material_id"]))
+                recorded = first_send.get(m["material_id"], recorded)
                 audience = "professional"
             elif kind == "template":
                 t = templates.get(m["template"])
@@ -1807,13 +1840,15 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
                 want.add("PRM-03")
             expected[m["material_id"]] = (mw, want, {d["rule"] for d in m["deviations"]})
             if kind == "template":
-                in_use.append((m["material_id"], m["first_use"], None, set(t["claims"])))
+                in_use.append((m["material_id"], m["first_use"], None, set(t["claims"]) | set(claims_doc["rules"]["isi_claims"])))
 
     # PRM-05: a material in use when a revision is approved, and citing a claim it changed, is replaced within 30 days.
-    # Each piece's claims are taken from its current units; patient pieces carry no claim ids and are not checked.
+    # Each piece's claims are taken from its current units and its ISI piece; patient pieces carry no claim ids and are
+    # not checked.
     for pid, mats in piece_materials.items():
         mats.sort()
-        piece_claims = {c for u in pieces[pid]["units"] for c in u["claims"]}
+        carried = [pieces[pid]] + ([pieces[pieces[pid]["isi_piece"]]] if pieces[pid].get("isi_piece") else [])
+        piece_claims = {c for p in carried for u in p["units"] for c in u["claims"]}
         for i, (fu, _, mid) in enumerate(mats):
             in_use.append((mid, fu, mats[i + 1][0] if i + 1 < len(mats) else None, piece_claims))
     site_want = {k: (set() if k in filed else {"PRM-01"}) for k in versions}
@@ -1823,10 +1858,15 @@ def check_regulatory(claims_doc, promo_doc, dtc_doc):
     for r in revs:
         hit = {c for c, ver in r.get("changed_claims", {}).items()}
         due = (day(r["approved_on"]) + timedelta(days=30)).isoformat()
+        awaiting = set()
         for key, start, replaced, cites in in_use:
-            if start <= r["approved_on"] and (replaced is None or replaced > r["approved_on"]) and cites & hit \
-                    and (replaced or as_of) > due:
-                (site_want[key] if isinstance(key, tuple) else expected[key][1]).add("PRM-05")
+            if start <= r["approved_on"] and (replaced is None or replaced > r["approved_on"]) and cites & hit:
+                if (replaced or as_of) > due:
+                    (site_want[key] if isinstance(key, tuple) else expected[key][1]).add("PRM-05")
+                elif replaced is None or replaced > as_of:
+                    awaiting.add(versions[key]["job_code"] if isinstance(key, tuple) else key)
+        if set(r.get("awaiting_replacement", [])) != awaiting:
+            fail(f"regulatory/opdp-submissions.json {r['revision']}: awaiting_replacement should be {sorted(awaiting)}")
     for mw, want, got in expected.values():
         if got != want:
             fail(f"{mw}: deviations should be {sorted(want)}")
@@ -1989,6 +2029,8 @@ def check_population():
         check_population_refs(docs)
     if {"patients", "hcps", "qc-staff"} <= set(docs):
         check_staff(docs)
+    if {"speakers", "speaker-programs", "open-payments", "hcps", "office-staff"} <= set(docs):
+        check_speaker_programs(docs)
 
 
 def ckd_epi_2021(creat, age, sex):
@@ -2757,6 +2799,162 @@ def check_staff(docs):
                 c = next((c for c in cases if c["case_id"] == x["of"]), None)
                 if c is None or c["patient"]["dob"] == p["dob"] or c["patient"]["zip"] == p["zip"]:
                     fail(f"{where}: a namesake must differ from {x['of']} in date of birth and ZIP code")
+
+
+def check_speaker_programs(docs):
+    """Speaker programs against SPK-01 to SPK-08, and the Open Payments records recomputed from them (OPR-01 to OPR-04)."""
+    from collections import defaultdict
+    from datetime import date, timedelta
+    rules = load("speaker-programs/speaker-program-rules.json")
+    op = rules["open_payments"]
+    subs = load("regulatory/opdp-submissions.json")["submissions"]
+    versions = sorted((m["first_use"], m["material_id"]) for s in subs for m in s["materials"] if m.get("piece") == rules["deck_piece"])
+    filed_on = {m["material_id"]: s["submitted_on"] for s in subs for m in s["materials"] if m.get("piece") == rules["deck_piece"]}
+    speakers = {s["id"]: s for s in docs["speakers"]["records"]}
+    hcps = {h["id"]: h for h in docs["hcps"]["records"]}
+    staff = {s["id"]: s for s in docs["office-staff"]["records"]}
+    territory_of = {st: t for t in load("crm/field-force.json")["territories"] for st in t["states"]}
+    as_of = docs["speaker-programs"]["generated"]["as_of"]
+    for s in speakers.values():
+        where = f"population/speakers.json {s['id']}"
+        if s["tier"] not in rules["honoraria"]["in_person"] or any(t["deck"] not in filed_on for t in s["trainings"]):
+            fail(f"{where}: unknown tier, or training on a deck version that was never filed")
+        want = {"contract_lapsed"} if s["contract"]["to"] < as_of else set()
+        if not any(t["deck"] == versions[-1][1] for t in s["trainings"]):
+            want.add("not_trained_on_current_deck")
+        if {x["type"] for x in s["patterns"]} - {"recruited_after_launch"} != want:
+            fail(f"{where}: patterns should include {sorted(want)}")
+
+    def eaters(p):
+        return sum(a["ate"] for a in p["attendees"]) + sum(a["ate"] for a in p["staff_attendees"]) + p["guests"] + p["speaker_ate"]
+
+    programs = docs["speaker-programs"]["records"]
+    if [p["id"] for p in programs] != [p["id"] for p in sorted(programs, key=lambda p: (p["date"], p["speaker_id"]))]:
+        fail("population/speaker-programs.json: records are not in date order")
+    seen, year_total, omitted = defaultdict(list), defaultdict(float), set()
+    for p in programs:
+        where = f"population/speaker-programs.json {p['id']}"
+        s, d, v, fmt = speakers[p["speaker_id"]], p["date"], p["venue"], p["format"]
+        filed = [code for fu, code in versions if fu <= d]
+        if d > as_of or p["deck_job_code"] not in filed:
+            fail(f"{where}: after as_of, or presents a deck version not yet in use on {d} (SPK-02)")
+            continue
+        if p["host_rep_id"] != territory_of.get(v["state"], {}).get("rep_id"):
+            fail(f"{where}: the host is not the representative for {v['state']}")
+        if (v["type"] == "office") != (fmt == "in_office") or (v["type"] == "virtual") != (fmt == "virtual") \
+                or bool(v["office_id"]) != (fmt == "in_office"):
+            fail(f"{where}: venue type and office do not match the format")
+        if fmt == "virtual" and (p["meal_total"] or p["speaker_ate"] or p["guests"] or any(a["ate"] for a in p["attendees"])):
+            fail(f"{where}: a virtual program serves no meal (SPK-04)")
+        if any(a["ate"] and not a["signed_in"] for a in p["attendees"]) or s["hcp_id"] in {a["hcp_id"] for a in p["attendees"]}:
+            fail(f"{where}: a prescriber ate without signing in, or the speaker is listed as an attendee")
+        if any(v["office_id"] not in staff[a["staff_id"]]["office_ids"] for a in p["staff_attendees"]):
+            fail(f"{where}: office staff from another office")
+        if p["status"] == "cancelled" and (p["meal_total"] or p["honorarium"] or p["travel_total"] or eaters(p)
+                                           or any(a["signed_in"] for a in p["attendees"])):
+            fail(f"{where}: a cancelled program has no attendance, meal, honorarium or travel")
+        want = []
+        if not s["contract"]["from"] <= d <= s["contract"]["to"]:
+            want.append(("speaker_not_contracted", None))
+        if not any(t["deck"] == p["deck_job_code"] and t["trained_on"] < d for t in s["trainings"]):
+            want.append(("untrained_speaker", None))
+        if p["deck_job_code"] != filed[-1]:
+            want.append(("superseded_deck", None))
+        if v["type"] not in rules["allowed_venue_types"]:
+            want.append(("entertainment_venue", None))
+        if p["status"] == "completed":
+            if p["honorarium"] != rules["honoraria"][fmt][s["tier"]]:
+                want.append(("honorarium_off_rate", None))
+            year_total[(s["id"], d[:4])] += p["honorarium"]
+            if year_total[(s["id"], d[:4])] > rules["annual_honoraria_cap"]:
+                want.append(("over_annual_cap", None))
+            pp = p["meal_total"] / eaters(p) if eaters(p) else 0
+            st = rules["state_restrictions"].get(v["state"], {})
+            if pp > rules["meal_cap_per_person"]:
+                want.append(("meal_over_cap", None))
+            if p["meal_total"] and (st.get("meals") is False or pp > st.get("meal_cap_per_person", pp)):
+                want.append(("state_meal_restriction", None))
+            if p["guests"]:
+                want.append(("guest_meal", None))
+            signed = [a["hcp_id"] for a in p["attendees"] if a["signed_in"]]
+            if len(signed) < rules["minimum_attendees"]:
+                want.append(("low_attendance", None))
+            since = str(date.fromisoformat(d) - timedelta(days=rules["repeat_window_days"]))
+            for h in signed:
+                if any(since < x < d for x in seen[h]):
+                    want.append(("repeat_attendee", h))
+                seen[h].append(d)
+        got = [(f["type"], f.get("hcp_id")) for f in p["quality_flags"] if f["type"] != "payment_not_reported"]
+        if sorted(got, key=str) != sorted(want, key=str):
+            fail(f"{where}: quality flags {sorted(got, key=str)} should be {sorted(want, key=str)}")
+        for f in p["quality_flags"]:
+            if f["type"] == "payment_not_reported":
+                omitted.add((p["id"], f["hcp_id"], f["nature"]))
+        pats = {"cancelled"} if p["status"] == "cancelled" else \
+            ({"no_shows"} if not all(a["signed_in"] for a in p["attendees"]) else set()) | ({"speaker_travel"} if p["travel_total"] else set())
+        if {x["type"] for x in p["patterns"]} != pats:
+            fail(f"{where}: patterns should be {sorted(pats)}")
+
+    # Open Payments: every payment the programs owe, at the program year's thresholds.
+    owed, date_of = {}, {p["id"]: p["date"] for p in programs}
+    for p in programs:
+        if p["status"] != "completed":
+            continue
+        pp, sp = round(p["meal_total"] / eaters(p), 2) if eaters(p) else 0, speakers[p["speaker_id"]]["hcp_id"]
+        for a in p["attendees"]:
+            if a["ate"]:
+                owed[(p["id"], a["hcp_id"], "food_and_beverage")] = pp
+        if p["speaker_ate"] and p["meal_total"]:
+            owed[(p["id"], sp, "food_and_beverage")] = pp
+        if p["honorarium"]:
+            owed[(p["id"], sp, "speaker_compensation")] = p["honorarium"]
+        if p["travel_total"]:
+            owed[(p["id"], sp, "travel_and_lodging")] = p["travel_total"]
+    year_sum = defaultdict(float)
+    for (pid, h, _), amt in owed.items():
+        year_sum[(h, date_of[pid][:4])] += amt
+    th = op["thresholds"]
+    owed = {k: a for k, a in owed.items() if a >= th[date_of[k[0]][:4]]["single"] or year_sum[(k[1], date_of[k[0]][:4])] >= th[date_of[k[0]][:4]]["aggregate"]}
+    for k in omitted - set(owed):
+        fail(f"population/speaker-programs.json {k[0]}: payment_not_reported for {k[1]} {k[2]}, which is not owed")
+    nature_key = {name: key for key, name in op["natures_of_payment"].items()}
+    by_pid = {p["id"]: p for p in programs}
+    reported = set()
+    types = {"MD": "Covered Recipient Physician", "DO": "Covered Recipient Physician"}
+    for r in docs["open-payments"]["records"]:
+        where = f"population/open-payments.json {r['id']}"
+        key = (r["program_id"], r["recipient_hcp_id"], nature_key.get(r["nature_of_payment"]))
+        p, year, flags = by_pid[r["program_id"]], date_of[r["program_id"]][:4], {f["type"] for f in r["quality_flags"]}
+        if key in reported:
+            fail(f"{where}: reported twice")
+        reported.add(key)
+        if key[2] is None or r["form_of_payment"] != op["forms_of_payment"][key[2]] or r["date_of_payment"] != p["date"] \
+                or r["program_year"] != int(year) or r["product"] != "QUORVANTA" \
+                or r["recipient_type"] != types.get(hcps[key[1]]["credential"], "Covered Recipient Non-Physician Practitioner"):
+            fail(f"{where}: nature, form, date, program year, product or recipient type is wrong")
+        if r["report_status"] != ("published" if op["program_years"][year]["published_on"] else "not_yet_submitted"):
+            fail(f"{where}: report_status does not follow the {year} program year")
+        if flags == {"amount_misallocated"}:
+            covered = sum(a["ate"] for a in p["attendees"]) + p["speaker_ate"]
+            ok = key in owed and r["amount"] == round(p["meal_total"] / covered, 2) != owed[key]
+        elif flags == {"reported_no_show"}:
+            ok = key not in owed and any(a["hcp_id"] == key[1] and not a["signed_in"] for a in p["attendees"])
+        else:
+            ok = not flags and owed.get(key) == r["amount"]
+        if not ok:
+            fail(f"{where}: amount {r['amount']} or quality flags {sorted(flags)} do not follow program {p['id']}")
+        pats = ({"disputed"} if r["dispute"] else set()) | ({"below_single_threshold"} if r["amount"] < th[year]["single"] else set())
+        if {x["type"] for x in r["patterns"]} != pats:
+            fail(f"{where}: patterns should be {sorted(pats)}")
+    for k in sorted(set(owed) - reported - omitted):
+        fail(f"population/speaker-programs.json {k[0]}: {k[2]} for {k[1]} is not reported and not flagged payment_not_reported")
+    for k in sorted(omitted & reported):
+        fail(f"population/speaker-programs.json {k[0]}: flagged payment_not_reported for {k[1]} {k[2]}, which is reported")
+    readme_counts(text("README.md"), [
+        (r"(\d+) contracted speakers", (len(speakers),)),
+        (r"(\d+) speaker programs at the default sizes", (len(programs),)),
+        (r"(\d+) Open Payments records at the default sizes", (len(docs["open-payments"]["records"]),)),
+    ])
 
 
 def read_denylist(path):

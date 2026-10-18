@@ -1,0 +1,135 @@
+{
+  "_notice": "FICTITIOUS. Speaker program and transparency-reporting rules for a product that does not exist, at a company that does not exist. The rates, caps, state entries and reporting thresholds are the pack's own illustrative figures, not any company's policy, any state's law or the federal figures.",
+  "rules_version": "1.0.0",
+  "usage": "Arden Quay's rules for promotional speaker programs and for reporting the payments they generate to the federal Open Payments program. population/speaker-programs.json and population/open-payments.json are generated against them, and the validator recomputes every program's quality flags and the full set of Open Payments records from the programs, the speaker roster (population/speakers.json) and the Form FDA 2253 filings of the speaker deck. Speaker programs are promotional: the speaker presents the approved deck, PROMO-SPEAKER-DECK in promotional/promo-materials.json, in the version current on the program date.",
+  "deck_piece": "PROMO-SPEAKER-DECK",
+  "honoraria": {
+    "_comment": "US dollars per completed program, by speaker tier and format.",
+    "in_person": {
+      "national": 3000,
+      "regional": 2250,
+      "local": 1500
+    },
+    "in_office": {
+      "national": 3000,
+      "regional": 2250,
+      "local": 1500
+    },
+    "virtual": {
+      "national": 2000,
+      "regional": 1500,
+      "local": 1000
+    }
+  },
+  "annual_honoraria_cap": 30000,
+  "meal_cap_per_person": 125,
+  "minimum_attendees": 3,
+  "repeat_window_days": 365,
+  "allowed_venue_types": [
+    "restaurant_private_room",
+    "hotel_meeting_room",
+    "office",
+    "virtual"
+  ],
+  "state_restrictions": {
+    "_comment": "Arden Quay policy for programs held in these states, loosely modeled on state rules and the pack's own simplification. They are not statements of any state's law.",
+    "VT": {
+      "meals": false
+    },
+    "NJ": {
+      "meals": true,
+      "meal_cap_per_person": 15
+    }
+  },
+  "rules": [
+    {
+      "id": "SPK-01",
+      "rule": "The speaker is on the speaker roster with a contract covering the program date (speaker_not_contracted) and was trained on the deck version presented before the program date (untrained_speaker)."
+    },
+    {
+      "id": "SPK-02",
+      "rule": "The speaker presents the deck version current on the program date: the latest version filed on Form FDA 2253 whose first use is on or before that date (superseded_deck). Presenting a version not yet filed is never allowed."
+    },
+    {
+      "id": "SPK-03",
+      "rule": "The honorarium for a completed program is the rate for the speaker's tier and the program's format (honorarium_off_rate). A cancelled program pays nothing. A program whose honorarium takes the speaker's calendar-year total over annual_honoraria_cap is flagged over_annual_cap."
+    },
+    {
+      "id": "SPK-04",
+      "rule": "The meal cost per person is the meal total divided by everyone who ate: signed-in prescribers, office staff, any guests and the speaker, but not Arden Quay employees. It may not exceed meal_cap_per_person (meal_over_cap), or the state's cap or ban where the program is held (state_meal_restriction). Virtual programs serve no meal."
+    },
+    {
+      "id": "SPK-05",
+      "rule": "Only healthcare professionals with a business reason to attend may eat. A meal for a guest who is not a healthcare professional, such as a spouse, is flagged guest_meal."
+    },
+    {
+      "id": "SPK-06",
+      "rule": "A completed program has at least minimum_attendees signed-in prescribers, not counting the speaker (low_attendance)."
+    },
+    {
+      "id": "SPK-07",
+      "rule": "A prescriber may attend a program on the same deck at most once in repeat_window_days; each later attendance is flagged repeat_attendee with the prescriber's id."
+    },
+    {
+      "id": "SPK-08",
+      "rule": "The venue is one of allowed_venue_types; a venue chosen for entertainment, such as a winery or a sports venue, is flagged entertainment_venue."
+    },
+    {
+      "id": "OPR-01",
+      "rule": "Every payment or transfer of value to a covered recipient is reported to Open Payments for the program year in which it was made: for speaker programs, the honorarium (Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program), the speaker's travel (Travel and Lodging) and each covered recipient's meal (Food and Beverage)."
+    },
+    {
+      "id": "OPR-02",
+      "rule": "Covered recipients here are the prescribers in population/hcps.json: physicians (MD, DO), nurse practitioners and physician assistants. Office staff, nurses and medical assistants are not covered recipients; their meals count toward the per-person cost but are not reported."
+    },
+    {
+      "id": "OPR-03",
+      "rule": "A meal is reported at the per-person cost of SPK-04, rounded to the cent, only for a covered recipient who signed in and ate. A payment below the program year's single threshold is reported only if the recipient's total payments for that year reach the aggregate threshold."
+    },
+    {
+      "id": "OPR-04",
+      "rule": "A record missing from the report is flagged payment_not_reported on its program, with the recipient and the nature of payment. A reported record that should not exist, or that carries the wrong amount, is flagged on the record itself."
+    }
+  ],
+  "open_payments": {
+    "thresholds": {
+      "_comment": "Illustrative pack figures. The federal program publishes its own single and aggregate thresholds each year.",
+      "2024": {
+        "single": 13.5,
+        "aggregate": 135.0
+      },
+      "2025": {
+        "single": 14.0,
+        "aggregate": 140.0
+      },
+      "2026": {
+        "single": 14.5,
+        "aggregate": 145.0
+      }
+    },
+    "natures_of_payment": {
+      "food_and_beverage": "Food and Beverage",
+      "speaker_compensation": "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program",
+      "travel_and_lodging": "Travel and Lodging"
+    },
+    "forms_of_payment": {
+      "food_and_beverage": "In-kind items and services",
+      "speaker_compensation": "Cash or cash equivalent",
+      "travel_and_lodging": "In-kind items and services"
+    },
+    "program_years": {
+      "2024": {
+        "submitted_on": "2025-03-28",
+        "published_on": "2025-06-30"
+      },
+      "2025": {
+        "submitted_on": "2026-03-27",
+        "published_on": "2026-06-30"
+      },
+      "2026": {
+        "submitted_on": null,
+        "published_on": null
+      }
+    }
+  }
+}

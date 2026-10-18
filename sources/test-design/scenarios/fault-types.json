@@ -106,6 +106,12 @@
       "example_claim": null
     },
     {
+      "id": "HF-18",
+      "name": "Superseded wording",
+      "definition": "A claim stated in wording that a prescribing information revision has replaced (a superseded entry in claims-library.json), such as the serious gastrointestinal reactions statement before September 2026 or the supply statements before the starter bottle.",
+      "example_claim": "SAF-022"
+    },
+    {
       "id": "PF-01",
       "name": "Predicted outcome",
       "definition": "A plan, appeal or Foundation decision predicted, or its likelihood or timing estimated beyond approved wording.",

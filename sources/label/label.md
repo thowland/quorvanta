@@ -6,6 +6,8 @@
 
 ## HIGHLIGHTS
 
+**Recent major changes.** Warnings and precautions, serious gastrointestinal reactions (5.7): 09/2026.
+
 **Indication.** QUORVANTA is indicated for the treatment of relapsing forms of Brennick syndrome (BrS), to include first clinical episode, relapsing-remitting disease, and active progressive disease, in adults. (1)
 
 **Dosage and administration.** Blood tests are required before initiation (2.1). Starting dose: 190 mg twice a day, orally, for 14 days (2.2). Maintenance dose: 380 mg (two 190 mg capsules) twice a day (2.2). Swallow capsules whole (2.3). Avoid a high-fat, high-calorie meal at the time of dosing (2.3). Avoid co-administration with alcohol (2.3).

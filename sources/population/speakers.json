@@ -1,0 +1,670 @@
+{
+  "_notice": "FICTITIOUS. A speaker roster of generated prescribers who do not exist, for a product that does not exist. NPI-shaped ids begin with 91.",
+  "population_version": "1.0.0",
+  "entity": "speakers",
+  "generated": {
+    "generator": "scripts/generate_population.py",
+    "faker_version": "40.39.0",
+    "seed": 20260922,
+    "count": 24,
+    "as_of": "2026-09-22"
+  },
+  "usage": "Prescribers contracted by Arden Quay to present the speaker deck (speaker-programs/speaker-program-rules.json). tier sets the honorarium; contract gives the dates the speaker may present; trainings lists each deck version (by job code) the speaker was trained on, and when. A speaker may present a version only after training on it (SPK-01).",
+  "id_prefix": "PSPR",
+  "references": {
+    "hcp_id": "hcps"
+  },
+  "must_match": {
+    "speaker_npi": [
+      "hcp_id",
+      "npi"
+    ],
+    "first_name": [
+      "hcp_id",
+      "first_name"
+    ],
+    "last_name": [
+      "hcp_id",
+      "last_name"
+    ],
+    "state": [
+      "hcp_id",
+      "state"
+    ]
+  },
+  "quality_flags": {},
+  "patterns": {
+    "recruited_after_launch": "Joined the roster after the launch training wave.",
+    "contract_lapsed": "The contract ended before the as_of date and was not renewed.",
+    "not_trained_on_current_deck": "Has no training on the current deck version."
+  },
+  "records": [
+    {
+      "id": "PSPR-00001",
+      "hcp_id": "PHCP-00040",
+      "speaker_npi": "9131361765",
+      "first_name": "Kristina",
+      "last_name": "Galenzone-Andersson",
+      "credential": "MD",
+      "state": "FL",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-08",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-07"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-08"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00002",
+      "hcp_id": "PHCP-00046",
+      "speaker_npi": "9101953898",
+      "first_name": "Dennis",
+      "last_name": "Phakathi-Duncan",
+      "credential": "DO",
+      "state": "WA",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-27",
+        "to": "2026-06-30"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-05"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "contract_lapsed"
+        },
+        {
+          "type": "not_trained_on_current_deck"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00003",
+      "hcp_id": "PHCP-00098",
+      "speaker_npi": "9173811321",
+      "first_name": "Thomas",
+      "last_name": "Heinz-Johnson",
+      "credential": "MD",
+      "state": "MO",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-17",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-05"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "not_trained_on_current_deck"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00004",
+      "hcp_id": "PHCP-00113",
+      "speaker_npi": "9133687787",
+      "first_name": "Kimberly",
+      "last_name": "Andreozzi-Nyazitla",
+      "credential": "DO",
+      "state": "FL",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-26",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-11"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00005",
+      "hcp_id": "PHCP-00134",
+      "speaker_npi": "9158717485",
+      "first_name": "Amy",
+      "last_name": "Acuña-Michaud",
+      "credential": "MD",
+      "state": "GA",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-23",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-10"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00006",
+      "hcp_id": "PHCP-00149",
+      "speaker_npi": "9153207722",
+      "first_name": "Andrea",
+      "last_name": "Salami-Ibikunle",
+      "credential": "MD",
+      "state": "FL",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-23",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-10"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00007",
+      "hcp_id": "PHCP-00176",
+      "speaker_npi": "9115677848",
+      "first_name": "Abigail",
+      "last_name": "Puustinen-Gaito",
+      "credential": "MD",
+      "state": "TX",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-25",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-02-29"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00008",
+      "hcp_id": "PHCP-00212",
+      "speaker_npi": "9109671930",
+      "first_name": "Evan",
+      "last_name": "Oluwagbemi-Björklund",
+      "credential": "MD",
+      "state": "IL",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-17",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-02"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00009",
+      "hcp_id": "PHCP-00224",
+      "speaker_npi": "9115297670",
+      "first_name": "Aaron",
+      "last_name": "Österberg-Samele",
+      "credential": "MD",
+      "state": "NM",
+      "tier": "national",
+      "contract": {
+        "from": "2024-02-10",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-10"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00010",
+      "hcp_id": "PHCP-00256",
+      "speaker_npi": "9147752304",
+      "first_name": "Adam",
+      "last_name": "Korhonen-Rodriguez",
+      "credential": "DO",
+      "state": "FL",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-23",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-08"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00011",
+      "hcp_id": "PHCP-00270",
+      "speaker_npi": "9105684192",
+      "first_name": "Jennifer",
+      "last_name": "Mielcarek-Green",
+      "credential": "MD",
+      "state": "IL",
+      "tier": "national",
+      "contract": {
+        "from": "2024-02-10",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-07"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00012",
+      "hcp_id": "PHCP-00297",
+      "speaker_npi": "9107621895",
+      "first_name": "Kayla",
+      "last_name": "Ring-Maillet",
+      "credential": "MD",
+      "state": "FL",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-08",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-02"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00013",
+      "hcp_id": "PHCP-00312",
+      "speaker_npi": "9173655934",
+      "first_name": "Chelsea",
+      "last_name": "Singh-Mansız",
+      "credential": "DO",
+      "state": "WA",
+      "tier": "national",
+      "contract": {
+        "from": "2024-02-11",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-02-29"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-09"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00014",
+      "hcp_id": "PHCP-00340",
+      "speaker_npi": "9141702164",
+      "first_name": "Kimberly",
+      "last_name": "Hałat-Gargallo",
+      "credential": "MD",
+      "state": "MD",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-27",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-02"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-10"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00015",
+      "hcp_id": "PHCP-00356",
+      "speaker_npi": "9169626071",
+      "first_name": "Jesse",
+      "last_name": "Thomas-Monteiro",
+      "credential": "MD",
+      "state": "WA",
+      "tier": "national",
+      "contract": {
+        "from": "2024-02-25",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-06"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-10"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00016",
+      "hcp_id": "PHCP-00391",
+      "speaker_npi": "9113527284",
+      "first_name": "Shane",
+      "last_name": "Miller-Heinonen",
+      "credential": "MD",
+      "state": "PA",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-13",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-01"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00017",
+      "hcp_id": "PHCP-00409",
+      "speaker_npi": "9188367400",
+      "first_name": "Jeremy",
+      "last_name": "Roberts-Hering",
+      "credential": "MD",
+      "state": "WI",
+      "tier": "regional",
+      "contract": {
+        "from": "2024-02-23",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-05"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00018",
+      "hcp_id": "PHCP-00424",
+      "speaker_npi": "9139843368",
+      "first_name": "Steven",
+      "last_name": "Piña-Hutchinson",
+      "credential": "MD",
+      "state": "VA",
+      "tier": "local",
+      "contract": {
+        "from": "2024-02-11",
+        "to": "2027-01-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-03-04"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": "PSPR-00019",
+      "hcp_id": "PHCP-00485",
+      "speaker_npi": "9166933439",
+      "first_name": "Patricia",
+      "last_name": "Yüksel-Adams",
+      "credential": "DO",
+      "state": "CA",
+      "tier": "local",
+      "contract": {
+        "from": "2025-08-27",
+        "to": "2028-07-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2025-09-06"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-10"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00020",
+      "hcp_id": "PHCP-00522",
+      "speaker_npi": "9154285529",
+      "first_name": "Joseph",
+      "last_name": "Vieira-Hirvonen",
+      "credential": "MD",
+      "state": "IL",
+      "tier": "local",
+      "contract": {
+        "from": "2024-12-07",
+        "to": "2027-11-30"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-12-15"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-10"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00021",
+      "hcp_id": "PHCP-00545",
+      "speaker_npi": "9156544279",
+      "first_name": "James",
+      "last_name": "Kweyama-Williams",
+      "credential": "MD",
+      "state": "IL",
+      "tier": "regional",
+      "contract": {
+        "from": "2025-03-18",
+        "to": "2028-02-29"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2025-03-30"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00022",
+      "hcp_id": "PHCP-00556",
+      "speaker_npi": "9171199802",
+      "first_name": "Terry",
+      "last_name": "Ruiz-Baroffio",
+      "credential": "MD",
+      "state": "MA",
+      "tier": "local",
+      "contract": {
+        "from": "2024-11-26",
+        "to": "2027-10-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2024-12-07"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-11"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00023",
+      "hcp_id": "PHCP-00578",
+      "speaker_npi": "9175079109",
+      "first_name": "Crystal",
+      "last_name": "Carvalho-Jackson",
+      "credential": "MD",
+      "state": "UT",
+      "tier": "local",
+      "contract": {
+        "from": "2025-09-25",
+        "to": "2028-08-31"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2025-10-02"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-12"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    },
+    {
+      "id": "PSPR-00024",
+      "hcp_id": "PHCP-00595",
+      "speaker_npi": "9148888644",
+      "first_name": "Jessica",
+      "last_name": "Hirvonen-Ogłaza",
+      "credential": "MD",
+      "state": "WA",
+      "tier": "regional",
+      "contract": {
+        "from": "2025-07-05",
+        "to": "2028-06-30"
+      },
+      "trainings": [
+        {
+          "deck": "AQB-QV-SPD-0224",
+          "trained_on": "2025-07-17"
+        },
+        {
+          "deck": "AQB-QV-SPD-0926",
+          "trained_on": "2026-09-10"
+        }
+      ],
+      "patterns": [
+        {
+          "type": "recruited_after_launch"
+        }
+      ]
+    }
+  ]
+}

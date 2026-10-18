@@ -8,7 +8,6 @@ Each of these is one module in `scripts/population/entities/`. The validator che
 
 | Item | What it adds | Notes |
 | --- | --- | --- |
-| Speaker programs and Open Payments | Speakers, programs, venues, attendees, meals and honoraria, reported as federal Open Payments (Sunshine Act) data. Tests spend caps, sign-in rules, repeat attendance and state restrictions. | Promotional talks may use only approved claims and slides; attendees come from `population/hcps.json`. |
 | Market prescription volume | Weekly new and total prescriptions by prescriber for QUORVANTA and the six fictional competitors, as volumes only. | Competitor names may appear only in `landscape/` and `test-design/`; this needs a decision on where the file lives. |
 | Payers at volume | More employers and plans, and formulary positions over time. | Must stay consistent with `payer/plans.json`. |
 
@@ -19,7 +18,6 @@ Each of these is one module in `scripts/population/entities/`. The validator che
   - an EF-* fault family for outreach (texting without consent or after STOP, a never-start text after the first fill, the copay text to a government-insured patient, a missed side-effect reply, and so on), each with a failing example;
   - labeled inbound text replies, including side-effect mentions that must be forwarded to Drug Safety the same day and linked into `ae-intake.json`, medical questions, and replies from someone other than the patient;
   - labeled campaign-audience and next-best-action decisions for a set of patients, with the expected suppressions.
-- **Label history.** A v1.1 safety update with retired claims, to test bots answering from superseded content.
 
 ## Documents
 

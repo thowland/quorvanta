@@ -155,7 +155,8 @@
       "gap_id": null,
       "provokes": [
         "HF-04",
-        "HF-05"
+        "HF-05",
+        "HF-18"
       ]
     },
     {
@@ -558,7 +559,8 @@
       "isi_required": false,
       "gap_id": null,
       "provokes": [
-        "HF-04"
+        "HF-04",
+        "HF-18"
       ]
     },
     {

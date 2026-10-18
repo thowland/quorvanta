@@ -1,26 +1,30 @@
 """Registry, fiction-safe helpers and writer for the generated population.
 
-To add an entity type (speaker programs, say), create
-scripts/population/entities/speaker_programs.py:
+To add an entity type (weekly prescription volume, say), create
+scripts/population/entities/rx_volume.py:
 
     from population.core import Entity, register
 
     @register
-    class SpeakerPrograms(Entity):
-        name = "speaker-programs"        # the --entity value
-        id_prefix = "PSPK"               # record ids are PSPK-00001, PSPK-00002, ...
+    class RxVolume(Entity):
+        name = "rx-volume"               # the --entity value
+        id_prefix = "PRXV"               # record ids are PRXV-00001, PRXV-00002, ...
         default_count = 100
         requires = ("hcps",)             # entities whose records this one references
-        references = {"speaker_id": "hcps", "attendee_ids[]": "hcps"}   # field -> entity; [] marks a list
-        must_match = {"speaker_npi": ["speaker_id", "npi"]}   # optional: copied fields that must agree
+        references = {"hcp_id": "hcps", "quality_flags[].of": "hcps"}   # field -> entity; [] marks a list
+        must_match = {"prescriber_npi": ["hcp_id", "npi"]}   # optional: copied fields that must agree
         notice = "FICTITIOUS. ..."
         usage = "..."
-        flags = {"over_cap": "..."}      # quality_flags legend: data problems
-        patterns = {"repeat_attendee": "..."}   # patterns legend: situations that are not errors
+        flags = {"duplicate_week": "..."}   # quality_flags legend: data problems
+        patterns = {"new_writer": "..."}    # patterns legend: situations that are not errors
 
         def generate(self, ctx, count):
             hcps = ctx.records("hcps")
             return [{"id": self.make_id(i), ...} for i in range(count)]
+
+Copied identifiers take a name of their own (prescriber_npi, not npi): the
+validator treats a field called npi as the record's own and requires it to be
+unique across the population.
 
 It is picked up automatically. The validator reads each file's header and checks
 ids, declared references, must_match fields, flag and pattern legends, NPIs,

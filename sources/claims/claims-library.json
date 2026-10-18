@@ -1,6 +1,6 @@
 {
   "_notice": "FICTITIOUS. QUORVANTA, soriximel tavorate, dimethyl tavorate, Brennick syndrome, Arden Quay Biosciences and every figure here are invented for software testing. Not medical information.",
-  "library_version": "1.2.0",
+  "library_version": "1.3.0",
   "product": {
     "brand": "QUORVANTA",
     "generic": "soriximel tavorate",
@@ -41,7 +41,8 @@
       "ADR-001"
     ],
     "requires_semantics": "When a claim is used, every claim in its requires list must accompany it in the same response.",
-    "access_claims_note": "Access claims answer availability, prescribing route and support-program questions. They do not answer whether a specific plan covers QUORVANTA, what a given patient will pay, or which pharmacy is best; those route to QuorvantaConnect."
+    "access_claims_note": "Access claims answer availability, prescribing route and support-program questions. They do not answer whether a specific plan covers QUORVANTA, what a given patient will pay, or which pharmacy is best; those route to QuorvantaConnect.",
+    "superseded_semantics": "A claim's superseded entries hold the wording it had before the prescribing information revision named in superseded_by. Superseded wording appears only in materials that went live before that revision; it is never approved for a new response."
   },
   "fixed_messages": {
     "ae_handoff": "Thank you for letting us know. What you have described may be an adverse event, and we are required to handle these through our Drug Safety team. Please call Arden Quay Biosciences Drug Safety at 1-800-555-0142 so that the details can be recorded properly.",
@@ -873,7 +874,14 @@
         "timepoint": "majority within 6 months"
       },
       "requires": [],
-      "version": 1,
+      "version": 2,
+      "superseded": [
+        {
+          "version": 1,
+          "text": "Serious gastrointestinal reactions, including perforation, ulceration, hemorrhage and obstruction, have been reported in the postmarketing setting with tavoric acid esters, with or without concomitant aspirin. The majority occurred within 6 months of initiation.",
+          "superseded_by": "09/2026"
+        }
+      ],
       "status": "approved"
     },
     {
@@ -1856,6 +1864,13 @@
       },
       "requires": [],
       "version": 2,
+      "superseded": [
+        {
+          "version": 1,
+          "text": "QUORVANTA is supplied in bottles of 120 capsules.",
+          "superseded_by": "05/2025"
+        }
+      ],
       "status": "approved"
     },
     {
@@ -1892,6 +1907,13 @@
       },
       "requires": [],
       "version": 2,
+      "superseded": [
+        {
+          "version": 1,
+          "text": "The NDC for QUORVANTA is 00000-190-01.",
+          "superseded_by": "05/2025"
+        }
+      ],
       "status": "approved"
     },
     {

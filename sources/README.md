@@ -19,6 +19,7 @@ Pick the row that matches the system you are building, demonstrating or testing.
 | CRM and field-force compliance | `crm/`, `promotional/promo-materials.json`, the claims library, and `population/` for volume | `crm-notes.json`, and the declared `deviations` in `crm/call-log.json` |
 | Claims management, modular content or promotional review | `label/`, `claims/`, `promotional/`, `patient/dtc-claims.json`, `regulatory/websites.json` | The claim-by-claim annotations in the promotional pieces and website pages, and the traps in [Claims and references](#claims-and-references) |
 | Promotional compliance and Form FDA 2253 tracking | `regulatory/`, `promotional/`, `crm/approved-emails.json`, `crm/call-log.json`, and the HCP emails and portal sessions in `population/` | The declared `deviations` in `regulatory/opdp-submissions.json` and `websites.json`, which the validator recomputes (see [Websites and Form FDA 2253](#websites-and-form-fda-2253)) |
+| Speaker programs, meal and honoraria compliance, Open Payments reporting | `speaker-programs/speaker-program-rules.json`, `promotional/promo-speaker-deck.md`, and the speakers, speaker programs and Open Payments records in `population/` | The `quality_flags` on each program and payment record, which the validator recomputes, and the full set of Open Payments records it rebuilds from the programs |
 | Medical Information operations: request intake, routing and turnaround | `medical-information/srds.json`, `label/label.md`, and the requests in `population/mi-requests.json` | The routing in each topic of the file's header, and the flagged late responses, late field submissions and duplicate-record requests, which the validator recomputes |
 | Supply chain, serialization and channel analytics | `product/`, `channel/` | The anomalies listed in [Channel and serialization](#channel-and-serialization) |
 | Recall and traceability | `channel/`, `ps-cases.json`, `payer/transactions.json`, and a drill's lot and brief | The answer keys and labeled traces in `mock-recall.json`, which the validator recomputes from the data |
@@ -52,6 +53,7 @@ Record ids carry a prefix that names their kind, and the prefixes recur througho
 | `ENG`, `CNS`, `MSG`, `CMP-ACTIVATION` and other named `CMP-` ids | Outreach rules, consents, approved texts and campaigns; the campaign ids share the `CMP` prefix with the compliance rules but are never numbered | `engagement/` |
 | `FR`, `CALL` | Field rules and field calls | `crm/` |
 | `WEB`, `OPDP`, `PRM` | Websites, Form FDA 2253 submissions and the rules they follow | `regulatory/` |
+| `SPK`, `OPR` | Speaker program rules and Open Payments reporting rules | `speaker-programs/` |
 | `PLN`, `FRM`, `TXN`, `COV` | Plans, formularies, payer transactions, coverage records | `payer/` |
 | `AET`, `SIT` | Event terms and special situations | `safety/safety-reference.json` |
 | `GAP`, `PGAP` | Gaps in the HCP library and in the patient-services content | `test-design/known-gaps.json`, `test-design/ps-known-gaps.json` |
@@ -70,6 +72,7 @@ sources/
 ├── claims/                Approved HCP claims and the reference bibliography they cite
 ├── promotional/           HCP promotional pieces, each statement annotated to its claims
 ├── regulatory/            Both websites, every version with its page text, and the Form FDA 2253 submissions
+├── speaker-programs/      Speaker program and Open Payments reporting rules
 ├── medical-information/   Reactive Medical Information standard response documents
 ├── disease/               Unbranded Brennick syndrome facts, HCP overview, patient awareness piece
 ├── landscape/             Six fictional competing therapies (context only, never approved content)
@@ -83,7 +86,7 @@ sources/
 ├── crm/                   Territories, field staff, accounts, prescribers, approved emails, call log
 ├── engagement/            Texting and outreach rules, approved text messages, campaigns, and outreach for eight cases
 ├── press/                 Corporate press releases
-├── population/            Generated offices, HCPs, office staff, QuorvantaConnect staff, patients, labs, lab results, refills, texts, emails, portal visits and MI requests
+├── population/            Generated offices, HCPs, office staff, QuorvantaConnect staff, patients, labs, lab results, refills, texts, emails, portal visits, MI requests, speakers, speaker programs and Open Payments records
 └── test-design/           Known gaps, synthetic cases, labeled scenarios and judge rubrics (keep out of prompts)
 ```
 
@@ -99,7 +102,7 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `claims/claims-library.json` | 105 claims (104 approved, 1 withdrawn, including 10 access claims) with citations into the references, product metadata, accompaniment rules, and the three fixed messages (AE handoff, fallback, access referral) | The HCP bot's content; claims-management and promotional review tools |
 | `claims/references.json` | 28 fictitious references (25 approved, 3 not approved for promotional use), each broken into numbered findings that claims cite | The HCP bot's retrieval source; substantiation checks |
 | `claims/references.md` | The same as a readable bibliography | Reading |
-| `promotional/promo-materials.json`, `promotional/promo-isi.md`, `promotional/promo-detail-aid.md`, `promotional/promo-dosing-card.md` | Three promotional pieces (ISI block, 8-screen detail aid, dosing card) with every statement annotated to its supporting claims | Faithful outbound examples; content assembly and review tools; field call records |
+| `promotional/promo-materials.json`, `promotional/promo-isi.md`, `promotional/promo-detail-aid.md`, `promotional/promo-dosing-card.md`, `promotional/promo-speaker-deck.md` | Four promotional pieces (ISI block, 8-screen detail aid, dosing card, 16-slide speaker deck) with every statement annotated to its supporting claims | Faithful outbound examples; content assembly and review tools; field call records |
 | `regulatory/websites.json` | 7 website versions (3 of the HCP site, 4 of the consumer site) from launch to September 2026, with the full text of every page, each statement annotated to its claims | Website content review; the pages behind the HCP portal sessions |
 | `regulatory/hcp-website.md`, `regulatory/consumer-website.md` | Every version of each site as readable pages. *Generated* | Reading; sources of website phrasing |
 | `regulatory/opdp-submissions.json` | Form FDA 2253 submissions with the prescribing information sent with each, the five submission rules (PRM-01 to PRM-05) and the prescribing information history, with the claims each revision changed | Promotional compliance and submission tracking |
@@ -139,10 +142,10 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | `test-design/known-gaps.json` | 24 topics the library leaves uncovered on purpose, with the expected bot behavior and the SRD that covers each (six have none and go to the fallback or access referral) | Answer key; scenario authors only |
 | `test-design/ps-known-gaps.json` | 29 patient-services situations the library deliberately stops at, with expected behavior and the cases that exercise them | Answer key; scenario authors only |
 | `test-design/ps-cases.json` | 29 synthetic QuorvantaConnect case records as of 2026-09-22, each naming the behaviors it tests | Hub data; the patient-services assistant sees one case only after verification |
-| `test-design/scenarios/fault-types.json` | 57 fault types (17 for the HCP bot, 16 for the patient-services assistant, 10 for adverse event intake, 8 for field records and 6 for recall traces) | Judges and scenario authors |
+| `test-design/scenarios/fault-types.json` | 58 fault types (18 for the HCP bot, 16 for the patient-services assistant, 10 for adverse event intake, 8 for field records and 6 for recall traces) | Judges and scenario authors |
 | `test-design/scenarios/rubrics.md` | Pass/fail criteria for judging the HCP bot and the patient-services assistant, and for scoring a conversation, mapped to fault ids; the other labeled sets are scored against answer keys the validator recomputes | Judge designers |
 | `test-design/scenarios/hcp-inbound.json` | 41 labeled HCP questions with expected routes, required claims and the faults each provokes | HCP bot harness |
-| `test-design/scenarios/hcp-outbound.json` | 64 labeled HCP bot responses (32 pass, 32 fail) | Judge calibration |
+| `test-design/scenarios/hcp-outbound.json` | 66 labeled HCP bot responses (32 pass, 34 fail) | Judge calibration |
 | `test-design/scenarios/ps-conversations.json` | 33 multi-turn patient-services conversations tied to synthetic cases, with expected handling per turn | Patient-services harness |
 | `test-design/scenarios/ps-outbound.json` | 53 labeled patient-services replies (26 pass, 27 fail) | Judge calibration |
 | `test-design/scenarios/ae-intake.json` | 24 adverse event reports from every company channel, each with its chain of receipts and the expected intake assessment | Adverse event intake harness |
@@ -193,7 +196,8 @@ Files marked *generated* are rebuilt by a script (see [Tooling](#tooling)); edit
 | June 2, 2025 | 30-day starter bottle of 92 capsules introduced; both websites revised |
 | January 1, 2026 | QuorvantaConnect program terms v2.1 effective |
 | July to September 2026 | Field call log and channel window (channel data from 2026-07-01) |
-| September 2026 | Label v1.0 revision date |
+| March 20, 2024 | First speaker program |
+| September 4, 2026 | Label revision 09/2026 approved: serious gastrointestinal reactions (5.7) revised |
 | September 14, 2026 | Both websites rebuilt on the September 2026 prescribing information |
 | September 22, 2026 | Case records current as of this date |
 
@@ -217,12 +221,13 @@ The press releases introduce two figures the label does not carry: 6.2% disconti
     "comparator": "optional"
   },
   "requires": ["EFF-001"],
-  "version": 1,
+  "version": 2,
+  "superseded": [{ "version": 1, "text": "the wording before the revision", "superseded_by": "09/2026" }],
   "status": "approved | withdrawn"
 }
 ```
 
-A claim listed in `requires` must accompany the claim that lists it. `rules.isi_claims` lists the twelve claims that make up the safety summary, and `rules.efficacy_requires_isi` says any response using an efficacy claim must carry them. The library stays under 254 claims, so every claim id plus "none" fits in a single multiple-choice classification of 255 options. Field names follow common claims-management conventions (claim text, references, product, status).
+A claim listed in `requires` must accompany the claim that lists it. A claim past version 1 keeps its earlier wording in `superseded`, each entry naming the prescribing information revision that replaced it (see [Websites and Form FDA 2253](#websites-and-form-fda-2253)). `rules.isi_claims` lists the twelve claims that make up the safety summary, and `rules.efficacy_requires_isi` says any response using an efficacy claim must carry them. The library stays under 254 claims, so every claim id plus "none" fits in a single multiple-choice classification of 255 options. Field names follow common claims-management conventions (claim text, references, product, status).
 
 ### References
 
@@ -241,6 +246,7 @@ Each of these is a deliberate, realistic way for a fluent answer to go wrong, an
 - **Label silence** on pediatrics, older adults, hepatic impairment, live vaccines, lactation and missed doses. `test-design/known-gaps.json` lists every such topic with its expected handling.
 - **A warning found only in this label.** Photosensitivity (5.8: 4% on DMT against 1% on placebo) has no source outside the pack, so an answer drawn from general knowledge of similar drugs, rather than from the label, will leave it out.
 - **A withdrawn claim.** `EFF-013` is kept so the code path that rejects withdrawn claims has something to reject. It is also a compact example of three faults at once: misattributed source, no population or timepoint, no comparator.
+- **Superseded wording.** SUP-002 and SUP-004 keep the supply wording from before the May 2025 starter bottle, and SAF-022 keeps the serious gastrointestinal reactions statement from before the September 2026 revision added fatal outcomes and QUORVANTA's own postmarketing reports. The three representative email templates, approved in December 2025, still carry the old SAF-022 wording, correctly, until their replacement falls due on October 4, 2026. An answer drawn from those emails or from an older website version, rather than from the claims library, has used superseded content (HF-18).
 - **References not approved for promotion.** REF-019 to REF-021 (an interim claims-cohort poster comparing tolerability with DMT, a network meta-analysis preprint, and an off-label case series) are marked `not_approved_for_promotional_use`. A retrieval step that hands them to the generator, or a generator that cites them, should be caught.
 - **Findings that support no claim.** The descriptive reference-arm figure in `REF-003.7` and five-year extension efficacy in `REF-011.7` exist in the references but not in the label.
 
@@ -261,7 +267,7 @@ Each of these is a deliberate, realistic way for a fluent answer to go wrong, an
 | HF-09 | Data against advice | "Alcohol is fine; it doesn't change exposure." | INT-004 without ADM-003 |
 | HF-10 | Filling a silence | "If a dose is missed, take it as soon as remembered." | none; GAP-13 |
 
-The other seven cover the response as a whole: a missing safety summary (HF-11), consumer language to an HCP (HF-12), an unapproved reference (HF-13), a withdrawn claim (HF-14), a missed adverse event handoff (HF-15), a disease fact fused with a product claim to imply a benefit (HF-16), and a description of another company's product (HF-17).
+The other eight cover the response as a whole: a missing safety summary (HF-11), consumer language to an HCP (HF-12), an unapproved reference (HF-13), a withdrawn claim (HF-14), a missed adverse event handoff (HF-15), a disease fact fused with a product claim to imply a benefit (HF-16), a description of another company's product (HF-17), and wording a label revision has replaced (HF-18).
 
 A passing HCP response contains its cited claims, disease facts and fixed messages word for word, uses the claim set its inbound scenario expects, and carries the safety summary whenever it uses an efficacy claim.
 
@@ -407,9 +413,9 @@ The SPL would not pass FDA's own validation, on purpose: an invented substance h
 
 ## Websites and Form FDA 2253
 
-`regulatory/websites.json` holds every version of the two QUORVANTA websites from launch to September 22, 2026, with the full text of every page. The HCP site, quorvantahcp.example, went live with commercial availability on February 26, 2024; its clinical data, dosing, safety, Medical Information and representative pages are open only to signed-in prescribers. The consumer site, quorvanta.example, followed on July 22, 2024, six months after approval. Both were revised on June 2, 2025 for the starter bottle and rebuilt on September 14, 2026 on the September 2026 prescribing information, and the consumer site had a small update on January 2, 2026. HCP pages quote the promotional pieces and HCP claims word for word and consumer pages quote the direct-to-consumer claims, so the validator can check every statement. Each version shows its Important Safety Information panel on every page. `hcp-website.md` and `consumer-website.md` render each site for reading, and the HCP portal sessions in `population/` land on whichever version was live that day.
+`regulatory/websites.json` holds every version of the two QUORVANTA websites from launch to September 22, 2026, with the full text of every page. The HCP site, quorvantahcp.example, went live with commercial availability on February 26, 2024; its clinical data, dosing, safety, Medical Information and representative pages are open only to signed-in prescribers. The consumer site, quorvanta.example, followed on July 22, 2024, six months after approval. Both were revised on June 2, 2025 for the starter bottle and rebuilt on September 14, 2026 on the September 2026 prescribing information, and the consumer site had a small update on January 2, 2026. HCP pages quote the promotional pieces and HCP claims word for word and consumer pages quote the direct-to-consumer claims, so the validator can check every statement. Each version quotes them in the wording in force on the day it went live, so HCP versions 1.0 and 2.0 show the serious gastrointestinal reactions statement as it read before September 2026. Each version shows its Important Safety Information panel on every page. `hcp-website.md` and `consumer-website.md` render each site for reading, and the HCP portal sessions in `population/` land on whichever version was live that day.
 
-`regulatory/opdp-submissions.json` records 10 Form FDA 2253 submissions covering 19 materials: each site version, each version of the three promotional pieces, the three representative email templates and the two patient pieces, each submission with the prescribing information revision sent with it. It is structured data, not a copy of the form, and the material types are the pack's own. Five rules govern it: file at or before first use (PRM-01), send the current prescribing information (PRM-02), file under the right audience (PRM-03), show the ISI and only approved content on every page (PRM-04), and replace any material that cites a claim a label revision changed within 30 days of the revision's approval (PRM-05). The 30-day window is Arden Quay's own rule, not an FDA deadline. As in the call log, a record may break a rule only if it declares the breach in `deviations`. The validator recomputes each one, taking first use from the site versions, the email log and the call log. Five breaches are planted:
+`regulatory/opdp-submissions.json` records 10 Form FDA 2253 submissions covering 21 materials: each site version, each version of the four promotional pieces, the three representative email templates and the two patient pieces, each submission with the prescribing information revision sent with it. It is structured data, not a copy of the form, and the material types are the pack's own. Five rules govern it: file at or before first use (PRM-01), send the current prescribing information (PRM-02), file under the right audience (PRM-03), show the ISI and only approved content on every page (PRM-04), and replace any material that cites a claim a label revision changed within 30 days of the revision's approval (PRM-05). The 30-day window is Arden Quay's own rule, not an FDA deadline. As in the call log, a record may break a rule only if it declares the breach in `deviations`. The validator recomputes each one, taking first use from the site versions, the email log and the call log. Five breaches are planted:
 
 - **A late email.** RTE-03 (AQB-QV-RTF-1225) was filed on January 6, 2026, the date the form gives as first use, but representatives had been sending it since January 2.
 - **An unfiled revision.** Consumer site version 2.1 went live on January 2, 2026 with its own job code and was never submitted.
@@ -417,11 +423,24 @@ The SPL would not pass FDA's own validation, on purpose: an invented substance h
 - **The wrong audience.** The side-effect guide, a patient piece, was filed as professional.
 - **A slow replacement.** The May 2025 revision changed SUP-002 and SUP-004 for the starter bottle. Both websites were updated on June 2, 17 days later, but the printed dosing card that cites them was not replaced until June 23, eight days past the deadline.
 
-The prescribing information history in the same file has three revisions: the original approval (01/2024), the starter bottle (05/2025), which changed SUP-002 and SUP-004 to version 2, and the current label (09/2026), which changed no claim. The label document is still version 1.0 of the pack, and the pack does not record what the September 2026 revision changed. Unbranded disease content is not product promotion and is not filed; nor are the Start Form and the patient-services letters.
+The prescribing information history in the same file has three revisions: the original approval (01/2024); the starter bottle (05/2025), which changed SUP-002 and SUP-004 to version 2; and a safety update (09/2026), approved September 4, 2026, which revised section 5.7 to include QUORVANTA's postmarketing reports and fatal outcomes, changed SAF-022 to version 2, and is listed under Recent major changes in the label highlights. The ISI piece, detail aid, dosing card and HCP site were replaced on September 14, 10 days later. On September 22 the three representative email templates still carry the earlier wording; they are inside their 30-day window, due by October 4, and the revision lists them in `awaiting_replacement`. The consumer site needed no change, because DTC-012's "serious stomach and bowel problems" already covers the revised statement. Unbranded disease content is not product promotion and is not filed; nor are the Start Form and the patient-services letters.
+
+## Speaker programs and Open Payments
+
+`speaker-programs/speaker-program-rules.json` holds Arden Quay's rules for promotional speaker programs (SPK-01 to SPK-08) and for reporting what they pay to the federal Open Payments program (OPR-01 to OPR-04), with the honorarium rates by speaker tier and format, a $30,000 annual honorarium cap, a $125 meal cap per person, a minimum of 3 signed-in prescribers, a 365-day repeat-attendance window, the allowed venue types, and two state entries (no meals in Vermont, a $15 meal cap in New Jersey). The rates, caps, state entries and reporting thresholds are the pack's own illustrative figures, not any company's policy, any state's law or the federal thresholds. The natures and forms of payment use the federal program's category names.
+
+Speakers present the speaker deck, `PROMO-SPEAKER-DECK`, a filed promotional piece like the others: version 1.0 (AQB-QV-SPD-0224) at launch and version 2.0 (AQB-QV-SPD-0926), with the September 2026 ISI, from September 14, 2026. The generated population carries the rest:
+- `speakers.json`, 24 contracted speakers drawn from the generated neurologists, each with a tier, a contract and the deck versions they were trained on;
+- `speaker-programs.json`, 164 speaker programs at the default sizes from March 2024 to September 2026, held in restaurant private rooms, hotel meeting rooms, prescribers' offices or online, each with its deck version, host representative, registered prescribers (signed in or not, and whether they ate), office staff, guests, meal total, honorarium and speaker travel;
+- `open-payments.json`, 977 Open Payments records at the default sizes: each covered recipient's meal, each honorarium and each speaker's travel, with the program year, the report status (2024 and 2025 published, 2026 not yet submitted) and any dispute.
+
+The meal cost per person is the meal total divided by everyone who ate, office staff and the speaker included. Only prescribers are covered recipients, so staff meals count toward the division but are never reported. A meal below the year's single threshold is reported only once the recipient's year reaches the aggregate threshold. The validator recomputes every program flag from the record and the rules, and rebuilds the complete set of Open Payments records the programs owe, so a reporting tool can be scored on what it should have filed. Planted breaches, each flagged:
+- **On programs:** meals over the cap; a guest's meal; low attendance; repeat attendees; a New Jersey dinner over the state cap; a winery; an honorarium at the wrong rate; a national speaker over the annual cap in 2025; a speaker presenting after their contract lapsed; a speaker presenting the September 2026 deck untrained; and a program on September 15, 2026 that still used the launch deck.
+- **In Open Payments:** two 2025 payments never reported (flagged `payment_not_reported` on their programs); an in-office lunch divided among the covered recipients only, which overstates each meal (`amount_misallocated`); and a no-show's meal reported, which the prescriber disputed and which was published unresolved (`reported_no_show`). A second dispute, over a correct record, was resolved with no change.
 
 ## Generated population
 
-`population/` adds volume around the hand-built cast: offices and the health systems they belong to, HCPs, office staff (office managers, prior authorization coordinators, nurses, billing staff), patients, the labs that run their monitoring blood tests, and the results. It also carries each patient's fills, text messages and campaign memberships, and each prescriber's approved emails, HCP portal sessions (see [Engagement and outreach](#engagement-and-outreach)) and medical information requests. It is for CRM, master-data, targeting, outreach and load testing. It is made by `scripts/generate_population.py`, which uses Faker, pinned in `scripts/requirements.txt`. That script is the only tool in the repository that needs a third-party library:
+`population/` adds volume around the hand-built cast: offices and the health systems they belong to, HCPs, office staff (office managers, prior authorization coordinators, nurses, billing staff), patients, the labs that run their monitoring blood tests, and the results. It also carries each patient's fills, text messages and campaign memberships, and each prescriber's approved emails, HCP portal sessions (see [Engagement and outreach](#engagement-and-outreach)) and medical information requests, and the speaker roster, speaker programs and Open Payments records (see [Speaker programs and Open Payments](#speaker-programs-and-open-payments)). It is for CRM, master-data, targeting, outreach and load testing. It is made by `scripts/generate_population.py`, which uses Faker, pinned in `scripts/requirements.txt`. That script is the only tool in the repository that needs a third-party library:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
@@ -431,7 +450,7 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 .venv/bin/python scripts/generate_population.py --list
 ```
 
-The default sizes are 150 offices, 600 HCPs, 250 office staff, 20 QuorvantaConnect case managers (with 16 more nurses, intake coordinators and supervisors), 500 patients, 60 labs, lab results for up to 400 patients who started treatment (381 at the default sizes, including some who have since stopped), and 450 medical information requests (a few more once repeats and flagged examples are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails and portal sessions follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream, so regenerating one entity alone leaves the others' output unchanged; if anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
+The default sizes are 150 offices, 600 HCPs, 250 office staff, 20 QuorvantaConnect case managers (with 16 more nurses, intake coordinators and supervisors), 500 patients, 60 labs, lab results for up to 400 patients who started treatment (381 at the default sizes, including some who have since stopped), 450 medical information requests (a few more once repeats and flagged examples are added), 24 speakers and 150 speaker programs (164 once the planted breaches are added). For `lab-results`, `--count` sets the number of patients monitored. Refills, text messages, campaign memberships, HCP emails, portal sessions and Open Payments records follow from the other entities, so `--count` does not apply to them. The same seed and Faker version always give the same files, and each entity has its own random stream, so regenerating one entity alone leaves the others' output unchanged; if anything references it, though, the validator reports every record that no longer agrees until those entities are regenerated as well.
 
 The generator keeps to the pack's fiction:
 - names pair a Faker first name with a hyphenated surname drawn from fifteen locales. A generated record shares a core cast member's name only where its `patterns` say why, and the validator fails any other match;
@@ -486,6 +505,7 @@ Each file lists deliberate data problems in `quality_flags`, with a legend in th
 | `lab-results.json` | `duplicate`, `unit_mismatch`, `canceled_specimen`, `lab_certificate_lapsed` |
 | `refills.json` | `duplicate` |
 | `mi-requests.json` | `late_response`, `rep_submitted_late`, `logged_to_duplicate` |
+| `speaker-programs.json`, `open-payments.json` | The rule breaches listed in [Speaker programs and Open Payments](#speaker-programs-and-open-payments) |
 | `sms-messages.json`, `hcp-emails.json`, `portal-sessions.json` | The rule breaches listed in [Engagement and outreach](#engagement-and-outreach) |
 
 ### Medical information requests
@@ -524,7 +544,6 @@ Run the validator after any change. It checks that ids resolve and links run bot
 - **More generated entities.** Speaker programs and Open Payments, market prescription volume, and payers at volume.
 - **Outreach scenarios.** Labeled text replies, including side-effect mentions that must reach Drug Safety, and labeled campaign-audience decisions, with a fault family of their own.
 - **Scenarios on existing data.** A periodic safety report built from the intake cases.
-- **Label history.** A v1.1 safety update with retired claims, to test bots answering from superseded content.
 - **Documents.** Filled letters and forms for document-AI testing, generated on demand from a committed manifest rather than stored as PDFs.
 - **Master data management.** Several source systems per person, golden records with crosswalks, and survivorship rules the validator can recompute.
 - **Complete patient journeys** for generated patients, through payer and channel data.

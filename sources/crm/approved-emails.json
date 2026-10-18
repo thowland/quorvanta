@@ -5,7 +5,7 @@
   "templates": [
     {
       "id": "RTE-01",
-      "job_code": "AQB-QV-RTE-0126",
+      "job_code": "AQB-QV-RTA-1225",
       "subject": "QUORVANTA: availability and QuorvantaConnect support",
       "claims": [
         "ACC-001",
@@ -22,7 +22,7 @@
     },
     {
       "id": "RTE-02",
-      "job_code": "AQB-QV-RTE-0226",
+      "job_code": "AQB-QV-RTD-1225",
       "subject": "QUORVANTA: starting dose and monitoring",
       "claims": [
         "DOS-001",
@@ -40,7 +40,7 @@
     },
     {
       "id": "RTE-03",
-      "job_code": "AQB-QV-RTE-0326",
+      "job_code": "AQB-QV-RTF-1225",
       "subject": "QUORVANTA: flushing and gastrointestinal events",
       "claims": [
         "SAF-019",

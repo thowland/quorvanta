@@ -185,6 +185,110 @@
       "topic": "access",
       "version": 1,
       "status": "approved"
+    },
+    {
+      "id": "DTC-016",
+      "audience": "patient",
+      "text": "Do not take QUORVANTA if you are allergic to soriximel tavorate, dimethyl tavorate or any of the ingredients in QUORVANTA, or if you take dimethyl tavorate.",
+      "derives_from": [
+        "CON-001",
+        "CON-002"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-017",
+      "audience": "patient",
+      "text": "QUORVANTA can cause serious allergic reactions after the first dose or at any time. Stop taking QUORVANTA and get emergency help right away if you have trouble breathing, hives, or swelling of your throat or tongue.",
+      "derives_from": [
+        "SAF-001",
+        "SAF-002"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-018",
+      "audience": "patient",
+      "text": "Tell your healthcare provider right away if you have weakness on one side of your body that gets worse, clumsiness in your arms or legs, vision problems, or changes in thinking or memory. These may be signs of PML.",
+      "derives_from": [
+        "SAF-003",
+        "SAF-005",
+        "SAF-006"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-019",
+      "audience": "patient",
+      "text": "QUORVANTA may harm your unborn baby. Tell your healthcare provider if you are pregnant or plan to become pregnant. A pregnancy registry collects information about pregnancies during treatment; you can enroll by calling 1-800-555-0177.",
+      "derives_from": [
+        "POP-001",
+        "POP-004"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-020",
+      "audience": "patient",
+      "text": "QUORVANTA is not recommended if you have moderate or severe kidney problems.",
+      "derives_from": [
+        "DOS-007"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-021",
+      "audience": "patient",
+      "text": "You can report side effects to Arden Quay Biosciences Drug Safety at 1-800-555-0142 or to FDA at 1-800-FDA-1088.",
+      "derives_from": [
+        "ADR-008"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-022",
+      "audience": "patient",
+      "text": "Your first shipment is a 30-day starter bottle with the starting schedule printed on its label. Later refills come in bottles of 120 capsules.",
+      "derives_from": [
+        "SUP-002"
+      ],
+      "topic": "dosing",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-023",
+      "audience": "patient",
+      "text": "You can reach QuorvantaConnect at 1-800-555-0183, Monday through Friday, 8 a.m. to 8 p.m. Eastern Time.",
+      "derives_from": [
+        "ACC-006"
+      ],
+      "topic": "access",
+      "version": 1,
+      "status": "approved"
+    },
+    {
+      "id": "DTC-024",
+      "audience": "patient",
+      "text": "Limit your time in sunlight and under sunlamps, and use sun protection, while you take QUORVANTA.",
+      "derives_from": [
+        "SAF-026"
+      ],
+      "topic": "safety",
+      "version": 1,
+      "status": "approved"
     }
   ]
 }

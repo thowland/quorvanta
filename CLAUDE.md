@@ -36,7 +36,8 @@ This is a synthetic test dataset, not software: an invented drug (QUORVANTA, sor
   - `CALL-0029`'s late adverse event forward (declared as `CF-03`), and the other intake traps in `ae-intake.json`: hepatic failure is unlisted because label 5.5 says no case progressed to it, and lot `QS26G099` is not in the register;
   - no price anywhere in `payer/`: claims carry patient amounts only;
   - the FHIR formulary's pack-local drug code (FHIR requires RxNorm, which an invented drug cannot have), and the SPL's pack-local ingredient and labeler ids (no UNII or DUNS);
-  - the channel traps: the damaged bottle at SP-03, expired lot QV24H009 destroyed at SP-05, and case QC-26-00118's allocated bottle.
+  - the channel traps: the damaged bottle at SP-03, expired lot QV24H009 destroyed at SP-05, and case QC-26-00118's allocated bottle;
+  - the declared Form FDA 2253 breaches in `regulatory/`: email RTE-03 filed after its first send, consumer site version 2.1 never filed, the September 2026 consumer site filed with the May 2025 prescribing information, the side-effect guide filed as professional, and the dosing card replaced 38 days after the May 2025 revision.
 
 ## How the pieces connect
 
@@ -116,6 +117,13 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - `patterns` (clinical or business situations) and `quality_flags` (data problems) are separate. The validator re-derives the lab-results patterns and eGFR from the values, so change the generator, not the output.
 - Deferred ideas live in `BACKLOG.md`.
 
+**Websites and Form FDA 2253** (`regulatory/`):
+- `websites.json` holds every version of the HCP site (quorvantahcp.example) and the consumer site (quorvanta.example), with the full text of each page. A unit is `{"ref": "PIECE/UNIT"}` (a promo unit), `{"claim": id}` or `{"dtc": id}`, quoted word for word, or its own text with its supporting claims. Consumer pages state nothing outside the DTC claims; headings, navigation, footers, forms and questions carry no claims.
+- Each version is one material with its own job code, and versions follow one another day by day. Each version's ISI panel shows on every page. `hcp-website.md` and `consumer-website.md` are generated: edit the JSON and run `scripts/render.py`.
+- `opdp-submissions.json` holds the Form FDA 2253 submissions as structured data, the prescribing information history (ending at the label's revision date) and the rules PRM-01 to PRM-05. Each revision lists the claims it changed in `changed_claims`, and every claim past version 1 must be named by one; PRM-05 gives materials citing a changed claim 30 days to be replaced. A breach is declared in `deviations`, and the validator recomputes them: first use comes from the site versions, the first send in `population/hcp-emails.json` and the call log.
+- A new job code on a promo piece, email template, patient piece or site version needs a filing. The HCP portal sessions take their page catalog from the current HCP site version, so regenerate the population after changing its pages.
+- Promotional and patient job codes end in the month and year of approval (`AQB-QV-DET-0926`).
+
 **Competitors** (`landscape/competitors.json`) are context only, with no efficacy data. Their names may appear only in `landscape/`, `test-design/` and `sources/README.md`; the validator enforces this.
 
 **Scenarios** (`test-design/scenarios/`):
@@ -129,7 +137,7 @@ The patient-services chain runs **program terms → responses → letters, scrip
 - When adding scenarios, build the passing answers from the source texts rather than typing them; paraphrases fail the checks.
 - `mock-recall.json` drills are exercises: no lot has been recalled, and the drill drafts are not approved content for either bot (GAP-24 still applies). Build a drill's `expected` with `recall_trace()` in `validate.py`, and failing traces as specific changes to it.
 
-Real public services the fiction keeps on purpose: 911, 988, FDA MedWatch, Poison Control, Medicare, Medicaid, TRICARE, the VA, Extra Help and the Federal Poverty Guidelines. Never add a real pharmacy, insurer, PBM or charity name, including in example questions.
+Real public services the fiction keeps on purpose: 911, 988, FDA MedWatch, Form FDA 2253 and FDA's Office of Prescription Drug Promotion, Poison Control, Medicare, Medicaid, TRICARE, the VA, Extra Help and the Federal Poverty Guidelines. Never add a real pharmacy, insurer, PBM or charity name, including in example questions.
 
 Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-form`, promo pieces). The JSON is canonical; update the Markdown to match. `patient-services/program-terms.md` is fully generated: edit the JSON and run `scripts/render.py`. Paths stored inside JSON files (e.g. `product.label`, `references_file`) are relative to `sources/`.
 
@@ -138,7 +146,7 @@ Several documents exist as a JSON/Markdown pair (`references`, `srds`, `start-fo
 ```bash
 python3 scripts/validate.py                            # all integrity checks; exits non-zero on failure
 python3 scripts/validate.py --denylist ~/real-names.txt  # also reject real brand/company names
-python3 scripts/render.py                              # regenerate program-terms.md, product-identifiers.md, payer/formulary-fhir.json and label/label-spl.xml
+python3 scripts/render.py                              # regenerate program-terms.md, product-identifiers.md, payer/formulary-fhir.json, label/label-spl.xml and the regulatory/ website renderings
 python3 scripts/build_channel.py                       # regenerate channel/ from the cases, claims, lots and CRM
 .venv/bin/python scripts/generate_population.py        # regenerate population/ (Faker; Python 3.10+)
 .venv/bin/python scripts/generate_population.py --list # entity types, default counts and dependencies
@@ -167,6 +175,7 @@ Run the validator after any edit. It checks:
 - engagement: the approved messages' content rules, and every due text, membership and exit in `case-outreach.json` and the generated logs recomputed under ENG-01 to ENG-13, with each breach carrying its rule's flag; HCP emails against consent, status and territory, and portal sessions against their flags;
 - population: ids, declared references and must_match fields, flag legends, 91-prefixed NPIs, 99D CLIA numbers, .example emails, adult patients unless flagged, plan names, and undeclared core cast names; lab-result patterns and eGFR re-derived from the values; MI requests' routing, turnaround, flags and repeat patterns; the staff roster's shifts, hourly coverage, supervisors and core case managers, and each patient's case manager; scenarios' `population_refs` against the generated records;
 - SPL: identical to a fresh render, section codes and highlight placement, and 10-digit NDCs;
+- websites and Form FDA 2253: site versions in sequence, every page unit resolved word for word to approved content on the right site, the ISI panel, renderings identical to a fresh render, every submission and site-version deviation recomputed (including the 30-day replacement window after each revision), every piece, template and patient piece's current job code filed, calls presenting only filed pieces, and portal sessions on pages of the version live that day;
 - payer: BIN range, plans and coverages, claims against shipments, copay arithmetic, benefit-check and PA history against the cases, and the FHIR bundle against `plans.json`.
 
 The denylist file must live outside the repo, since listing real names inside the pack would defeat the purpose. The only real numbers allowed are FDA MedWatch and US Poison Control (`ALLOWED_PHONES` in the script). The only real domains allowed are the HL7 and GS1 canonical hosts that FHIR and EPCIS require (`ALLOWED_HOSTS`).

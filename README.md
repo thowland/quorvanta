@@ -43,6 +43,7 @@ The foundation is a fictitious prescribing information document (the label), wri
 | Field force | Territories, representatives, prescribers, approved emails and a call log checked against field compliance rules |
 | Engagement and outreach | Texting consent and opt-in rules, approved text messages in English and Spanish, never-start and discontinuation-risk campaigns, refill and blood test reminders, and the resulting message logs and campaign memberships, with HCP email engagement and HCP portal sessions |
 | Label as SPL | The label rendered as HL7 Structured Product Labeling XML, the format FDA receives |
+| Websites and FDA submissions | Every version of an HCP website and a consumer website, launch to September 2026, with the full text of each page, and the Form FDA 2253 submissions that filed them, with planted filing breaches |
 | Disease and market | Unbranded disease education for HCPs and patients, a competitor landscape with no efficacy data, and press releases from topline results through approval and commercial availability |
 | Generated population | Offices, HCPs, office staff, QuorvantaConnect staff, patients, labs, monitoring lab results, refills, text messages, campaign memberships, HCP emails, portal sessions and medical information requests at volume, for CRM, master-data, outreach, contact-center and load testing |
 
@@ -110,7 +111,7 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 
 ## Keeping it consistent
 
-Several files are generated from others. `scripts/render.py` writes the Structured Product Labeling rendering, the FHIR formulary and the Markdown versions of the program terms and product identifiers, and the validator fails if any of them differs from a fresh render. `scripts/build_channel.py` writes the supply-chain data and `scripts/generate_population.py` the population; the validator does not regenerate those, but it recomputes their contents from the records they are built on, so a hand edit that breaks the arithmetic fails.
+Several files are generated from others. `scripts/render.py` writes the Structured Product Labeling rendering, the FHIR formulary, the Markdown versions of the program terms and product identifiers, and readable versions of the two websites, and the validator fails if any of them differs from a fresh render. `scripts/build_channel.py` writes the supply-chain data and `scripts/generate_population.py` the population; the validator does not regenerate those, but it recomputes their contents from the records they are built on, so a hand edit that breaks the arithmetic fails.
 
 When a figure changes, it changes in the label first and then everywhere it is repeated. `CLAUDE.md` records the rules that keep the pack coherent for anyone editing it with an AI coding assistant, and they apply equally to anyone editing by hand.
 

@@ -2,7 +2,7 @@
 
 > Everything in this kit is invented. QUORVANTA, Brennick syndrome and Arden Quay Biosciences do not exist. It imitates a patient starter kit so that software can be tested against it. It contains no medical information.
 
-*Job code AQB-QV-PSK-0924. Please see the Patient Information and full Prescribing Information included in this kit.*
+*Job code AQB-QV-PSK-0525. Please see the Patient Information and full Prescribing Information included in this kit.*
 
 ## What's in this kit
 

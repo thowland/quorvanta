@@ -1651,6 +1651,225 @@ def check_spl():
             fail(f"{rel}: 10-digit NDC for {ndc} missing or malformed")
 
 
+CLAIMLESS_KINDS = {"heading", "nav", "notice", "footer", "form", "download", "question"}
+
+
+def check_regulatory(claims_doc, promo_doc, dtc_doc):
+    """Website versions and their content; Form FDA 2253 submissions, with every deviation recomputed."""
+    from datetime import date, timedelta
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import render
+    sites_doc, subs_doc = load("regulatory/websites.json"), load("regulatory/opdp-submissions.json")
+    sources = render.site_sources()
+    promo_units, claims, dtc = sources
+    pieces = {p["id"]: p for p in promo_doc["pieces"]}
+    templates = {t["id"]: t for t in load("crm/approved-emails.json")["templates"]}
+    as_of = subs_doc["as_of"]
+    day = lambda iso: date.fromisoformat(iso)  # noqa: E731
+    sites = {s["id"]: s for s in sites_doc["sites"]}
+    if set(sites) != set(render.SITE_FILES):
+        fail(f"regulatory/websites.json: sites should be {sorted(render.SITE_FILES)}")
+        return
+
+    # Site versions: dates, content and the ISI panel.
+    versions, cited = {}, {}
+    for s in sites.values():
+        rel = render.SITE_FILES[s["id"]]
+        if text(rel) != render.build_website(s, sources):
+            fail(f"{rel}: out of date with websites.json; run scripts/render.py")
+        hcp = s["audience"] == "professional"
+        for i, v in enumerate(s["versions"]):
+            where = f"regulatory/websites.json {s['id']} {v['version']}"
+            versions[(s["id"], v["version"])] = v
+            nxt = s["versions"][i + 1] if i + 1 < len(s["versions"]) else None
+            if nxt is None and v["live_to"] is not None:
+                fail(f"{where}: the last version has no live_to")
+            if nxt is not None and (v["live_to"] is None or day(nxt["live_from"]) - day(v["live_to"]) != timedelta(days=1)
+                                    or v["live_to"] < v["live_from"]):
+                fail(f"{where}: versions must follow one another day by day")
+            live_now = v["live_to"] is None or v["live_to"] >= as_of
+            used = []
+            for owner, units in [(f"{where} isi", v["isi"])] + [(f"{where} page {pg['id']}", pg["units"]) for pg in v["pages"]]:
+                for u in units:
+                    if ("ref" in u or "claim" in u) and not hcp or "dtc" in u and hcp:
+                        fail(f"{owner}: {u} belongs on the other site")
+                        continue
+                    if "ref" in u and u["ref"] not in promo_units or "claim" in u and u["claim"] not in claims \
+                            or "dtc" in u and u["dtc"] not in dtc:
+                        fail(f"{owner}: {u} does not resolve")
+                        continue
+                    kind, _, ids = render.site_unit(u, sources)
+                    if not any(k in u for k in ("ref", "claim", "dtc")):
+                        if (kind in CLAIMLESS_KINDS) == bool(ids) or (not hcp and ids):
+                            fail(f"{owner}: a {kind} unit {'carries no' if kind in CLAIMLESS_KINDS else 'needs its'} claims; "
+                                 "consumer pages state nothing outside the DTC claims")
+                        if any(c not in claims for c in ids):
+                            fail(f"{owner}: unknown claim in {ids}")
+                    used += ids
+                    if "ref" in u and live_now and pieces[u["ref"].split("/")[0]]["status"] != "approved":
+                        fail(f"{owner}: {u['ref']} is not from an approved piece (PRM-04)")
+            if "EFF-013" in used:
+                fail(f"{where}: shows the withdrawn claim EFF-013 (PRM-04)")
+            if live_now:
+                for c in set(used):
+                    status = (claims.get(c) or dtc.get(c))["status"]
+                    if status != "approved":
+                        fail(f"{where}: live at {as_of} with {status} claim {c} (PRM-04)")
+            isi = {c for u in v["isi"] for c in render.site_unit(u, sources)[2]}
+            cited[(s["id"], v["version"])] = set(used) | isi
+            want = set(claims_doc["rules"]["isi_claims"]) if hcp else {"DTC-012", "DTC-016"}
+            if not v["pages"] or not want <= isi:
+                fail(f"{where}: the ISI panel lacks {sorted(want - isi)} (PRM-04)")
+            if len({pg["id"] for pg in v["pages"]}) != len(v["pages"]) or len({pg["path"] for pg in v["pages"]}) != len(v["pages"]):
+                fail(f"{where}: page ids and paths must be unique")
+            for pg in v["pages"]:
+                if pg.get("document") and not (SRC / pg["document"]).exists():
+                    fail(f"{where} page {pg['id']}: {pg['document']} does not exist")
+
+    # Prescribing information history: the last revision is the label in the pack.
+    revs = subs_doc["pi_revisions"]
+    if [r["approved_on"] for r in revs] != sorted(r["approved_on"] for r in revs) or \
+            f"synthetic revision date {revs[-1]['revision']}" not in text("label/label.md"):
+        fail("regulatory/opdp-submissions.json: pi_revisions must run in order and end at the label's revision date")
+
+    def current_pi(on):
+        return [r["revision"] for r in revs if r["approved_on"] <= on][-1]
+
+    # Claims each revision changed, at the version it made them; every claim past version 1 was changed by one.
+    changed = {}
+    for r in revs:
+        for c, ver in r.get("changed_claims", {}).items():
+            if c not in claims or claims[c]["version"] < ver:
+                fail(f"regulatory/opdp-submissions.json {r['revision']}: claim {c} has not reached version {ver}")
+            changed[c] = max(changed.get(c, 0), ver)
+    for c in claims.values():
+        if c["version"] > 1 and changed.get(c["id"]) != c["version"]:
+            fail(f"claims/claims-library.json {c['id']}: version {c['version']} is not named by a prescribing information revision")
+
+    # Recorded first uses: the first send of each email template, and every call that presents a piece.
+    first_send = {}
+    for e in load("population/hcp-emails.json")["records"]:
+        first_send[e["template_id"]] = min(first_send.get(e["template_id"], e["sent_at"][:10]), e["sent_at"][:10])
+    calls = load("crm/call-log.json")["calls"]
+
+    subs = subs_doc["submissions"]
+    if [s["submitted_on"] for s in subs] != sorted(s["submitted_on"] for s in subs) or \
+            [s["ectd_sequence"] for s in subs] != sorted(set(s["ectd_sequence"] for s in subs)):
+        fail("regulatory/opdp-submissions.json: submissions run in date order with rising eCTD sequence numbers")
+    filed, piece_materials, material_ids, expected, in_use = {}, {}, set(), {}, []
+    for s in subs:
+        where = f"regulatory/opdp-submissions.json {s['id']}"
+        if s["submitted_on"] > as_of:
+            fail(f"{where}: submitted after the as_of date")
+        want_sub = {"PRM-02"} if s["pi_revision"] != current_pi(s["submitted_on"]) else set()
+        if {d["rule"] for d in s["deviations"]} != want_sub:
+            fail(f"{where}: deviations should be {sorted(want_sub)}")
+        for m in s["materials"]:
+            mw = f"{where} {m['material_id']}"
+            if m["material_id"] in material_ids:
+                fail(f"{mw}: job code filed twice")
+            material_ids.add(m["material_id"])
+            kinds = [k for k in ("site", "piece", "template", "document") if k in m]
+            if len(kinds) != 1:
+                fail(f"{mw}: names exactly one of site, piece, template or document")
+                continue
+            kind = kinds[0]
+            recorded = m["first_use"]
+            if kind == "site":
+                v = versions.get((m["site"], m["version"]))
+                if not v or v["job_code"] != m["material_id"]:
+                    fail(f"{mw}: not the job code of {m['site']} {m['version']}")
+                    continue
+                filed[(m["site"], m["version"])] = m
+                recorded = v["live_from"]
+                audience = sites[m["site"]]["audience"]
+            elif kind == "piece":
+                if m["piece"] not in pieces:
+                    fail(f"{mw}: unknown piece {m['piece']}")
+                    continue
+                piece_materials.setdefault(m["piece"], []).append((m["first_use"], s["submitted_on"], m["material_id"]))
+                audience = "professional"
+            elif kind == "template":
+                t = templates.get(m["template"])
+                if not t or t["job_code"] != m["material_id"]:
+                    fail(f"{mw}: not the job code of template {m['template']}")
+                    continue
+                recorded = first_send.get(m["template"], recorded)
+                audience = "professional"
+            else:
+                if m["document"] and m["material_id"] not in text(m["document"]):
+                    fail(f"{mw}: job code not in {m['document']}")
+                audience = "consumer"
+            want = set()
+            if s["submitted_on"] > min(m["first_use"], recorded):
+                want.add("PRM-01")
+            if m["audience"] != audience:
+                want.add("PRM-03")
+            expected[m["material_id"]] = (mw, want, {d["rule"] for d in m["deviations"]})
+            if kind == "template":
+                in_use.append((m["material_id"], m["first_use"], None, set(t["claims"])))
+
+    # PRM-05: a material in use when a revision is approved, and citing a claim it changed, is replaced within 30 days.
+    # Each piece's claims are taken from its current units; patient pieces carry no claim ids and are not checked.
+    for pid, mats in piece_materials.items():
+        mats.sort()
+        piece_claims = {c for u in pieces[pid]["units"] for c in u["claims"]}
+        for i, (fu, _, mid) in enumerate(mats):
+            in_use.append((mid, fu, mats[i + 1][0] if i + 1 < len(mats) else None, piece_claims))
+    site_want = {k: (set() if k in filed else {"PRM-01"}) for k in versions}
+    for (sid, ver), v in versions.items():
+        nxt = (day(v["live_to"]) + timedelta(days=1)).isoformat() if v["live_to"] else None
+        in_use.append(((sid, ver), v["live_from"], nxt, cited[(sid, ver)]))
+    for r in revs:
+        hit = {c for c, ver in r.get("changed_claims", {}).items()}
+        due = (day(r["approved_on"]) + timedelta(days=30)).isoformat()
+        for key, start, replaced, cites in in_use:
+            if start <= r["approved_on"] and (replaced is None or replaced > r["approved_on"]) and cites & hit \
+                    and (replaced or as_of) > due:
+                (site_want[key] if isinstance(key, tuple) else expected[key][1]).add("PRM-05")
+    for mw, want, got in expected.values():
+        if got != want:
+            fail(f"{mw}: deviations should be {sorted(want)}")
+    for (sid, ver), v in versions.items():
+        if v["live_from"] <= as_of and {d["rule"] for d in v["deviations"]} != site_want[(sid, ver)]:
+            fail(f"regulatory/websites.json {sid} {ver}: deviations should be {sorted(site_want[(sid, ver)])}")
+    for pid, p in pieces.items():
+        mats = sorted(piece_materials.get(pid, []))
+        if not mats or mats[-1][2] != p["job_code"]:
+            fail(f"regulatory/opdp-submissions.json: {pid}'s current job code {p['job_code']} is not its latest filing")
+    for t in templates.values():
+        if t["job_code"] not in material_ids:
+            fail(f"regulatory/opdp-submissions.json: email template {t['id']} ({t['job_code']}) was never filed")
+    for rel in ("patient/starter-kit.md", "patient/side-effect-guide.md"):
+        code = re.search(r"Job code (AQB-[A-Z0-9-]+)", text(rel))
+        if not code or code.group(1) not in material_ids:
+            fail(f"{rel}: its job code was never filed")
+    for c in calls:
+        for pid in c["pieces"]:
+            if not any(fu <= c["date"] and so <= c["date"] for fu, so, _ in piece_materials.get(pid, [])):
+                fail(f"crm/call-log.json {c['id']}: presents {pid} before any version of it was filed")
+
+    # Portal sessions: each lands on the HCP site version live that day, on pages it has.
+    portal = load("population/portal-sessions.json")
+    hcp_versions = sites["WEB-HCP"]["versions"]
+    current = {pg["id"]: {"title": pg["title"], "path": pg["path"], "gated": pg["gated"]} for pg in hcp_versions[-1]["pages"]}
+    if portal["site"] != sites["WEB-HCP"]["domain"] or portal["pages"] != current:
+        fail("population/portal-sessions.json: header pages differ from the current HCP site version; regenerate")
+    for r in portal["records"]:
+        d = r["started_at"][:10]
+        v = next((v for v in hcp_versions if v["live_from"] <= d and (v["live_to"] is None or d <= v["live_to"])), None)
+        pages = {pg["id"]: pg for pg in v["pages"]} if v else {}
+        if any(pv["page"] not in pages or pages[pv["page"]]["gated"] != current.get(pv["page"], {}).get("gated")
+               for pv in r["page_views"]):
+            fail(f"population/portal-sessions.json {r['id']}: a page that the HCP site version live on {d} lacks or gates differently")
+
+    n_versions = sum(len(s["versions"]) for s in sites.values())
+    readme_counts(text("README.md"), [
+        (r"(\d+) Form FDA 2253 submissions covering (\d+) materials", (len(subs), len(material_ids))),
+        (r"(\d+) website versions", (n_versions,)),
+    ])
+
+
 def field_values(record, path):
     """Values at a dotted path; a segment ending in [] iterates a list."""
     values = [record]
@@ -2584,6 +2803,7 @@ def main():
     recall_coverage = check_mock_recall(faults)
     check_spl()
     check_population()
+    check_regulatory(claims_doc, promo_doc, dtc_doc)
     for owner, ids in [(r["id"], r["provokes"]) for r in reports.values()]:
         for f in ids:
             if f not in faults:

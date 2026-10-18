@@ -1,0 +1,2587 @@
+{
+  "_notice": "FICTITIOUS. Two websites for a product that does not exist. The domains use .example; the pages, job codes and dates are invented.",
+  "websites_version": "1.0.0",
+  "usage": "Every version of the QUORVANTA HCP site and consumer site from launch to the as_of date, with the full text of each page. A page is a list of units. {\"ref\": \"PIECE/UNIT\"} is a unit of promotional/promo-materials.json word for word; {\"claim\": id} is an HCP claim's text and {\"dtc\": id} a consumer claim's text from patient/dtc-claims.json, word for word; any other unit carries its own text, with the claims that support it when it makes a statement about the product. Retired versions cite claims as they then stood: SUP-002 described only the bottle of 120 before the starter bottle. isi is the panel shown at the foot of every page of that version. Each version is one promotional material, with its own job code, filed on Form FDA 2253 (regulatory/opdp-submissions.json); a version with no filing declares the breach in deviations. population/portal-sessions.json records visits to the HCP site. regulatory/hcp-website.md and consumer-website.md are generated from this file by scripts/render.py.",
+  "sites": [
+    {
+      "id": "WEB-HCP",
+      "domain": "quorvantahcp.example",
+      "audience": "professional",
+      "title": "QUORVANTA for healthcare professionals",
+      "gating": "Gated pages need a signed-in prescriber whose NPI has been verified.",
+      "versions": [
+        {
+          "version": "1.0",
+          "job_code": "AQB-QV-HCW-0124",
+          "live_from": "2024-02-26",
+          "live_to": "2025-06-01",
+          "changes": "Launch site, live with commercial availability.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-14"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-01"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-02"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-03"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-04"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-05"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-06"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-07"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-08"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-09"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-10"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-11"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-12"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-13"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA for healthcare professionals",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-01"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-02"
+                },
+                {
+                  "kind": "body",
+                  "text": "The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of Brennick syndrome and in healthy subjects. The clinical efficacy studies were conducted with dimethyl tavorate.",
+                  "claims": [
+                    "EFF-001"
+                  ]
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-14"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-01"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-02"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-03"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-04"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-05"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-06"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-07"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-08"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-09"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-10"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-11"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-12"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-13"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "efficacy",
+              "path": "/clinical-data",
+              "title": "Clinical data",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Clinical data"
+                },
+                {
+                  "kind": "body",
+                  "text": "The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of Brennick syndrome and in healthy subjects. The clinical efficacy studies were conducted with dimethyl tavorate.",
+                  "claims": [
+                    "EFF-001"
+                  ]
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-04"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-05"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-06"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-07"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-08"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-09"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-10"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "dosing",
+              "path": "/dosing",
+              "title": "Dosing and monitoring",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Dosing and monitoring"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-02"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-03"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-04"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-05"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-06"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-07"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-08"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-09"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-10"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-11"
+                },
+                {
+                  "kind": "body",
+                  "text": "Supplied: 190 mg delayed-release capsules in bottles of 120 (NDC 00000-190-01). Dispense in the original container. Store at 20°C to 25°C (68°F to 77°F).",
+                  "claims": [
+                    "SUP-001",
+                    "SUP-002",
+                    "SUP-004",
+                    "SUP-005",
+                    "SUP-003"
+                  ]
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "safety",
+              "path": "/safety",
+              "title": "Safety profile",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Safety profile"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-11"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-12"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-13"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-14"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "access",
+              "path": "/prescribing-and-access",
+              "title": "Prescribing and access",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Prescribing and access"
+                },
+                {
+                  "claim": "ACC-001"
+                },
+                {
+                  "claim": "ACC-002"
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "claim": "ACC-004"
+                },
+                {
+                  "claim": "ACC-005"
+                },
+                {
+                  "claim": "ACC-006"
+                },
+                {
+                  "claim": "ACC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "start-form",
+              "path": "/start-form",
+              "title": "QUORVANTA Start Form (download)",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "QUORVANTA Start Form"
+                },
+                {
+                  "kind": "download",
+                  "text": "Download the QUORVANTA Start Form (PDF). Fax the completed form to QuorvantaConnect at 1-800-555-0184 or submit it at quorvantaconnect.example."
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ],
+              "document": null
+            },
+            {
+              "id": "request-medinfo",
+              "path": "/medical-information",
+              "title": "Ask Medical Information",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Ask Medical Information"
+                },
+                {
+                  "kind": "form",
+                  "text": "Submit a question to Arden Quay Biosciences Medical Information. A medical information specialist will reply by your chosen method. For an urgent question, call 1-800-555-0164."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "request-rep",
+              "path": "/request-a-representative",
+              "title": "Request a representative",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Request a representative"
+                },
+                {
+                  "kind": "form",
+                  "text": "Ask for a visit, a call or an email from your QUORVANTA representative. Choose a time that suits your office."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        },
+        {
+          "version": "2.0",
+          "job_code": "AQB-QV-HCW-0525",
+          "live_from": "2025-06-02",
+          "live_to": "2026-09-13",
+          "changes": "Adds the 30-day starter bottle to the dosing page, for the May 2025 prescribing information.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-14"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-01"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-02"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-03"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-04"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-05"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-06"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-07"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-08"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-09"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-10"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-11"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-12"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-13"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA for healthcare professionals",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-01"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-02"
+                },
+                {
+                  "kind": "body",
+                  "text": "The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of Brennick syndrome and in healthy subjects. The clinical efficacy studies were conducted with dimethyl tavorate.",
+                  "claims": [
+                    "EFF-001"
+                  ]
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-14"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-01"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-02"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-03"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-04"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-05"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-06"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-07"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-08"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-09"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-10"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-11"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-12"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-13"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "efficacy",
+              "path": "/clinical-data",
+              "title": "Clinical data",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Clinical data"
+                },
+                {
+                  "kind": "body",
+                  "text": "The efficacy of QUORVANTA is based on bioavailability studies comparing dimethyl tavorate with QUORVANTA in patients with relapsing forms of Brennick syndrome and in healthy subjects. The clinical efficacy studies were conducted with dimethyl tavorate.",
+                  "claims": [
+                    "EFF-001"
+                  ]
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-04"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-05"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-06"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-07"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-08"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-09"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-10"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "dosing",
+              "path": "/dosing",
+              "title": "Dosing and monitoring",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Dosing and monitoring"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-02"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-03"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-04"
+                },
+                {
+                  "kind": "body",
+                  "text": "Starting treatment: the 30-day starter bottle of 92 capsules (NDC 00000-190-02) is labeled for the 14-day starting dosage followed by the maintenance dosage.",
+                  "claims": [
+                    "SUP-002",
+                    "SUP-004",
+                    "DOS-001",
+                    "DOS-002"
+                  ]
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-05"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-06"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-07"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-08"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-09"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-10"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-11"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-12"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "safety",
+              "path": "/safety",
+              "title": "Safety profile",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Safety profile"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-11"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-12"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-13"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-14"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "access",
+              "path": "/prescribing-and-access",
+              "title": "Prescribing and access",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Prescribing and access"
+                },
+                {
+                  "claim": "ACC-001"
+                },
+                {
+                  "claim": "ACC-002"
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "claim": "ACC-004"
+                },
+                {
+                  "claim": "ACC-005"
+                },
+                {
+                  "claim": "ACC-006"
+                },
+                {
+                  "claim": "ACC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "start-form",
+              "path": "/start-form",
+              "title": "QUORVANTA Start Form (download)",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "QUORVANTA Start Form"
+                },
+                {
+                  "kind": "download",
+                  "text": "Download the QUORVANTA Start Form (PDF). Fax the completed form to QuorvantaConnect at 1-800-555-0184 or submit it at quorvantaconnect.example."
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ],
+              "document": null
+            },
+            {
+              "id": "request-medinfo",
+              "path": "/medical-information",
+              "title": "Ask Medical Information",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Ask Medical Information"
+                },
+                {
+                  "kind": "form",
+                  "text": "Submit a question to Arden Quay Biosciences Medical Information. A medical information specialist will reply by your chosen method. For an urgent question, call 1-800-555-0164."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "request-rep",
+              "path": "/request-a-representative",
+              "title": "Request a representative",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Request a representative"
+                },
+                {
+                  "kind": "form",
+                  "text": "Ask for a visit, a call or an email from your QUORVANTA representative. Choose a time that suits your office."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        },
+        {
+          "version": "3.0",
+          "job_code": "AQB-QV-HCW-0926",
+          "live_from": "2026-09-14",
+          "live_to": null,
+          "changes": "Rebuilt on the September 2026 prescribing information and promotional set; the access page adds bridge supply, nurse support and the Foundation, and the Start Form download is the 2026 form.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-14"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-01"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-02"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-03"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-04"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-05"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-06"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-07"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-08"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-09"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-10"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-11"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-12"
+            },
+            {
+              "ref": "PROMO-ISI/ISI-13"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA for healthcare professionals",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-01"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-02"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-03"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-14"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-01"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-02"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-03"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-04"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-05"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-06"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-07"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-08"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-09"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-10"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-11"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-12"
+                },
+                {
+                  "ref": "PROMO-ISI/ISI-13"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "efficacy",
+              "path": "/clinical-data",
+              "title": "Clinical data",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Clinical data"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-03"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-04"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-05"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-06"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-07"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-08"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-09"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-10"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "dosing",
+              "path": "/dosing",
+              "title": "Dosing and monitoring",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Dosing and monitoring"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-02"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-03"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-04"
+                },
+                {
+                  "kind": "body",
+                  "text": "Starting treatment: the 30-day starter bottle of 92 capsules (NDC 00000-190-02) is labeled for the 14-day starting dosage followed by the maintenance dosage.",
+                  "claims": [
+                    "SUP-002",
+                    "SUP-004",
+                    "DOS-001",
+                    "DOS-002"
+                  ]
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-05"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-06"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-07"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-08"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-09"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-10"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-11"
+                },
+                {
+                  "ref": "PROMO-DOSING-CARD/DC-12"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "safety",
+              "path": "/safety",
+              "title": "Safety profile",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Safety profile"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-11"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-12"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-13"
+                },
+                {
+                  "ref": "PROMO-DETAIL-AID/DA-14"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "access",
+              "path": "/prescribing-and-access",
+              "title": "Prescribing and access",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Prescribing and access"
+                },
+                {
+                  "claim": "ACC-001"
+                },
+                {
+                  "claim": "ACC-002"
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "claim": "ACC-004"
+                },
+                {
+                  "claim": "ACC-005"
+                },
+                {
+                  "claim": "ACC-006"
+                },
+                {
+                  "claim": "ACC-007"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Support while coverage is decided, and beyond"
+                },
+                {
+                  "claim": "ACC-008"
+                },
+                {
+                  "claim": "ACC-009"
+                },
+                {
+                  "claim": "ACC-010"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "start-form",
+              "path": "/start-form",
+              "title": "QUORVANTA Start Form (download)",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "QUORVANTA Start Form"
+                },
+                {
+                  "kind": "download",
+                  "text": "Download the QUORVANTA Start Form (PDF). Fax the completed form to QuorvantaConnect at 1-800-555-0184 or submit it at quorvantaconnect.example."
+                },
+                {
+                  "claim": "ACC-003"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ],
+              "document": "access/start-form.md"
+            },
+            {
+              "id": "request-medinfo",
+              "path": "/medical-information",
+              "title": "Ask Medical Information",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Ask Medical Information"
+                },
+                {
+                  "kind": "form",
+                  "text": "Submit a question to Arden Quay Biosciences Medical Information. A medical information specialist will reply by your chosen method. For an urgent question, call 1-800-555-0164."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "request-rep",
+              "path": "/request-a-representative",
+              "title": "Request a representative",
+              "gated": true,
+              "units": [
+                {
+                  "kind": "notice",
+                  "text": "This site is intended for US healthcare professionals only."
+                },
+                {
+                  "kind": "nav",
+                  "text": "Clinical data | Dosing and monitoring | Safety profile | Prescribing and access | Start Form | Ask Medical Information | Request a representative"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Request a representative"
+                },
+                {
+                  "kind": "form",
+                  "text": "Ask for a visit, a call or an email from your QUORVANTA representative. Choose a time that suits your office."
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and full Prescribing Information. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        }
+      ]
+    },
+    {
+      "id": "WEB-DTC",
+      "domain": "quorvanta.example",
+      "audience": "consumer",
+      "title": "QUORVANTA (soriximel tavorate)",
+      "gating": "No page is gated.",
+      "versions": [
+        {
+          "version": "1.0",
+          "job_code": "AQB-QV-DTW-0724",
+          "live_from": "2024-07-22",
+          "live_to": "2025-06-01",
+          "changes": "Launch of the consumer site, six months after approval.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "kind": "heading",
+              "text": "What is QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-001"
+            },
+            {
+              "kind": "heading",
+              "text": "Who should not take QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-016"
+            },
+            {
+              "kind": "heading",
+              "text": "What are the possible side effects of QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-012"
+            },
+            {
+              "dtc": "DTC-017"
+            },
+            {
+              "dtc": "DTC-018"
+            },
+            {
+              "dtc": "DTC-013"
+            },
+            {
+              "dtc": "DTC-024"
+            },
+            {
+              "dtc": "DTC-008"
+            },
+            {
+              "kind": "heading",
+              "text": "Before you take QUORVANTA"
+            },
+            {
+              "dtc": "DTC-019"
+            },
+            {
+              "dtc": "DTC-020"
+            },
+            {
+              "dtc": "DTC-021"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "results",
+              "path": "/study-results",
+              "title": "Study results",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What the studies showed"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "dtc": "DTC-005"
+                },
+                {
+                  "dtc": "DTC-006"
+                },
+                {
+                  "dtc": "DTC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "taking",
+              "path": "/taking-quorvanta",
+              "title": "Taking QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Taking QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-003"
+                },
+                {
+                  "dtc": "DTC-011"
+                },
+                {
+                  "dtc": "DTC-010"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "side-effects",
+              "path": "/side-effects",
+              "title": "Side effects",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Side effects"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "dtc": "DTC-009"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "support",
+              "path": "/savings-and-support",
+              "title": "Savings and support",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Savings and support"
+                },
+                {
+                  "dtc": "DTC-014"
+                },
+                {
+                  "dtc": "DTC-015"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Who should not take QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-016"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What are the possible side effects of QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "dtc": "DTC-024"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Before you take QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-019"
+                },
+                {
+                  "dtc": "DTC-020"
+                },
+                {
+                  "dtc": "DTC-021"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        },
+        {
+          "version": "2.0",
+          "job_code": "AQB-QV-DTW-0525",
+          "live_from": "2025-06-02",
+          "live_to": "2026-01-01",
+          "changes": "Adds the starter bottle to the taking page.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "kind": "heading",
+              "text": "What is QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-001"
+            },
+            {
+              "kind": "heading",
+              "text": "Who should not take QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-016"
+            },
+            {
+              "kind": "heading",
+              "text": "What are the possible side effects of QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-012"
+            },
+            {
+              "dtc": "DTC-017"
+            },
+            {
+              "dtc": "DTC-018"
+            },
+            {
+              "dtc": "DTC-013"
+            },
+            {
+              "dtc": "DTC-024"
+            },
+            {
+              "dtc": "DTC-008"
+            },
+            {
+              "kind": "heading",
+              "text": "Before you take QUORVANTA"
+            },
+            {
+              "dtc": "DTC-019"
+            },
+            {
+              "dtc": "DTC-020"
+            },
+            {
+              "dtc": "DTC-021"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "results",
+              "path": "/study-results",
+              "title": "Study results",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What the studies showed"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "dtc": "DTC-005"
+                },
+                {
+                  "dtc": "DTC-006"
+                },
+                {
+                  "dtc": "DTC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "taking",
+              "path": "/taking-quorvanta",
+              "title": "Taking QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Taking QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-003"
+                },
+                {
+                  "dtc": "DTC-022"
+                },
+                {
+                  "dtc": "DTC-011"
+                },
+                {
+                  "dtc": "DTC-010"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "side-effects",
+              "path": "/side-effects",
+              "title": "Side effects",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Side effects"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "dtc": "DTC-009"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "support",
+              "path": "/savings-and-support",
+              "title": "Savings and support",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Savings and support"
+                },
+                {
+                  "dtc": "DTC-014"
+                },
+                {
+                  "dtc": "DTC-015"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Who should not take QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-016"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What are the possible side effects of QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "dtc": "DTC-024"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Before you take QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-019"
+                },
+                {
+                  "dtc": "DTC-020"
+                },
+                {
+                  "dtc": "DTC-021"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        },
+        {
+          "version": "2.1",
+          "job_code": "AQB-QV-DTW-1225",
+          "live_from": "2026-01-02",
+          "live_to": "2026-09-13",
+          "changes": "Adds the QuorvantaConnect phone number and hours to the savings and support page.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "kind": "heading",
+              "text": "What is QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-001"
+            },
+            {
+              "kind": "heading",
+              "text": "Who should not take QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-016"
+            },
+            {
+              "kind": "heading",
+              "text": "What are the possible side effects of QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-012"
+            },
+            {
+              "dtc": "DTC-017"
+            },
+            {
+              "dtc": "DTC-018"
+            },
+            {
+              "dtc": "DTC-013"
+            },
+            {
+              "dtc": "DTC-024"
+            },
+            {
+              "dtc": "DTC-008"
+            },
+            {
+              "kind": "heading",
+              "text": "Before you take QUORVANTA"
+            },
+            {
+              "dtc": "DTC-019"
+            },
+            {
+              "dtc": "DTC-020"
+            },
+            {
+              "dtc": "DTC-021"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "results",
+              "path": "/study-results",
+              "title": "Study results",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What the studies showed"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "dtc": "DTC-005"
+                },
+                {
+                  "dtc": "DTC-006"
+                },
+                {
+                  "dtc": "DTC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "taking",
+              "path": "/taking-quorvanta",
+              "title": "Taking QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Taking QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-003"
+                },
+                {
+                  "dtc": "DTC-022"
+                },
+                {
+                  "dtc": "DTC-011"
+                },
+                {
+                  "dtc": "DTC-010"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "side-effects",
+              "path": "/side-effects",
+              "title": "Side effects",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Side effects"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "dtc": "DTC-009"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "support",
+              "path": "/savings-and-support",
+              "title": "Savings and support",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Savings and support"
+                },
+                {
+                  "dtc": "DTC-014"
+                },
+                {
+                  "dtc": "DTC-015"
+                },
+                {
+                  "dtc": "DTC-023"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Who should not take QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-016"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What are the possible side effects of QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "dtc": "DTC-024"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Before you take QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-019"
+                },
+                {
+                  "dtc": "DTC-020"
+                },
+                {
+                  "dtc": "DTC-021"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": [
+            {
+              "rule": "PRM-01",
+              "note": "Approved and published with its own job code, but never submitted on Form FDA 2253."
+            }
+          ]
+        },
+        {
+          "version": "3.0",
+          "job_code": "AQB-QV-DTW-0926",
+          "live_from": "2026-09-14",
+          "live_to": null,
+          "changes": "Rebuilt on the September 2026 prescribing information; adds the Talking with your doctor page.",
+          "isi": [
+            {
+              "kind": "heading",
+              "text": "Important Safety Information"
+            },
+            {
+              "kind": "heading",
+              "text": "What is QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-001"
+            },
+            {
+              "kind": "heading",
+              "text": "Who should not take QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-016"
+            },
+            {
+              "kind": "heading",
+              "text": "What are the possible side effects of QUORVANTA?"
+            },
+            {
+              "dtc": "DTC-012"
+            },
+            {
+              "dtc": "DTC-017"
+            },
+            {
+              "dtc": "DTC-018"
+            },
+            {
+              "dtc": "DTC-013"
+            },
+            {
+              "dtc": "DTC-024"
+            },
+            {
+              "dtc": "DTC-008"
+            },
+            {
+              "kind": "heading",
+              "text": "Before you take QUORVANTA"
+            },
+            {
+              "dtc": "DTC-019"
+            },
+            {
+              "dtc": "DTC-020"
+            },
+            {
+              "dtc": "DTC-021"
+            }
+          ],
+          "pages": [
+            {
+              "id": "home",
+              "path": "/",
+              "title": "QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "results",
+              "path": "/study-results",
+              "title": "Study results",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What the studies showed"
+                },
+                {
+                  "dtc": "DTC-004"
+                },
+                {
+                  "dtc": "DTC-005"
+                },
+                {
+                  "dtc": "DTC-006"
+                },
+                {
+                  "dtc": "DTC-007"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "taking",
+              "path": "/taking-quorvanta",
+              "title": "Taking QUORVANTA",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Taking QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-002"
+                },
+                {
+                  "dtc": "DTC-003"
+                },
+                {
+                  "dtc": "DTC-022"
+                },
+                {
+                  "dtc": "DTC-011"
+                },
+                {
+                  "dtc": "DTC-010"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "side-effects",
+              "path": "/side-effects",
+              "title": "Side effects",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Side effects"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "dtc": "DTC-009"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "support",
+              "path": "/savings-and-support",
+              "title": "Savings and support",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Savings and support"
+                },
+                {
+                  "dtc": "DTC-014"
+                },
+                {
+                  "dtc": "DTC-015"
+                },
+                {
+                  "dtc": "DTC-023"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "doctor-guide",
+              "path": "/talking-with-your-doctor",
+              "title": "Talking with your doctor",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Questions you may want to ask your healthcare provider"
+                },
+                {
+                  "kind": "question",
+                  "text": "Is QUORVANTA right for me?"
+                },
+                {
+                  "kind": "question",
+                  "text": "Which blood tests will I need, and when?"
+                },
+                {
+                  "kind": "question",
+                  "text": "How should I take QUORVANTA around meals?"
+                },
+                {
+                  "kind": "question",
+                  "text": "Which side effects should I call you about?"
+                },
+                {
+                  "kind": "question",
+                  "text": "What should I do if I am pregnant or plan to become pregnant?"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            },
+            {
+              "id": "isi",
+              "path": "/important-safety-information",
+              "title": "Important Safety Information",
+              "gated": false,
+              "units": [
+                {
+                  "kind": "nav",
+                  "text": "What is QUORVANTA? | Study results | Taking QUORVANTA | Side effects | Savings and support | Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Important Safety Information"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What is QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-001"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Who should not take QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-016"
+                },
+                {
+                  "kind": "heading",
+                  "text": "What are the possible side effects of QUORVANTA?"
+                },
+                {
+                  "dtc": "DTC-012"
+                },
+                {
+                  "dtc": "DTC-017"
+                },
+                {
+                  "dtc": "DTC-018"
+                },
+                {
+                  "dtc": "DTC-013"
+                },
+                {
+                  "dtc": "DTC-024"
+                },
+                {
+                  "dtc": "DTC-008"
+                },
+                {
+                  "kind": "heading",
+                  "text": "Before you take QUORVANTA"
+                },
+                {
+                  "dtc": "DTC-019"
+                },
+                {
+                  "dtc": "DTC-020"
+                },
+                {
+                  "dtc": "DTC-021"
+                },
+                {
+                  "kind": "footer",
+                  "text": "Please see Important Safety Information below and the full Prescribing Information and Patient Information. This site is intended for US residents. © Arden Quay Biosciences, Inc. All rights reserved."
+                }
+              ]
+            }
+          ],
+          "deviations": []
+        }
+      ]
+    }
+  ]
+}

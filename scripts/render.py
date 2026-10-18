@@ -3,8 +3,8 @@
 
 Run from anywhere:  python3 scripts/render.py
 
-Writes program-terms.md, product-identifiers.md, payer/formulary-fhir.json and
-label/label-spl.xml. Edit the JSON (or label.md), then re-run this script;
+Writes program-terms.md, product-identifiers.md, payer/formulary-fhir.json,
+label/label-spl.xml and the two website renderings in regulatory/. Edit the JSON (or label.md), then re-run this script;
 never edit a generated file by hand.
 """
 
@@ -72,6 +72,92 @@ def render_product_identifiers():
     path = SRC / "product/product-identifiers.md"
     path.write_text("\n".join(out) + "\n")
     print(f"wrote {path.relative_to(SRC.parent)}")
+
+
+def us_date(iso):
+    y, m, d = (int(x) for x in iso.split("-"))
+    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+              "November", "December"]
+    return f"{months[m - 1]} {d}, {y}"
+
+
+def site_sources():
+    load = lambda rel: json.loads((SRC / rel).read_text())  # noqa: E731
+    promo = {f"{p['id']}/{u['id']}": u for p in load("promotional/promo-materials.json")["pieces"] for u in p["units"]}
+    claims = {c["id"]: c for c in load("claims/claims-library.json")["claims"]}
+    dtc = {c["id"]: c for c in load("patient/dtc-claims.json")["claims"]}
+    return promo, claims, dtc
+
+
+def site_unit(u, sources):
+    """A website unit as (kind, text, claim ids): refs resolve to promo units, HCP claims or DTC claims word for word."""
+    promo, claims, dtc = sources
+    if "ref" in u:
+        p = promo[u["ref"]]
+        return p["kind"], p["text"], p["claims"]
+    if "claim" in u:
+        return "body", claims[u["claim"]]["text"], [u["claim"]]
+    if "dtc" in u:
+        return "body", dtc[u["dtc"]]["text"], [u["dtc"]]
+    return u["kind"], u["text"], u.get("claims", [])
+
+
+SITE_FILES = {"WEB-HCP": "regulatory/hcp-website.md", "WEB-DTC": "regulatory/consumer-website.md"}
+
+
+def build_website(site, sources):
+    def lines(units):
+        out = []
+        for u in units:
+            kind, body, ids = site_unit(u, sources)
+            if kind == "heading":
+                out.append(f"**{body}**")
+            elif kind in ("nav", "notice", "footer"):
+                out.append(f"*{body}*")
+            elif kind == "question":
+                out.append(f"- {body}")
+            elif kind in ("form", "download"):
+                out.append(f"[{kind.capitalize()}] {body}")
+            else:
+                out.append(body)
+            if ids:
+                out[-1] += f" `[{', '.join(ids)}]`"
+            out.append("")
+        return out
+
+    out = [
+        f"# {site['title']}: {site['domain']}, every version (fictitious)",
+        "",
+        f"> Everything here is invented. QUORVANTA, Arden Quay Biosciences and {site['domain']} do not exist. "
+        "Each statement is followed by the claim ids that support it, as a promotional review annotation would. "
+        "Generated from `websites.json` by `scripts/render.py`; do not edit by hand.",
+        "",
+        f"Audience: {site['audience']}. {site['gating']}",
+        "",
+        "| Version | Job code | Live from | Live to |",
+        "| --- | --- | --- | --- |",
+    ]
+    for v in site["versions"]:
+        out.append(f"| {v['version']} | {v['job_code']} | {us_date(v['live_from'])} | "
+                   f"{us_date(v['live_to']) if v['live_to'] else 'current'} |")
+    for v in site["versions"]:
+        out += ["", f"## Version {v['version']}, job code {v['job_code']}", "", v["changes"], ""]
+        for pg in v["pages"]:
+            gated = ", gated" if pg["gated"] else ""
+            out += [f"### {pg['title']} (`{pg['path']}`{gated})", ""] + lines(pg["units"])
+            if pg.get("document"):
+                out += [f"The download is `{pg['document']}`.", ""]
+        out += ["### Important Safety Information panel, at the foot of every page", ""] + lines(v["isi"])
+    return "\n".join(out).rstrip("\n") + "\n"
+
+
+def render_websites():
+    data = json.loads((SRC / "regulatory/websites.json").read_text())
+    sources = site_sources()
+    for site in data["sites"]:
+        path = SRC / SITE_FILES[site["id"]]
+        path.write_text(build_website(site, sources))
+        print(f"wrote {path.relative_to(SRC.parent)}")
 
 
 USDF = "http://hl7.org/fhir/us/davinci-drug-formulary"
@@ -362,3 +448,4 @@ if __name__ == "__main__":
     render_product_identifiers()
     render_formulary_fhir()
     render_spl()
+    render_websites()

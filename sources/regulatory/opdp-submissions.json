@@ -1,0 +1,361 @@
+{
+  "_notice": "FICTITIOUS. Form FDA 2253 submissions for a product that does not exist, by a company that does not exist. The application number, sequence numbers, job codes and contact details are invented.",
+  "submissions_version": "1.0.0",
+  "usage": "Every Form FDA 2253 (Transmittal of Advertisements and Promotional Labeling) Arden Quay Biosciences submitted to FDA's Office of Prescription Drug Promotion for QUORVANTA, from launch to the as_of date, as structured data rather than the form itself. Each submission carries the prescribing information revision sent with it; each material its job code, what it is (a website version in regulatory/websites.json, a promotional piece, a representative email template or a patient piece), its audience, its type in the pack's own vocabulary, the date of first use the form states, and any rule it breaks in deviations. Each prescribing information revision lists the claims it changed in changed_claims. The validator recomputes every deviation from the rules below, the prescribing information history, the site versions, the email log (population/hcp-emails.json) and the call log. Unbranded disease content is not product promotion and is not submitted; nor are the Start Form and the patient-services letters.",
+  "as_of": "2026-09-22",
+  "application": {
+    "type": "NDA",
+    "number": "NDA000000",
+    "applicant": "Arden Quay Biosciences, Inc.",
+    "proprietary_name": "QUORVANTA",
+    "established_name": "soriximel tavorate",
+    "dosage_form": "delayed-release capsules",
+    "submitter": {
+      "office": "Regulatory Advertising and Promotion, Arden Quay Biosciences, Inc.",
+      "phone": "1-800-555-0150",
+      "email": "adpromo@ardenquay.example"
+    }
+  },
+  "pi_revisions": [
+    {
+      "revision": "01/2024",
+      "approved_on": "2024-01-22",
+      "summary": "Original approval."
+    },
+    {
+      "revision": "05/2025",
+      "approved_on": "2025-05-16",
+      "summary": "Adds the 30-day starter bottle of 92 capsules (NDC 00000-190-02) to section 16, labeled for the starting dosage followed by the maintenance dosage.",
+      "changed_claims": {
+        "SUP-002": 2,
+        "SUP-004": 2
+      }
+    },
+    {
+      "revision": "09/2026",
+      "approved_on": "2026-09-04",
+      "summary": "The current prescribing information, label/label.md. The pack does not record what this revision changed."
+    }
+  ],
+  "rules": [
+    {
+      "id": "PRM-01",
+      "rule": "Each promotional material is submitted on Form FDA 2253 at or before its first use. A new job code is a new material. First use is the earlier of the date the form states and the first use the pack records: a site version's live date, the first send of an email template, or the first call that presents a piece."
+    },
+    {
+      "id": "PRM-02",
+      "rule": "Each submission includes the current prescribing information: the revision most recently approved on or before the submission date."
+    },
+    {
+      "id": "PRM-03",
+      "rule": "Each material is filed under its audience: professional for the HCP site, the promotional pieces and representative emails; consumer for the consumer site and patient pieces."
+    },
+    {
+      "id": "PRM-04",
+      "rule": "A site version shows the Important Safety Information on every page and only approved content: approved promotional units and HCP claims on the HCP site, consumer claims on the consumer site. The withdrawn claim EFF-013 never appears."
+    },
+    {
+      "id": "PRM-05",
+      "rule": "When a prescribing information revision changes a claim (changed_claims, at the version it reached), every material in use on the approval date that cites the claim is replaced by a filed version within 30 days. Pieces are judged by the claims their current units cite; patient pieces carry no claim ids and are not checked."
+    }
+  ],
+  "submissions": [
+    {
+      "id": "OPDP-001",
+      "form": "FDA 2253",
+      "ectd_sequence": "0003",
+      "submitted_on": "2024-02-23",
+      "pi_revision": "01/2024",
+      "materials": [
+        {
+          "material_id": "AQB-QV-HCW-0124",
+          "site": "WEB-HCP",
+          "version": "1.0",
+          "audience": "professional",
+          "material_type": "website",
+          "first_use": "2024-02-26",
+          "description": "QUORVANTA HCP website, quorvantahcp.example, version 1.0 (launch).",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-ISI-0124",
+          "piece": "PROMO-ISI",
+          "audience": "professional",
+          "material_type": "isi",
+          "first_use": "2024-02-26",
+          "description": "Important Safety Information, professional.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-DET-0124",
+          "piece": "PROMO-DETAIL-AID",
+          "audience": "professional",
+          "material_type": "detail_aid",
+          "first_use": "2024-02-26",
+          "description": "HCP detail aid (e-detail), 8 screens.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-DOS-0124",
+          "piece": "PROMO-DOSING-CARD",
+          "audience": "professional",
+          "material_type": "dosing_card",
+          "first_use": "2024-02-26",
+          "description": "Dosing and monitoring card.",
+          "deviations": [
+            {
+              "rule": "PRM-05",
+              "note": "Still the card in use on June 15, 2025, 30 days after the May 2025 revision changed SUP-002 and SUP-004; its replacement reached the field on June 23."
+            }
+          ]
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-002",
+      "form": "FDA 2253",
+      "ectd_sequence": "0009",
+      "submitted_on": "2024-07-19",
+      "pi_revision": "01/2024",
+      "materials": [
+        {
+          "material_id": "AQB-QV-DTW-0724",
+          "site": "WEB-DTC",
+          "version": "1.0",
+          "audience": "consumer",
+          "material_type": "website",
+          "first_use": "2024-07-22",
+          "description": "QUORVANTA consumer website, quorvanta.example, version 1.0 (launch).",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-003",
+      "form": "FDA 2253",
+      "ectd_sequence": "0011",
+      "submitted_on": "2024-09-27",
+      "pi_revision": "01/2024",
+      "materials": [
+        {
+          "material_id": "AQB-QV-PSK-0924",
+          "document": null,
+          "audience": "consumer",
+          "material_type": "patient_brochure",
+          "first_use": "2024-09-30",
+          "description": "Patient starter kit, Welcome to QUORVANTA: your first 90 days. Superseded by AQB-QV-PSK-0525.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-PSE-0924",
+          "document": "patient/side-effect-guide.md",
+          "audience": "professional",
+          "material_type": "patient_brochure",
+          "first_use": "2024-09-30",
+          "description": "Patient guide, Managing side effects in the first weeks.",
+          "deviations": [
+            {
+              "rule": "PRM-03",
+              "note": "A patient piece filed as professional."
+            }
+          ]
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-004",
+      "form": "FDA 2253",
+      "ectd_sequence": "0017",
+      "submitted_on": "2025-05-30",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-HCW-0525",
+          "site": "WEB-HCP",
+          "version": "2.0",
+          "audience": "professional",
+          "material_type": "website",
+          "first_use": "2025-06-02",
+          "description": "QUORVANTA HCP website, version 2.0: starter bottle.",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-005",
+      "form": "FDA 2253",
+      "ectd_sequence": "0018",
+      "submitted_on": "2025-05-30",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-DTW-0525",
+          "site": "WEB-DTC",
+          "version": "2.0",
+          "audience": "consumer",
+          "material_type": "website",
+          "first_use": "2025-06-02",
+          "description": "QUORVANTA consumer website, version 2.0: starter bottle.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-PSK-0525",
+          "document": "patient/starter-kit.md",
+          "audience": "consumer",
+          "material_type": "patient_brochure",
+          "first_use": "2025-06-02",
+          "description": "Patient starter kit, revised for the starter bottle.",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-006",
+      "form": "FDA 2253",
+      "ectd_sequence": "0020",
+      "submitted_on": "2025-06-20",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-DOS-0525",
+          "piece": "PROMO-DOSING-CARD",
+          "audience": "professional",
+          "material_type": "dosing_card",
+          "first_use": "2025-06-23",
+          "description": "Dosing and monitoring card, revised for the starter bottle. The printed card followed the website by three weeks.",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-007",
+      "form": "FDA 2253",
+      "ectd_sequence": "0024",
+      "submitted_on": "2025-12-29",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-RTA-1225",
+          "template": "RTE-01",
+          "audience": "professional",
+          "material_type": "email",
+          "first_use": "2026-01-01",
+          "description": "Representative email: availability and QuorvantaConnect support.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-RTD-1225",
+          "template": "RTE-02",
+          "audience": "professional",
+          "material_type": "email",
+          "first_use": "2026-01-01",
+          "description": "Representative email: starting dose and monitoring.",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-008",
+      "form": "FDA 2253",
+      "ectd_sequence": "0025",
+      "submitted_on": "2026-01-06",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-RTF-1225",
+          "template": "RTE-03",
+          "audience": "professional",
+          "material_type": "email",
+          "first_use": "2026-01-06",
+          "description": "Representative email: flushing and gastrointestinal events. Held back from the December submission for a correction.",
+          "deviations": [
+            {
+              "rule": "PRM-01",
+              "note": "Representatives sent it from January 2, 2026, before it was submitted; the form states the planned date."
+            }
+          ]
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-009",
+      "form": "FDA 2253",
+      "ectd_sequence": "0031",
+      "submitted_on": "2026-09-11",
+      "pi_revision": "09/2026",
+      "materials": [
+        {
+          "material_id": "AQB-QV-HCW-0926",
+          "site": "WEB-HCP",
+          "version": "3.0",
+          "audience": "professional",
+          "material_type": "website",
+          "first_use": "2026-09-14",
+          "description": "QUORVANTA HCP website, version 3.0.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-ISI-0926",
+          "piece": "PROMO-ISI",
+          "audience": "professional",
+          "material_type": "isi",
+          "first_use": "2026-09-14",
+          "description": "Important Safety Information, professional, on the September 2026 prescribing information.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-DET-0926",
+          "piece": "PROMO-DETAIL-AID",
+          "audience": "professional",
+          "material_type": "detail_aid",
+          "first_use": "2026-09-14",
+          "description": "HCP detail aid (e-detail), 8 screens, on the September 2026 prescribing information.",
+          "deviations": []
+        },
+        {
+          "material_id": "AQB-QV-DOS-0926",
+          "piece": "PROMO-DOSING-CARD",
+          "audience": "professional",
+          "material_type": "dosing_card",
+          "first_use": "2026-09-14",
+          "description": "Dosing and monitoring card, on the September 2026 prescribing information.",
+          "deviations": []
+        }
+      ],
+      "deviations": []
+    },
+    {
+      "id": "OPDP-010",
+      "form": "FDA 2253",
+      "ectd_sequence": "0032",
+      "submitted_on": "2026-09-11",
+      "pi_revision": "05/2025",
+      "materials": [
+        {
+          "material_id": "AQB-QV-DTW-0926",
+          "site": "WEB-DTC",
+          "version": "3.0",
+          "audience": "consumer",
+          "material_type": "website",
+          "first_use": "2026-09-14",
+          "description": "QUORVANTA consumer website, version 3.0.",
+          "deviations": []
+        }
+      ],
+      "deviations": [
+        {
+          "rule": "PRM-02",
+          "note": "Sent with the May 2025 prescribing information a week after the September 2026 revision was approved."
+        }
+      ]
+    }
+  ]
+}

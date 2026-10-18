@@ -1,23 +1,17 @@
 """Portal sessions: visits to the HCP portal by generated prescribers, anonymous visitors and bots."""
 
+import json
 from datetime import datetime, timedelta
 
-from population.core import AS_OF, STATES, Entity, register
+from population.core import AS_OF, SRC, STATES, Entity, register
 from population import engagement as eng
 from population.entities.hcp_emails import START
 
-SITE = "quorvantahcp.example"
-PAGES = {
-    "home": {"title": "QUORVANTA for healthcare professionals", "content": [], "gated": False},
-    "isi": {"title": "Important Safety Information", "content": ["PROMO-ISI"], "gated": False},
-    "efficacy": {"title": "Clinical data", "content": ["PROMO-DETAIL-AID"], "gated": True},
-    "dosing": {"title": "Dosing and monitoring", "content": ["PROMO-DOSING-CARD"], "gated": True},
-    "safety": {"title": "Safety profile", "content": ["PROMO-DETAIL-AID", "PROMO-ISI"], "gated": True},
-    "access": {"title": "Prescribing and access", "content": ["access/how-to-prescribe.md"], "gated": False},
-    "start-form": {"title": "QUORVANTA Start Form (download)", "content": ["access/start-form.md"], "gated": False},
-    "request-medinfo": {"title": "Ask Medical Information", "content": [], "gated": True},
-    "request-rep": {"title": "Request a representative", "content": [], "gated": True},
-}
+# The HCP site's pages, from the version live at the as_of date (regulatory/websites.json holds every version).
+_SITE = next(x for x in json.loads((SRC / "regulatory/websites.json").read_text())["sites"] if x["id"] == "WEB-HCP")
+SITE = _SITE["domain"]
+PAGES = {pg["id"]: {"title": pg["title"], "path": pg["path"], "gated": pg["gated"]}
+         for pg in next(v for v in _SITE["versions"] if v["live_to"] is None)["pages"]}
 BOT_PAGES = 15          # a session with at least this many page views, each under 2 seconds, is automated
 
 
@@ -34,7 +28,8 @@ class PortalSessions(Entity):
              "registered prescriber is signed in and null for anonymous visitors. source is email (with email_id, starting "
              "within 60 seconds of a human click in hcp-emails.json), rep_link, search or direct. region is the state the "
              "connection comes from. page_views give each page's id from the pages catalog in this header, its offset "
-             "from the session start and the seconds spent on it. Gated pages need a signed-in, verified prescriber. "
+             "from the session start and the seconds spent on it; the page text for each date is in the site version "
+             "then live, in regulatory/websites.json. Gated pages need a signed-in, verified prescriber. "
              "quality_flags mark sessions that should not count as engagement or that a portal should have refused.")
     flags = {
         "bot_session": f"Automated traffic: {BOT_PAGES} or more page views, each under 2 seconds.",
